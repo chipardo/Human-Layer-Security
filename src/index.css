@@ -13,4 +13,8 @@
   body {
     @apply bg-background text-text font-sans antialiased overflow-x-hidden selection:bg-primary selection:text-black;
   }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { @apply bg-background; }
+  ::-webkit-scrollbar-thumb { @apply bg-gray-800 rounded-full hover:bg-primary transition-colors; }
 }
