@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate, useLocation, Link } from 'react-router-dom';
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Shield, Menu, X, CheckCircle, Users, Mail, Phone, Activity, ArrowRight, Lock, Globe, Terminal, FileText, Award, ChevronRight } from 'lucide-react';
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
@@ -152,8 +152,6 @@ const Footer = () => (
 // --- HOME PAGE ---
 const Home = () => {
   const navigate = useNavigate();
-  const { scrollYProgress } = useScroll();
-
 
   return (
     <>
@@ -408,7 +406,6 @@ const Legal = () => (
 // --- MAIN APP ---
 function App() {
   const location = useLocation();
-
 
   // Scroll to top on route change
   useEffect(() => {
