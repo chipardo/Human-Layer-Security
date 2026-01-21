@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate, useLocation, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Shield, Zap, Menu, X, CheckCircle, Globe, Users, Mail, Phone, Activity } from 'lucide-react';
+import { Shield, Zap, Menu, X, CheckCircle, Users, Mail, Phone, Activity } from 'lucide-react';
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
