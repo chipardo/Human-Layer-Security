@@ -1,20 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@400;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --color-background: #050505;
-    --color-surface: #121212;
-    --color-primary: #00FF41;
-    --color-text: #E5E5E5;
-  }
-  
-  body {
-    @apply bg-background text-text font-sans antialiased overflow-x-hidden selection:bg-primary selection:text-black;
+    --color-background: #050014;
+    --color-surface: #0F0529;
+    --color-primary: #A855F7;
+    --color-text: #FFFFFF;
   }
 
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { @apply bg-background; }
-  ::-webkit-scrollbar-thumb { @apply bg-gray-800 rounded-full hover:bg-primary transition-colors; }
+  body {
+    @apply bg-background text-text font-sans antialiased overflow-x-hidden selection:bg-primary selection:text-white;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-display;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-background;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-surface rounded-full hover:bg-primary transition-colors;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/5 backdrop-blur-lg border border-white/10;
+  }
+
+  .glass-dark {
+    @apply bg-black/40 backdrop-blur-md border border-white/5;
+  }
+
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .rotate-y-2 {
+    transform: rotateY(2deg);
+  }
 }
