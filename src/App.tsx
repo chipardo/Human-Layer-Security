@@ -17,11 +17,21 @@ const PRICING = {
 };
 
 // --- UI COMPONENTS ---
-const Button: React.FC<React.ButtonHTMLAttributes<HTMLButtonElement> & { variant?: 'primary' | 'outline', size?: 'sm' | 'md' | 'lg', fullWidth?: boolean }> = ({ className, variant = 'primary', size = 'md', fullWidth, children, ...props }) => {
+type ButtonProps = React.ComponentProps<typeof motion.button> & {
+  variant?: 'primary' | 'outline';
+  size?: 'sm' | 'md' | 'lg';
+  fullWidth?: boolean;
+};
+
+const Button: React.FC<ButtonProps> = ({ className, variant = 'primary', size = 'md', fullWidth, children, ...props }) => {
   const base = "inline-flex items-center justify-center font-mono font-bold uppercase tracking-widest transition-all focus:outline-none disabled:opacity-50";
   const vars = { primary: "bg-[#00ff41] text-black hover:bg-[#00cc33] shadow-[0_0_15px_rgba(0,255,65,0.3)]", outline: "border border-[#00ff41] text-[#00ff41] hover:bg-[#00ff41] hover:text-black" };
   const sizes = { sm: "h-9 px-4 text-[10px]", md: "h-12 px-8 text-xs", lg: "h-14 px-10 text-sm" };
-  return <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className={cn(base, vars[variant], sizes[size], fullWidth && "w-full", className)} {...props}>{children}</motion.button>;
+  return (
+    <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className={cn(base, vars[variant], sizes[size], fullWidth && "w-full", className)} {...props}>
+      {children}
+    </motion.button>
+  );
 };
 
 const Section: React.FC<{ children: React.ReactNode, className?: string, id?: string }> = ({ children, className = "", id }) => (
