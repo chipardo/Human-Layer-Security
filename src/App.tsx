@@ -1,15 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, useNavigate, useLocation, Link, BrowserRouter } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Shield, Zap, Menu, X, CheckCircle, Globe, Users, Mail, Phone, Activity } from 'lucide-react';
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
+// --- UTILS ---
 function cn(...inputs: ClassValue[]) { return twMerge(clsx(inputs)); }
 
-const CONTACT_INFO = { email: "nicolassunobrega2@gmail.com", phone: "3052820302", phoneDisplay: "+1 (305) 282-0302", founder: "Nicolas Su Nobrega Garces" };
-const PRICING = { tier1: "https://buy.stripe.com/9B67sMafFbrq3n03aOgnK03", tier2: "https://buy.stripe.com/6oU8wQ2Ndbrqg9M26KgnK01", tier3: "https://buy.stripe.com/dRmfZigE3cvu9Lo8v8gnK02" };
+// --- DATA ---
+const CONTACT_INFO = { email: "nicolassunobrega2@gmail.com", phone: "3052820302", founder: "Nicolas Su Nobrega Garces" };
+const PRICING = { 
+  tier1: "https://buy.stripe.com/9B67sMafFbrq3n03aOgnK03", 
+  tier2: "https://buy.stripe.com/6oU8wQ2Ndbrqg9M26KgnK01", 
+  tier3: "https://buy.stripe.com/dRmfZigE3cvu9Lo8v8gnK02" 
+};
 
+// --- UI COMPONENTS ---
 const Button: React.FC<React.ButtonHTMLAttributes<HTMLButtonElement> & { variant?: 'primary' | 'outline', size?: 'sm' | 'md' | 'lg', fullWidth?: boolean }> = ({ className, variant = 'primary', size = 'md', fullWidth, children, ...props }) => {
   const base = "inline-flex items-center justify-center font-mono font-bold uppercase tracking-widest transition-all focus:outline-none disabled:opacity-50";
   const vars = { primary: "bg-[#00ff41] text-black hover:bg-[#00cc33] shadow-[0_0_15px_rgba(0,255,65,0.3)]", outline: "border border-[#00ff41] text-[#00ff41] hover:bg-[#00ff41] hover:text-black" };
@@ -27,10 +34,11 @@ const PricingCard: React.FC<{ title: string, price: string, features: string[], 
     <h3 className="text-xl font-bold text-white mb-4">{title}</h3>
     <div className="mb-6"><span className="text-4xl font-bold text-white">{price}</span><span className="text-lg text-gray-500">/mo</span></div>
     <ul className="space-y-4 mb-8 text-sm text-gray-400">{features.map((f, i) => <li key={i} className="flex gap-3"><CheckCircle className="w-5 h-5 text-[#00ff41]" />{f}</li>)}</ul>
-    <a href={link} target="_blank"><Button variant={isPopular ? 'primary' : 'outline'} fullWidth>Subscribe</Button></a>
+    <a href={link} target="_blank" rel="noopener noreferrer"><Button variant={isPopular ? 'primary' : 'outline'} fullWidth>Subscribe</Button></a>
   </motion.div>
 );
 
+// --- LAYOUT COMPONENTS ---
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
@@ -41,9 +49,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
         <Link to="/" className="flex items-center gap-2"><Shield className="w-8 h-8 text-[#00ff41]" /><span className="font-mono font-bold text-white text-xl">HUMAN<span className="text-[#00ff41]">LAYER</span></span></Link>
         <div className="hidden md:flex gap-8 font-mono text-xs font-bold text-gray-400">
-          {['SERVICES', 'ABOUT', 'PARTNERSHIP', 'PRESS'].map((item) => (
-             <Link key={item} to={`/${item.toLowerCase()}`} className="hover:text-[#00ff41] transition-colors">{item}</Link>
-          ))}
+          {['SERVICES', 'ABOUT', 'PARTNERSHIP', 'PRESS'].map((item) => <Link key={item} to={`/${item.toLowerCase()}`} className="hover:text-[#00ff41] transition-colors">{item}</Link>)}
         </div>
         <button className="md:hidden text-white" onClick={() => setIsOpen(!isOpen)}>{isOpen ? <X /> : <Menu />}</button>
       </div>
@@ -55,6 +61,16 @@ const Navbar = () => {
     </nav>
   );
 };
+
+const StickyBottomBar = () => (
+  <motion.div initial={{ y: 100 }} animate={{ y: 0 }} transition={{ delay: 1 }} className="fixed bottom-0 left-0 w-full bg-[#0a0a0a] border-t border-[#00ff41]/50 z-40 py-4 px-6 flex flex-col md:flex-row justify-between items-center shadow-[0_-5px_30px_rgba(0,255,65,0.15)]">
+    <div className="mb-4 md:mb-0 text-center md:text-left flex items-center gap-3">
+      <div className="relative"><div className="w-2 h-2 bg-[#00ff41] rounded-full animate-pulse"></div><div className="absolute inset-0 bg-[#00ff41] rounded-full animate-ping opacity-50"></div></div>
+      <div><span className="text-white font-bold tracking-wider text-sm">READY TO SECURE YOUR TEAM?</span><p className="text-gray-500 text-xs hidden md:block">Accepting new retainers for Q1 2026.</p></div>
+    </div>
+    <div className="flex gap-4"><Link to="/partnership" className="px-6 py-3 border border-gray-700 text-gray-300 hover:border-[#00ff41] hover:text-[#00ff41] text-xs font-bold uppercase tracking-wider bg-black/50">Partner With Us</Link><a href={`tel:${CONTACT_INFO.phone}`} className="px-6 py-3 bg-[#00ff41] text-black hover:bg-[#00cc33] text-xs font-bold uppercase tracking-wider flex items-center gap-2 shadow-[0_0_15px_rgba(0,255,65,0.4)]"><Phone size={14}/> Call Now</a></div>
+  </motion.div>
+);
 
 const Footer = () => (
   <footer className="py-20 bg-[#050505] border-t border-gray-900 text-center md:text-left pb-32">
@@ -70,6 +86,7 @@ const Footer = () => (
   </footer>
 );
 
+// --- PAGES ---
 const Home = () => {
   const navigate = useNavigate();
   return (
@@ -121,6 +138,7 @@ const Partnership = () => <div className="pt-32 px-6 min-h-screen text-center pb
 const Press = () => <div className="pt-32 px-6 min-h-screen pb-20 bg-[#050505] text-white"><h1 className="text-4xl font-bold mb-8 font-mono border-l-4 border-[#00ff41] pl-6">PRESS ROOM</h1><div className="bg-[#111] p-8 border-l-2 border-[#00ff41]"><h3 className="text-xl font-bold">Human Layer Security Launches in Miami</h3></div></div>;
 const Legal = () => <div className="pt-32 px-6 min-h-screen pb-20 bg-[#050505] text-white"><h1 className="text-4xl font-bold mb-8 font-mono">LEGAL</h1><p className="text-gray-400">Contact legal for full documentation.</p></div>;
 
+// --- MAIN APP ---
 function App() {
   const location = useLocation();
   return (
@@ -137,6 +155,7 @@ function App() {
           <Route path="/terms" element={<Legal />} />
         </Routes>
       </AnimatePresence>
+      <StickyBottomBar />
       <Footer />
     </div>
   );
