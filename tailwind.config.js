@@ -7,10 +7,10 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: '#050505', // Void Black
-        surface: '#121212', // Tactical Grey
-        primary: '#00FF41', // Terminal Green
-        text: '#E5E5E5', // Off-white
+        background: '#050505',
+        surface: '#121212',
+        primary: '#00FF41',
+        text: '#E5E5E5',
       },
       fontFamily: {
         mono: ['"JetBrains Mono"', 'monospace'],
