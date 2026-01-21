@@ -14,25 +14,8 @@
     @apply bg-background text-text font-sans antialiased overflow-x-hidden selection:bg-primary selection:text-black;
   }
 
-  /* Custom Scrollbar for the technical feel */
-  ::-webkit-scrollbar {
-    width: 6px;
-  }
-  ::-webkit-scrollbar-track {
-    @apply bg-background;
-  }
-  ::-webkit-scrollbar-thumb {
-    @apply bg-gray-800 rounded-full hover:bg-primary transition-colors;
-  }
-}
-
-@layer components {
-  /* Glassmorphism utility */
-  .glass-panel {
-    @apply bg-surface/80 backdrop-blur-md border border-white/10 shadow-xl;
-  }
-  
-  .glass-card {
-    @apply bg-surface/50 backdrop-blur-sm border border-white/5 hover:border-primary/50 transition-all duration-300;
-  }
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { @apply bg-background; }
+  ::-webkit-scrollbar-thumb { @apply bg-gray-800 rounded-full hover:bg-primary transition-colors; }
 }
