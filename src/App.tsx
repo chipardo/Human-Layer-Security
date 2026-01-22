@@ -104,7 +104,7 @@ const Navbar = () => {
 
       <AnimatePresence>
         {isOpen && (
-          <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="md:hidden bg-[#050014] border-b border-white/10 overflow-hidden absolute top-24 left-4 right-4 rounded-2xl border border-white/10 z-50 shadow-2xl">
+          <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="md:hidden bg-black border-b border-white/10 overflow-hidden absolute top-24 left-4 right-4 rounded-2xl border border-white/10 z-50 shadow-2xl">
             <div className="p-4 flex flex-col gap-2">
               {['SERVICES', 'ABOUT', 'PARTNERSHIP'].map((item) => <Link key={item} to={`/${item.toLowerCase()}`} className="block p-4 text-white hover:bg-white/5 rounded-xl font-bold font-display">{item}</Link>)}
               <Link to="/contact" className="block p-4 bg-green-600/20 text-green-500 hover:bg-green-600/30 rounded-xl font-bold text-center border border-green-500/20">Contact Us</Link>
@@ -117,7 +117,7 @@ const Navbar = () => {
 };
 
 const Footer = () => (
-  <footer className="bg-[#02000a] border-t border-white/5 pt-32 pb-12 relative overflow-hidden">
+  <footer className="bg-black border-t border-white/5 pt-32 pb-12 relative overflow-hidden">
     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
     <div className="max-w-7xl mx-auto px-6 relative z-10">
       <div className="grid md:grid-cols-4 gap-12 mb-20">
@@ -158,7 +158,7 @@ const Home = () => {
       {/* HERO */}
       <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
         {/* Animated Background */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_rgba(168,85,247,0.05),transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_rgba(34,197,94,0.05),transparent_50%)]" />
         <div className="absolute top-0 right-0 w-2/3 h-full bg-gradient-to-l from-primary/10 via-primary/5 to-transparent opacity-60 pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-6 w-full grid md:grid-cols-2 gap-12 items-center relative z-10">
@@ -179,7 +179,7 @@ const Home = () => {
           <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }} className="relative group perspective-1000">
             <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-primary/20 bg-surface/50 backdrop-blur-sm transform transition-transform duration-700 group-hover:rotate-y-2">
               <img src="/hero-war-room.png" alt="Cyber War Room" className="w-full h-auto object-cover opacity-90 group-hover:scale-105 transition-transform duration-700 ease-out" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#050014] via-transparent to-transparent opacity-80" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
               <div className="absolute bottom-8 left-8 right-8 grid grid-cols-2 gap-4">
                 <div className="bg-white/10 backdrop-blur-md p-4 rounded-xl border border-white/10">
                   <div className="text-xs text-gray-400 mb-1">Threat Level</div>
@@ -209,7 +209,7 @@ const Home = () => {
       </div>
 
       {/* HOW WE WORK */}
-      <Section className="bg-[#080218]">
+      <Section className="bg-surface">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-white mb-4">How We Work</h2>
           <p className="text-gray-400 max-w-2xl mx-auto">From user as a problem to user as a sensor. A 4-step monthly cycle.</p>
