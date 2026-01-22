@@ -178,16 +178,16 @@ const Home = () => {
           </motion.div>
           <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }} className="relative group perspective-1000">
             <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-primary/20 bg-surface/50 backdrop-blur-sm transform transition-transform duration-700 group-hover:rotate-y-2">
-              <img src="/hero-war-room.png" alt="Cyber War Room" className="w-full h-auto object-cover opacity-90 group-hover:scale-105 transition-transform duration-700 ease-out" />
+              <img src="/hero-network.png" alt="Human Defense Network" className="w-full h-auto object-cover opacity-90 group-hover:scale-105 transition-transform duration-700 ease-out" />
               <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
               <div className="absolute bottom-8 left-8 right-8 grid grid-cols-2 gap-4">
-                <div className="bg-white/10 backdrop-blur-md p-4 rounded-xl border border-white/10">
-                  <div className="text-xs text-gray-400 mb-1">Threat Level</div>
-                  <div className="text-xl font-bold text-white flex items-center gap-2"><Activity size={18} className="animate-pulse text-primary" /> CRITICAL</div>
+                <div className="bg-black/40 backdrop-blur-md p-4 rounded-xl border border-white/10">
+                  <div className="text-xs text-green-400 font-mono mb-1 uppercase tracking-wider">Human Risk</div>
+                  <div className="text-2xl font-bold text-white flex items-center gap-2">MITIGATED</div>
                 </div>
-                <div className="bg-white/10 backdrop-blur-md p-4 rounded-xl border border-white/10">
-                  <div className="text-xs text-gray-400 mb-1">Active Monitors</div>
-                  <div className="text-xl font-bold text-primary">24/7</div>
+                <div className="bg-black/40 backdrop-blur-md p-4 rounded-xl border border-white/10">
+                  <div className="text-xs text-green-400 font-mono mb-1 uppercase tracking-wider">Resilience Score</div>
+                  <div className="text-2xl font-bold text-white">99.9%</div>
                 </div>
               </div>
             </div>
@@ -505,6 +505,7 @@ function App() {
 }
 
 export default App;
+
 
 
 
