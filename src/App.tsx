@@ -210,14 +210,13 @@ const Home = () => {
             </motion.div>
           ))}
         </motion.div>
-      </motion.div>
-      <div className="flex justify-center">
-        <Link to="/about"><Button size="lg" variant="outline">Learn More About Us</Button></Link>
-      </div>
-    </Section >
+        <div className="flex justify-center">
+          <Link to="/about"><Button size="lg" variant="outline">Learn More About Us</Button></Link>
+        </div>
+      </Section>
 
-      {/* SERVICES PREVIEW */ }
-      < Section id = "services-preview" >
+      {/* SERVICES PREVIEW */}
+      <Section id="services-preview">
         <div className="flex flex-col md:flex-row justify-between items-end mb-12">
           <div><h2 className="text-4xl font-bold text-white mb-4">Core Capabilities</h2><p className="text-gray-400">Specialized. Focused. Effective.</p></div>
           <Button variant="outline" className="hidden md:flex" onClick={() => navigate('/services')}>All Services</Button>
@@ -237,44 +236,44 @@ const Home = () => {
         <div className="flex justify-center">
           <Link to="/services"><Button size="lg">Explore Our Services</Button></Link>
         </div>
-      </Section >
+      </Section>
 
-  {/* SOCIAL PROOF / VALUE PROP */ }
-  < Section className = "bg-surface/50" >
-    <div className="grid md:grid-cols-2 gap-12 items-center">
-      <div>
-        <h2 className="text-3xl font-bold text-white mb-6">Why Choose Us?</h2>
-        <ul className="space-y-6">
-          <li className="flex gap-4 items-start">
-            <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0 text-primary font-bold">1</div>
-            <div>
-              <h4 className="font-bold text-white mb-1">Human-Centric Approach</h4>
-              <p className="text-gray-400 text-sm">We believe in empowerment, not punishment. We turn your biggest liability into your biggest asset.</p>
+      {/* SOCIAL PROOF / VALUE PROP */}
+      <Section className="bg-surface/50">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div>
+            <h2 className="text-3xl font-bold text-white mb-6">Why Choose Us?</h2>
+            <ul className="space-y-6">
+              <li className="flex gap-4 items-start">
+                <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0 text-primary font-bold">1</div>
+                <div>
+                  <h4 className="font-bold text-white mb-1">Human-Centric Approach</h4>
+                  <p className="text-gray-400 text-sm">We believe in empowerment, not punishment. We turn your biggest liability into your biggest asset.</p>
+                </div>
+              </li>
+              <li className="flex gap-4 items-start">
+                <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0 text-primary font-bold">2</div>
+                <div>
+                  <h4 className="font-bold text-white mb-1">Data-Driven Results</h4>
+                  <p className="text-gray-400 text-sm">Measurable reduction in click rates and distinct improvement in reporting speed.</p>
+                </div>
+              </li>
+            </ul>
+            <div className="mt-8">
+              <Link to="/contact"><Button>Contact Us</Button></Link>
             </div>
-          </li>
-          <li className="flex gap-4 items-start">
-            <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0 text-primary font-bold">2</div>
-            <div>
-              <h4 className="font-bold text-white mb-1">Data-Driven Results</h4>
-              <p className="text-gray-400 text-sm">Measurable reduction in click rates and distinct improvement in reporting speed.</p>
+          </div>
+          <div className="p-8 rounded-2xl bg-black/40 border border-white/5">
+            <Quote className="text-primary w-12 h-12 mb-6 opacity-50" />
+            <p className="text-xl text-gray-300 italic mb-6 leading-relaxed">
+              "Security is not a product, but a process. And that process starts with people."
+            </p>
+            <div className="mt-8">
+              <Link to="/services"><Button variant="outline">See How We Work</Button></Link>
             </div>
-          </li>
-        </ul>
-        <div className="mt-8">
-          <Link to="/contact"><Button>Contact Us</Button></Link>
+          </div>
         </div>
-      </div>
-      <div className="p-8 rounded-2xl bg-black/40 border border-white/5">
-        <Quote className="text-primary w-12 h-12 mb-6 opacity-50" />
-        <p className="text-xl text-gray-300 italic mb-6 leading-relaxed">
-          "Security is not a product, but a process. And that process starts with people."
-        </p>
-        <div className="mt-8">
-          <Link to="/services"><Button variant="outline">See How We Work</Button></Link>
-        </div>
-      </div>
-    </div>
-      </Section >
+      </Section>
     </>
   );
 };
@@ -501,4 +500,5 @@ function App() {
 }
 
 export default App;
+
 
