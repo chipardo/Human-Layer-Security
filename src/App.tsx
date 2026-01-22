@@ -1,4 +1,4 @@
-   import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate, useLocation, Link } from 'react-router-dom';
 import { Shield, Menu, X, CheckCircle, Users, Mail, Phone, Activity, ArrowRight, Lock, Globe, Terminal, FileText, Award, Quote } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -80,11 +80,11 @@ const Navbar = () => {
         "max-w-7xl mx-auto px-6 h-20 flex justify-between items-center transition-all duration-300",
         scrolled ? "glass rounded-full border border-white/10 shadow-lg shadow-black/50" : "bg-transparent border-transparent"
       )}>
-        <Link to="/" className="flex items-center gap-4 group">
-          <img src="/humanlayerlogo.png" alt="HumanLayer Security" className="h-18 w-auto object-contain transition-all duration-300 group-hover:scale-105 filter drop-shadow-[0_0_8px_rgba(34,197,94,0.3)]" />
+        <Link to="/" className="flex items-center gap-3 group">
+          <img src="/humanlayerlogo.png" alt="HumanLayer Security" className="h-10 md:h-14 w-auto object-contain transition-all duration-300 group-hover:scale-105 filter drop-shadow-[0_0_8px_rgba(34,197,94,0.3)]" />
           <div className="flex flex-col justify-center">
-            <span className="font-display font-bold text-white text-xl tracking-tight leading-none group-hover:text-primary transition-colors">HUMAN</span>
-            <span className="font-display font-bold text-primary text-sm tracking-[0.2em] leading-none">LAYER</span>
+            <span className="font-display font-bold text-white text-lg md:text-xl tracking-tight leading-none group-hover:text-primary transition-colors">HUMAN</span>
+            <span className="font-display font-bold text-primary text-[10px] md:text-sm tracking-[0.2em] leading-none">LAYER</span>
           </div>
         </Link>
 
@@ -587,5 +587,6 @@ function App() {
 }
 
 export default App;
+
 
 
