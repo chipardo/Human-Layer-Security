@@ -266,8 +266,9 @@ const Home = () => {
           <div className="p-8 rounded-2xl bg-black/40 border border-white/5">
             <Quote className="text-primary w-12 h-12 mb-6 opacity-50" />
             <p className="text-xl text-gray-300 italic mb-6 leading-relaxed">
-              "Security is not a product, but a process. And that process starts with people."
+              "{quote.text}"
             </p>
+            <div className="text-sm font-bold text-white">- {quote.author}</div>
             <div className="mt-8">
               <Link to="/services"><Button variant="outline">See How We Work</Button></Link>
             </div>
@@ -364,22 +365,12 @@ const About = () => (
             <div className="flex flex-col gap-8">
               <div className="flex gap-6 items-center">
                 <div className="w-20 h-20 rounded-full bg-black border-2 border-primary/20 flex items-center justify-center text-xl font-bold text-white overflow-hidden relative">
-                  AM
+                  NS
                 </div>
                 <div>
-                  <div className="text-xl font-bold text-white">Alejandro Marcone</div>
-                  <div className="text-primary font-mono text-xs mb-2">CO-FOUNDER & CYBER ANALYST</div>
-                  <p className="text-gray-500 text-sm">Expert in human-centric security analysis.</p>
-                </div>
-              </div>
-              <div className="flex gap-6 items-center">
-                <div className="w-20 h-20 rounded-full bg-black border-2 border-primary/20 flex items-center justify-center text-xl font-bold text-white overflow-hidden relative">
-                  BF
-                </div>
-                <div>
-                  <div className="text-xl font-bold text-white">Branco Forti</div>
-                  <div className="text-primary font-mono text-xs mb-2">CO-FOUNDER & ELECTRICAL ENGINEER</div>
-                  <p className="text-gray-500 text-sm">Technical visionary and systems architect.</p>
+                  <div className="text-xl font-bold text-white">{CONTACT_INFO.founder}</div>
+                  <div className="text-primary font-mono text-xs mb-2">FOUNDER & PRINCIPAL</div>
+                  <p className="text-gray-500 text-sm">Offensive Security Expert & Human Risk Specialist.</p>
                 </div>
               </div>
             </div>
@@ -500,5 +491,7 @@ function App() {
 }
 
 export default App;
+
+
 
 
