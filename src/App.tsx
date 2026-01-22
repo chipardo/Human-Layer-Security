@@ -28,7 +28,7 @@ const staggerContainer = {
 const Button: React.FC<React.ComponentProps<typeof motion.button> & { variant?: 'primary' | 'outline' | 'ghost', size?: 'sm' | 'md' | 'lg' }> = ({ className, variant = 'primary', size = 'md', children, ...props }) => {
   const base = "inline-flex items-center justify-center font-display font-semibold transition-all focus:outline-none disabled:opacity-50 rounded-full cursor-pointer";
   const vars = {
-    primary: "bg-primary text-white hover:bg-secondary shadow-[0_0_20px_rgba(168,85,247,0.4)] hover:shadow-[0_0_30px_rgba(168,85,247,0.6)] border border-transparent",
+    primary: "bg-primary text-black hover:bg-green-400 shadow-[0_0_20px_rgba(34,197,94,0.4)] hover:shadow-[0_0_30px_rgba(34,197,94,0.6)] border border-transparent",
     outline: "border border-white/20 text-white hover:border-primary hover:text-primary bg-transparent hover:bg-white/5",
     ghost: "text-white/70 hover:text-white hover:bg-white/5"
   };
@@ -78,7 +78,7 @@ const Navbar = () => {
         </Link>
 
         <div className="hidden md:flex gap-1 bg-white/5 rounded-full p-1 border border-white/5 backdrop-blur-sm">
-          {['SERVICES', 'ABOUT', 'PARTNERSHIP', 'PRESS'].map((item) => (
+          {['SERVICES', 'ABOUT', 'PARTNERSHIP'].map((item) => (
             <Link key={item} to={`/${item.toLowerCase()}`} className={cn(
               "px-6 py-2 text-xs font-bold text-gray-300 hover:text-white rounded-full transition-all tracking-wide",
               location.pathname === `/${item.toLowerCase()}` ? "bg-white/10 text-white shadow-inner" : "hover:bg-white/5"
@@ -87,7 +87,7 @@ const Navbar = () => {
         </div>
 
         <div className="hidden md:flex gap-4">
-          <Link to="/contact"><Button size="sm" className="gap-2 shadow-none hover:shadow-lg bg-green-600 hover:bg-green-700 border-green-500/50 shadow-green-900/20">Contact Us</Button></Link>
+          <Link to="/contact"><Button size="sm" className="gap-2 shadow-none hover:shadow-lg bg-green-600 hover:bg-green-500 border-green-500/50 shadow-green-900/20 text-white">Contact Us</Button></Link>
         </div>
 
         <button className="md:hidden text-white" onClick={() => setIsOpen(!isOpen)}>{isOpen ? <X /> : <Menu />}</button>
@@ -97,7 +97,7 @@ const Navbar = () => {
         {isOpen && (
           <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="md:hidden bg-[#050014] border-b border-white/10 overflow-hidden absolute top-24 left-4 right-4 rounded-2xl border border-white/10 z-50 shadow-2xl">
             <div className="p-4 flex flex-col gap-2">
-              {['SERVICES', 'ABOUT', 'PARTNERSHIP', 'PRESS'].map((item) => <Link key={item} to={`/${item.toLowerCase()}`} className="block p-4 text-white hover:bg-white/5 rounded-xl font-bold font-display">{item}</Link>)}
+              {['SERVICES', 'ABOUT', 'PARTNERSHIP'].map((item) => <Link key={item} to={`/${item.toLowerCase()}`} className="block p-4 text-white hover:bg-white/5 rounded-xl font-bold font-display">{item}</Link>)}
               <Link to="/contact" className="block p-4 bg-green-600/20 text-green-500 hover:bg-green-600/30 rounded-xl font-bold text-center border border-green-500/20">Contact Us</Link>
             </div>
           </motion.div>
@@ -119,10 +119,10 @@ const Footer = () => (
           </Link>
           <h2 className="text-3xl font-bold text-white mb-6 max-w-sm leading-tight">Securing the human operating system.</h2>
           <div className="flex gap-4">
-            <Button>Book a Demo</Button>
+            <Link to="/contact"><Button>Contact Us</Button></Link>
           </div>
         </div>
-        <div><h4 className="text-white font-bold mb-6 font-display tracking-widest text-sm">COMPANY</h4><ul className="space-y-4 text-sm text-gray-500"><li><Link to="/about" className="hover:text-primary transition-colors">About Us</Link></li><li><Link to="/services" className="hover:text-primary transition-colors">Services</Link></li><li><Link to="/partnership" className="hover:text-primary transition-colors">Partnerships</Link></li><li><Link to="/press" className="hover:text-primary transition-colors">Press</Link></li></ul></div>
+        <div><h4 className="text-white font-bold mb-6 font-display tracking-widest text-sm">COMPANY</h4><ul className="space-y-4 text-sm text-gray-500"><li><Link to="/about" className="hover:text-primary transition-colors">About Us</Link></li><li><Link to="/services" className="hover:text-primary transition-colors">Services</Link></li><li><Link to="/partnership" className="hover:text-primary transition-colors">Partnerships</Link></li></ul></div>
         <div><h4 className="text-white font-bold mb-6 font-display tracking-widest text-sm">CONTACT</h4><ul className="space-y-4 text-sm text-gray-500"><li><Link to="/contact" className="hover:text-primary flex items-center gap-2">Contact Us <ArrowRight size={14} /></Link></li></ul></div>
       </div>
       <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-sm text-gray-600">
@@ -153,13 +153,13 @@ const Home = () => {
               <span className="w-2 h-2 rounded-full bg-primary animate-pulse" /> System Active
             </div>
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-[1.1] tracking-tight">
-              Humans are your <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">strongest firewall.</span>
+              Humans are your <span className="text-primary">strongest firewall.</span>
             </h1>
             <p className="text-xl text-gray-400 mb-10 max-w-lg leading-relaxed">
               Is your team prepared for the next social engineering attack? We transform your workforce from a liability into a high-fidelity sensor network.
             </p>
             <div className="flex gap-4">
-              <Link to="/contact"><Button size="lg" className="bg-green-600 hover:bg-green-700 shadow-green-900/20 border-green-500/20">Contact Us</Button></Link>
+              <Link to="/contact"><Button size="lg" className="bg-green-600 hover:bg-green-500 shadow-green-900/20 border-green-500/20 text-white">Contact Us</Button></Link>
             </div>
           </motion.div>
           <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }} className="relative group perspective-1000">
@@ -169,7 +169,7 @@ const Home = () => {
               <div className="absolute bottom-8 left-8 right-8 grid grid-cols-2 gap-4">
                 <div className="bg-white/10 backdrop-blur-md p-4 rounded-xl border border-white/10">
                   <div className="text-xs text-gray-400 mb-1">Threat Level</div>
-                  <div className="text-xl font-bold text-red-500 flex items-center gap-2"><Activity size={18} className="animate-pulse" /> CRITICAL</div>
+                  <div className="text-xl font-bold text-white flex items-center gap-2"><Activity size={18} className="animate-pulse text-primary" /> CRITICAL</div>
                 </div>
                 <div className="bg-white/10 backdrop-blur-md p-4 rounded-xl border border-white/10">
                   <div className="text-xs text-gray-400 mb-1">Active Monitors</div>
@@ -210,19 +210,20 @@ const Home = () => {
             </motion.div>
           ))}
         </motion.div>
-        <div className="flex justify-center">
-          <Link to="/contact"><Button size="lg">Contact Us</Button></Link>
-        </div>
-      </Section>
+      </motion.div>
+      <div className="flex justify-center">
+        <Link to="/about"><Button size="lg" variant="outline">Learn More About Us</Button></Link>
+      </div>
+    </Section >
 
-      {/* SERVICES PREVIEW */}
-      <Section id="services-preview">
+      {/* SERVICES PREVIEW */ }
+      < Section id = "services-preview" >
         <div className="flex flex-col md:flex-row justify-between items-end mb-12">
           <div><h2 className="text-4xl font-bold text-white mb-4">Core Capabilities</h2><p className="text-gray-400">Specialized. Focused. Effective.</p></div>
           <Button variant="outline" className="hidden md:flex" onClick={() => navigate('/services')}>All Services</Button>
         </div>
         <div className="grid md:grid-cols-3 gap-6 mb-12">
-          <div className="md:col-span-2 p-10 rounded-3xl bg-gradient-to-br from-secondary/20 to-surface border border-white/10 min-h-[300px] flex flex-col justify-end group transition-all hover:border-primary/30">
+          <div className="md:col-span-2 p-10 rounded-3xl bg-surface border border-white/10 min-h-[300px] flex flex-col justify-end group transition-all hover:border-primary/30">
             <Shield className="w-12 h-12 text-primary mb-auto" />
             <h3 className="text-2xl font-bold text-white mb-2">Ethical Phishing Simulations</h3>
             <p className="text-gray-300">We don't hack systems; we test people. Controlled campaigns that identify weak points before attackers do.</p>
@@ -234,44 +235,46 @@ const Home = () => {
           </div>
         </div>
         <div className="flex justify-center">
-          <Link to="/contact"><Button size="lg">Contact Us</Button></Link>
+          <Link to="/services"><Button size="lg">Explore Our Services</Button></Link>
         </div>
-      </Section>
+      </Section >
 
-      {/* SOCIAL PROOF / VALUE PROP */}
-      <Section className="bg-surface/50">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div>
-            <h2 className="text-3xl font-bold text-white mb-6">Why Choose Us?</h2>
-            <ul className="space-y-6">
-              <li className="flex gap-4 items-start">
-                <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0 text-primary font-bold">1</div>
-                <div>
-                  <h4 className="font-bold text-white mb-1">Human-Centric Approach</h4>
-                  <p className="text-gray-400 text-sm">We believe in empowerment, not punishment. We turn your biggest liability into your biggest asset.</p>
-                </div>
-              </li>
-              <li className="flex gap-4 items-start">
-                <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0 text-primary font-bold">2</div>
-                <div>
-                  <h4 className="font-bold text-white mb-1">Data-Driven Results</h4>
-                  <p className="text-gray-400 text-sm">Measurable reduction in click rates and distinct improvement in reporting speed.</p>
-                </div>
-              </li>
-            </ul>
-            <div className="mt-8">
-              <Link to="/contact"><Button>Contact Us</Button></Link>
+  {/* SOCIAL PROOF / VALUE PROP */ }
+  < Section className = "bg-surface/50" >
+    <div className="grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <h2 className="text-3xl font-bold text-white mb-6">Why Choose Us?</h2>
+        <ul className="space-y-6">
+          <li className="flex gap-4 items-start">
+            <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0 text-primary font-bold">1</div>
+            <div>
+              <h4 className="font-bold text-white mb-1">Human-Centric Approach</h4>
+              <p className="text-gray-400 text-sm">We believe in empowerment, not punishment. We turn your biggest liability into your biggest asset.</p>
             </div>
-          </div>
-          <div className="p-8 rounded-2xl bg-black/40 border border-white/5">
-            <Quote className="text-primary w-12 h-12 mb-6 opacity-50" />
-            <p className="text-xl text-gray-300 italic mb-6 leading-relaxed">
-              "Security is not a product, but a process. And that process starts with people."
-            </p>
-            <div className="text-sm font-bold text-white">- Bruce Schneier</div>
-          </div>
+          </li>
+          <li className="flex gap-4 items-start">
+            <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0 text-primary font-bold">2</div>
+            <div>
+              <h4 className="font-bold text-white mb-1">Data-Driven Results</h4>
+              <p className="text-gray-400 text-sm">Measurable reduction in click rates and distinct improvement in reporting speed.</p>
+            </div>
+          </li>
+        </ul>
+        <div className="mt-8">
+          <Link to="/contact"><Button>Contact Us</Button></Link>
         </div>
-      </Section>
+      </div>
+      <div className="p-8 rounded-2xl bg-black/40 border border-white/5">
+        <Quote className="text-primary w-12 h-12 mb-6 opacity-50" />
+        <p className="text-xl text-gray-300 italic mb-6 leading-relaxed">
+          "Security is not a product, but a process. And that process starts with people."
+        </p>
+        <div className="mt-8">
+          <Link to="/services"><Button variant="outline">See How We Work</Button></Link>
+        </div>
+      </div>
+    </div>
+      </Section >
     </>
   );
 };
@@ -300,7 +303,7 @@ const Services = () => (
           { t: "Spear Phishing Sims", d: "Highly targeted campaigns designed to test your C-suite's resilience against sophisticated social engineering.", i: Mail }
         ].map((s, i) => (
           <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} key={i} className="flex flex-col md:flex-row gap-8 p-10 border border-white/5 bg-white/5 rounded-2xl hover:border-primary/30 hover:bg-white/10 transition-all group">
-            <div className="w-16 h-16 bg-surface rounded-2xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform shadow-lg shadow-black/50 border border-white/5">
+            <div className="w-16 h-16 bg-surface rounded-2xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform shadow-lg shadow-green-900/20 border border-white/5">
               <s.i className="w-8 h-8 text-primary" />
             </div>
             <div>
@@ -334,7 +337,7 @@ const Services = () => (
           </div>
         </div>
         <p className="text-xl text-white font-bold mb-8">Numbers don't lie. Training works.</p>
-        <Link to="/contact"><Button size="lg" className="bg-green-600 hover:bg-green-700">Ready to get started? Contact Us</Button></Link>
+        <Link to="/contact"><Button size="lg" className="bg-green-600 hover:bg-green-500 text-white">Ready to get started? Contact Us</Button></Link>
       </div>
     </Section>
   </div>
@@ -346,28 +349,45 @@ const About = () => (
     <Section className="!pt-0">
       <div className="grid md:grid-cols-2 gap-16 items-start">
         <div className="space-y-8 text-lg text-gray-300 leading-relaxed">
-          <p>The "Human Layer" is the final frontier of cybersecurity. While firewalls utilize advanced AI to block threats, human psychology remains static—and vulnerable.</p>
-          <p className="text-2xl font-bold text-white border-l-4 border-primary pl-6 my-8">"Call us crazy, but we believe your employees are your best defense, not your biggest risk."</p>
-          <p>We founded HumanLayer Security with a simple mission: <span className="text-white font-bold">To harden the human operating system.</span></p>
-          <p>We don't just send automated emails. We study your organization's culture, identify communication patterns, and design simulations that mirror the exact tactics real attackers will use against you.</p>
+          <h3 className="text-2xl font-bold text-white">Why We Started HumanLayer Security</h3>
+          <p>It began with a realization during a red team engagement. We spent weeks building advanced malware, only to find the easiest way in was a simple phone call.</p>
+          <p>The cybersecurity industry keeps buying brighter boxes and smarter firewalls, but the attackers have moved on. They aren't hacking machines anymore; they're hacking people.</p>
+          <p>We founded this company on a shared belief: <span className="text-white font-bold">Employees shouldn't be the weakest link. They should be the first line of defense.</span> By empowering people instead of blaming them, we're changing the DNA of security culture.</p>
           <div className="flex gap-4 pt-4">
             <Link to="/services"><Button>Explore Our Services</Button></Link>
             <Link to="/contact"><Button variant="outline">Ready to talk? Contact Us</Button></Link>
           </div>
         </div>
-        <div className="bg-surface rounded-3xl p-8 border border-white/10 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 rounded-full blur-[60px] pointer-events-none" />
-          <h3 className="text-sm font-bold text-primary uppercase tracking-widest mb-8">Leadership</h3>
-          <div className="flex gap-6 items-center">
-            <div className="w-24 h-24 rounded-full bg-black border-2 border-primary/20 flex items-center justify-center text-xl font-bold text-gray-700 overflow-hidden relative">
-              <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent" />
-              NS
+        <div className="space-y-8">
+          <div className="bg-surface rounded-3xl p-8 border border-white/10 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 rounded-full blur-[60px] pointer-events-none" />
+            <h3 className="text-sm font-bold text-primary uppercase tracking-widest mb-8">Leadership</h3>
+            <div className="flex flex-col gap-8">
+              <div className="flex gap-6 items-center">
+                <div className="w-20 h-20 rounded-full bg-black border-2 border-primary/20 flex items-center justify-center text-xl font-bold text-white overflow-hidden relative">
+                  AM
+                </div>
+                <div>
+                  <div className="text-xl font-bold text-white">Alejandro Marcone</div>
+                  <div className="text-primary font-mono text-xs mb-2">CO-FOUNDER & CYBER ANALYST</div>
+                  <p className="text-gray-500 text-sm">Expert in human-centric security analysis.</p>
+                </div>
+              </div>
+              <div className="flex gap-6 items-center">
+                <div className="w-20 h-20 rounded-full bg-black border-2 border-primary/20 flex items-center justify-center text-xl font-bold text-white overflow-hidden relative">
+                  BF
+                </div>
+                <div>
+                  <div className="text-xl font-bold text-white">Branco Forti</div>
+                  <div className="text-primary font-mono text-xs mb-2">CO-FOUNDER & ELECTRICAL ENGINEER</div>
+                  <p className="text-gray-500 text-sm">Technical visionary and systems architect.</p>
+                </div>
+              </div>
             </div>
-            <div>
-              <div className="text-2xl font-bold text-white">{CONTACT_INFO.founder}</div>
-              <div className="text-primary font-mono text-sm mb-2">FOUNDER & PRINCIPAL</div>
-              <p className="text-gray-500 text-sm">Ex-Offensive Security Specialist.</p>
-            </div>
+          </div>
+
+          <div className="p-8 rounded-3xl border border-white/10 bg-surface/50">
+            <p className="text-xl font-bold text-white italic">"Call us crazy, but we believe your employees are your best defense, not your biggest risk."</p>
           </div>
         </div>
       </div>
@@ -379,6 +399,19 @@ const Partnership = () => (
   <div className="min-h-screen bg-background text-white pb-20">
     <PageHeader title="Partnership" subtitle="Security is a team sport. We enable MSPs and agencies to offer elite human-layer defense." />
     <Section>
+      <div className="mb-20 grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 className="text-3xl font-bold text-white mb-6">We Believe in Partnerships</h2>
+          <div className="space-y-6 text-gray-400 leading-relaxed">
+            <p>At HumanLayer Security, we don't just work for organizations—we work with them. True cybersecurity isn't a product you buy; it's a culture you build. That's why we approach every client relationship as a partnership, not a transaction.</p>
+            <p>Your team knows your organization better than anyone. Our expertise is in human behavior and social engineering tactics. Together, we create a security-aware culture that's authentic to your company and sustainable over time. We succeed when you succeed.</p>
+            <p>As your partner, we're committed to transparency, continuous improvement, and measurable results. We don't just send phishing emails—we help you understand your human risk landscape and turn your people into your strongest defense layer.</p>
+          </div>
+        </div>
+        <div className="bg-surface p-8 rounded-3xl border border-white/10 flex items-center justify-center">
+          <Users className="w-32 h-32 text-primary opacity-50" />
+        </div>
+      </div>
       <div className="grid md:grid-cols-3 gap-8 mb-16">
         {[
           { t: "White Label", d: "Deploy our simulations under your brand.", i: FileText },
@@ -401,36 +434,7 @@ const Partnership = () => (
   </div>
 );
 
-const Press = () => (
-  <div className="min-h-screen bg-background text-white pb-20">
-    <PageHeader title="Press Room" subtitle="Latest news, research, and updates from the HumanLayer Security team." />
-    <Section className="!pt-0">
-      <div className="grid gap-6">
-        {[
-          { date: "Jan 15, 2026", title: "HumanLayer Security Launches in Miami Tech Hub", source: "Press Release" },
-          { date: "Dec 10, 2025", title: "The Rise of AI-Driven Social Engineering", source: "Security Week Op-Ed" },
-          { date: "Nov 22, 2025", title: "Interview: Why Firewalls Can't Save You From Phishing", source: "Cyber Daily" }
-        ].map((n, i) => (
-          <div key={i} className="flex gap-6 items-center p-6 border-b border-white/5 group hover:bg-white/5 transition-colors cursor-pointer">
-            <div className="text-sm font-mono text-primary w-32 shrink-0">{n.date}</div>
-            <div className="flex-grow">
-              <h3 className="text-xl font-bold text-white group-hover:text-primary transition-colors">{n.title}</h3>
-              <div className="text-gray-500 text-sm mt-1">{n.source}</div>
-            </div>
-            <ChevronRight className="text-gray-600 group-hover:text-white transition-colors" />
-          </div>
-        ))}
-      </div>
-      <div className="mt-12 p-8 border border-white/10 rounded-2xl bg-surface flex flex-col md:flex-row items-center justify-between gap-6">
-        <div>
-          <h3 className="text-xl font-bold">Media Inquiries</h3>
-          <p className="text-gray-400 text-sm mt-1">For comment or interviews, contact our media team.</p>
-        </div>
-        <Link to="/contact"><Button variant="outline">Contact Us</Button></Link>
-      </div>
-    </Section>
-  </div>
-);
+
 
 const Contact = () => (
   <div className="min-h-screen bg-background text-white pb-20">
@@ -485,7 +489,6 @@ function App() {
           <Route path="/services" element={<Services />} />
           <Route path="/about" element={<About />} />
           <Route path="/partnership" element={<Partnership />} />
-          <Route path="/press" element={<Press />} />
           <Route path="/privacy" element={<Legal />} />
           <Route path="/terms" element={<Legal />} />
           <Route path="/contact" element={<Contact />} />
