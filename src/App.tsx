@@ -81,7 +81,7 @@ const Navbar = () => {
         scrolled ? "glass rounded-full border border-white/10 shadow-lg shadow-black/50" : "bg-transparent border-transparent"
       )}>
         <Link to="/" className="flex items-center gap-2 group">
-          <img src="/humanlayerlogo.png" alt="HumanLayer Security" className="h-10 w-auto" />
+          <img src="/humanlayerlogo.png" alt="HumanLayer Security" className="h-16 w-auto transition-transform group-hover:scale-105" />
           <span className="font-display font-bold text-white text-xl tracking-tight leading-none">HUMAN<br /><span className="text-primary text-sm tracking-widest">LAYER</span></span>
         </Link>
 
@@ -122,7 +122,7 @@ const Footer = () => (
       <div className="grid md:grid-cols-4 gap-12 mb-20">
         <div className="col-span-1 md:col-span-2">
           <Link to="/" className="flex items-center gap-2 mb-6">
-            <img src="/humanlayerlogo.png" alt="HumanLayer Security" className="h-12 w-auto" />
+            <img src="/humanlayerlogo.png" alt="HumanLayer Security" className="h-20 w-auto" />
             <span className="font-display font-bold text-white text-2xl">HUMAN<span className="text-primary">LAYER</span></span>
           </Link>
           <h2 className="text-3xl font-bold text-white mb-6 max-w-sm leading-tight">Securing the human operating system.</h2>
@@ -307,7 +307,7 @@ const Services = () => (
   <div className="min-h-screen bg-background text-white pb-20">
     <PageHeader title="Our Services" subtitle="We provide a full spectrum of human-centric security services, ranging from preventative education to active crisis management." />
     <Section className="!pt-0">
-      <div className="grid gap-4">
+      <div className="grid gap-6">
         {[
           { t: "Simulated Phishing Campaigns", d: "Monthly, controlled tests using the latest threat templates. We find the gaps before the bad guys do.", i: Activity },
           { t: "Human-Centric Training", d: "Immediate, contextual feedback moments. We teach employees to recognize the signs, not just memorize rules.", i: Globe },
@@ -315,42 +315,66 @@ const Services = () => (
           { t: "Executive Workshops", d: "High-level strategy sessions for leadership to understand the human risk factor.", i: Shield },
           { t: "Spear Phishing Sims", d: "Highly targeted campaigns designed to test your C-suite's resilience against sophisticated social engineering.", i: Mail }
         ].map((s, i) => (
-          <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} key={i} className="flex flex-col md:flex-row gap-8 p-10 border border-white/5 bg-white/5 rounded-2xl hover:border-primary/30 hover:bg-white/10 transition-all group">
-            <div className="w-16 h-16 bg-surface rounded-2xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform shadow-lg shadow-green-900/20 border border-white/5">
-              <s.i className="w-8 h-8 text-primary" />
+          <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} key={i} className="flex flex-col md:flex-row gap-8 p-10 border border-white/5 bg-surface/50 rounded-2xl hover:border-primary/50 hover:bg-white/5 transition-all group relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className="w-20 h-20 bg-black rounded-2xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform shadow-[0_0_30px_rgba(34,197,94,0.15)] border border-white/10 relative z-10">
+              <s.i className="w-10 h-10 text-primary" />
             </div>
-            <div>
+            <div className="relative z-10">
               <h3 className="text-2xl font-bold mb-3 text-white">{s.t}</h3>
-              <p className="text-gray-400 leading-relaxed max-w-3xl mb-4">{s.d}</p>
+              <p className="text-gray-400 leading-relaxed max-w-3xl mb-4 text-lg">{s.d}</p>
               <Link to="/contact" className="inline-flex items-center text-primary font-bold text-sm hover:underline">
                 Contact Us <ChevronRight size={14} className="ml-1" />
               </Link>
             </div>
-            <div className="md:ml-auto flex items-center">
-              <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-primary group-hover:border-primary transition-colors">
-                <ArrowRight size={18} className="text-white" />
+            <div className="md:ml-auto flex items-center relative z-10">
+              <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-primary group-hover:border-primary transition-colors group-hover:text-black">
+                <ArrowRight size={20} className="text-current" />
               </div>
             </div>
           </motion.div>
         ))}
       </div>
-      <div className="mt-16 text-center bg-surface/30 p-12 rounded-3xl border border-white/5">
-        <div className="grid md:grid-cols-3 gap-8 mb-8">
-          <div className="text-center">
-            <div className="text-4xl font-bold text-white mb-2">37%</div>
-            <div className="text-sm text-gray-400">Avg. Phishing Click Rate (Pre-Training)</div>
+
+      {/* DUPLICATED HOW WE WORK SECTION */}
+      <div className="my-32">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold text-white mb-4">How We Work</h2>
+          <p className="text-gray-400 max-w-2xl mx-auto">From user as a problem to user as a sensor. A 4-step monthly cycle.</p>
+        </div>
+        <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid md:grid-cols-4 gap-4 mb-12">
+          {[{ t: "Simulate", d: "We send monthly controlled phishing campaigns.", i: Mail }, { t: "Educate", d: "Instant micro-trainings for those who click.", i: FileText }, { t: "Report", d: "Comprehensive vulnerability trend analysis.", i: Activity }, { t: "Improve", d: "Hardening the human operating system over time.", i: CheckCircle }].map((s, i) => (
+            <motion.div variants={fadeInUp} key={i} className="group relative p-8 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
+              <div className="absolute top-0 right-0 p-4 text-7xl font-bold text-white/5 font-display select-none group-hover:text-white/10 transition-colors">0{i + 1}</div>
+              <div className="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"><s.i className="w-6 h-6 text-primary" /></div>
+              <h3 className="text-xl font-bold text-white mb-2">{s.t}</h3>
+              <p className="text-gray-400 text-sm leading-relaxed">{s.d}</p>
+            </motion.div>
+          ))}
+        </motion.div>
+        <div className="flex justify-center">
+          <Link to="/about"><Button size="lg" variant="outline">Learn More About Us</Button></Link>
+        </div>
+      </div>
+
+      <div className="mt-16 text-center bg-black/40 backdrop-blur-md p-16 rounded-[3rem] border border-white/10 relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
+        <div className="grid md:grid-cols-3 gap-12 mb-12 relative z-10">
+          <div className="text-center group">
+            <div className="text-7xl font-bold text-white mb-2 group-hover:text-primary transition-colors tracking-tighter">37%</div>
+            <div className="text-sm text-gray-400 uppercase tracking-widest font-bold">Avg. Phishing Click Rate (Pre-Training)</div>
           </div>
-          <div className="text-center">
-            <div className="text-4xl font-bold text-primary mb-2">4%</div>
-            <div className="text-sm text-gray-400">Click Rate After 6 Months</div>
+          <div className="text-center group">
+            <div className="text-7xl font-bold text-primary mb-2 tracking-tighter shadow-primary drop-shadow-[0_0_15px_rgba(34,197,94,0.5)]">4%</div>
+            <div className="text-sm text-gray-400 uppercase tracking-widest font-bold">Click Rate After 6 Months</div>
           </div>
-          <div className="text-center">
-            <div className="text-4xl font-bold text-white mb-2">8x</div>
-            <div className="text-sm text-gray-400">Faster Incident Reporting</div>
+          <div className="text-center group">
+            <div className="text-7xl font-bold text-white mb-2 group-hover:text-primary transition-colors tracking-tighter">8x</div>
+            <div className="text-sm text-gray-400 uppercase tracking-widest font-bold">Faster Incident Reporting</div>
           </div>
         </div>
-        <p className="text-xl text-white font-bold mb-8">Numbers don't lie. Training works.</p>
-        <Link to="/contact"><Button size="lg" className="bg-green-600 hover:bg-green-500 text-white">Ready to get started? Contact Us</Button></Link>
+        <p className="text-3xl text-white font-bold mb-10 font-display italic">"Numbers don't lie. Training works."</p>
+        <Link to="/contact"><Button size="lg" className="bg-green-600 hover:bg-green-500 text-white h-16 px-12 text-lg">Ready to get started? Contact Us</Button></Link>
       </div>
     </Section>
   </div>
@@ -533,3 +557,4 @@ function App() {
 }
 
 export default App;
+
