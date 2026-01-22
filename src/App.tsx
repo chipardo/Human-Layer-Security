@@ -12,6 +12,15 @@ function cn(...inputs: ClassValue[]) { return twMerge(clsx(inputs)); }
 // --- DATA ---
 const CONTACT_INFO = { email: "nicolassunobrega2@gmail.com", phone: "3052820302", founder: "Nicolas Su Nobrega Garces" };
 
+const QUOTES = [
+  { text: "Security is not a product, but a process.", author: "Bruce Schneier" },
+  { text: "Amateurs hack systems, professionals hack people.", author: "Bruce Schneier" },
+  { text: "There is no patch for human stupidity.", author: "Kevin Mitnick" },
+  { text: "Humans are the weakest link in security.", author: "Kevin Mitnick" },
+  { text: "Social engineering is the art of deception.", author: "Kevin Mitnick" },
+  { text: "You can't rely on technology to solve a human problem.", author: "Unknown" }
+];
+
 
 // --- ANIMATION VARIANTS ---
 const fadeInUp = {
@@ -136,6 +145,11 @@ const Footer = () => (
 // --- HOME PAGE ---
 const Home = () => {
   const navigate = useNavigate();
+  const [quote, setQuote] = useState(QUOTES[0]);
+
+  useEffect(() => {
+    setQuote(QUOTES[Math.floor(Math.random() * QUOTES.length)]);
+  }, []);
 
 
 
