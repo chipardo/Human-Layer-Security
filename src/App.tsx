@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate, useLocation, Link } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Shield, Menu, X, CheckCircle, Users, Mail, Phone, Activity, ArrowRight, Lock, Globe, Terminal, FileText, Award, ChevronRight } from 'lucide-react';
+import { Shield, Menu, X, CheckCircle, Users, Mail, Phone, Activity, ArrowRight, Lock, Globe, Terminal, FileText, Award, ChevronRight, Quote } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+
 
 // --- UTILS ---
 function cn(...inputs: ClassValue[]) { return twMerge(clsx(inputs)); }
@@ -102,7 +103,7 @@ const Navbar = () => {
         </div>
 
         <div className="hidden md:flex gap-4">
-          <Button size="sm" className="gap-2 shadow-none hover:shadow-lg bg-red-600 hover:bg-red-700 border-red-500/50 shadow-red-900/20"><Phone size={14} /> Emergency: 24/7</Button>
+          <Link to="/contact"><Button size="sm" className="gap-2 shadow-none hover:shadow-lg bg-green-600 hover:bg-green-700 border-green-500/50 shadow-green-900/20">Contact Us</Button></Link>
         </div>
 
         <button className="md:hidden text-white" onClick={() => setIsOpen(!isOpen)}>{isOpen ? <X /> : <Menu />}</button>
@@ -113,7 +114,7 @@ const Navbar = () => {
           <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="md:hidden bg-[#050014] border-b border-white/10 overflow-hidden absolute top-24 left-4 right-4 rounded-2xl border border-white/10 z-50 shadow-2xl">
             <div className="p-4 flex flex-col gap-2">
               {['SERVICES', 'ABOUT', 'PARTNERSHIP', 'PRESS'].map((item) => <Link key={item} to={`/${item.toLowerCase()}`} className="block p-4 text-white hover:bg-white/5 rounded-xl font-bold font-display">{item}</Link>)}
-              <a href={`tel:${CONTACT_INFO.phone}`} className="block p-4 bg-red-600/20 text-red-500 hover:bg-red-600/30 rounded-xl font-bold text-center border border-red-500/20">Emergency Call</a>
+              <Link to="/contact" className="block p-4 bg-green-600/20 text-green-500 hover:bg-green-600/30 rounded-xl font-bold text-center border border-green-500/20">Contact Us</Link>
             </div>
           </motion.div>
         )}
@@ -138,7 +139,7 @@ const Footer = () => (
           </div>
         </div>
         <div><h4 className="text-white font-bold mb-6 font-display tracking-widest text-sm">COMPANY</h4><ul className="space-y-4 text-sm text-gray-500"><li><Link to="/about" className="hover:text-primary transition-colors">About Us</Link></li><li><Link to="/services" className="hover:text-primary transition-colors">Services</Link></li><li><Link to="/partnership" className="hover:text-primary transition-colors">Partnerships</Link></li><li><Link to="/press" className="hover:text-primary transition-colors">Press</Link></li></ul></div>
-        <div><h4 className="text-white font-bold mb-6 font-display tracking-widest text-sm">CONTACT</h4><ul className="space-y-4 text-sm text-gray-500"><li><a href={`mailto:${CONTACT_INFO.email}`} className="hover:text-primary flex items-center gap-2">Email Us <ArrowRight size={14} /></a></li><li><a href={`tel:${CONTACT_INFO.phone}`} className="hover:text-primary flex items-center gap-2">Call Now <ArrowRight size={14} /></a></li></ul></div>
+        <div><h4 className="text-white font-bold mb-6 font-display tracking-widest text-sm">CONTACT</h4><ul className="space-y-4 text-sm text-gray-500"><li><Link to="/contact" className="hover:text-primary flex items-center gap-2">Contact Us <ArrowRight size={14} /></Link></li></ul></div>
       </div>
       <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-sm text-gray-600">
         <p>© 2026 HumanLayer Security. All rights reserved.</p>
@@ -151,6 +152,8 @@ const Footer = () => (
 // --- HOME PAGE ---
 const Home = () => {
   const navigate = useNavigate();
+
+
 
   return (
     <>
@@ -166,14 +169,13 @@ const Home = () => {
               <span className="w-2 h-2 rounded-full bg-primary animate-pulse" /> System Active
             </div>
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-[1.1] tracking-tight">
-              When the firewall <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">fails.</span>
+              Humans are your <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">strongest firewall.</span>
             </h1>
             <p className="text-xl text-gray-400 mb-10 max-w-lg leading-relaxed">
-              We specialize in securing the human layer through advanced simulation, ethical phishing, and crisis response.
+              Is your team prepared for the next social engineering attack? We transform your workforce from a liability into a high-fidelity sensor network.
             </p>
             <div className="flex gap-4">
-              <Button size="lg" onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}>View Plans</Button>
-              <Button size="lg" variant="outline" onClick={() => navigate('/services')}>Our Capabilities</Button>
+              <Link to="/contact"><Button size="lg" className="bg-green-600 hover:bg-green-700 shadow-green-900/20 border-green-500/20">Contact Us</Button></Link>
             </div>
           </motion.div>
           <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }} className="relative group perspective-1000">
@@ -200,22 +202,22 @@ const Home = () => {
         <motion.div className="flex gap-20 whitespace-nowrap" animate={{ x: [0, -1000] }} transition={{ repeat: Infinity, duration: 40, ease: "linear" }}>
           {[...Array(10)].map((_, i) => (
             <React.Fragment key={i}>
-              <span className="text-white/50 font-mono text-sm tracking-widest uppercase flex items-center gap-4"><Activity className="text-primary w-4 h-4" /> When every second counts</span>
-              <span className="text-white/50 font-mono text-sm tracking-widest uppercase flex items-center gap-4"><Lock className="text-primary w-4 h-4" /> Protecting your reputation</span>
-              <span className="text-white/50 font-mono text-sm tracking-widest uppercase flex items-center gap-4"><Shield className="text-primary w-4 h-4" /> Led by top-tier experts</span>
+              <span className="text-white/50 font-mono text-sm tracking-widest uppercase flex items-center gap-4"><Activity className="text-primary w-4 h-4" /> Your people, your strongest layer</span>
+              <span className="text-white/50 font-mono text-sm tracking-widest uppercase flex items-center gap-4"><Lock className="text-primary w-4 h-4" /> Awareness is the first line of defense</span>
+              <span className="text-white/50 font-mono text-sm tracking-widest uppercase flex items-center gap-4"><Shield className="text-primary w-4 h-4" /> Empowered employees, secured company</span>
             </React.Fragment>
           ))}
         </motion.div>
       </div>
 
-      {/* PROCESS */}
+      {/* HOW WE WORK */}
       <Section className="bg-[#080218]">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-white mb-4">How We Work</h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">Our methodology is built on speed, precision, and minimizing reputational damage.</p>
+          <p className="text-gray-400 max-w-2xl mx-auto">From user as a problem to user as a sensor. A 4-step monthly cycle.</p>
         </div>
-        <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid md:grid-cols-4 gap-4">
-          {[{ t: "Intake", d: "Immediate assessment of scope and severity.", i: Phone }, { t: "Containment", d: "Stopping the bleeding and securing vectors.", i: Lock }, { t: "Analysis", d: "Deep forensic dive into origin and impact.", i: Terminal }, { t: "Resolution", d: "Recovery, detailed reporting, and hardening.", i: CheckCircle }].map((s, i) => (
+        <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid md:grid-cols-4 gap-4 mb-12">
+          {[{ t: "Simulate", d: "We send monthly controlled phishing campaigns.", i: Mail }, { t: "Educate", d: "Instant micro-trainings for those who click.", i: FileText }, { t: "Report", d: "Comprehensive vulnerability trend analysis.", i: Activity }, { t: "Improve", d: "Hardening the human operating system over time.", i: CheckCircle }].map((s, i) => (
             <motion.div variants={fadeInUp} key={i} className="group relative p-8 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
               <div className="absolute top-0 right-0 p-4 text-7xl font-bold text-white/5 font-display select-none group-hover:text-white/10 transition-colors">0{i + 1}</div>
               <div className="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"><s.i className="w-6 h-6 text-primary" /></div>
@@ -224,36 +226,66 @@ const Home = () => {
             </motion.div>
           ))}
         </motion.div>
+        <div className="flex justify-center">
+          <Link to="/contact"><Button size="lg">Contact Us</Button></Link>
+        </div>
       </Section>
 
       {/* SERVICES PREVIEW */}
       <Section id="services-preview">
         <div className="flex flex-col md:flex-row justify-between items-end mb-12">
-          <div><h2 className="text-4xl font-bold text-white mb-4">Core Capabilities</h2><p className="text-gray-400">Beyond standard security. We handle the mess.</p></div>
+          <div><h2 className="text-4xl font-bold text-white mb-4">Core Capabilities</h2><p className="text-gray-400">Specialized. Focused. Effective.</p></div>
           <Button variant="outline" className="hidden md:flex" onClick={() => navigate('/services')}>All Services</Button>
         </div>
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-3 gap-6 mb-12">
           <div className="md:col-span-2 p-10 rounded-3xl bg-gradient-to-br from-secondary/20 to-surface border border-white/10 min-h-[300px] flex flex-col justify-end group transition-all hover:border-primary/30">
             <Shield className="w-12 h-12 text-primary mb-auto" />
-            <h3 className="text-2xl font-bold text-white mb-2">Crisis Management</h3>
-            <p className="text-gray-300">When the breach happens, we are the first call. We handle negotiation, communications, and technical remediation.</p>
+            <h3 className="text-2xl font-bold text-white mb-2">Ethical Phishing Simulations</h3>
+            <p className="text-gray-300">We don't hack systems; we test people. Controlled campaigns that identify weak points before attackers do.</p>
           </div>
           <div className="p-10 rounded-3xl bg-surface border border-white/10 flex flex-col justify-end group hover:bg-white/5 transition-colors">
             <Users className="w-12 h-12 text-white/50 mb-auto group-hover:text-primary transition-colors" />
             <h3 className="text-xl font-bold text-white mb-2">Training</h3>
-            <p className="text-gray-400">Simulations that actually fool people.</p>
+            <p className="text-gray-400">Contextual learning moments.</p>
           </div>
+        </div>
+        <div className="flex justify-center">
+          <Link to="/contact"><Button size="lg">Contact Us</Button></Link>
         </div>
       </Section>
 
-      {/* PRICING */}
-      <Section id="pricing" className="bg-[#050014]">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent opacity-50 pointer-events-none"></div>
-        <div className="text-center mb-20 relative z-10"><h2 className="text-4xl font-bold text-white mb-4">Defense Presets</h2><p className="text-gray-400">Choose the level of engagement that fits your risk profile.</p></div>
-        <div className="grid md:grid-cols-3 gap-8 items-stretch relative z-10">
-          <PricingCard title="Simulation Starter" price="$1,450" features={["Monthly Phishing Tests", "Basic Reporting", "Email Support Only"]} link={PRICING.tier1} delay={0.1} />
-          <PricingCard title="Culture Shifter" price="$3,800" features={["Weekly Simulations", "Interactive Training Library", "Executive Dashboard", "Priority Support"]} link={PRICING.tier2} isPopular delay={0.2} />
-          <PricingCard title="Human Firewall" price="$7,500" features={["Unlimited Simulations", "Spear-Phishing Vectors", "Dedicated Security Consultant", "24/7 Crisis Access"]} link={PRICING.tier3} delay={0.3} />
+      {/* SOCIAL PROOF / VALUE PROP */}
+      <Section className="bg-surface/50">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div>
+            <h2 className="text-3xl font-bold text-white mb-6">Why Choose Us?</h2>
+            <ul className="space-y-6">
+              <li className="flex gap-4 items-start">
+                <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0 text-primary font-bold">1</div>
+                <div>
+                  <h4 className="font-bold text-white mb-1">Human-Centric Approach</h4>
+                  <p className="text-gray-400 text-sm">We believe in empowerment, not punishment. We turn your biggest liability into your biggest asset.</p>
+                </div>
+              </li>
+              <li className="flex gap-4 items-start">
+                <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0 text-primary font-bold">2</div>
+                <div>
+                  <h4 className="font-bold text-white mb-1">Data-Driven Results</h4>
+                  <p className="text-gray-400 text-sm">Measurable reduction in click rates and distinct improvement in reporting speed.</p>
+                </div>
+              </li>
+            </ul>
+            <div className="mt-8">
+              <Link to="/contact"><Button>Contact Us</Button></Link>
+            </div>
+          </div>
+          <div className="p-8 rounded-2xl bg-black/40 border border-white/5">
+            <Quote className="text-primary w-12 h-12 mb-6 opacity-50" />
+            <p className="text-xl text-gray-300 italic mb-6 leading-relaxed">
+              "Security is not a product, but a process. And that process starts with people."
+            </p>
+            <div className="text-sm font-bold text-white">- Bruce Schneier</div>
+          </div>
         </div>
       </Section>
     </>
@@ -277,10 +309,10 @@ const Services = () => (
     <Section className="!pt-0">
       <div className="grid gap-4">
         {[
-          { t: "Incident Response", d: "We take command of the situation immediately. From technical containment to public relations management, we guide you through the storm.", i: Activity },
-          { t: "Dark Web Monitoring", d: "We track your data leaks before they become breaches. Continuous scanning of underground forums for your credentials.", i: Globe },
-          { t: "Ransom Negotiation", d: "Professional intermediaries for ransomware situations. We handle the criminals so you don't have to.", i: Lock },
-          { t: "Executive Protection", d: "Securing the personal digital lives of high-value targets. Home network audits and family security training.", i: Shield },
+          { t: "Simulated Phishing Campaigns", d: "Monthly, controlled tests using the latest threat templates. We find the gaps before the bad guys do.", i: Activity },
+          { t: "Human-Centric Training", d: "Immediate, contextual feedback moments. We teach employees to recognize the signs, not just memorize rules.", i: Globe },
+          { t: "Vulnerability Reporting", d: "Deep insights into which departments and individuals are targeted and most susceptible.", i: Terminal },
+          { t: "Executive Workshops", d: "High-level strategy sessions for leadership to understand the human risk factor.", i: Shield },
           { t: "Spear Phishing Sims", d: "Highly targeted campaigns designed to test your C-suite's resilience against sophisticated social engineering.", i: Mail }
         ].map((s, i) => (
           <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} key={i} className="flex flex-col md:flex-row gap-8 p-10 border border-white/5 bg-white/5 rounded-2xl hover:border-primary/30 hover:bg-white/10 transition-all group">
@@ -289,7 +321,10 @@ const Services = () => (
             </div>
             <div>
               <h3 className="text-2xl font-bold mb-3 text-white">{s.t}</h3>
-              <p className="text-gray-400 leading-relaxed max-w-3xl">{s.d}</p>
+              <p className="text-gray-400 leading-relaxed max-w-3xl mb-4">{s.d}</p>
+              <Link to="/contact" className="inline-flex items-center text-primary font-bold text-sm hover:underline">
+                Contact Us <ChevronRight size={14} className="ml-1" />
+              </Link>
             </div>
             <div className="md:ml-auto flex items-center">
               <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-primary group-hover:border-primary transition-colors">
@@ -298,6 +333,24 @@ const Services = () => (
             </div>
           </motion.div>
         ))}
+      </div>
+      <div className="mt-16 text-center bg-surface/30 p-12 rounded-3xl border border-white/5">
+        <div className="grid md:grid-cols-3 gap-8 mb-8">
+          <div className="text-center">
+            <div className="text-4xl font-bold text-white mb-2">37%</div>
+            <div className="text-sm text-gray-400">Avg. Phishing Click Rate (Pre-Training)</div>
+          </div>
+          <div className="text-center">
+            <div className="text-4xl font-bold text-primary mb-2">4%</div>
+            <div className="text-sm text-gray-400">Click Rate After 6 Months</div>
+          </div>
+          <div className="text-center">
+            <div className="text-4xl font-bold text-white mb-2">8x</div>
+            <div className="text-sm text-gray-400">Faster Incident Reporting</div>
+          </div>
+        </div>
+        <p className="text-xl text-white font-bold mb-8">Numbers don't lie. Training works.</p>
+        <Link to="/contact"><Button size="lg" className="bg-green-600 hover:bg-green-700">Ready to get started? Contact Us</Button></Link>
       </div>
     </Section>
   </div>
@@ -310,8 +363,13 @@ const About = () => (
       <div className="grid md:grid-cols-2 gap-16 items-start">
         <div className="space-y-8 text-lg text-gray-300 leading-relaxed">
           <p>The "Human Layer" is the final frontier of cybersecurity. While firewalls utilize advanced AI to block threats, human psychology remains static—and vulnerable.</p>
+          <p className="text-2xl font-bold text-white border-l-4 border-primary pl-6 my-8">"Call us crazy, but we believe your employees are your best defense, not your biggest risk."</p>
           <p>We founded HumanLayer Security with a simple mission: <span className="text-white font-bold">To harden the human operating system.</span></p>
           <p>We don't just send automated emails. We study your organization's culture, identify communication patterns, and design simulations that mirror the exact tactics real attackers will use against you.</p>
+          <div className="flex gap-4 pt-4">
+            <Link to="/services"><Button>Explore Our Services</Button></Link>
+            <Link to="/contact"><Button variant="outline">Ready to talk? Contact Us</Button></Link>
+          </div>
         </div>
         <div className="bg-surface rounded-3xl p-8 border border-white/10 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 rounded-full blur-[60px] pointer-events-none" />
@@ -384,7 +442,29 @@ const Press = () => (
           <h3 className="text-xl font-bold">Media Inquiries</h3>
           <p className="text-gray-400 text-sm mt-1">For comment or interviews, contact our media team.</p>
         </div>
-        <Button variant="outline">Download Media Kit</Button>
+        <Link to="/contact"><Button variant="outline">Contact Us</Button></Link>
+      </div>
+    </Section>
+  </div>
+);
+
+const Contact = () => (
+  <div className="min-h-screen bg-background text-white pb-20">
+    <PageHeader title="Contact Us" subtitle="Ready to transform your users from risk to defense?" />
+    <Section className="!pt-0">
+      <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div className="p-10 rounded-3xl bg-surface border border-white/10 flex flex-col items-center text-center group hover:border-primary/50 transition-colors">
+          <Mail className="w-16 h-16 text-primary mb-6" />
+          <h3 className="text-2xl font-bold text-white mb-2">Email Us</h3>
+          <p className="text-gray-400 mb-6">For general inquiries and partnership opportunities.</p>
+          <a href={`mailto:${CONTACT_INFO.email}`} className="text-xl font-bold text-primary hover:underline">{CONTACT_INFO.email}</a>
+        </div>
+        <div className="p-10 rounded-3xl bg-surface border border-white/10 flex flex-col items-center text-center group hover:border-primary/50 transition-colors">
+          <Phone className="w-16 h-16 text-primary mb-6" />
+          <h3 className="text-2xl font-bold text-white mb-2">Call Us</h3>
+          <p className="text-gray-400 mb-6">Speak directly with our team.</p>
+          <a href={`tel:${CONTACT_INFO.phone}`} className="text-xl font-bold text-primary hover:underline">{CONTACT_INFO.phone}</a>
+        </div>
       </div>
     </Section>
   </div>
@@ -406,6 +486,7 @@ const Legal = () => (
 function App() {
   const location = useLocation();
 
+
   // Scroll to top on route change
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -423,6 +504,7 @@ function App() {
           <Route path="/press" element={<Press />} />
           <Route path="/privacy" element={<Legal />} />
           <Route path="/terms" element={<Legal />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<Home />} />
         </Routes>
       </AnimatePresence>
