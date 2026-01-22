@@ -11,11 +11,7 @@ function cn(...inputs: ClassValue[]) { return twMerge(clsx(inputs)); }
 
 // --- DATA ---
 const CONTACT_INFO = { email: "nicolassunobrega2@gmail.com", phone: "3052820302", founder: "Nicolas Su Nobrega Garces" };
-const PRICING = {
-  tier1: "https://buy.stripe.com/9B67sMafFbrq3n03aOgnK03",
-  tier2: "https://buy.stripe.com/6oU8wQ2Ndbrqg9M26KgnK01",
-  tier3: "https://buy.stripe.com/dRmfZigE3cvu9Lo8v8gnK02"
-};
+
 
 // --- ANIMATION VARIANTS ---
 const fadeInUp = {
@@ -53,19 +49,7 @@ const Section: React.FC<{ children: React.ReactNode, className?: string, id?: st
   </section>
 );
 
-const PricingCard: React.FC<{ title: string, price: string, features: string[], link: string, isPopular?: boolean, delay?: number }> = ({ title, price, features, link, isPopular, delay = 0 }) => (
-  <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay }}
-    className={cn(
-      "relative p-8 rounded-2xl glass-dark transition-all duration-300 group hover:bg-surface/80 flex flex-col h-full",
-      isPopular ? 'border-primary/50 shadow-[0_0_30px_rgba(168,85,247,0.15)] ring-1 ring-primary/20' : 'border-white/5'
-    )}>
-    {isPopular && <div className="absolute top-0 right-0 bg-primary text-white px-4 py-1 font-bold text-xs uppercase tracking-wider rounded-bl-xl rounded-tr-xl">Most Popular</div>}
-    <h3 className="text-xl font-bold text-white mb-2 font-display">{title}</h3>
-    <div className="mb-6 flex items-baseline gap-1"><span className="text-4xl font-bold text-white">{price}</span><span className="text-sm text-gray-400">/mo</span></div>
-    <ul className="space-y-4 mb-8 text-sm text-gray-400 flex-grow">{features.map((f, i) => <li key={i} className="flex gap-3 items-start"><CheckCircle className="w-5 h-5 text-primary shrink-0 mt-0.5" />{f}</li>)}</ul>
-    <a href={link} target="_blank" rel="noopener noreferrer" className="mt-auto"><Button variant={isPopular ? 'primary' : 'outline'} className="w-full rounded-xl">Subscribe</Button></a>
-  </motion.div>
-);
+
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -514,3 +498,4 @@ function App() {
 }
 
 export default App;
+
