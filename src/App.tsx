@@ -18,14 +18,15 @@ const QUOTES = [
   { text: "There is no patch for human stupidity.", author: "Kevin Mitnick" },
   { text: "Humans are the weakest link in security.", author: "Kevin Mitnick" },
   { text: "Social engineering is the art of deception.", author: "Kevin Mitnick" },
-  { text: "You can't rely on technology to solve a human problem.", author: "Unknown" }
+  { text: "The human factor is truly security's weakest link.", author: "Kevin Mitnick" },
+  { text: "If you think technology can solve your security problems, then you don't understand the problems and you don't understand the technology.", author: "Bruce Schneier" }
 ];
 
 
 // --- ANIMATION VARIANTS ---
 const fadeInUp = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } }
 };
 
 const staggerContainer = {
@@ -51,8 +52,8 @@ const Button: React.FC<React.ComponentProps<typeof motion.button> & { variant?: 
 };
 
 const Section: React.FC<{ children: React.ReactNode, className?: string, id?: string }> = ({ children, className = "", id }) => (
-  <section id={id} className={cn("py-24 px-6 relative overflow-hidden", className)}>
-    <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeInUp} className="max-w-7xl mx-auto relative z-10">
+  <section id={id} className={cn("py-20 md:py-24 px-6 relative overflow-hidden", className)}>
+    <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={fadeInUp} className="max-w-7xl mx-auto relative z-10">
       {children}
     </motion.div>
   </section>
@@ -80,9 +81,7 @@ const Navbar = () => {
         scrolled ? "glass rounded-full border border-white/10 shadow-lg shadow-black/50" : "bg-transparent border-transparent"
       )}>
         <Link to="/" className="flex items-center gap-2 group">
-          <div className="w-10 h-10 bg-primary/20 rounded-lg flex items-center justify-center border border-primary/50 backdrop-blur-md group-hover:bg-primary/30 transition-colors">
-            <Shield className="w-6 h-6 text-primary" />
-          </div>
+          <img src="/humanlayerlogo.png" alt="HumanLayer Security" className="h-10 w-auto" />
           <span className="font-display font-bold text-white text-xl tracking-tight leading-none">HUMAN<br /><span className="text-primary text-sm tracking-widest">LAYER</span></span>
         </Link>
 
@@ -123,7 +122,7 @@ const Footer = () => (
       <div className="grid md:grid-cols-4 gap-12 mb-20">
         <div className="col-span-1 md:col-span-2">
           <Link to="/" className="flex items-center gap-2 mb-6">
-            <Shield className="w-8 h-8 text-primary" />
+            <img src="/humanlayerlogo.png" alt="HumanLayer Security" className="h-12 w-auto" />
             <span className="font-display font-bold text-white text-2xl">HUMAN<span className="text-primary">LAYER</span></span>
           </Link>
           <h2 className="text-3xl font-bold text-white mb-6 max-w-sm leading-tight">Securing the human operating system.</h2>
@@ -362,41 +361,42 @@ const About = () => (
     <PageHeader title="Who We Are" subtitle="We are a collective of former white-hat hackers, intelligence analysts, and psychological operations experts." />
     <Section className="!pt-0">
       <div className="grid md:grid-cols-2 gap-16 items-start">
-        <div className="space-y-8 text-lg text-gray-300 leading-relaxed">
-          <h3 className="text-2xl font-bold text-white">Why We Started HumanLayer Security</h3>
-          <p>It began with a realization during a red team engagement. We spent weeks building advanced malware, only to find the easiest way in was a simple phone call.</p>
-          <p>The cybersecurity industry keeps buying brighter boxes and smarter firewalls, but the attackers have moved on. They aren't hacking machines anymore; they're hacking people.</p>
-          <p>We founded this company on a shared belief: <span className="text-white font-bold">Employees shouldn't be the weakest link. They should be the first line of defense.</span> By empowering people instead of blaming them, we're changing the DNA of security culture.</p>
-          <div className="flex gap-4 pt-4">
-            <Link to="/services"><Button>Explore Our Services</Button></Link>
-            <Link to="/contact"><Button variant="outline">Ready to talk? Contact Us</Button></Link>
-          </div>
+        <div className="text-center md:text-left">
+          <h3 className="text-2xl font-bold text-white mb-4">Why We Started HumanLayer Security</h3>
+          <p className="mb-4">It began with a realization during a red team engagement. We spent weeks building advanced malware, only to find the easiest way in was a simple phone call.</p>
+          <p className="mb-4">The cybersecurity industry keeps buying brighter boxes and smarter firewalls, but the attackers have moved on. They aren't hacking machines anymore; they're hacking people.</p>
+          <p className="mb-4">We founded this company on a shared belief: <span className="text-white font-bold">Employees shouldn't be the weakest link. They should be the first line of defense.</span> By empowering people instead of blaming them, we're changing the DNA of security culture.</p>
         </div>
-        <div className="space-y-8">
-          <div className="bg-surface rounded-3xl p-8 border border-white/10 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 rounded-full blur-[60px] pointer-events-none" />
-            <h3 className="text-sm font-bold text-primary uppercase tracking-widest mb-8">Leadership</h3>
-            <div className="flex flex-col gap-8">
-              <div className="flex gap-6 items-center">
-                <div className="w-20 h-20 rounded-full bg-black border-2 border-primary/20 flex items-center justify-center text-xl font-bold text-white overflow-hidden relative">
-                  NS
-                </div>
-                <div>
-                  <div className="text-xl font-bold text-white">{CONTACT_INFO.founder}</div>
-                  <div className="text-primary font-mono text-xs mb-2">FOUNDER & PRINCIPAL</div>
-                  <p className="text-gray-500 text-sm">Offensive Security Expert & Human Risk Specialist.</p>
-                </div>
+        <div className="flex gap-4 pt-4 justify-center md:justify-start">
+          <Link to="/services"><Button>Explore Our Services</Button></Link>
+          <Link to="/contact"><Button variant="outline">Ready to talk? Contact Us</Button></Link>
+        </div>
+      </div>
+      <div className="space-y-8">
+        <div className="bg-surface rounded-3xl p-8 border border-white/10 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 rounded-full blur-[60px] pointer-events-none" />
+          <h3 className="text-sm font-bold text-primary uppercase tracking-widest mb-8">Leadership</h3>
+          <div className="flex flex-col gap-8">
+            <div className="flex gap-6 items-center">
+              <div className="w-20 h-20 rounded-full bg-black border-2 border-primary/20 flex items-center justify-center text-xl font-bold text-white overflow-hidden relative">
+                NS
+              </div>
+              <div>
+                <div className="text-xl font-bold text-white">{CONTACT_INFO.founder}</div>
+                <div className="text-primary font-mono text-xs mb-2">FOUNDER & PRINCIPAL</div>
+                <p className="text-gray-500 text-sm">Offensive Security Expert & Human Risk Specialist.</p>
               </div>
             </div>
           </div>
+        </div>
 
-          <div className="p-8 rounded-3xl border border-white/10 bg-surface/50">
-            <p className="text-xl font-bold text-white italic">"Call us crazy, but we believe your employees are your best defense, not your biggest risk."</p>
-          </div>
+        <div className="p-8 rounded-3xl border border-white/10 bg-surface/50">
+          <p className="text-xl font-bold text-white italic">"Call us crazy, but we believe your employees are your best defense, not your biggest risk."</p>
         </div>
       </div>
-    </Section>
   </div>
+    </Section >
+  </div >
 );
 
 const Partnership = () => (
@@ -418,14 +418,17 @@ const Partnership = () => (
       </div>
       <div className="grid md:grid-cols-3 gap-8 mb-16">
         {[
-          { t: "White Label", d: "Deploy our simulations under your brand.", i: FileText },
-          { t: "Rev Share", d: "Generous recurring commissions for referrals.", i: Award },
-          { t: "Sales Support", d: "We help you close the deal with technical expertise.", i: Users }
+          { t: "White Label", d: "Deploy our high-fidelity simulations under your own brand identity.", i: FileText },
+          { t: "Rev Share", d: "Earn generous recurring commissions for every client referral.", i: Award },
+          { t: "Sales Support", d: "We provide technical expertise to help you close the deal.", i: Users }
         ].map((s, i) => (
-          <div key={i} className="p-8 bg-surface border border-white/5 rounded-2xl text-center hover:-translate-y-2 transition-transform">
-            <div className="w-16 h-16 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-6"><s.i className="w-8 h-8 text-primary" /></div>
-            <h3 className="text-xl font-bold mb-2">{s.t}</h3>
-            <p className="text-gray-400 text-sm">{s.d}</p>
+          <div key={i} className="p-8 bg-surface/50 border border-white/10 rounded-2xl text-center group hover:bg-white/5 transition-all hover:border-primary/50 relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className="w-20 h-20 bg-black rounded-full flex items-center justify-center mx-auto mb-6 border border-white/10 group-hover:scale-110 transition-transform relative z-10 shadow-[0_0_20px_rgba(34,197,94,0.2)]">
+              <s.i className="w-10 h-10 text-primary" />
+            </div>
+            <h3 className="text-xl font-bold mb-3 text-white relative z-10">{s.t}</h3>
+            <p className="text-gray-400 text-sm leading-relaxed relative z-10">{s.d}</p>
           </div>
         ))}
       </div>
@@ -505,6 +508,7 @@ function App() {
 }
 
 export default App;
+
 
 
 
