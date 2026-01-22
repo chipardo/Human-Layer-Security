@@ -81,7 +81,7 @@ const Navbar = () => {
         scrolled ? "glass rounded-full border border-white/10 shadow-lg shadow-black/50" : "bg-transparent border-transparent"
       )}>
         <Link to="/" className="flex items-center gap-2 group">
-          <img src="/humanlayerlogo.png" alt="HumanLayer Security" className="h-16 w-auto transition-transform group-hover:scale-105" />
+          <img src="/humanlayerlogo.png" alt="HumanLayer Security" className="h-24 w-auto transition-all duration-300 group-hover:scale-105 filter drop-shadow-[0_0_8px_rgba(34,197,94,0.3)]" />
           <span className="font-display font-bold text-white text-xl tracking-tight leading-none">HUMAN<br /><span className="text-primary text-sm tracking-widest">LAYER</span></span>
         </Link>
 
@@ -122,7 +122,7 @@ const Footer = () => (
       <div className="grid md:grid-cols-4 gap-12 mb-20">
         <div className="col-span-1 md:col-span-2">
           <Link to="/" className="flex items-center gap-2 mb-6">
-            <img src="/humanlayerlogo.png" alt="HumanLayer Security" className="h-20 w-auto" />
+            <img src="/humanlayerlogo.png" alt="HumanLayer Security" className="h-32 w-auto" />
             <span className="font-display font-bold text-white text-2xl">HUMAN<span className="text-primary">LAYER</span></span>
           </Link>
           <h2 className="text-3xl font-bold text-white mb-6 max-w-sm leading-tight">Securing the human operating system.</h2>
@@ -230,8 +230,8 @@ const Home = () => {
 
       {/* SERVICES PREVIEW */}
       <Section id="services-preview">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-12">
-          <div><h2 className="text-4xl font-bold text-white mb-4">Core Capabilities</h2><p className="text-gray-400">Specialized. Focused. Effective.</p></div>
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12">
+          <div className="mb-6 md:mb-0"><h2 className="text-4xl font-bold text-white mb-4">Core Capabilities</h2><p className="text-gray-400">Specialized. Focused. Effective.</p></div>
           <Button variant="outline" className="hidden md:flex" onClick={() => navigate('/services')}>All Services</Button>
         </div>
         <div className="grid md:grid-cols-3 gap-6 mb-12">
@@ -360,16 +360,38 @@ const Services = () => (
       <div className="mt-16 text-center bg-black/40 backdrop-blur-md p-16 rounded-[3rem] border border-white/10 relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
         <div className="grid md:grid-cols-3 gap-12 mb-12 relative z-10">
-          <div className="text-center group">
-            <div className="text-7xl font-bold text-white mb-2 group-hover:text-primary transition-colors tracking-tighter">37%</div>
+          {/* STAT 1: CIRCULAR GRAPHIC */}
+          <div className="flex flex-col items-center group">
+            <div className="relative w-40 h-40 flex items-center justify-center mb-6">
+              <svg className="w-full h-full rotate-[-90deg]" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="45" fill="none" stroke="#262626" strokeWidth="8" />
+                <circle cx="50" cy="50" r="45" fill="none" stroke="#22C55E" strokeWidth="8" strokeDasharray="283" strokeDashoffset="180" strokeLinecap="round" className="drop-shadow-[0_0_10px_rgba(34,197,94,0.5)]" />
+              </svg>
+              <div className="absolute inset-0 flex items-center justify-center text-4xl font-bold text-white">37%</div>
+            </div>
             <div className="text-sm text-gray-400 uppercase tracking-widest font-bold">Avg. Phishing Click Rate (Pre-Training)</div>
           </div>
-          <div className="text-center group">
-            <div className="text-7xl font-bold text-primary mb-2 tracking-tighter shadow-primary drop-shadow-[0_0_15px_rgba(34,197,94,0.5)]">4%</div>
+
+          {/* STAT 2: CENTRAL HERO GRAPHIC */}
+          <div className="flex flex-col items-center group">
+            <div className="relative w-48 h-48 flex items-center justify-center mb-6">
+              <div className="absolute inset-0 bg-primary/20 rounded-full animate-pulse filter blur-xl"></div>
+              <div className="w-full h-full rounded-full border-4 border-primary/30 flex items-center justify-center relative bg-black/50 backdrop-blur-sm">
+                <div className="text-7xl font-bold text-primary tracking-tighter drop-shadow-[0_0_15px_rgba(34,197,94,1)]">4%</div>
+              </div>
+            </div>
             <div className="text-sm text-gray-400 uppercase tracking-widest font-bold">Click Rate After 6 Months</div>
           </div>
-          <div className="text-center group">
-            <div className="text-7xl font-bold text-white mb-2 group-hover:text-primary transition-colors tracking-tighter">8x</div>
+
+          {/* STAT 3: BAR GRAPHIC */}
+          <div className="flex flex-col items-center justify-center group h-full">
+            <div className="flex items-end gap-2 h-32 mb-6">
+              <div className="w-6 h-10 bg-white/10 rounded-t-lg"></div>
+              <div className="w-6 h-16 bg-white/20 rounded-t-lg"></div>
+              <div className="w-6 h-20 bg-white/30 rounded-t-lg"></div>
+              <div className="w-6 h-32 bg-primary rounded-t-lg shadow-[0_0_15px_rgba(34,197,94,0.5)]"></div>
+            </div>
+            <div className="text-5xl font-bold text-white mb-2">8x</div>
             <div className="text-sm text-gray-400 uppercase tracking-widest font-bold">Faster Incident Reporting</div>
           </div>
         </div>
@@ -390,7 +412,11 @@ const About = () => (
             <h3 className="text-2xl font-bold text-white mb-4">Why We Started HumanLayer Security</h3>
             <p className="mb-4">It began with a realization during a red team engagement. We spent weeks building advanced malware, only to find the easiest way in was a simple phone call.</p>
             <p className="mb-4">The cybersecurity industry keeps buying brighter boxes and smarter firewalls, but the attackers have moved on. They aren't hacking machines anymore; they're hacking people.</p>
-            <p className="mb-4">We founded this company on a shared belief: <span className="text-white font-bold">Employees shouldn't be the weakest link. They should be the first line of defense.</span> By empowering people instead of blaming them, we're changing the DNA of security culture.</p>
+            <div className="bg-white/5 border-l-4 border-primary p-6 my-8 rounded-r-xl">
+              <h4 className="text-white font-bold mb-2 uppercase tracking-widest text-sm">Our Philosophy</h4>
+              <p className="italic text-white/80">"Employees shouldn't be the weakest link. They should be the first line of defense."</p>
+            </div>
+            <p className="mb-4">We believe in a future where security awareness isn't a compliance checkbox, but a core cultural pillar. By empowering people instead of blaming them, we're changing the DNA of security culture across the globe.</p>
           </div>
           <div className="flex gap-4 pt-4 justify-center md:justify-start">
             <Link to="/services"><Button>Explore Our Services</Button></Link>
@@ -557,4 +583,5 @@ function App() {
 }
 
 export default App;
+
 
