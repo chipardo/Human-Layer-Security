@@ -80,9 +80,12 @@ const Navbar = () => {
         "max-w-7xl mx-auto px-6 h-20 flex justify-between items-center transition-all duration-300",
         scrolled ? "glass rounded-full border border-white/10 shadow-lg shadow-black/50" : "bg-transparent border-transparent"
       )}>
-        <Link to="/" className="flex items-center gap-2 group">
-          <img src="/humanlayerlogo.png" alt="HumanLayer Security" className="h-24 w-auto transition-all duration-300 group-hover:scale-105 filter drop-shadow-[0_0_8px_rgba(34,197,94,0.3)]" />
-          <span className="font-display font-bold text-white text-xl tracking-tight leading-none">HUMAN<br /><span className="text-primary text-sm tracking-widest">LAYER</span></span>
+        <Link to="/" className="flex items-center gap-4 group">
+          <img src="/humanlayerlogo.png" alt="HumanLayer Security" className="h-14 w-auto object-contain transition-all duration-300 group-hover:scale-105 filter drop-shadow-[0_0_8px_rgba(34,197,94,0.3)]" />
+          <div className="flex flex-col justify-center">
+            <span className="font-display font-bold text-white text-xl tracking-tight leading-none group-hover:text-primary transition-colors">HUMAN</span>
+            <span className="font-display font-bold text-primary text-sm tracking-[0.2em] leading-none">LAYER</span>
+          </div>
         </Link>
 
         <div className="hidden md:flex gap-1 bg-white/5 rounded-full p-1 border border-white/5 backdrop-blur-sm">
@@ -121,9 +124,12 @@ const Footer = () => (
     <div className="max-w-7xl mx-auto px-6 relative z-10">
       <div className="grid md:grid-cols-4 gap-12 mb-20">
         <div className="col-span-1 md:col-span-2">
-          <Link to="/" className="flex items-center gap-2 mb-6">
-            <img src="/humanlayerlogo.png" alt="HumanLayer Security" className="h-32 w-auto" />
-            <span className="font-display font-bold text-white text-2xl">HUMAN<span className="text-primary">LAYER</span></span>
+          <Link to="/" className="flex items-center gap-4 mb-6 group">
+            <img src="/humanlayerlogo.png" alt="HumanLayer Security" className="h-16 w-auto object-contain transition-transform group-hover:scale-105" />
+            <div className="flex flex-col justify-center">
+              <span className="font-display font-bold text-white text-2xl tracking-tight leading-none group-hover:text-primary transition-colors">HUMAN</span>
+              <span className="font-display font-bold text-primary text-base tracking-[0.25em] leading-none">LAYER</span>
+            </div>
           </Link>
           <h2 className="text-3xl font-bold text-white mb-6 max-w-sm leading-tight">Securing the human operating system.</h2>
           <div className="flex gap-4">
@@ -584,3 +590,4 @@ function App() {
 }
 
 export default App;
+
