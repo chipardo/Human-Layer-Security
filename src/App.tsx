@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+    import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate, useLocation, Link } from 'react-router-dom';
 import { Shield, Menu, X, CheckCircle, Users, Mail, Phone, Activity, ArrowRight, Lock, Globe, Terminal, FileText, Award, ChevronRight, Quote } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -81,7 +81,7 @@ const Navbar = () => {
         scrolled ? "glass rounded-full border border-white/10 shadow-lg shadow-black/50" : "bg-transparent border-transparent"
       )}>
         <Link to="/" className="flex items-center gap-4 group">
-          <img src="/humanlayerlogo.png" alt="HumanLayer Security" className="h-14 w-auto object-contain transition-all duration-300 group-hover:scale-105 filter drop-shadow-[0_0_8px_rgba(34,197,94,0.3)]" />
+          <img src="/humanlayerlogo.png" alt="HumanLayer Security" className="h-18 w-auto object-contain transition-all duration-300 group-hover:scale-105 filter drop-shadow-[0_0_8px_rgba(34,197,94,0.3)]" />
           <div className="flex flex-col justify-center">
             <span className="font-display font-bold text-white text-xl tracking-tight leading-none group-hover:text-primary transition-colors">HUMAN</span>
             <span className="font-display font-bold text-primary text-sm tracking-[0.2em] leading-none">LAYER</span>
@@ -125,7 +125,7 @@ const Footer = () => (
       <div className="grid md:grid-cols-4 gap-12 mb-20">
         <div className="col-span-1 md:col-span-2">
           <Link to="/" className="flex items-center gap-4 mb-6 group">
-            <img src="/humanlayerlogo.png" alt="HumanLayer Security" className="h-16 w-auto object-contain transition-transform group-hover:scale-105" />
+            <img src="/humanlayerlogo.png" alt="HumanLayer Security" className="h-24 w-auto object-contain transition-transform group-hover:scale-105" />
             <div className="flex flex-col justify-center">
               <span className="font-display font-bold text-white text-2xl tracking-tight leading-none group-hover:text-primary transition-colors">HUMAN</span>
               <span className="font-display font-bold text-primary text-base tracking-[0.25em] leading-none">LAYER</span>
@@ -329,9 +329,6 @@ const Services = () => (
             <div className="relative z-10">
               <h3 className="text-2xl font-bold mb-3 text-white">{s.t}</h3>
               <p className="text-gray-400 leading-relaxed max-w-3xl mb-4 text-lg">{s.d}</p>
-              <Link to="/contact" className="inline-flex items-center text-primary font-bold text-sm hover:underline">
-                Contact Us <ChevronRight size={14} className="ml-1" />
-              </Link>
             </div>
             <div className="md:ml-auto flex items-center relative z-10">
               <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-primary group-hover:border-primary transition-colors group-hover:text-black">
@@ -402,7 +399,7 @@ const Services = () => (
           </div>
         </div>
         <p className="text-3xl text-white font-bold mb-10 font-display italic">"Numbers don't lie. Training works."</p>
-        <Link to="/contact"><Button size="lg" className="bg-green-600 hover:bg-green-500 text-white h-16 px-12 text-lg">Ready to get started? Contact Us</Button></Link>
+        <Link to="/contact"><Button size="lg" className="bg-green-600 hover:bg-green-500 text-white h-auto min-h-[4rem] px-6 py-4 text-base md:text-lg whitespace-normal leading-tight text-center">Ready to get started? Contact Us</Button></Link>
       </div>
     </Section>
   </div>
@@ -590,4 +587,3 @@ function App() {
 }
 
 export default App;
-
