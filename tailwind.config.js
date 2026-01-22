@@ -7,12 +7,12 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: '#050014', // Deep purple/black
-        surface: '#0F0529',    // Slightly lighter purple for cards
-        primary: '#A855F7',    // Neon purple/violet
-        secondary: '#7C3AED',  // Darker violet
-        text: '#FFFFFF',
-        muted: '#94A3B8',
+        background: '#000000', // Black
+        surface: '#111111',    // Dark Gray/Off-black for cards
+        primary: '#22C55E',    // Green (Tailwind green-500 matches request #22C55E)
+        secondary: '#FFFFFF',  // White
+        text: '#FFFFFF',       // White
+        muted: '#A3A3A3',      // Neutral Gray
       },
       fontFamily: {
         mono: ['"JetBrains Mono"', 'monospace'],
