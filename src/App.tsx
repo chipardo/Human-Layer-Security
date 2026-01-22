@@ -361,42 +361,67 @@ const About = () => (
     <PageHeader title="Who We Are" subtitle="We are a collective of former white-hat hackers, intelligence analysts, and psychological operations experts." />
     <Section className="!pt-0">
       <div className="grid md:grid-cols-2 gap-16 items-start">
-        <div className="text-center md:text-left">
-          <h3 className="text-2xl font-bold text-white mb-4">Why We Started HumanLayer Security</h3>
-          <p className="mb-4">It began with a realization during a red team engagement. We spent weeks building advanced malware, only to find the easiest way in was a simple phone call.</p>
-          <p className="mb-4">The cybersecurity industry keeps buying brighter boxes and smarter firewalls, but the attackers have moved on. They aren't hacking machines anymore; they're hacking people.</p>
-          <p className="mb-4">We founded this company on a shared belief: <span className="text-white font-bold">Employees shouldn't be the weakest link. They should be the first line of defense.</span> By empowering people instead of blaming them, we're changing the DNA of security culture.</p>
-        </div>
-        <div className="flex gap-4 pt-4 justify-center md:justify-start">
-          <Link to="/services"><Button>Explore Our Services</Button></Link>
-          <Link to="/contact"><Button variant="outline">Ready to talk? Contact Us</Button></Link>
-        </div>
-      </div>
-      <div className="space-y-8">
-        <div className="bg-surface rounded-3xl p-8 border border-white/10 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 rounded-full blur-[60px] pointer-events-none" />
-          <h3 className="text-sm font-bold text-primary uppercase tracking-widest mb-8">Leadership</h3>
-          <div className="flex flex-col gap-8">
-            <div className="flex gap-6 items-center">
-              <div className="w-20 h-20 rounded-full bg-black border-2 border-primary/20 flex items-center justify-center text-xl font-bold text-white overflow-hidden relative">
-                NS
-              </div>
-              <div>
-                <div className="text-xl font-bold text-white">{CONTACT_INFO.founder}</div>
-                <div className="text-primary font-mono text-xs mb-2">FOUNDER & PRINCIPAL</div>
-                <p className="text-gray-500 text-sm">Offensive Security Expert & Human Risk Specialist.</p>
-              </div>
-            </div>
+        <div className="space-y-8">
+          <div className="text-center md:text-left text-lg text-gray-300 leading-relaxed">
+            <h3 className="text-2xl font-bold text-white mb-4">Why We Started HumanLayer Security</h3>
+            <p className="mb-4">It began with a realization during a red team engagement. We spent weeks building advanced malware, only to find the easiest way in was a simple phone call.</p>
+            <p className="mb-4">The cybersecurity industry keeps buying brighter boxes and smarter firewalls, but the attackers have moved on. They aren't hacking machines anymore; they're hacking people.</p>
+            <p className="mb-4">We founded this company on a shared belief: <span className="text-white font-bold">Employees shouldn't be the weakest link. They should be the first line of defense.</span> By empowering people instead of blaming them, we're changing the DNA of security culture.</p>
+          </div>
+          <div className="flex gap-4 pt-4 justify-center md:justify-start">
+            <Link to="/services"><Button>Explore Our Services</Button></Link>
+            <Link to="/contact"><Button variant="outline">Ready to talk? Contact Us</Button></Link>
           </div>
         </div>
 
-        <div className="p-8 rounded-3xl border border-white/10 bg-surface/50">
-          <p className="text-xl font-bold text-white italic">"Call us crazy, but we believe your employees are your best defense, not your biggest risk."</p>
+        <div className="space-y-8">
+          <div className="bg-surface rounded-3xl p-8 border border-white/10 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 rounded-full blur-[60px] pointer-events-none" />
+            <h3 className="text-sm font-bold text-primary uppercase tracking-widest mb-8">Leadership</h3>
+            <div className="flex flex-col gap-8">
+              {/* Nicolas */}
+              <div className="flex gap-6 items-center">
+                <div className="w-20 h-20 rounded-full bg-black border-2 border-primary/20 flex items-center justify-center text-xl font-bold text-white overflow-hidden relative">
+                  NS
+                </div>
+                <div>
+                  <div className="text-xl font-bold text-white">{CONTACT_INFO.founder}</div>
+                  <div className="text-primary font-mono text-xs mb-2">FOUNDER & PRINCIPAL</div>
+                  <p className="text-gray-500 text-sm">Offensive Security Expert & Human Risk Specialist.</p>
+                </div>
+              </div>
+              {/* Alejandro */}
+              <div className="flex gap-6 items-center">
+                <div className="w-20 h-20 rounded-full bg-black border-2 border-primary/20 flex items-center justify-center text-xl font-bold text-white overflow-hidden relative">
+                  AM
+                </div>
+                <div>
+                  <div className="text-xl font-bold text-white">Alejandro Marcone</div>
+                  <div className="text-primary font-mono text-xs mb-2">CO-FOUNDER & CYBER ANALYST</div>
+                  <p className="text-gray-500 text-sm">Expert in human-centric security analysis.</p>
+                </div>
+              </div>
+              {/* Branco */}
+              <div className="flex gap-6 items-center">
+                <div className="w-20 h-20 rounded-full bg-black border-2 border-primary/20 flex items-center justify-center text-xl font-bold text-white overflow-hidden relative">
+                  BF
+                </div>
+                <div>
+                  <div className="text-xl font-bold text-white">Branco Forti</div>
+                  <div className="text-primary font-mono text-xs mb-2">CO-FOUNDER & ELECTRICAL ENGINEER</div>
+                  <p className="text-gray-500 text-sm">Technical visionary and systems architect.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="p-8 rounded-3xl border border-white/10 bg-surface/50">
+            <p className="text-xl font-bold text-white italic">"Call us crazy, but we believe your employees are your best defense, not your biggest risk."</p>
+          </div>
         </div>
       </div>
+    </Section>
   </div>
-    </Section >
-  </div >
 );
 
 const Partnership = () => (
@@ -508,9 +533,3 @@ function App() {
 }
 
 export default App;
-
-
-
-
-
-
