@@ -487,8 +487,9 @@ const Partnership = () => (
             <p>As your partner, we're committed to transparency, continuous improvement, and measurable results. We don't just send phishing emails—we help you understand your human risk landscape and turn your people into your strongest defense layer.</p>
           </div>
         </div>
-        <div className="bg-surface p-8 rounded-3xl border border-white/10 flex items-center justify-center">
-          <Users className="w-32 h-32 text-primary opacity-50" />
+        <div className="bg-surface p-8 rounded-3xl border border-white/10 flex items-center justify-center overflow-hidden relative group">
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-50 group-hover:opacity-100 transition-opacity" />
+          <img src="/partnership-hero.png" alt="Strategic Partnership" className="w-full h-auto object-contain relative z-10 filter drop-shadow-[0_0_30px_rgba(34,197,94,0.4)] transform hover:scale-105 transition-transform duration-700" />
         </div>
       </div>
       <div className="grid md:grid-cols-3 gap-8 mb-16">
@@ -583,5 +584,3 @@ function App() {
 }
 
 export default App;
-
-
