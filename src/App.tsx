@@ -631,7 +631,7 @@ const Partnership = () => (
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         <div className="flex-1 space-y-8 z-10 order-2 md:order-1">
           <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight">We Believe in <span className="text-primary">Partnerships</span></h2>
@@ -671,8 +671,8 @@ const Partnership = () => (
           <a href={`mailto:${CONTACT_INFO.email}?subject=Partnership Inquiry`}><Button size="lg" className="shadow-[0_0_30px_rgba(34,197,94,0.3)] hover:shadow-[0_0_50px_rgba(34,197,94,0.5)]">Contact Partner Team</Button></a>
         </div>
       </div>
-    </Section >
-  </div >
+    </Section>
+  </div>
 );
 
 
