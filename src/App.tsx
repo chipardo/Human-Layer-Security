@@ -12,15 +12,7 @@ function cn(...inputs: ClassValue[]) { return twMerge(clsx(inputs)); }
 // --- DATA ---
 const CONTACT_INFO = { email: "contact@humanls.com", phone: "3052820302", founder: "Nicolas Su Nobrega Garces" };
 
-const QUOTES = [
-  { text: "Security is not a product, but a process.", author: "Bruce Schneier" },
-  { text: "Amateurs hack systems, professionals hack people.", author: "Bruce Schneier" },
-  { text: "There is no patch for human stupidity.", author: "Kevin Mitnick" },
-  { text: "Humans are the weakest link in security.", author: "Kevin Mitnick" },
-  { text: "Social engineering is the art of deception.", author: "Kevin Mitnick" },
-  { text: "The human factor is truly security's weakest link.", author: "Kevin Mitnick" },
-  { text: "If you think technology can solve your security problems, then you don't understand the problems and you don't understand the technology.", author: "Bruce Schneier" }
-];
+
 
 
 // --- ANIMATION VARIANTS ---
@@ -150,11 +142,6 @@ const Footer = () => (
 // --- HOME PAGE ---
 const Home = () => {
   const navigate = useNavigate();
-  const [quote, setQuote] = useState(QUOTES[0]);
-
-  useEffect(() => {
-    setQuote(QUOTES[Math.floor(Math.random() * QUOTES.length)]);
-  }, []);
 
 
 
@@ -384,7 +371,7 @@ const Services = () => (
               s.span
             )}
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
             {/* Tech Decoration */}
             <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
@@ -415,11 +402,11 @@ const Services = () => (
         <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="flex md:grid md:grid-cols-4 gap-4 mb-12 overflow-x-auto md:overflow-visible pb-8 md:pb-0 snap-x snap-mandatory px-4 md:px-0 -mx-4 md:mx-0">
           {[{ t: "Simulate", d: "We send monthly controlled phishing campaigns.", i: Mail }, { t: "Educate", d: "Instant micro-trainings for those who click.", i: FileText }, { t: "Report", d: "Comprehensive vulnerability trend analysis.", i: Activity }, { t: "Improve", d: "Hardening the human operating system over time.", i: CheckCircle }].map((s, i) => (
             <motion.div variants={fadeInUp} key={i} className="group relative p-8 rounded-3xl bg-surface/40 backdrop-blur-sm border border-white/10 hover:bg-surface/60 transition-all min-w-[300px] md:min-w-0 snap-center hover:border-primary/50 overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-              {/* Tech Decoration */}
-              <div className="absolute top-0 right-0 p-4 opacity-20 group-hover:opacity-40 transition-opacity">
-                <div className="w-12 h-12 rounded-full border border-primary/20 dashed-border animate-[spin_10s_linear_infinite]" />
+              {/* Tech Decoration - Optimized */}
+              <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                <div className="w-12 h-12 rounded-full border border-primary/20 dashed-border" />
               </div>
 
               <div className="absolute top-0 right-0 p-4 text-7xl font-bold text-white/5 font-display select-none group-hover:text-white/10 transition-colors z-0">0{i + 1}</div>
