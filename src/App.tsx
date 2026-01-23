@@ -221,9 +221,9 @@ const Home = () => {
         </div>
         <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="flex md:grid md:grid-cols-4 gap-4 mb-12 overflow-x-auto md:overflow-visible pb-8 md:pb-0 snap-x snap-mandatory px-4 md:px-0 -mx-4 md:mx-0">
           {[{ t: "Simulate", d: "We send monthly controlled phishing campaigns.", i: Mail }, { t: "Educate", d: "Instant micro-trainings for those who click.", i: FileText }, { t: "Report", d: "Comprehensive vulnerability trend analysis.", i: Activity }, { t: "Improve", d: "Hardening the human operating system over time.", i: CheckCircle }].map((s, i) => (
-            <motion.div variants={fadeInUp} key={i} className="group relative p-8 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors min-w-[300px] md:min-w-0 snap-center">
+            <motion.div variants={fadeInUp} key={i} className="group relative p-8 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-all min-w-[300px] md:min-w-0 snap-center hover:border-primary/20">
               <div className="absolute top-0 right-0 p-4 text-7xl font-bold text-white/5 font-display select-none group-hover:text-white/10 transition-colors">0{i + 1}</div>
-              <div className="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"><s.i className="w-6 h-6 text-gray-400 group-hover:text-primary transition-colors" /></div>
+              <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"><s.i className="w-6 h-6 text-gray-400 group-hover:text-primary transition-colors" /></div>
               <h3 className="text-xl font-bold text-white mb-2">{s.t}</h3>
               <p className="text-gray-400 text-sm leading-relaxed">{s.d}</p>
             </motion.div>
@@ -282,15 +282,15 @@ const Home = () => {
               <Link to="/contact"><Button>Contact Us</Button></Link>
             </div>
 
-            {/* Trusted Industries */}
-            <div className="mt-12 pt-8 border-t border-white/5">
-              <h5 className="text-xs font-bold text-primary tracking-widest uppercase mb-4">Securing Human Layers In</h5>
-              <div className="flex flex-wrap gap-4 text-gray-400 font-display font-bold text-sm">
-                <span className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-primary" /> Finance</span>
-                <span className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-primary" /> Healthcare</span>
-                <span className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-primary" /> Technology</span>
-                <span className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-primary" /> Government</span>
+            {/* Cyber Quote Section */}
+            <div className="mt-16 pt-8 border-t border-white/5 text-center">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold tracking-wider uppercase mb-6">
+                Cyber Quote of the Day
               </div>
+              <blockquote className="text-2xl md:text-3xl font-display font-bold text-white italic max-w-3xl mx-auto leading-tight">
+                "Amateurs hack systems, professionals hack people."
+              </blockquote>
+              <div className="mt-4 text-gray-500 font-mono text-sm uppercase tracking-widest">— Bruce Schneier</div>
             </div>
           </div>
           <div className="p-8 rounded-2xl bg-black/40 border border-white/5">
@@ -324,23 +324,43 @@ const Services = () => (
   <div className="min-h-screen bg-background text-white pb-20">
     <PageHeader title="Our Services" subtitle="We provide a full spectrum of human-centric security services, ranging from preventative education to active crisis management." />
     <Section className="!pt-0">
-      <div className="grid gap-6">
+      <div className="grid md:grid-cols-2 lg:grid-cols-6 gap-6">
         {[
-          { t: "Simulated Phishing Campaigns", d: "Monthly, controlled tests using the latest threat templates. We find the gaps before the bad guys do.", i: Activity },
-          { t: "Human-Centric Training", d: "Immediate, contextual feedback moments. We teach employees to recognize the signs, not just memorize rules.", i: Globe },
-          { t: "Vulnerability Reporting", d: "Deep insights into which departments and individuals are targeted and most susceptible.", i: Terminal },
-          { t: "Executive Workshops", d: "High-level strategy sessions for leadership to understand the human risk factor.", i: Shield },
-          { t: "Spear Phishing Sims", d: "Highly targeted campaigns designed to test your C-suite's resilience against sophisticated social engineering.", i: Mail }
+          { t: "Simulated Phishing Campaigns", d: "Monthly, controlled tests using the latest threat templates. We find the gaps before the bad guys do.", i: Activity, span: "lg:col-span-3" },
+          { t: "Human-Centric Training", d: "Immediate, contextual feedback moments. We teach employees to recognize the signs, not just memorize rules.", i: Globe, span: "lg:col-span-3" },
+          { t: "Vulnerability Reporting", d: "Deep insights into which departments and individuals are targeted and most susceptible.", i: Terminal, span: "lg:col-span-2" },
+          { t: "Executive Workshops", d: "High-level strategy sessions for leadership to understand the human risk factor.", i: Shield, span: "lg:col-span-2" },
+          { t: "Spear Phishing Sims", d: "Highly targeted campaigns designed to test your C-suite's resilience against sophisticated social engineering.", i: Mail, span: "lg:col-span-2" }
         ].map((s, i) => (
-          <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} key={i} className="flex flex-col md:flex-row gap-6 md:gap-8 p-6 md:p-10 border border-white/5 bg-surface/50 rounded-2xl hover:border-primary/50 hover:bg-white/5 transition-all group relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-            <div className="w-16 h-16 md:w-20 md:h-20 bg-black rounded-2xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform shadow-[0_0_30px_rgba(34,197,94,0.15)] border border-white/10 relative z-10">
-              <s.i className="w-8 h-8 md:w-10 md:h-10 text-gray-400 group-hover:text-primary transition-colors" />
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.1 }}
+            key={i}
+            className={twMerge(
+              "flex flex-col p-8 border border-white/10 bg-surface/40 backdrop-blur-sm rounded-3xl hover:border-primary/50 hover:bg-surface/60 transition-all group relative overflow-hidden min-h-[280px]",
+              s.span
+            )}
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+            {/* Tech Decoration */}
+            <div className="absolute top-0 right-0 p-6 opacity-20 group-hover:opacity-40 transition-opacity">
+              <div className="w-16 h-16 rounded-full border border-primary/20 dashed-border animate-[spin_10s_linear_infinite]" />
             </div>
+
+            <div className="w-16 h-16 bg-black/50 rounded-2xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform shadow-inner border border-white/5 relative z-10 mb-6 group-hover:border-primary/30">
+              <s.i className="w-8 h-8 text-gray-400 group-hover:text-primary transition-colors" />
+            </div>
+
             <div className="relative z-10 flex-1">
-              <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-3 text-white">{s.t}</h3>
-              <p className="text-gray-400 leading-relaxed max-w-3xl text-sm md:text-lg">{s.d}</p>
+              <h3 className="text-2xl font-bold mb-3 text-white group-hover:text-primary transition-colors">{s.t}</h3>
+              <p className="text-gray-400 leading-relaxed text-sm md:text-base">{s.d}</p>
             </div>
+
+            {/* Bottom highlight */}
+            <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700" />
           </motion.div>
         ))}
       </div>
@@ -620,4 +640,3 @@ function App() {
 }
 
 export default App;
-
