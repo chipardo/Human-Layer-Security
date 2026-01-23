@@ -84,7 +84,7 @@ const Navbar = () => {
         scrolled ? "glass rounded-full border border-white/10 shadow-lg shadow-black/50" : "bg-transparent border-transparent"
       )}>
         <Link to="/" className="flex items-center gap-3 group">
-          <img src="/humanlayerlogo.png" alt="HumanLayer Security" className="h-14 md:h-20 w-auto object-contain transition-all duration-300 group-hover:scale-105 filter drop-shadow-[0_0_8px_rgba(34,197,94,0.3)]" />
+          <img src="/humanlayerlogo.png" alt="HumanLayer Security" className="h-14 md:h-20 w-auto object-contain transition-all duration-300 group-hover:scale-102 filter drop-shadow-[0_0_8px_rgba(34,197,94,0.3)]" />
           <div className="flex flex-col justify-center">
             <span className="font-display font-bold text-white text-lg md:text-xl tracking-tight leading-none group-hover:text-primary transition-colors">HUMAN&nbsp;&nbsp;LAYER</span>
             <span className="font-display font-bold text-primary text-[10px] md:text-sm tracking-[0.2em] leading-none">SECURITY</span>
@@ -128,7 +128,7 @@ const Footer = () => (
       <div className="grid md:grid-cols-4 gap-12 mb-20">
         <div className="col-span-1 md:col-span-2">
           <Link to="/" className="flex items-center gap-4 mb-6 group">
-            <img src="/humanlayerlogo.png" alt="HumanLayer Security" className="h-24 w-auto object-contain transition-transform group-hover:scale-105" />
+            <img src="/humanlayerlogo.png" alt="HumanLayer Security" className="h-24 w-auto object-contain transition-transform group-hover:scale-102" />
             <div className="flex flex-col justify-center">
               <span className="font-display font-bold text-white text-2xl tracking-tight leading-none group-hover:text-primary transition-colors">HUMAN&nbsp;&nbsp;LAYER</span>
               <span className="font-display font-bold text-primary text-sm tracking-[0.25em] leading-none">SECURITY</span>
@@ -185,11 +185,19 @@ const Home = () => {
               <Link to="/contact"><Button size="lg" className="bg-green-600 hover:bg-green-500 shadow-green-900/20 border-green-500/20 text-white">Contact Us</Button></Link>
             </div>
           </motion.div>
-          <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }} className="relative group perspective-1000">
-            <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-primary/20 bg-surface/50 backdrop-blur-sm transform transition-transform duration-700 group-hover:rotate-y-2">
-              <img src="/hero-network.png" alt="Human Defense Network" className="w-full h-auto object-cover opacity-90 group-hover:scale-105 transition-transform duration-700 ease-out" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
-              <div className="absolute bottom-8 left-8 right-8 grid grid-cols-2 gap-4">
+          <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }} className="relative group">
+            <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-primary/20 bg-surface/50 backdrop-blur-sm transition-all duration-500">
+              {/* Decorative Elements */}
+              <div className="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full blur-[80px] pointer-events-none mix-blend-screen" />
+              <div className="absolute bottom-0 left-0 w-48 h-48 bg-blue-500/10 rounded-full blur-[60px] pointer-events-none mix-blend-screen" />
+
+              <img src="/hero-network.png" alt="Human Defense Network" className="w-full h-auto object-cover opacity-90 transition-transform duration-700 ease-out relative z-0" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80 z-10" />
+
+              {/* Scanline Effect */}
+              <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent_50%,rgba(0,0,0,0.3)_50%)] bg-[length:100%_4px] pointer-events-none opacity-20 z-20" />
+
+              <div className="absolute bottom-8 left-8 right-8 grid grid-cols-2 gap-4 z-30">
                 <div className="bg-black/40 backdrop-blur-md p-4 rounded-xl border border-white/10">
                   <div className="text-xs text-green-400 font-mono mb-1 uppercase tracking-wider">Human Risk</div>
                   <div className="text-2xl font-bold text-white flex items-center gap-2">MITIGATED</div>
@@ -234,7 +242,7 @@ const Home = () => {
               </div>
 
               <div className="absolute top-0 right-0 p-4 text-7xl font-bold text-white/5 font-display select-none group-hover:text-white/10 transition-colors z-0">0{i + 1}</div>
-              <div className="w-12 h-12 bg-black/50 border border-white/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform relative z-10 group-hover:border-primary/30"><s.i className="w-6 h-6 text-gray-400 group-hover:text-primary transition-colors" /></div>
+              <div className="w-12 h-12 bg-black/50 border border-white/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-105 transition-transform relative z-10 group-hover:border-primary/30"><s.i className="w-6 h-6 text-gray-400 group-hover:text-primary transition-colors" /></div>
               <h3 className="text-xl font-bold text-white mb-2 relative z-10 group-hover:text-primary transition-colors">{s.t}</h3>
               <p className="text-gray-400 text-sm leading-relaxed relative z-10">{s.d}</p>
 
@@ -347,7 +355,7 @@ const Home = () => {
               {/* Decorative Elements */}
               <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-[80px] pointer-events-none" />
               <div className="absolute bottom-0 left-0 w-48 h-48 bg-blue-500/5 rounded-full blur-[60px] pointer-events-none" />
-              <Quote className="absolute top-8 right-8 text-primary/10 w-32 h-32 rotate-12 transform group-hover:scale-110 group-hover:text-primary/20 transition-all duration-700" />
+              <Quote className="absolute top-8 right-8 text-primary/10 w-32 h-32 rotate-12 transform group-hover:scale-105 group-hover:text-primary/20 transition-all duration-700" />
 
               <div className="relative z-10">
                 <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-10">
@@ -421,7 +429,7 @@ const Services = () => (
               <div className="w-16 h-16 rounded-full border border-primary/20 dashed-border" />
             </div>
 
-            <div className="w-16 h-16 bg-black/50 rounded-2xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform shadow-inner border border-white/5 relative z-10 mb-6 group-hover:border-primary/30">
+            <div className="w-16 h-16 bg-black/50 rounded-2xl flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform shadow-inner border border-white/5 relative z-10 mb-6 group-hover:border-primary/30">
               <s.i className="w-8 h-8 text-gray-400 group-hover:text-primary transition-colors" />
             </div>
 
@@ -453,7 +461,7 @@ const Services = () => (
               </div>
 
               <div className="absolute top-0 right-0 p-4 text-7xl font-bold text-white/5 font-display select-none group-hover:text-white/10 transition-colors z-0">0{i + 1}</div>
-              <div className="w-12 h-12 bg-black/50 border border-white/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform relative z-10 group-hover:border-primary/30"><s.i className="w-6 h-6 text-gray-400 group-hover:text-primary transition-colors" /></div>
+              <div className="w-12 h-12 bg-black/50 border border-white/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-105 transition-transform relative z-10 group-hover:border-primary/30"><s.i className="w-6 h-6 text-gray-400 group-hover:text-primary transition-colors" /></div>
               <h3 className="text-xl font-bold text-white mb-2 relative z-10 group-hover:text-primary transition-colors">{s.t}</h3>
               <p className="text-gray-400 text-sm leading-relaxed relative z-10">{s.d}</p>
 
@@ -599,13 +607,20 @@ const Partnership = () => (
 
       <div className="mb-24 flex flex-col md:flex-row items-center gap-16">
         {/* Mobile: Image First | Desktop: Image Left */}
-        <div className="flex-1 relative w-full group perspective-1000 order-1 md:order-2">
-          <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-primary/20 bg-surface/50 backdrop-blur-sm transform transition-transform duration-700 group-hover:rotate-y-2">
-            <img src="/partnership-hero.png" alt="Strategic Partnership" className="w-full h-auto object-cover opacity-90 group-hover:scale-105 transition-transform duration-700 ease-out" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
+        <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }} className="flex-1 relative w-full group order-1 md:order-2">
+          <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-primary/20 bg-surface/50 backdrop-blur-sm transition-all duration-500">
+            {/* Decorative Elements */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full blur-[80px] pointer-events-none mix-blend-screen" />
+            <div className="absolute bottom-0 left-0 w-48 h-48 bg-blue-500/10 rounded-full blur-[60px] pointer-events-none mix-blend-screen" />
+
+            <img src="/partnership-hero.png" alt="Strategic Partnership" className="w-full h-auto object-cover opacity-90 transition-transform duration-700 ease-out relative z-0" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80 z-10" />
+
+            {/* Scanline Effect */}
+            <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent_50%,rgba(0,0,0,0.3)_50%)] bg-[length:100%_4px] pointer-events-none opacity-20 z-20" />
 
             {/* Data Overlays matching Home Page vibe */}
-            <div className="absolute bottom-6 left-6 right-6 grid grid-cols-2 gap-4">
+            <div className="absolute bottom-6 left-6 right-6 grid grid-cols-2 gap-4 z-30">
               <div className="bg-black/40 backdrop-blur-md p-3 rounded-xl border border-white/10">
                 <div className="text-[10px] text-green-400 font-mono mb-1 uppercase tracking-wider">Partner Status</div>
                 <div className="text-lg font-bold text-white flex items-center gap-2">ACTIVE</div>
@@ -636,7 +651,7 @@ const Partnership = () => (
           <div key={i} className="group relative p-8 rounded-3xl bg-surface/40 hover:bg-surface/60 border border-white/10 hover:border-primary/30 transition-all duration-500 overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-            <div className="w-16 h-16 mb-6 rounded-2xl bg-black/50 border border-white/10 flex items-center justify-center group-hover:scale-110 group-hover:border-primary/30 transition-all duration-500 relative z-10 shadow-inner">
+            <div className="w-16 h-16 mb-6 rounded-2xl bg-black/50 border border-white/10 flex items-center justify-center group-hover:scale-105 group-hover:border-primary/30 transition-all duration-500 relative z-10 shadow-inner">
               <s.i className="w-8 h-8 text-gray-400 group-hover:text-primary transition-colors" />
             </div>
 
@@ -656,8 +671,8 @@ const Partnership = () => (
           <a href={`mailto:${CONTACT_INFO.email}?subject=Partnership Inquiry`}><Button size="lg" className="shadow-[0_0_30px_rgba(34,197,94,0.3)] hover:shadow-[0_0_50px_rgba(34,197,94,0.5)]">Contact Partner Team</Button></a>
         </div>
       </div>
-    </Section>
-  </div>
+    </Section >
+  </div >
 );
 
 
