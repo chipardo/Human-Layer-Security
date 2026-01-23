@@ -479,23 +479,23 @@ const About = () => (
 
 const Partnership = () => (
   <div className="min-h-screen bg-background text-white pb-20">
-    <section className="pt-40 pb-10 px-6 relative overflow-hidden">
+    <section className="pt-40 pb-16 px-6 relative overflow-hidden">
       <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/10 to-transparent opacity-30 pointer-events-none" />
       <motion.div initial="hidden" animate="visible" variants={fadeInUp} className="max-w-7xl mx-auto relative z-10">
         <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight">Partnership</h1>
         <p className="text-xl text-gray-400 max-w-2xl leading-relaxed border-l-4 border-primary pl-6">Security is a team sport. We enable MSPs and agencies to offer elite human-layer defense.</p>
       </motion.div>
     </section>
-    <Section className="relative !pt-0">
+    <Section className="relative !pt-8">
       {/* Background Decor */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] pointer-events-none -z-10" />
 
       <div className="mb-24 flex flex-col md:flex-row items-center gap-16">
         {/* Mobile: Image First | Desktop: Image Left */}
         <div className="flex-1 relative w-full group perspective-1000 order-1 md:order-2">
-          <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent blur-3xl opacity-30 group-hover:opacity-50 transition-opacity duration-700" />
-          <div className="relative bg-surface/30 backdrop-blur-md border border-white/10 rounded-[2rem] p-10 transform transition-all duration-700 group-hover:rotate-y-2 group-hover:scale-105 shadow-2xl shadow-black/50">
-            <img src="/partnership-hero.png" alt="Strategic Partnership" className="w-full h-auto object-contain filter drop-shadow-[0_0_40px_rgba(34,197,94,0.2)]" />
+          <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-primary/20 bg-surface/50 backdrop-blur-sm transform transition-transform duration-700 group-hover:rotate-y-2 group-hover:scale-105 p-8 flex items-center justify-center">
+            <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 to-transparent opacity-20" />
+            <img src="/partnership-hero.png" alt="Strategic Partnership" className="w-full h-auto object-contain relative z-10 drop-shadow-2xl" />
           </div>
         </div>
 
@@ -514,16 +514,14 @@ const Partnership = () => (
           { t: "Rev Share", d: "Earn recurring commissions for every client referral.", i: Award },
           { t: "Sales Support", d: "We provide technical expertise to help you close the deal.", i: Users }
         ].map((s, i) => (
-          <div key={i} className="relative p-1 bg-gradient-to-b from-white/10 to-transparent rounded-[2rem] group hover:from-primary/50 transition-all duration-500">
-            <div className="h-full bg-black/80 backdrop-blur-xl rounded-[1.9rem] p-8 flex flex-col items-center text-center border border-white/5 relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-              <div className="w-20 h-20 mb-8 rounded-2xl bg-white/5 flex items-center justify-center group-hover:scale-110 group-hover:bg-primary/20 transition-all duration-300 relative z-10">
-                <s.i className="w-10 h-10 text-gray-400 group-hover:text-primary transition-colors" />
+          <div key={i} className="relative p-[1px] rounded-[2rem] group transition-all duration-500 bg-gradient-to-b from-primary/40 via-primary/10 to-transparent hover:from-primary/60 hover:via-primary/30">
+            <div className="h-full bg-black/60 backdrop-blur-xl rounded-[1.9rem] p-8 flex flex-col items-center text-center border border-white/5 relative overflow-hidden group-hover:bg-primary/5 transition-colors duration-500">
+              <div className="w-20 h-20 mb-8 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center group-hover:scale-110 group-hover:bg-primary/30 transition-all duration-300 relative z-10 shadow-[0_0_15px_rgba(34,197,94,0.1)]">
+                <s.i className="w-10 h-10 text-primary group-hover:text-white transition-colors" />
               </div>
 
               <h3 className="text-2xl font-bold text-white mb-4 relative z-10">{s.t}</h3>
-              <p className="text-gray-400 relative z-10">{s.d}</p>
+              <p className="text-gray-300 relative z-10 font-medium">{s.d}</p>
             </div>
           </div>
         ))}
