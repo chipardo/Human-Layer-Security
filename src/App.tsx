@@ -81,10 +81,10 @@ const Navbar = () => {
         scrolled ? "glass rounded-full border border-white/10 shadow-lg shadow-black/50" : "bg-transparent border-transparent"
       )}>
         <Link to="/" className="flex items-center gap-3 group">
-          <img src="/humanlayerlogo.png" alt="HumanLayer Security" className="h-10 md:h-14 w-auto object-contain transition-all duration-300 group-hover:scale-105 filter drop-shadow-[0_0_8px_rgba(34,197,94,0.3)]" />
+          <img src="/humanlayerlogo.png" alt="HumanLayer Security" className="h-12 md:h-16 w-auto object-contain transition-all duration-300 group-hover:scale-105 filter drop-shadow-[0_0_8px_rgba(34,197,94,0.3)]" />
           <div className="flex flex-col justify-center">
-            <span className="font-display font-bold text-white text-lg md:text-xl tracking-tight leading-none group-hover:text-primary transition-colors">HUMAN</span>
-            <span className="font-display font-bold text-primary text-[10px] md:text-sm tracking-[0.2em] leading-none">LAYER</span>
+            <span className="font-display font-bold text-white text-lg md:text-xl tracking-tight leading-none group-hover:text-primary transition-colors">HUMANLAYER</span>
+            <span className="font-display font-bold text-primary text-[10px] md:text-xs tracking-[0.2em] leading-none">SECURITY</span>
           </div>
         </Link>
 
@@ -127,8 +127,8 @@ const Footer = () => (
           <Link to="/" className="flex items-center gap-4 mb-6 group">
             <img src="/humanlayerlogo.png" alt="HumanLayer Security" className="h-24 w-auto object-contain transition-transform group-hover:scale-105" />
             <div className="flex flex-col justify-center">
-              <span className="font-display font-bold text-white text-2xl tracking-tight leading-none group-hover:text-primary transition-colors">HUMAN</span>
-              <span className="font-display font-bold text-primary text-base tracking-[0.25em] leading-none">LAYER</span>
+              <span className="font-display font-bold text-white text-2xl tracking-tight leading-none group-hover:text-primary transition-colors">HUMANLAYER</span>
+              <span className="font-display font-bold text-primary text-sm tracking-[0.25em] leading-none">SECURITY</span>
             </div>
           </Link>
           <h2 className="text-3xl font-bold text-white mb-6 max-w-sm leading-tight">Securing the human operating system.</h2>
@@ -481,7 +481,7 @@ const Partnership = () => (
   <div className="min-h-screen bg-background text-white pb-20">
     <PageHeader title="Partnership" subtitle="Security is a team sport. We enable MSPs and agencies to offer elite human-layer defense." />
     <Section>
-      <div className="mb-20 grid md:grid-cols-2 gap-12 items-center">
+      <div className="mb-12 md:mb-20 grid md:grid-cols-2 gap-8 md:gap-12 items-center">
         <div>
           <h2 className="text-3xl font-bold text-white mb-6">We Believe in Partnerships</h2>
           <div className="space-y-6 text-gray-400 leading-relaxed">
@@ -490,12 +490,12 @@ const Partnership = () => (
             <p>As your partner, we're committed to transparency, continuous improvement, and measurable results. We don't just send phishing emails—we help you understand your human risk landscape and turn your people into your strongest defense layer.</p>
           </div>
         </div>
-        <div className="bg-surface p-8 rounded-3xl border border-white/10 flex items-center justify-center overflow-hidden relative group">
+        <div className="bg-surface p-6 md:p-8 rounded-3xl border border-white/10 flex items-center justify-center overflow-hidden relative group">
           <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-50 group-hover:opacity-100 transition-opacity" />
           <img src="/partnership-hero.png" alt="Strategic Partnership" className="w-full h-auto object-contain relative z-10 filter drop-shadow-[0_0_30px_rgba(34,197,94,0.4)] transform hover:scale-105 transition-transform duration-700" />
         </div>
       </div>
-      <div className="grid md:grid-cols-3 gap-8 mb-16">
+      <div className="grid md:grid-cols-3 gap-6 md:gap-8 mb-16">
         {[
           { t: "White Label", d: "Deploy our high-fidelity simulations under your own brand identity.", i: FileText },
           { t: "Rev Share", d: "Earn generous recurring commissions for every client referral.", i: Award },
@@ -587,6 +587,7 @@ function App() {
 }
 
 export default App;
+
 
 
 
