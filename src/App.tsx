@@ -480,41 +480,56 @@ const About = () => (
 const Partnership = () => (
   <div className="min-h-screen bg-background text-white pb-20">
     <PageHeader title="Partnership" subtitle="Security is a team sport. We enable MSPs and agencies to offer elite human-layer defense." />
-    <Section>
-      <div className="mb-12 md:mb-20 grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-        <div>
-          <h2 className="text-3xl font-bold text-white mb-6">We Believe in Partnerships</h2>
-          <div className="space-y-6 text-gray-400 leading-relaxed">
+    <Section className="relative">
+      {/* Background Decor */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] pointer-events-none -z-10" />
+
+      <div className="mb-24 flex flex-col md:flex-row items-center gap-16">
+        <div className="flex-1 space-y-8 z-10">
+          <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight">We Believe in <span className="text-primary">Partnerships</span></h2>
+          <div className="space-y-6 text-gray-400 text-lg leading-relaxed">
             <p>At HumanLayer Security, we don't just work for organizations—we work with them. True cybersecurity isn't a product you buy; it's a culture you build. That's why we approach every client relationship as a partnership, not a transaction.</p>
-            <p>Your team knows your organization better than anyone. Our expertise is in human behavior and social engineering tactics. Together, we create a security-aware culture that's authentic to your company and sustainable over time. We succeed when you succeed.</p>
-            <p>As your partner, we're committed to transparency, continuous improvement, and measurable results. We don't just send phishing emails—we help you understand your human risk landscape and turn your people into your strongest defense layer.</p>
+            <p>Your team knows your organization better than anyone. Our expertise is in human behavior and social engineering tactics. Together, we create a security-aware culture that's authentic to your company and sustainable over time.</p>
           </div>
         </div>
-        <div className="bg-surface p-6 md:p-8 rounded-3xl border border-white/10 flex items-center justify-center overflow-hidden relative group">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-50 group-hover:opacity-100 transition-opacity" />
-          <img src="/partnership-hero.png" alt="Strategic Partnership" className="w-full h-auto object-contain relative z-10 filter drop-shadow-[0_0_30px_rgba(34,197,94,0.4)] transform hover:scale-105 transition-transform duration-700" />
+        <div className="flex-1 relative w-full group perspective-1000">
+          <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent blur-3xl opacity-30 group-hover:opacity-50 transition-opacity duration-700" />
+          <div className="relative bg-surface/30 backdrop-blur-md border border-white/10 rounded-[2rem] p-10 transform transition-all duration-700 group-hover:rotate-y-2 group-hover:scale-105 shadow-2xl shadow-black/50">
+            <img src="/partnership-hero.png" alt="Strategic Partnership" className="w-full h-auto object-contain filter drop-shadow-[0_0_40px_rgba(34,197,94,0.2)]" />
+          </div>
         </div>
       </div>
-      <div className="grid md:grid-cols-3 gap-6 md:gap-8 mb-16">
+
+      <div className="grid md:grid-cols-3 gap-8 mb-24">
         {[
           { t: "White Label", d: "Deploy our high-fidelity simulations under your own brand identity.", i: FileText },
-          { t: "Rev Share", d: "Earn generous recurring commissions for every client referral.", i: Award },
+          { t: "Rev Share", d: "Earn recurring commissions for every client referral.", i: Award },
           { t: "Sales Support", d: "We provide technical expertise to help you close the deal.", i: Users }
         ].map((s, i) => (
-          <div key={i} className="p-8 bg-surface/50 border border-white/10 rounded-2xl text-center group hover:bg-white/5 transition-all hover:border-primary/50 relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-            <div className="w-20 h-20 bg-black rounded-full flex items-center justify-center mx-auto mb-6 border border-white/10 group-hover:scale-110 transition-transform relative z-10 shadow-[0_0_20px_rgba(34,197,94,0.2)]">
-              <s.i className="w-10 h-10 text-primary" />
+          <div key={i} className="relative p-1 bg-gradient-to-b from-white/10 to-transparent rounded-[2rem] group hover:from-primary/50 transition-all duration-500">
+            <div className="h-full bg-black/80 backdrop-blur-xl rounded-[1.9rem] p-8 flex flex-col items-center text-center border border-white/5 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+              <div className="w-20 h-20 mb-8 rounded-2xl bg-white/5 flex items-center justify-center group-hover:scale-110 group-hover:bg-primary/20 transition-all duration-300 relative z-10">
+                <s.i className="w-10 h-10 text-gray-400 group-hover:text-primary transition-colors" />
+              </div>
+
+              <h3 className="text-2xl font-bold text-white mb-4 relative z-10">{s.t}</h3>
+              <p className="text-gray-400 relative z-10">{s.d}</p>
             </div>
-            <h3 className="text-xl font-bold mb-3 text-white relative z-10">{s.t}</h3>
-            <p className="text-gray-400 text-sm leading-relaxed relative z-10">{s.d}</p>
           </div>
         ))}
       </div>
-      <div className="bg-gradient-to-r from-surface to-background border border-white/10 rounded-3xl p-12 text-center max-w-3xl mx-auto">
-        <h2 className="text-3xl font-bold mb-6">Become a Partner</h2>
-        <p className="text-gray-400 mb-8">Join our network of elite security providers.</p>
-        <a href={`mailto:${CONTACT_INFO.email}?subject=Partnership Inquiry`}><Button size="lg">Contact Partner Team</Button></a>
+
+      <div className="relative rounded-[3rem] overflow-hidden p-12 text-center border border-white/10 group">
+        <div className="absolute inset-0 bg-surface/80 backdrop-blur-md" />
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out" />
+
+        <div className="relative z-10 max-w-2xl mx-auto">
+          <h2 className="text-3xl font-bold mb-6 text-white">Become a <span className="text-primary">Partner</span></h2>
+          <p className="text-gray-400 mb-10 text-lg">Join our network of elite security providers and start offering premium human-layer defense today.</p>
+          <a href={`mailto:${CONTACT_INFO.email}?subject=Partnership Inquiry`}><Button size="lg" className="shadow-[0_0_30px_rgba(34,197,94,0.3)] hover:shadow-[0_0_50px_rgba(34,197,94,0.5)]">Contact Partner Team</Button></a>
+        </div>
       </div>
     </Section>
   </div>
@@ -587,7 +602,4 @@ function App() {
 }
 
 export default App;
-
-
-
 
