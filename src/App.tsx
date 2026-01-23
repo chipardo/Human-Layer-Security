@@ -18,9 +18,9 @@ const QUOTES = [
   { text: "Social engineering is the art of manipulating people so they give up confidential information.", author: "Kevin Mitnick" },
   { text: "Security is not a product, it’s a process.", author: "Bruce Schneier" },
   { text: "The human factor is truly security's weakest link.", author: "Kevin Mitnick" },
-  { text: "You can patch software, but you can't patch stupid.", author: "Anonymous" }, // Classic, maybe a bit harsh but fits the cyber vibe? Let's stick to professional ones mostly.
-  { text: "The greatest vulnerability is the one you don't know about.", author: "Unknown" },
-  { text: "Trust, but verify.", author: "Ronald Reagan (Russian Proverb)" }
+  { text: "The only truly secure system is one that is powered off...", author: "Gene Spafford" },
+  { text: "There are only two types of companies: those that have been hacked and those that will be.", author: "Robert Mueller" },
+  { text: "Trust, but verify.", author: "Ronald Reagan" }
 ];
 
 
@@ -246,8 +246,7 @@ const Home = () => {
               <h3 className="text-xl font-bold text-white mb-2 relative z-10 group-hover:text-primary transition-colors">{s.t}</h3>
               <p className="text-gray-400 text-sm leading-relaxed relative z-10">{s.d}</p>
 
-              {/* Bottom highlight */}
-              <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700" />
+
             </motion.div>
           ))}
         </motion.div>
@@ -281,7 +280,7 @@ const Home = () => {
               <h3 className="text-3xl font-bold text-white mb-3 group-hover:text-primary transition-colors">Ethical Phishing Simulations</h3>
               <p className="text-gray-300 text-lg leading-relaxed">We don't hack systems; we test people. Controlled campaigns that identify weak points before attackers do.</p>
             </div>
-            <div className="absolute bottom-0 left-0 w-full h-1 bg-primary/50 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
+
           </div>
 
           {/* Feature 2: Training */}
@@ -302,7 +301,7 @@ const Home = () => {
               <h3 className="text-3xl font-bold text-white mb-3 group-hover:text-primary transition-colors">Interactive Training</h3>
               <p className="text-gray-300 text-lg leading-relaxed">Contextual learning moments that teach "why" not just "what". Immediate feedback when it matters most.</p>
             </div>
-            <div className="absolute bottom-0 left-0 w-full h-1 bg-primary/50 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
+
           </div>
         </div>
         <div className="flex justify-center">
@@ -438,8 +437,7 @@ const Services = () => (
               <p className="text-gray-400 leading-relaxed text-sm md:text-base">{s.d}</p>
             </div>
 
-            {/* Bottom highlight */}
-            <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700" />
+
           </motion.div>
         ))}
       </div>
@@ -465,8 +463,7 @@ const Services = () => (
               <h3 className="text-xl font-bold text-white mb-2 relative z-10 group-hover:text-primary transition-colors">{s.t}</h3>
               <p className="text-gray-400 text-sm leading-relaxed relative z-10">{s.d}</p>
 
-              {/* Bottom highlight */}
-              <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700" />
+
             </motion.div>
           ))}
         </motion.div>
