@@ -493,9 +493,21 @@ const Partnership = () => (
       <div className="mb-24 flex flex-col md:flex-row items-center gap-16">
         {/* Mobile: Image First | Desktop: Image Left */}
         <div className="flex-1 relative w-full group perspective-1000 order-1 md:order-2">
-          <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-primary/20 bg-surface/50 backdrop-blur-sm transform transition-transform duration-700 group-hover:rotate-y-2 group-hover:scale-105 p-8 flex items-center justify-center">
-            <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 to-transparent opacity-20" />
-            <img src="/partnership-hero.png" alt="Strategic Partnership" className="w-full h-auto object-contain relative z-10 drop-shadow-2xl" />
+          <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-primary/20 bg-surface/50 backdrop-blur-sm transform transition-transform duration-700 group-hover:rotate-y-2">
+            <img src="/partnership-hero.png" alt="Strategic Partnership" className="w-full h-auto object-cover opacity-90 group-hover:scale-105 transition-transform duration-700 ease-out" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
+
+            {/* Data Overlays matching Home Page vibe */}
+            <div className="absolute bottom-6 left-6 right-6 grid grid-cols-2 gap-4">
+              <div className="bg-black/40 backdrop-blur-md p-3 rounded-xl border border-white/10">
+                <div className="text-[10px] text-green-400 font-mono mb-1 uppercase tracking-wider">Partner Status</div>
+                <div className="text-lg font-bold text-white flex items-center gap-2">ACTIVE</div>
+              </div>
+              <div className="bg-black/40 backdrop-blur-md p-3 rounded-xl border border-white/10">
+                <div className="text-[10px] text-green-400 font-mono mb-1 uppercase tracking-wider">Commission</div>
+                <div className="text-lg font-bold text-white">UNCAPPED</div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -514,15 +526,15 @@ const Partnership = () => (
           { t: "Rev Share", d: "Earn recurring commissions for every client referral.", i: Award },
           { t: "Sales Support", d: "We provide technical expertise to help you close the deal.", i: Users }
         ].map((s, i) => (
-          <div key={i} className="relative p-[1px] rounded-[2rem] group transition-all duration-500 bg-gradient-to-b from-primary/40 via-primary/10 to-transparent hover:from-primary/60 hover:via-primary/30">
-            <div className="h-full bg-black/60 backdrop-blur-xl rounded-[1.9rem] p-8 flex flex-col items-center text-center border border-white/5 relative overflow-hidden group-hover:bg-primary/5 transition-colors duration-500">
-              <div className="w-20 h-20 mb-8 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center group-hover:scale-110 group-hover:bg-primary/30 transition-all duration-300 relative z-10 shadow-[0_0_15px_rgba(34,197,94,0.1)]">
-                <s.i className="w-10 h-10 text-primary group-hover:text-white transition-colors" />
-              </div>
+          <div key={i} className="group relative p-8 rounded-3xl bg-surface/40 hover:bg-surface/60 border border-white/10 hover:border-primary/30 transition-all duration-500 overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-              <h3 className="text-2xl font-bold text-white mb-4 relative z-10">{s.t}</h3>
-              <p className="text-gray-300 relative z-10 font-medium">{s.d}</p>
+            <div className="w-16 h-16 mb-6 rounded-2xl bg-black/50 border border-white/10 flex items-center justify-center group-hover:scale-110 group-hover:border-primary/30 transition-all duration-500 relative z-10 shadow-inner">
+              <s.i className="w-8 h-8 text-gray-400 group-hover:text-primary transition-colors" />
             </div>
+
+            <h3 className="text-2xl font-bold text-white mb-3 relative z-10">{s.t}</h3>
+            <p className="text-gray-400 text-sm leading-relaxed relative z-10">{s.d}</p>
           </div>
         ))}
       </div>
