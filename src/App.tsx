@@ -254,8 +254,8 @@ const Home = () => {
           {/* Feature 1: Ethical Phishing */}
           <div className="p-10 rounded-3xl bg-surface/40 backdrop-blur-sm border border-white/10 flex flex-col justify-end group transition-all hover:border-primary/50 hover:bg-surface/60 min-h-[350px] relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            <div className="absolute top-0 right-0 p-6 opacity-20 group-hover:opacity-40 transition-opacity">
-              <div className="w-16 h-16 rounded-full border border-primary/20 dashed-border animate-[spin_10s_linear_infinite]" />
+            <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
+              <div className="w-16 h-16 rounded-full border border-primary/20 dashed-border" />
             </div>
 
             <Shield className="w-16 h-16 text-gray-400 mb-auto group-hover:text-primary transition-colors relative z-10" />
@@ -270,8 +270,8 @@ const Home = () => {
           {/* Feature 2: Training */}
           <div className="p-10 rounded-3xl bg-surface/40 backdrop-blur-sm border border-white/10 flex flex-col justify-end group transition-all hover:border-primary/50 hover:bg-surface/60 min-h-[350px] relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            <div className="absolute top-0 right-0 p-6 opacity-20 group-hover:opacity-40 transition-opacity">
-              <div className="w-16 h-16 rounded-full border border-primary/20 dashed-border animate-[spin_10s_linear_infinite]" />
+            <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
+              <div className="w-16 h-16 rounded-full border border-primary/20 dashed-border" />
             </div>
 
             <Users className="w-16 h-16 text-gray-400 mb-auto group-hover:text-primary transition-colors relative z-10" />
@@ -389,8 +389,8 @@ const Services = () => (
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
             {/* Tech Decoration */}
-            <div className="absolute top-0 right-0 p-6 opacity-20 group-hover:opacity-40 transition-opacity">
-              <div className="w-16 h-16 rounded-full border border-primary/20 dashed-border animate-[spin_10s_linear_infinite]" />
+            <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
+              <div className="w-16 h-16 rounded-full border border-primary/20 dashed-border" />
             </div>
 
             <div className="w-16 h-16 bg-black/50 rounded-2xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform shadow-inner border border-white/5 relative z-10 mb-6 group-hover:border-primary/30">
