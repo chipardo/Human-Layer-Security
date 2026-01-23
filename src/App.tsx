@@ -240,16 +240,37 @@ const Home = () => {
           <div className="mb-6 md:mb-0"><h2 className="text-4xl font-bold text-white mb-4">Core Capabilities</h2><p className="text-gray-400">Specialized. Focused. Effective.</p></div>
           <Button variant="outline" className="hidden md:flex" onClick={() => navigate('/services')}>All Services</Button>
         </div>
-        <div className="grid md:grid-cols-3 gap-6 mb-12">
-          <div className="md:col-span-2 p-10 rounded-3xl bg-surface border border-white/10 min-h-[300px] flex flex-col justify-end group transition-all hover:border-primary/30">
-            <Shield className="w-12 h-12 text-primary mb-auto" />
-            <h3 className="text-2xl font-bold text-white mb-2">Ethical Phishing Simulations</h3>
-            <p className="text-gray-300">We don't hack systems; we test people. Controlled campaigns that identify weak points before attackers do.</p>
+        <div className="grid md:grid-cols-2 gap-6 mb-12">
+          {/* Feature 1: Ethical Phishing */}
+          <div className="p-10 rounded-3xl bg-surface/40 backdrop-blur-sm border border-white/10 flex flex-col justify-end group transition-all hover:border-primary/50 hover:bg-surface/60 min-h-[350px] relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute top-0 right-0 p-6 opacity-20 group-hover:opacity-40 transition-opacity">
+              <div className="w-16 h-16 rounded-full border border-primary/20 dashed-border animate-[spin_10s_linear_infinite]" />
+            </div>
+
+            <Shield className="w-16 h-16 text-gray-400 mb-auto group-hover:text-primary transition-colors relative z-10" />
+
+            <div className="relative z-10">
+              <h3 className="text-3xl font-bold text-white mb-3 group-hover:text-primary transition-colors">Ethical Phishing Simulations</h3>
+              <p className="text-gray-300 text-lg leading-relaxed">We don't hack systems; we test people. Controlled campaigns that identify weak points before attackers do.</p>
+            </div>
+            <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700" />
           </div>
-          <div className="p-10 rounded-3xl bg-surface border border-white/10 flex flex-col justify-end group hover:bg-white/5 transition-colors">
-            <Users className="w-12 h-12 text-white/50 mb-auto group-hover:text-primary transition-colors" />
-            <h3 className="text-xl font-bold text-white mb-2">Training</h3>
-            <p className="text-gray-400">Contextual learning moments.</p>
+
+          {/* Feature 2: Training */}
+          <div className="p-10 rounded-3xl bg-surface/40 backdrop-blur-sm border border-white/10 flex flex-col justify-end group transition-all hover:border-primary/50 hover:bg-surface/60 min-h-[350px] relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute top-0 right-0 p-6 opacity-20 group-hover:opacity-40 transition-opacity">
+              <div className="w-16 h-16 rounded-full border border-primary/20 dashed-border animate-[spin_10s_linear_infinite]" />
+            </div>
+
+            <Users className="w-16 h-16 text-gray-400 mb-auto group-hover:text-primary transition-colors relative z-10" />
+
+            <div className="relative z-10">
+              <h3 className="text-3xl font-bold text-white mb-3 group-hover:text-primary transition-colors">Interactive Training</h3>
+              <p className="text-gray-300 text-lg leading-relaxed">Contextual learning moments that teach "why" not just "what". Immediate feedback when it matters most.</p>
+            </div>
+            <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700" />
           </div>
         </div>
         <div className="flex justify-center">
