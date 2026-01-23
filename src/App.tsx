@@ -219,9 +219,9 @@ const Home = () => {
           <h2 className="text-4xl font-bold text-white mb-4">How We Work</h2>
           <p className="text-gray-400 max-w-2xl mx-auto">From user as a problem to user as a sensor. A 4-step monthly cycle.</p>
         </div>
-        <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid md:grid-cols-4 gap-4 mb-12">
+        <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="flex md:grid md:grid-cols-4 gap-4 mb-12 overflow-x-auto md:overflow-visible pb-8 md:pb-0 snap-x snap-mandatory px-4 md:px-0 -mx-4 md:mx-0">
           {[{ t: "Simulate", d: "We send monthly controlled phishing campaigns.", i: Mail }, { t: "Educate", d: "Instant micro-trainings for those who click.", i: FileText }, { t: "Report", d: "Comprehensive vulnerability trend analysis.", i: Activity }, { t: "Improve", d: "Hardening the human operating system over time.", i: CheckCircle }].map((s, i) => (
-            <motion.div variants={fadeInUp} key={i} className="group relative p-8 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
+            <motion.div variants={fadeInUp} key={i} className="group relative p-8 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors min-w-[300px] md:min-w-0 snap-center">
               <div className="absolute top-0 right-0 p-4 text-7xl font-bold text-white/5 font-display select-none group-hover:text-white/10 transition-colors">0{i + 1}</div>
               <div className="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"><s.i className="w-6 h-6 text-primary" /></div>
               <h3 className="text-xl font-bold text-white mb-2">{s.t}</h3>
@@ -280,6 +280,17 @@ const Home = () => {
             </ul>
             <div className="mt-8">
               <Link to="/contact"><Button>Contact Us</Button></Link>
+            </div>
+
+            {/* Trusted Industries */}
+            <div className="mt-12 pt-8 border-t border-white/5">
+              <h5 className="text-xs font-bold text-primary tracking-widest uppercase mb-4">Securing Human Layers In</h5>
+              <div className="flex flex-wrap gap-4 text-gray-400 font-display font-bold text-sm">
+                <span className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-primary" /> Finance</span>
+                <span className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-primary" /> Healthcare</span>
+                <span className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-primary" /> Technology</span>
+                <span className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-primary" /> Government</span>
+              </div>
             </div>
           </div>
           <div className="p-8 rounded-2xl bg-black/40 border border-white/5">
