@@ -12,6 +12,17 @@ function cn(...inputs: ClassValue[]) { return twMerge(clsx(inputs)); }
 // --- DATA ---
 const CONTACT_INFO = { email: "contact@humanls.com", phone: "3052820302", founder: "Nicolas Su Nobrega Garces" };
 
+const QUOTES = [
+  { text: "Amateurs hack systems, professionals hack people.", author: "Bruce Schneier" },
+  { text: "Humans are the weakest link in security.", author: "Kevin Mitnick" },
+  { text: "Social engineering is the art of manipulating people so they give up confidential information.", author: "Kevin Mitnick" },
+  { text: "Security is not a product, it’s a process.", author: "Bruce Schneier" },
+  { text: "The human factor is truly security's weakest link.", author: "Kevin Mitnick" },
+  { text: "You can patch software, but you can't patch stupid.", author: "Anonymous" }, // Classic, maybe a bit harsh but fits the cyber vibe? Let's stick to professional ones mostly.
+  { text: "The greatest vulnerability is the one you don't know about.", author: "Unknown" },
+  { text: "Trust, but verify.", author: "Ronald Reagan (Russian Proverb)" }
+];
+
 
 
 
@@ -142,6 +153,12 @@ const Footer = () => (
 // --- HOME PAGE ---
 const Home = () => {
   const navigate = useNavigate();
+  const [quote, setQuote] = useState(QUOTES[0]);
+
+  useEffect(() => {
+    // Random quote on mount/refresh
+    setQuote(QUOTES[Math.floor(Math.random() * QUOTES.length)]);
+  }, []);
 
 
 
@@ -321,16 +338,42 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <div className="p-10 rounded-3xl bg-black/40 border border-white/5 flex flex-col justify-center h-full text-center">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold tracking-wider uppercase mb-8 mx-auto">
-              <Quote className="w-3 h-3" /> Cyber Quote of the Day
-            </div>
 
-            <blockquote className="text-2xl md:text-3xl font-display font-bold text-white italic leading-tight mb-6">
-              "Amateurs hack systems, professionals hack people."
-            </blockquote>
-            <div className="text-gray-500 font-mono text-sm uppercase tracking-widest">— Bruce Schneier</div>
+          {/* DYNAMIC QUOTE COMPONENT */}
+          <div className="relative group perspective-1000 h-full min-h-[400px]">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent rounded-[3rem] blur-xl opacity-50 group-hover:opacity-70 transition-opacity duration-1000" />
+            <div className="relative h-full rounded-[3rem] bg-black/80 backdrop-blur-xl border border-white/10 p-12 flex flex-col justify-between overflow-hidden group-hover:border-primary/30 transition-colors duration-500">
+
+              {/* Decorative Elements */}
+              <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-[80px] pointer-events-none" />
+              <div className="absolute bottom-0 left-0 w-48 h-48 bg-blue-500/5 rounded-full blur-[60px] pointer-events-none" />
+              <Quote className="absolute top-8 right-8 text-primary/10 w-32 h-32 rotate-12 transform group-hover:scale-110 group-hover:text-primary/20 transition-all duration-700" />
+
+              <div className="relative z-10">
+                <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-10">
+                  <div className="w-2 h-2 rounded-full bg-primary animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.8)]" />
+                  <span className="text-primary text-xs font-bold tracking-[0.2em] uppercase">Daily Intel</span>
+                </div>
+
+                <blockquote className="text-3xl md:text-5xl font-display font-bold text-white leading-[1.15] mb-8">
+                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-gray-400">
+                    "{quote.text}"
+                  </span>
+                </blockquote>
+              </div>
+
+              <div className="relative z-10 flex items-center gap-4">
+                <div className="w-12 h-[1px] bg-primary/50" />
+                <div className="text-primary font-mono text-sm uppercase tracking-widest font-bold">
+                  {quote.author}
+                </div>
+              </div>
+
+              {/* Scanline Effect */}
+              <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent_50%,rgba(0,0,0,0.3)_50%)] bg-[length:100%_4px] pointer-events-none opacity-20" />
+            </div>
           </div>
+
         </div>
       </Section>
     </>
@@ -678,4 +721,3 @@ function App() {
 }
 
 export default App;
-
