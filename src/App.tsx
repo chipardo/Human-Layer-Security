@@ -479,8 +479,14 @@ const About = () => (
 
 const Partnership = () => (
   <div className="min-h-screen bg-background text-white pb-20">
-    <PageHeader title="Partnership" subtitle="Security is a team sport. We enable MSPs and agencies to offer elite human-layer defense." />
-    <Section className="relative">
+    <section className="pt-40 pb-10 px-6 relative overflow-hidden">
+      <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/10 to-transparent opacity-30 pointer-events-none" />
+      <motion.div initial="hidden" animate="visible" variants={fadeInUp} className="max-w-7xl mx-auto relative z-10">
+        <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight">Partnership</h1>
+        <p className="text-xl text-gray-400 max-w-2xl leading-relaxed border-l-4 border-primary pl-6">Security is a team sport. We enable MSPs and agencies to offer elite human-layer defense.</p>
+      </motion.div>
+    </section>
+    <Section className="relative !pt-0">
       {/* Background Decor */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] pointer-events-none -z-10" />
 
