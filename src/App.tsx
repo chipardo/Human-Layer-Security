@@ -258,18 +258,28 @@ const Home = () => {
               <div className="w-16 h-16 rounded-full border border-primary/20 dashed-border" />
             </div>
 
+            <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
+              <div className="w-16 h-16 rounded-full border border-primary/20 dashed-border" />
+            </div>
+
             <Shield className="w-16 h-16 text-gray-400 mb-auto group-hover:text-primary transition-colors relative z-10" />
 
             <div className="relative z-10">
               <h3 className="text-3xl font-bold text-white mb-3 group-hover:text-primary transition-colors">Ethical Phishing Simulations</h3>
               <p className="text-gray-300 text-lg leading-relaxed">We don't hack systems; we test people. Controlled campaigns that identify weak points before attackers do.</p>
             </div>
-            <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700" />
+            <div className="absolute bottom-0 left-0 w-full h-1 bg-primary/50 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
           </div>
 
           {/* Feature 2: Training */}
           <div className="p-10 rounded-3xl bg-surface/40 backdrop-blur-sm border border-white/10 flex flex-col justify-end group transition-all hover:border-primary/50 hover:bg-surface/60 min-h-[350px] relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
+              <div className="w-16 h-16 rounded-full border border-primary/20 dashed-border" />
+            </div>
+
+            <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
               <div className="w-16 h-16 rounded-full border border-primary/20 dashed-border" />
             </div>
@@ -280,7 +290,7 @@ const Home = () => {
               <h3 className="text-3xl font-bold text-white mb-3 group-hover:text-primary transition-colors">Interactive Training</h3>
               <p className="text-gray-300 text-lg leading-relaxed">Contextual learning moments that teach "why" not just "what". Immediate feedback when it matters most.</p>
             </div>
-            <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700" />
+            <div className="absolute bottom-0 left-0 w-full h-1 bg-primary/50 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
           </div>
         </div>
         <div className="flex justify-center">
@@ -324,27 +334,15 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <div className="p-8 rounded-2xl bg-black/40 border border-white/5">
-            <Quote className="text-primary w-12 h-12 mb-6 opacity-50" />
-            <p className="text-xl text-gray-300 italic mb-6 leading-relaxed">
-              "{quote.text}"
-            </p>
-            <div className="text-sm font-bold text-white">- {quote.author}</div>
-
-            {/* Cyber Quote Section - MOVED INSIDE THE BOX */}
-            <div className="mt-8 pt-8 border-t border-white/10 text-center">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold tracking-wider uppercase mb-4">
-                Cyber Quote of the Day
-              </div>
-              <blockquote className="text-lg font-display font-bold text-white italic leading-tight">
-                "Amateurs hack systems, professionals hack people."
-              </blockquote>
-              <div className="mt-2 text-gray-500 font-mono text-xs uppercase tracking-widest">— Bruce Schneier</div>
+          <div className="p-10 rounded-3xl bg-black/40 border border-white/5 flex flex-col justify-center h-full text-center">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold tracking-wider uppercase mb-8 mx-auto">
+              <Quote className="w-3 h-3" /> Cyber Quote of the Day
             </div>
 
-            <div className="mt-8">
-              <Link to="/services"><Button variant="outline" className="w-full">See How We Work</Button></Link>
-            </div>
+            <blockquote className="text-2xl md:text-3xl font-display font-bold text-white italic leading-tight mb-6">
+              "Amateurs hack systems, professionals hack people."
+            </blockquote>
+            <div className="text-gray-500 font-mono text-sm uppercase tracking-widest">— Bruce Schneier</div>
           </div>
         </div>
       </Section>
