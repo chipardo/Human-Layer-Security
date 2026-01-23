@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate, useLocation, Link } from 'react-router-dom';
-import { Shield, Menu, X, CheckCircle, Users, Mail, Phone, Activity, ArrowRight, Lock, Globe, Terminal, FileText, Award, Quote } from 'lucide-react';
+import { Shield, Menu, X, CheckCircle, Users, Mail, Activity, ArrowRight, Lock, Globe, Terminal, FileText, Award, Quote } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
@@ -620,3 +620,4 @@ function App() {
 }
 
 export default App;
+
