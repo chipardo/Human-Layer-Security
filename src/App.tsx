@@ -221,11 +221,21 @@ const Home = () => {
         </div>
         <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="flex md:grid md:grid-cols-4 gap-4 mb-12 overflow-x-auto md:overflow-visible pb-8 md:pb-0 snap-x snap-mandatory px-4 md:px-0 -mx-4 md:mx-0">
           {[{ t: "Simulate", d: "We send monthly controlled phishing campaigns.", i: Mail }, { t: "Educate", d: "Instant micro-trainings for those who click.", i: FileText }, { t: "Report", d: "Comprehensive vulnerability trend analysis.", i: Activity }, { t: "Improve", d: "Hardening the human operating system over time.", i: CheckCircle }].map((s, i) => (
-            <motion.div variants={fadeInUp} key={i} className="group relative p-8 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-all min-w-[300px] md:min-w-0 snap-center hover:border-primary/20">
-              <div className="absolute top-0 right-0 p-4 text-7xl font-bold text-white/5 font-display select-none group-hover:text-white/10 transition-colors">0{i + 1}</div>
-              <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"><s.i className="w-6 h-6 text-gray-400 group-hover:text-primary transition-colors" /></div>
-              <h3 className="text-xl font-bold text-white mb-2">{s.t}</h3>
-              <p className="text-gray-400 text-sm leading-relaxed">{s.d}</p>
+            <motion.div variants={fadeInUp} key={i} className="group relative p-8 rounded-3xl bg-surface/40 backdrop-blur-sm border border-white/10 hover:bg-surface/60 transition-all min-w-[300px] md:min-w-0 snap-center hover:border-primary/50 overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+              {/* Tech Decoration */}
+              <div className="absolute top-0 right-0 p-4 opacity-20 group-hover:opacity-40 transition-opacity">
+                <div className="w-12 h-12 rounded-full border border-primary/20 dashed-border animate-[spin_10s_linear_infinite]" />
+              </div>
+
+              <div className="absolute top-0 right-0 p-4 text-7xl font-bold text-white/5 font-display select-none group-hover:text-white/10 transition-colors z-0">0{i + 1}</div>
+              <div className="w-12 h-12 bg-black/50 border border-white/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform relative z-10 group-hover:border-primary/30"><s.i className="w-6 h-6 text-gray-400 group-hover:text-primary transition-colors" /></div>
+              <h3 className="text-xl font-bold text-white mb-2 relative z-10 group-hover:text-primary transition-colors">{s.t}</h3>
+              <p className="text-gray-400 text-sm leading-relaxed relative z-10">{s.d}</p>
+
+              {/* Bottom highlight */}
+              <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700" />
             </motion.div>
           ))}
         </motion.div>
@@ -303,15 +313,15 @@ const Home = () => {
               <Link to="/contact"><Button>Contact Us</Button></Link>
             </div>
 
-            {/* Cyber Quote Section */}
-            <div className="mt-16 pt-8 border-t border-white/5 text-center">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold tracking-wider uppercase mb-6">
-                Cyber Quote of the Day
+            {/* Trusted Industries - MOVED HERE */}
+            <div className="mt-12 pt-8 border-t border-white/5">
+              <h5 className="text-xs font-bold text-primary tracking-widest uppercase mb-4">Securing Human Layers In</h5>
+              <div className="flex flex-wrap gap-4 text-gray-400 font-display font-bold text-sm">
+                <span className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-primary" /> Finance</span>
+                <span className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-primary" /> Healthcare</span>
+                <span className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-primary" /> Technology</span>
+                <span className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-primary" /> Government</span>
               </div>
-              <blockquote className="text-2xl md:text-3xl font-display font-bold text-white italic max-w-3xl mx-auto leading-tight">
-                "Amateurs hack systems, professionals hack people."
-              </blockquote>
-              <div className="mt-4 text-gray-500 font-mono text-sm uppercase tracking-widest">— Bruce Schneier</div>
             </div>
           </div>
           <div className="p-8 rounded-2xl bg-black/40 border border-white/5">
@@ -320,8 +330,20 @@ const Home = () => {
               "{quote.text}"
             </p>
             <div className="text-sm font-bold text-white">- {quote.author}</div>
+
+            {/* Cyber Quote Section - MOVED INSIDE THE BOX */}
+            <div className="mt-8 pt-8 border-t border-white/10 text-center">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold tracking-wider uppercase mb-4">
+                Cyber Quote of the Day
+              </div>
+              <blockquote className="text-lg font-display font-bold text-white italic leading-tight">
+                "Amateurs hack systems, professionals hack people."
+              </blockquote>
+              <div className="mt-2 text-gray-500 font-mono text-xs uppercase tracking-widest">— Bruce Schneier</div>
+            </div>
+
             <div className="mt-8">
-              <Link to="/services"><Button variant="outline">See How We Work</Button></Link>
+              <Link to="/services"><Button variant="outline" className="w-full">See How We Work</Button></Link>
             </div>
           </div>
         </div>
@@ -392,13 +414,23 @@ const Services = () => (
           <h2 className="text-4xl font-bold text-white mb-4">How We Work</h2>
           <p className="text-gray-400 max-w-2xl mx-auto">From user as a problem to user as a sensor. A 4-step monthly cycle.</p>
         </div>
-        <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid md:grid-cols-4 gap-4 mb-12">
+        <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="flex md:grid md:grid-cols-4 gap-4 mb-12 overflow-x-auto md:overflow-visible pb-8 md:pb-0 snap-x snap-mandatory px-4 md:px-0 -mx-4 md:mx-0">
           {[{ t: "Simulate", d: "We send monthly controlled phishing campaigns.", i: Mail }, { t: "Educate", d: "Instant micro-trainings for those who click.", i: FileText }, { t: "Report", d: "Comprehensive vulnerability trend analysis.", i: Activity }, { t: "Improve", d: "Hardening the human operating system over time.", i: CheckCircle }].map((s, i) => (
-            <motion.div variants={fadeInUp} key={i} className="group relative p-8 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
-              <div className="absolute top-0 right-0 p-4 text-7xl font-bold text-white/5 font-display select-none group-hover:text-white/10 transition-colors">0{i + 1}</div>
-              <div className="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"><s.i className="w-6 h-6 text-primary" /></div>
-              <h3 className="text-xl font-bold text-white mb-2">{s.t}</h3>
-              <p className="text-gray-400 text-sm leading-relaxed">{s.d}</p>
+            <motion.div variants={fadeInUp} key={i} className="group relative p-8 rounded-3xl bg-surface/40 backdrop-blur-sm border border-white/10 hover:bg-surface/60 transition-all min-w-[300px] md:min-w-0 snap-center hover:border-primary/50 overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+              {/* Tech Decoration */}
+              <div className="absolute top-0 right-0 p-4 opacity-20 group-hover:opacity-40 transition-opacity">
+                <div className="w-12 h-12 rounded-full border border-primary/20 dashed-border animate-[spin_10s_linear_infinite]" />
+              </div>
+
+              <div className="absolute top-0 right-0 p-4 text-7xl font-bold text-white/5 font-display select-none group-hover:text-white/10 transition-colors z-0">0{i + 1}</div>
+              <div className="w-12 h-12 bg-black/50 border border-white/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform relative z-10 group-hover:border-primary/30"><s.i className="w-6 h-6 text-gray-400 group-hover:text-primary transition-colors" /></div>
+              <h3 className="text-xl font-bold text-white mb-2 relative z-10 group-hover:text-primary transition-colors">{s.t}</h3>
+              <p className="text-gray-400 text-sm leading-relaxed relative z-10">{s.d}</p>
+
+              {/* Bottom highlight */}
+              <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700" />
             </motion.div>
           ))}
         </motion.div>
@@ -661,3 +693,4 @@ function App() {
 }
 
 export default App;
+
