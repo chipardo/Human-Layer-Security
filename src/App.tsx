@@ -10,7 +10,7 @@ import { twMerge } from "tailwind-merge";
 function cn(...inputs: ClassValue[]) { return twMerge(clsx(inputs)); }
 
 // --- DATA ---
-const CONTACT_INFO = { email: "nicolassunobrega2@gmail.com", phone: "3052820302", founder: "Nicolas Su Nobrega Garces" };
+const CONTACT_INFO = { email: "contact@humanls.com", phone: "3052820302", founder: "Nicolas Su Nobrega Garces" };
 
 const QUOTES = [
   { text: "Security is not a product, but a process.", author: "Bruce Schneier" },
@@ -223,7 +223,7 @@ const Home = () => {
           {[{ t: "Simulate", d: "We send monthly controlled phishing campaigns.", i: Mail }, { t: "Educate", d: "Instant micro-trainings for those who click.", i: FileText }, { t: "Report", d: "Comprehensive vulnerability trend analysis.", i: Activity }, { t: "Improve", d: "Hardening the human operating system over time.", i: CheckCircle }].map((s, i) => (
             <motion.div variants={fadeInUp} key={i} className="group relative p-8 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors min-w-[300px] md:min-w-0 snap-center">
               <div className="absolute top-0 right-0 p-4 text-7xl font-bold text-white/5 font-display select-none group-hover:text-white/10 transition-colors">0{i + 1}</div>
-              <div className="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"><s.i className="w-6 h-6 text-primary" /></div>
+              <div className="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"><s.i className="w-6 h-6 text-gray-400 group-hover:text-primary transition-colors" /></div>
               <h3 className="text-xl font-bold text-white mb-2">{s.t}</h3>
               <p className="text-gray-400 text-sm leading-relaxed">{s.d}</p>
             </motion.div>
@@ -332,19 +332,14 @@ const Services = () => (
           { t: "Executive Workshops", d: "High-level strategy sessions for leadership to understand the human risk factor.", i: Shield },
           { t: "Spear Phishing Sims", d: "Highly targeted campaigns designed to test your C-suite's resilience against sophisticated social engineering.", i: Mail }
         ].map((s, i) => (
-          <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} key={i} className="flex flex-col md:flex-row gap-8 p-10 border border-white/5 bg-surface/50 rounded-2xl hover:border-primary/50 hover:bg-white/5 transition-all group relative overflow-hidden">
+          <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} key={i} className="flex flex-col md:flex-row gap-6 md:gap-8 p-6 md:p-10 border border-white/5 bg-surface/50 rounded-2xl hover:border-primary/50 hover:bg-white/5 transition-all group relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-            <div className="w-20 h-20 bg-black rounded-2xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform shadow-[0_0_30px_rgba(34,197,94,0.15)] border border-white/10 relative z-10">
-              <s.i className="w-10 h-10 text-primary" />
+            <div className="w-16 h-16 md:w-20 md:h-20 bg-black rounded-2xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform shadow-[0_0_30px_rgba(34,197,94,0.15)] border border-white/10 relative z-10">
+              <s.i className="w-8 h-8 md:w-10 md:h-10 text-gray-400 group-hover:text-primary transition-colors" />
             </div>
-            <div className="relative z-10">
-              <h3 className="text-2xl font-bold mb-3 text-white">{s.t}</h3>
-              <p className="text-gray-400 leading-relaxed max-w-3xl mb-4 text-lg">{s.d}</p>
-            </div>
-            <div className="md:ml-auto flex items-center relative z-10">
-              <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-primary group-hover:border-primary transition-colors group-hover:text-black">
-                <ArrowRight size={20} className="text-current" />
-              </div>
+            <div className="relative z-10 flex-1">
+              <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-3 text-white">{s.t}</h3>
+              <p className="text-gray-400 leading-relaxed max-w-3xl text-sm md:text-lg">{s.d}</p>
             </div>
           </motion.div>
         ))}
@@ -570,18 +565,12 @@ const Contact = () => (
   <div className="min-h-screen bg-background text-white pb-20">
     <PageHeader title="Contact Us" subtitle="Ready to transform your users from risk to defense?" />
     <Section className="!pt-0">
-      <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+      <div className="max-w-4xl mx-auto">
         <div className="p-10 rounded-3xl bg-surface border border-white/10 flex flex-col items-center text-center group hover:border-primary/50 transition-colors">
-          <Mail className="w-16 h-16 text-primary mb-6" />
+          <Mail className="w-16 h-16 text-gray-400 group-hover:text-primary mb-6 transition-colors" />
           <h3 className="text-2xl font-bold text-white mb-2">Email Us</h3>
           <p className="text-gray-400 mb-6">For general inquiries and partnership opportunities.</p>
           <a href={`mailto:${CONTACT_INFO.email}`} className="text-xl font-bold text-primary hover:underline">{CONTACT_INFO.email}</a>
-        </div>
-        <div className="p-10 rounded-3xl bg-surface border border-white/10 flex flex-col items-center text-center group hover:border-primary/50 transition-colors">
-          <Phone className="w-16 h-16 text-primary mb-6" />
-          <h3 className="text-2xl font-bold text-white mb-2">Call Us</h3>
-          <p className="text-gray-400 mb-6">Speak directly with our team.</p>
-          <a href={`tel:${CONTACT_INFO.phone}`} className="text-xl font-bold text-primary hover:underline">{CONTACT_INFO.phone}</a>
         </div>
       </div>
     </Section>
