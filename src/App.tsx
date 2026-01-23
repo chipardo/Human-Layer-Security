@@ -81,10 +81,10 @@ const Navbar = () => {
         scrolled ? "glass rounded-full border border-white/10 shadow-lg shadow-black/50" : "bg-transparent border-transparent"
       )}>
         <Link to="/" className="flex items-center gap-3 group">
-          <img src="/humanlayerlogo.png" alt="HumanLayer Security" className="h-12 md:h-16 w-auto object-contain transition-all duration-300 group-hover:scale-105 filter drop-shadow-[0_0_8px_rgba(34,197,94,0.3)]" />
+          <img src="/humanlayerlogo.png" alt="HumanLayer Security" className="h-14 md:h-20 w-auto object-contain transition-all duration-300 group-hover:scale-105 filter drop-shadow-[0_0_8px_rgba(34,197,94,0.3)]" />
           <div className="flex flex-col justify-center">
-            <span className="font-display font-bold text-white text-lg md:text-xl tracking-tight leading-none group-hover:text-primary transition-colors">HUMANLAYER</span>
-            <span className="font-display font-bold text-primary text-[10px] md:text-xs tracking-[0.2em] leading-none">SECURITY</span>
+            <span className="font-display font-bold text-white text-lg md:text-xl tracking-tight leading-none group-hover:text-primary transition-colors">HUMAN&nbsp;&nbsp;LAYER</span>
+            <span className="font-display font-bold text-primary text-[10px] md:text-sm tracking-[0.2em] leading-none">SECURITY</span>
           </div>
         </Link>
 
@@ -127,7 +127,7 @@ const Footer = () => (
           <Link to="/" className="flex items-center gap-4 mb-6 group">
             <img src="/humanlayerlogo.png" alt="HumanLayer Security" className="h-24 w-auto object-contain transition-transform group-hover:scale-105" />
             <div className="flex flex-col justify-center">
-              <span className="font-display font-bold text-white text-2xl tracking-tight leading-none group-hover:text-primary transition-colors">HUMANLAYER</span>
+              <span className="font-display font-bold text-white text-2xl tracking-tight leading-none group-hover:text-primary transition-colors">HUMAN&nbsp;&nbsp;LAYER</span>
               <span className="font-display font-bold text-primary text-sm tracking-[0.25em] leading-none">SECURITY</span>
             </div>
           </Link>
@@ -485,17 +485,19 @@ const Partnership = () => (
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] pointer-events-none -z-10" />
 
       <div className="mb-24 flex flex-col md:flex-row items-center gap-16">
-        <div className="flex-1 space-y-8 z-10">
+        {/* Mobile: Image First | Desktop: Image Left */}
+        <div className="flex-1 relative w-full group perspective-1000 order-1 md:order-2">
+          <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent blur-3xl opacity-30 group-hover:opacity-50 transition-opacity duration-700" />
+          <div className="relative bg-surface/30 backdrop-blur-md border border-white/10 rounded-[2rem] p-10 transform transition-all duration-700 group-hover:rotate-y-2 group-hover:scale-105 shadow-2xl shadow-black/50">
+            <img src="/partnership-hero.png" alt="Strategic Partnership" className="w-full h-auto object-contain filter drop-shadow-[0_0_40px_rgba(34,197,94,0.2)]" />
+          </div>
+        </div>
+
+        <div className="flex-1 space-y-8 z-10 order-2 md:order-1">
           <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight">We Believe in <span className="text-primary">Partnerships</span></h2>
           <div className="space-y-6 text-gray-400 text-lg leading-relaxed">
             <p>At HumanLayer Security, we don't just work for organizations—we work with them. True cybersecurity isn't a product you buy; it's a culture you build. That's why we approach every client relationship as a partnership, not a transaction.</p>
             <p>Your team knows your organization better than anyone. Our expertise is in human behavior and social engineering tactics. Together, we create a security-aware culture that's authentic to your company and sustainable over time.</p>
-          </div>
-        </div>
-        <div className="flex-1 relative w-full group perspective-1000">
-          <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent blur-3xl opacity-30 group-hover:opacity-50 transition-opacity duration-700" />
-          <div className="relative bg-surface/30 backdrop-blur-md border border-white/10 rounded-[2rem] p-10 transform transition-all duration-700 group-hover:rotate-y-2 group-hover:scale-105 shadow-2xl shadow-black/50">
-            <img src="/partnership-hero.png" alt="Strategic Partnership" className="w-full h-auto object-contain filter drop-shadow-[0_0_40px_rgba(34,197,94,0.2)]" />
           </div>
         </div>
       </div>
@@ -602,4 +604,3 @@ function App() {
 }
 
 export default App;
-
