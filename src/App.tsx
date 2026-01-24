@@ -228,8 +228,8 @@ const Home = () => {
       {/* HOW WE WORK */}
       <Section className="bg-surface">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-white mb-4">How We Work</h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">Four steps to turn your biggest vulnerability into your strongest defense.</p>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">How We <span className="text-primary">Work</span></h2>
+          <p className="text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">Four steps to turn your biggest vulnerability into your strongest defense.</p>
         </div>
         <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="flex md:grid md:grid-cols-4 gap-4 mb-12 overflow-x-auto md:overflow-visible pb-8 md:pb-0 snap-x snap-mandatory px-4 md:px-0 -mx-4 md:mx-0">
           {[{ t: "Test", d: "We send realistic phishing emails that look exactly like the attacks your team faces every day. Fake invoices. Urgent password resets. Requests from the CEO. Real scenarios. Zero risk.", i: Mail }, { t: "Catch", d: "Someone clicks? They land on a safe page that shows them it was a test. No consequences. No reporting to their manager. Just an immediate, private notification.", i: FileText }, { t: "Teach", d: "Right there, a 90 second lesson explains exactly what they missed. The fake sender address. The urgency tactic. The subtle signs. They learn in the moment when their brain is most receptive.", i: Activity }, { t: "Improve", d: "Over weeks and months, you watch the click rates drop. Employees start forwarding suspicious emails to IT instead of clicking them. Your team builds real instincts, not just memorized rules.", i: CheckCircle }].map((s, i) => (
@@ -258,7 +258,7 @@ const Home = () => {
       {/* SERVICES PREVIEW */}
       <Section id="services-preview">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12">
-          <div className="mb-6 md:mb-0"><h2 className="text-4xl font-bold text-white mb-4">What You Get</h2><p className="text-gray-400">Everything you need to build a security-aware team. Nothing you don't.</p></div>
+          <div className="mb-6 md:mb-0"><h2 className="text-4xl md:text-5xl font-bold text-white mb-6">What You <span className="text-primary">Get</span></h2><p className="text-gray-400 text-lg">Everything you need to build a security aware team. Nothing you don't.</p></div>
           <Button variant="outline" className="hidden md:flex" onClick={() => navigate('/services')}>View All Features</Button>
         </div>
         <div className="grid md:grid-cols-2 gap-6 mb-12">
@@ -313,7 +313,7 @@ const Home = () => {
       <Section className="bg-surface/50">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div>
-            <h2 className="text-3xl font-bold text-white mb-6">Why This Approach Works</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">Why This Approach <span className="text-primary">Works</span></h2>
             <ul className="space-y-6">
               <li className="flex gap-4 items-start">
                 <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0 text-primary font-bold">1</div>
@@ -525,7 +525,7 @@ const About = () => (
       <div className="grid md:grid-cols-2 gap-16 items-start">
         <div className="space-y-8">
           <div className="text-center md:text-left text-lg text-gray-300 leading-relaxed">
-            <h3 className="text-2xl font-bold text-white mb-4">Why We Started HumanLayer Security</h3>
+            <h3 className="text-3xl font-bold text-white mb-6">Why We Started <span className="text-primary">Human Layer Security</span></h3>
             <p className="mb-4">We studied cybersecurity and electrical engineering. We learned how attacks work. How social engineering bypasses every technical defense. How one convincing email can compromise an entire organization.</p>
             <p className="mb-4">Then we looked at how companies actually train their employees against these attacks. Annual compliance videos. Generic "be careful with emails" warnings. Boring slide decks that people click through while checking their phone.</p>
             <p className="mb-4">It doesn't work. And we knew why it doesn't work.</p>
@@ -636,7 +636,7 @@ const Partnership = () => (
         </motion.div>
 
         <div className="flex-1 space-y-8 z-10 order-2 md:order-1">
-          <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight">Let's Grow Together</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-8">Let's Grow <span className="text-primary">Together</span></h2>
           <div className="space-y-6 text-gray-400 text-lg leading-relaxed">
             <p>If you work with businesses that need security training—MSPs, IT consultants, compliance advisors—you already know your clients need phishing protection.</p>
             <p>Building a phishing training platform would take you months and cost tens of thousands of dollars. We've already built it. White-label our platform and offer it to your clients under your brand.</p>
@@ -652,7 +652,7 @@ const Partnership = () => (
           { t: "Recurring Revenue Share", d: "You bring the client. We deliver the platform. You earn a percentage of monthly subscription revenue as long as they're a customer. Build predictable, recurring income without building the technology.", i: Award },
           { t: "We Handle the Technical Side", d: "Platform questions? We'll answer them. Customer support? We'll handle it. New features? We'll build them. Security updates? We'll deploy them. You focus on your clients. We focus on making the platform excellent.", i: Users }
         ].map((s, i) => (
-          <motion.div variants={fadeInUp} key={i} className="group relative p-8 rounded-3xl bg-surface/40 hover:bg-surface/60 border border-white/10 hover:border-primary/30 transition-all duration-500 overflow-hidden">
+          <motion.div variants={fadeInUp} key={i} className="group relative p-10 rounded-[2.5rem] bg-surface/40 hover:bg-surface/60 border border-white/10 hover:border-primary/30 transition-all duration-500 overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
             <div className="w-16 h-16 mb-6 rounded-2xl bg-black/50 border border-white/10 flex items-center justify-center group-hover:scale-105 group-hover:border-primary/30 transition-all duration-500 relative z-10 shadow-inner">
@@ -669,9 +669,9 @@ const Partnership = () => (
         <div className="absolute inset-0 bg-surface/80 backdrop-blur-md" />
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out" />
 
-        <div className="relative z-10 max-w-2xl mx-auto">
-          <h2 className="text-3xl font-bold mb-6 text-white">Become a <span className="text-primary">Partner</span></h2>
-          <p className="text-gray-400 mb-10 text-lg">We're building a network of partners who help small and medium businesses improve their security. If you work with companies that need phishing training, let's talk about working together.</p>
+        <div className="relative z-10 max-w-3xl mx-auto">
+          <h2 className="text-4xl font-bold mb-8 text-white">Become a <span className="text-primary">Partner</span></h2>
+          <p className="text-gray-400 mb-10 text-xl leading-relaxed">We're building a network of partners who help small and medium businesses improve their security. If you work with companies that need phishing training, let's talk about working together.</p>
           <a href={`mailto:${CONTACT_INFO.email}?subject=Partnership Inquiry`}><Button size="lg" className="shadow-[0_0_30px_rgba(34,197,94,0.3)] hover:shadow-[0_0_50px_rgba(34,197,94,0.5)]">Let's Discuss Partnership</Button></a>
         </div>
       </div>
