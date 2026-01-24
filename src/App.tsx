@@ -175,8 +175,8 @@ const Home = () => {
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold mb-8 uppercase tracking-widest">
               <span className="w-2 h-2 rounded-full bg-primary animate-pulse" /> Phishing Defense Platform
             </div>
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-[1.1] tracking-tight">
-              One phishing email can destroy your business. We train your team to recognize it before they click.
+            <h1 className="text-5xl md:text-7xl font-bold text-white mb-8 leading-[1.1] tracking-tight max-w-6xl">
+              One phishing email can destroy your business. <span className="text-primary block mt-2">We train your team to recognize it before they click.</span>
             </h1>
             <p className="text-xl text-gray-400 mb-10 max-w-lg leading-relaxed">
               We send realistic phishing tests to your employees. When someone clicks, they get instant training on what they missed. Your team gets better every month. Your company gets safer every day.
@@ -446,17 +446,17 @@ const Services = () => (
       {/* DUPLICATED HOW WE WORK SECTION */}
       <div className="my-32">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-white mb-4">How We Work</h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">From user as a problem to user as a sensor. A 4-step monthly cycle.</p>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">How We <span className="text-primary">Work</span></h2>
+          <p className="text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">Four steps to turn your biggest vulnerability into your strongest defense.</p>
         </div>
         <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="flex md:grid md:grid-cols-4 gap-4 mb-12 overflow-x-auto md:overflow-visible pb-8 md:pb-0 snap-x snap-mandatory px-4 md:px-0 -mx-4 md:mx-0">
-          {[{ t: "Simulate", d: "We send monthly controlled phishing campaigns.", i: Mail }, { t: "Educate", d: "Instant micro-trainings for those who click.", i: FileText }, { t: "Report", d: "Comprehensive vulnerability trend analysis.", i: Activity }, { t: "Improve", d: "Hardening the human operating system over time.", i: CheckCircle }].map((s, i) => (
-            <motion.div variants={fadeInUp} key={i} className="group relative p-8 rounded-3xl bg-surface/40 backdrop-blur-sm border border-white/10 hover:bg-surface/60 transition-all duration-500 min-w-[300px] md:min-w-0 snap-center hover:border-primary/50 overflow-hidden">
-              <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          {[{ t: "Test", d: "We send realistic phishing emails that look exactly like the attacks your team faces every day. Fake invoices. Urgent password resets. Requests from the CEO. Real scenarios. Zero risk.", i: Mail }, { t: "Catch", d: "Someone clicks? They land on a safe page that shows them it was a test. No consequences. No reporting to their manager. Just an immediate, private notification.", i: FileText }, { t: "Teach", d: "Right there, a 90 second lesson explains exactly what they missed. The fake sender address. The urgency tactic. The subtle signs. They learn in the moment when their brain is most receptive.", i: Activity }, { t: "Improve", d: "Over weeks and months, you watch the click rates drop. Employees start forwarding suspicious emails to IT instead of clicking them. Your team builds real instincts, not just memorized rules.", i: CheckCircle }].map((s, i) => (
+            <motion.div variants={fadeInUp} key={i} className="group relative p-10 rounded-[2.5rem] bg-surface/40 backdrop-blur-sm border border-white/10 hover:bg-surface/60 transition-all duration-500 min-w-[300px] md:min-w-0 snap-center hover:border-primary/50 overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-              {/* Tech Decoration - Optimized */}
-              <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                <div className="w-12 h-12 rounded-full border border-primary/20 dashed-border" />
+              {/* Tech Decoration */}
+              <div className="absolute top-0 right-0 p-4 opacity-20 group-hover:opacity-40 transition-opacity">
+                <div className="w-12 h-12 rounded-full border border-primary/20 dashed-border animate-[spin_10s_linear_infinite]" />
               </div>
 
               <div className="absolute top-0 right-0 p-4 text-7xl font-bold text-white/5 font-display select-none group-hover:text-white/10 transition-colors z-0">0{i + 1}</div>
@@ -638,8 +638,8 @@ const Partnership = () => (
         <div className="flex-1 space-y-8 z-10 order-2 md:order-1">
           <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-8">Let's Grow <span className="text-primary">Together</span></h2>
           <div className="space-y-6 text-gray-400 text-lg leading-relaxed">
-            <p>If you work with businesses that need security training—MSPs, IT consultants, compliance advisors—you already know your clients need phishing protection.</p>
-            <p>Building a phishing training platform would take you months and cost tens of thousands of dollars. We've already built it. White-label our platform and offer it to your clients under your brand.</p>
+            <p>If you work with businesses that need security training — MSPs, IT consultants, compliance advisors — you already know your clients need phishing protection.</p>
+            <p>Building a phishing training platform would take you months and cost tens of thousands of dollars. We've already built it. White label our platform and offer it to your clients under your brand.</p>
             <p>Here's how it works: We provide the platform. You provide the client relationship. We handle infrastructure, updates, and technical support. You earn recurring revenue on every client you bring on.</p>
             <p>Your clients get better security. You get a new revenue stream. We get to help more companies. Everyone wins.</p>
           </div>
@@ -740,4 +740,3 @@ function App() {
 }
 
 export default App;
-
