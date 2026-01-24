@@ -201,11 +201,11 @@ const Home = () => {
               <div className="absolute bottom-8 left-8 right-8 grid grid-cols-2 gap-4 z-30">
                 <div className="bg-black/40 backdrop-blur-md p-4 rounded-xl border border-white/10">
                   <div className="text-xs text-green-400 font-mono mb-1 uppercase tracking-wider">Team Awareness</div>
-                  <div className="text-2xl font-bold text-white flex items-center gap-2">GROWING <span className="text-primary animate-pulse">▲</span></div>
+                  <div className="text-2xl font-bold text-white flex items-center gap-2">GROWING</div>
                 </div>
                 <div className="bg-black/40 backdrop-blur-md p-4 rounded-xl border border-white/10">
                   <div className="text-xs text-green-400 font-mono mb-1 uppercase tracking-wider">Training Style</div>
-                  <div className="text-2xl font-bold text-white">INSTANT <span className="text-primary">⚡</span></div>
+                  <div className="text-2xl font-bold text-white">INSTANT</div>
                 </div>
               </div>
             </div>
@@ -242,12 +242,10 @@ const Home = () => {
                 <div className="w-12 h-12 rounded-full border border-primary/20 dashed-border animate-[spin_10s_linear_infinite]" />
               </div>
 
-              <div className="absolute top-0 right-0 p-4 text-7xl font-bold text-white/5 font-display select-none group-hover:text-white/10 transition-colors z-0">0{i + 1}</div>
+              <div className="absolute top-0 right-0 p-4 text-7xl font-bold text-primary/20 font-display select-none transition-colors z-0">0{i + 1}</div>
               <div className="w-12 h-12 bg-black/50 border border-white/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-105 transition-transform relative z-10 group-hover:border-primary/30"><s.i className="w-6 h-6 text-gray-400 group-hover:text-primary transition-colors" /></div>
               <h3 className="text-xl font-bold text-white mb-2 relative z-10 group-hover:text-primary transition-colors">
-                {s.t.split(' ').map((word, i, arr) => (
-                  <span key={i} className={i >= arr.length / 2 ? "text-primary" : "text-white"}>{word} </span>
-                ))}
+                {s.t} <span className="text-primary">Phase</span>
               </h3>
               <p className="text-gray-400 text-sm leading-relaxed relative z-10">{s.d}</p>
 
@@ -318,7 +316,7 @@ const Home = () => {
       <Section className="bg-surface/50">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">Why This Approach <span className="text-primary">Works</span></h2>
+            <h2 className="text-4xl md:text-6xl font-bold text-white mb-8">Why This Approach <span className="text-primary">Works</span></h2>
             <ul className="space-y-6">
               <li className="flex gap-4 items-start">
                 <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0 text-primary font-bold">1</div>
@@ -368,10 +366,9 @@ const Home = () => {
                   <span className="text-primary text-xs font-bold tracking-[0.2em] uppercase">Security Truth</span>
                 </div>
 
-                <blockquote className="text-3xl md:text-5xl font-display font-bold text-white leading-[1.15] mb-8">
-                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-gray-400">
-                    "{quote.text}"
-                  </span>
+                <blockquote className="text-3xl md:text-4xl font-display font-bold text-white leading-[1.15] mb-8">
+                  <span className="text-white">"{quote.text.split(' ').slice(0, Math.ceil(quote.text.split(' ').length / 2)).join(' ')} </span>
+                  <span className="text-primary">{quote.text.split(' ').slice(Math.ceil(quote.text.split(' ').length / 2)).join(' ')}"</span>
                 </blockquote>
               </div>
 
@@ -398,7 +395,9 @@ const PageHeader: React.FC<{ title: string, subtitle: string }> = ({ title, subt
   <section className="pt-40 pb-20 px-6 relative overflow-hidden">
     <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/10 to-transparent opacity-30 pointer-events-none" />
     <motion.div initial="hidden" animate="visible" variants={fadeInUp} className="max-w-7xl mx-auto relative z-10">
-      <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight">{title}</h1>
+      <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight">
+        {title.split(' ').slice(0, Math.ceil(title.split(' ').length / 2)).join(' ')} <span className="text-primary">{title.split(' ').slice(Math.ceil(title.split(' ').length / 2)).join(' ')}</span>
+      </h1>
       <p className="text-xl text-gray-400 max-w-2xl leading-relaxed border-l-4 border-primary pl-6">{subtitle}</p>
     </motion.div>
   </section>
@@ -466,10 +465,10 @@ const Services = () => (
                 <div className="w-12 h-12 rounded-full border border-primary/20 dashed-border animate-[spin_10s_linear_infinite]" />
               </div>
 
-              <div className="absolute top-0 right-0 p-4 text-7xl font-bold text-white/5 font-display select-none group-hover:text-white/10 transition-colors z-0">0{i + 1}</div>
+              <div className="absolute top-0 right-0 p-4 text-7xl font-bold text-primary/20 font-display select-none transition-colors z-0">0{i + 1}</div>
               <div className="w-12 h-12 bg-black/50 border border-white/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-105 transition-transform relative z-10 group-hover:border-primary/30"><s.i className="w-6 h-6 text-gray-400 group-hover:text-primary transition-colors" /></div>
               <h3 className="text-xl font-bold text-white mb-2 relative z-10 group-hover:text-primary transition-colors">
-                {s.t} <span className="text-primary group-hover:text-white transition-colors">Phase</span>
+                {s.t} <span className="text-primary">Phase</span>
               </h3>
               <p className="text-gray-400 text-sm leading-relaxed relative z-10">{s.d}</p>
 
@@ -608,7 +607,7 @@ const Partnership = () => (
     <section className="pt-40 pb-16 px-6 relative overflow-hidden">
       <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/10 to-transparent opacity-30 pointer-events-none" />
       <motion.div initial="hidden" animate="visible" variants={fadeInUp} className="max-w-7xl mx-auto relative z-10">
-        <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight">Partnership</h1>
+        <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight">Partner <span className="text-primary">ship</span></h1>
         <p className="text-xl text-gray-400 max-w-2xl leading-relaxed border-l-4 border-primary pl-6">Partner with us. Offer phishing training under your brand. Earn recurring revenue on every client.</p>
       </motion.div>
     </section>
@@ -671,8 +670,6 @@ const Partnership = () => (
             <h3 className="text-2xl font-bold text-white mb-4 relative z-10">
               {s.t.split(' ').slice(0, Math.ceil(s.t.split(' ').length / 2)).join(' ')} <span className="text-primary">{s.t.split(' ').slice(Math.ceil(s.t.split(' ').length / 2)).join(' ')}</span>
             </h3>
-
-            <h3 className="text-2xl font-bold text-white mb-3 relative z-10">{s.t}</h3>
             <p className="text-gray-400 text-sm leading-relaxed relative z-10">{s.d}</p>
           </motion.div>
         ))}
@@ -753,4 +750,5 @@ function App() {
 }
 
 export default App;
+
 
