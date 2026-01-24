@@ -134,7 +134,7 @@ const Footer = () => (
               <span className="font-display font-bold text-primary text-sm tracking-[0.25em] leading-none">SECURITY</span>
             </div>
           </Link>
-          <h2 className="text-3xl font-bold text-white mb-6 max-w-sm leading-tight">Securing the human operating system.</h2>
+          <h2 className="text-3xl font-bold text-white mb-6 max-w-sm leading-tight">Train your people. Stop the attacks.</h2>
           <div className="flex gap-4">
             <Link to="/contact"><Button>Contact Us</Button></Link>
           </div>
@@ -173,16 +173,16 @@ const Home = () => {
         <div className="max-w-7xl mx-auto px-6 w-full grid md:grid-cols-2 gap-12 items-center relative z-10">
           <motion.div initial="hidden" animate="visible" variants={fadeInUp}>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold mb-8 uppercase tracking-widest">
-              <span className="w-2 h-2 rounded-full bg-primary animate-pulse" /> System Active
+              <span className="w-2 h-2 rounded-full bg-primary animate-pulse" /> Phishing Defense Platform
             </div>
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-[1.1] tracking-tight">
-              Humans are your <span className="text-primary">strongest firewall.</span>
+              One phishing email can destroy your business. We train your team to recognize it before they click.
             </h1>
             <p className="text-xl text-gray-400 mb-10 max-w-lg leading-relaxed">
-              Is your team prepared for the next social engineering attack? We transform your workforce from a liability into a high-fidelity sensor network.
+              We send realistic phishing tests to your employees. When someone clicks, they get instant training on what they missed. Your team gets better every month. Your company gets safer every day.
             </p>
             <div className="flex gap-4">
-              <Link to="/contact"><Button size="lg" className="bg-green-600 hover:bg-green-500 shadow-green-900/20 border-green-500/20 text-white">Contact Us</Button></Link>
+              <Link to="/contact"><Button size="lg" className="bg-green-600 hover:bg-green-500 shadow-green-900/20 border-green-500/20 text-white">See How It Works</Button></Link>
             </div>
           </motion.div>
           <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }} className="relative group">
@@ -199,12 +199,12 @@ const Home = () => {
 
               <div className="absolute bottom-8 left-8 right-8 grid grid-cols-2 gap-4 z-30">
                 <div className="bg-black/40 backdrop-blur-md p-4 rounded-xl border border-white/10">
-                  <div className="text-xs text-green-400 font-mono mb-1 uppercase tracking-wider">Human Risk</div>
-                  <div className="text-2xl font-bold text-white flex items-center gap-2">MITIGATED</div>
+                  <div className="text-xs text-green-400 font-mono mb-1 uppercase tracking-wider">Team Awareness</div>
+                  <div className="text-2xl font-bold text-white flex items-center gap-2">GROWING</div>
                 </div>
                 <div className="bg-black/40 backdrop-blur-md p-4 rounded-xl border border-white/10">
-                  <div className="text-xs text-green-400 font-mono mb-1 uppercase tracking-wider">Resilience Score</div>
-                  <div className="text-2xl font-bold text-white">99.9%</div>
+                  <div className="text-xs text-green-400 font-mono mb-1 uppercase tracking-wider">Training Style</div>
+                  <div className="text-2xl font-bold text-white">INSTANT</div>
                 </div>
               </div>
             </div>
@@ -217,9 +217,9 @@ const Home = () => {
         <motion.div className="flex gap-20 whitespace-nowrap" animate={{ x: [0, -1000] }} transition={{ repeat: Infinity, duration: 40, ease: "linear" }}>
           {[...Array(10)].map((_, i) => (
             <React.Fragment key={i}>
-              <span className="text-white/50 font-mono text-sm tracking-widest uppercase flex items-center gap-4"><Activity className="text-primary w-4 h-4" /> Your people, your strongest layer</span>
-              <span className="text-white/50 font-mono text-sm tracking-widest uppercase flex items-center gap-4"><Lock className="text-primary w-4 h-4" /> Awareness is the first line of defense</span>
-              <span className="text-white/50 font-mono text-sm tracking-widest uppercase flex items-center gap-4"><Shield className="text-primary w-4 h-4" /> Empowered employees, secured company</span>
+              <span className="text-white/50 font-mono text-sm tracking-widest uppercase flex items-center gap-4"><Activity className="text-primary w-4 h-4" /> 82% of breaches start with a phishing email</span>
+              <span className="text-white/50 font-mono text-sm tracking-widest uppercase flex items-center gap-4"><Lock className="text-primary w-4 h-4" /> Your employees need practice, not lectures</span>
+              <span className="text-white/50 font-mono text-sm tracking-widest uppercase flex items-center gap-4"><Shield className="text-primary w-4 h-4" /> Real attacks happen daily — train before they do</span>
             </React.Fragment>
           ))}
         </motion.div>
@@ -229,10 +229,10 @@ const Home = () => {
       <Section className="bg-surface">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-white mb-4">How We Work</h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">From user as a problem to user as a sensor. A 4-step monthly cycle.</p>
+          <p className="text-gray-400 max-w-2xl mx-auto">Four steps to turn your biggest vulnerability into your strongest defense.</p>
         </div>
         <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="flex md:grid md:grid-cols-4 gap-4 mb-12 overflow-x-auto md:overflow-visible pb-8 md:pb-0 snap-x snap-mandatory px-4 md:px-0 -mx-4 md:mx-0">
-          {[{ t: "Simulate", d: "We send monthly controlled phishing campaigns.", i: Mail }, { t: "Educate", d: "Instant micro-trainings for those who click.", i: FileText }, { t: "Report", d: "Comprehensive vulnerability trend analysis.", i: Activity }, { t: "Improve", d: "Hardening the human operating system over time.", i: CheckCircle }].map((s, i) => (
+          {[{ t: "Test", d: "We send realistic phishing emails that look exactly like the attacks your team faces every day. Fake invoices. Urgent password resets. Requests from the CEO. Real scenarios. Zero risk.", i: Mail }, { t: "Catch", d: "Someone clicks? They land on a safe page that shows them it was a test. No consequences. No reporting to their manager. Just an immediate, private notification.", i: FileText }, { t: "Teach", d: "Right there, a 90 second lesson explains exactly what they missed. The fake sender address. The urgency tactic. The subtle signs. They learn in the moment when their brain is most receptive.", i: Activity }, { t: "Improve", d: "Over weeks and months, you watch the click rates drop. Employees start forwarding suspicious emails to IT instead of clicking them. Your team builds real instincts, not just memorized rules.", i: CheckCircle }].map((s, i) => (
             <motion.div variants={fadeInUp} key={i} className="group relative p-8 rounded-3xl bg-surface/40 backdrop-blur-sm border border-white/10 hover:bg-surface/60 transition-all duration-500 min-w-[300px] md:min-w-0 snap-center hover:border-primary/50 overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
@@ -258,8 +258,8 @@ const Home = () => {
       {/* SERVICES PREVIEW */}
       <Section id="services-preview">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12">
-          <div className="mb-6 md:mb-0"><h2 className="text-4xl font-bold text-white mb-4">Core Capabilities</h2><p className="text-gray-400">Specialized. Focused. Effective.</p></div>
-          <Button variant="outline" className="hidden md:flex" onClick={() => navigate('/services')}>All Services</Button>
+          <div className="mb-6 md:mb-0"><h2 className="text-4xl font-bold text-white mb-4">What You Get</h2><p className="text-gray-400">Everything you need to build a security-aware team. Nothing you don't.</p></div>
+          <Button variant="outline" className="hidden md:flex" onClick={() => navigate('/services')}>View All Features</Button>
         </div>
         <div className="grid md:grid-cols-2 gap-6 mb-12">
           {/* Feature 1: Ethical Phishing */}
@@ -277,8 +277,8 @@ const Home = () => {
             <Shield className="w-16 h-16 text-gray-400 mb-auto group-hover:text-primary transition-colors relative z-10" />
 
             <div className="relative z-10">
-              <h3 className="text-3xl font-bold text-white mb-3 group-hover:text-primary transition-colors">Ethical Phishing Simulations</h3>
-              <p className="text-gray-300 text-lg leading-relaxed">We don't hack systems; we test people. Controlled campaigns that identify weak points before attackers do.</p>
+              <h3 className="text-3xl font-bold text-white mb-3 group-hover:text-primary transition-colors">Realistic Attack Simulations</h3>
+              <p className="text-gray-300 text-lg leading-relaxed">We send phishing emails that look and feel exactly like real attacks—because they're based on real attacks. Your employees see them in their actual inbox. They make decisions under real conditions. But when they click, they learn instead of getting compromised.</p>
             </div>
 
           </div>
@@ -298,14 +298,14 @@ const Home = () => {
             <Users className="w-16 h-16 text-gray-400 mb-auto group-hover:text-primary transition-colors relative z-10" />
 
             <div className="relative z-10">
-              <h3 className="text-3xl font-bold text-white mb-3 group-hover:text-primary transition-colors">Interactive Training</h3>
-              <p className="text-gray-300 text-lg leading-relaxed">Contextual learning moments that teach "why" not just "what". Immediate feedback when it matters most.</p>
+              <h3 className="text-3xl font-bold text-white mb-3 group-hover:text-primary transition-colors">Training at the Point of Failure</h3>
+              <p className="text-gray-300 text-lg leading-relaxed">The second someone clicks a phishing link, they see what they missed and why it worked. Not next week in a training session. Not in an annual compliance video. Right now, while the mistake is fresh and the lesson will stick.</p>
             </div>
 
           </div>
         </div>
         <div className="flex justify-center">
-          <Link to="/services"><Button size="lg">Explore Our Services</Button></Link>
+          <Link to="/services"><Button size="lg">Explore All Features</Button></Link>
         </div>
       </Section>
 
@@ -313,35 +313,36 @@ const Home = () => {
       <Section className="bg-surface/50">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div>
-            <h2 className="text-3xl font-bold text-white mb-6">Why Choose Us?</h2>
+            <h2 className="text-3xl font-bold text-white mb-6">Why This Approach Works</h2>
             <ul className="space-y-6">
               <li className="flex gap-4 items-start">
                 <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0 text-primary font-bold">1</div>
                 <div>
-                  <h4 className="font-bold text-white mb-1">Human-Centric Approach</h4>
-                  <p className="text-gray-400 text-sm">We believe in empowerment, not punishment. We turn your biggest liability into your biggest asset.</p>
+                  <h4 className="font-bold text-white mb-1">No Shame, Real Learning</h4>
+                  <p className="text-gray-400 text-sm">We don't report clicks to management. We don't shame anyone. We just teach. Because fear kills learning. When people aren't afraid of consequences, they engage honestly with training and actually improve.</p>
                 </div>
               </li>
               <li className="flex gap-4 items-start">
                 <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0 text-primary font-bold">2</div>
                 <div>
-                  <h4 className="font-bold text-white mb-1">Data-Driven Results</h4>
-                  <p className="text-gray-400 text-sm">Measurable reduction in click rates and distinct improvement in reporting speed.</p>
+                  <h4 className="font-bold text-white mb-1">You'll See the Difference</h4>
+                  <p className="text-gray-400 text-sm">Month by month, you'll watch click rates drop. You'll see employees start forwarding suspicious emails to IT. You'll notice the shift from "I hope this is safe" to "I know what to look for." The data proves what you'll feel—your team is getting sharper.</p>
                 </div>
               </li>
             </ul>
             <div className="mt-8">
-              <Link to="/contact"><Button>Contact Us</Button></Link>
+              <Link to="/contact"><Button>Start Building Your Defense</Button></Link>
             </div>
 
             {/* Trusted Industries - MOVED HERE */}
             <div className="mt-12 pt-8 border-t border-white/5">
-              <h5 className="text-xs font-bold text-primary tracking-widest uppercase mb-4">Securing Human Layers In</h5>
+              <h5 className="text-xs font-bold text-primary tracking-widest uppercase mb-4">Built For Teams In</h5>
               <div className="flex flex-wrap gap-4 text-gray-400 font-display font-bold text-sm">
-                <span className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-primary" /> Finance</span>
-                <span className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-primary" /> Healthcare</span>
-                <span className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-primary" /> Technology</span>
-                <span className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-primary" /> Government</span>
+                <span className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-primary" /> Law Firms</span>
+                <span className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-primary" /> Medical Practices</span>
+                <span className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-primary" /> Financial Services</span>
+                <span className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-primary" /> Tech Startups</span>
+                <span className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-primary" /> Small Businesses</span>
               </div>
             </div>
           </div>
@@ -359,7 +360,7 @@ const Home = () => {
               <div className="relative z-10">
                 <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-10">
                   <div className="w-2 h-2 rounded-full bg-primary animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.8)]" />
-                  <span className="text-primary text-xs font-bold tracking-[0.2em] uppercase">Daily Intel</span>
+                  <span className="text-primary text-xs font-bold tracking-[0.2em] uppercase">Security Truth</span>
                 </div>
 
                 <blockquote className="text-3xl md:text-5xl font-display font-bold text-white leading-[1.15] mb-8">
@@ -400,15 +401,15 @@ const PageHeader: React.FC<{ title: string, subtitle: string }> = ({ title, subt
 
 const Services = () => (
   <div className="min-h-screen bg-background text-white pb-20">
-    <PageHeader title="Our Services" subtitle="We provide a full spectrum of human-centric security services, ranging from preventative education to active crisis management." />
+    <PageHeader title="Our Services" subtitle="Realistic phishing tests. Instant training. Clear analytics. Built by cybersecurity professionals who understand how attackers actually operate." />
     <Section className="!pt-0">
       <div className="grid md:grid-cols-2 lg:grid-cols-6 gap-6">
         {[
-          { t: "Simulated Phishing Campaigns", d: "Monthly, controlled tests using the latest threat templates. We find the gaps before the bad guys do.", i: Activity, span: "lg:col-span-3" },
-          { t: "Human-Centric Training", d: "Immediate, contextual feedback moments. We teach employees to recognize the signs, not just memorize rules.", i: Globe, span: "lg:col-span-3" },
-          { t: "Vulnerability Reporting", d: "Deep insights into which departments and individuals are targeted and most susceptible.", i: Terminal, span: "lg:col-span-2" },
-          { t: "Executive Workshops", d: "High-level strategy sessions for leadership to understand the human risk factor.", i: Shield, span: "lg:col-span-2" },
-          { t: "Spear Phishing Sims", d: "Highly targeted campaigns designed to test your C-suite's resilience against sophisticated social engineering.", i: Mail, span: "lg:col-span-2" }
+          { t: "Monthly Phishing Simulations", d: "Regular phishing emails designed to mimic real attacks your team actually faces. Fake delivery notifications. Payroll updates. IT security alerts. Each one is a chance to practice under real conditions before a real attacker tries the same thing.", i: Activity, span: "lg:col-span-3" },
+          { t: "Instant, Targeted Training", d: "The instant someone clicks a test, they see exactly what they missed in that specific email. Then a 90 second lesson on that exact tactic. No generic compliance videos. No scheduling training sessions. Just immediate, relevant learning when it counts most.", i: Globe, span: "lg:col-span-3" },
+          { t: "Clear Analytics Dashboard", d: "See who's clicking, which attacks are working, and where your vulnerabilities are concentrated. Track improvement over time. Identify patterns. Export reports for compliance audits. Understand your real security posture in plain English.", i: Terminal, span: "lg:col-span-2" },
+          { t: "Direct Platform Support", d: "Questions about a campaign? Want to customize scenarios? Need help interpreting results? Direct access to the team that built this platform. We're invested in your success because your success is our success.", i: Shield, span: "lg:col-span-2" },
+          { t: "Role-Specific Scenarios", d: "Different roles face different threats. Finance teams get fake invoice approvals. HR gets suspicious resumes. IT gets fake security alerts. Executives get targeted spear phishing. We customize scenarios to match the actual risks each department faces.", i: Mail, span: "lg:col-span-2" }
         ].map((s, i) => (
           <motion.div
             initial={{ opacity: 0, y: 10 }}
@@ -484,7 +485,7 @@ const Services = () => (
               </svg>
               <div className="absolute inset-0 flex items-center justify-center text-4xl font-bold text-white">37%</div>
             </div>
-            <div className="text-sm text-gray-400 uppercase tracking-widest font-bold">Avg. Phishing Click Rate (Pre-Training)</div>
+            <div className="text-sm text-gray-400 uppercase tracking-widest font-bold">Where Most Teams Start</div>
           </div>
 
           {/* STAT 2: CENTRAL HERO GRAPHIC */}
@@ -495,7 +496,7 @@ const Services = () => (
                 <div className="text-7xl font-bold text-primary tracking-tighter drop-shadow-[0_0_15px_rgba(34,197,94,1)]">4%</div>
               </div>
             </div>
-            <div className="text-sm text-gray-400 uppercase tracking-widest font-bold">Click Rate After 6 Months</div>
+            <div className="text-sm text-gray-400 uppercase tracking-widest font-bold">Where You Can Be</div>
           </div>
 
           {/* STAT 3: BAR GRAPHIC */}
@@ -507,11 +508,11 @@ const Services = () => (
               <div className="w-6 h-32 bg-primary rounded-t-lg shadow-[0_0_15px_rgba(34,197,94,0.5)]"></div>
             </div>
             <div className="text-5xl font-bold text-white mb-2">8x</div>
-            <div className="text-sm text-gray-400 uppercase tracking-widest font-bold">Faster Incident Reporting</div>
+            <div className="text-sm text-gray-400 uppercase tracking-widest font-bold">Improved Threat Response</div>
           </div>
         </div>
-        <p className="text-3xl text-white font-bold mb-10 font-display italic">"Numbers don't lie. Training works."</p>
-        <Link to="/contact"><Button size="lg" className="bg-green-600 hover:bg-green-500 text-white h-auto min-h-[4rem] px-6 py-4 text-base md:text-lg whitespace-normal leading-tight text-center">Ready to get started? Contact Us</Button></Link>
+        <p className="text-3xl text-white font-bold mb-10 font-display italic">"This is what happens when training actually works."</p>
+        <Link to="/contact"><Button size="lg" className="bg-green-600 hover:bg-green-500 text-white h-auto min-h-[4rem] px-6 py-4 text-base md:text-lg whitespace-normal leading-tight text-center">Get These Results for Your Team</Button></Link>
       </div>
     </Section>
   </div>
@@ -519,23 +520,27 @@ const Services = () => (
 
 const About = () => (
   <div className="min-h-screen bg-background text-white pb-20">
-    <PageHeader title="Who We Are" subtitle="We are a collective of former white-hat hackers, intelligence analysts, and psychological operations experts." />
+    <PageHeader title="Who We Are" subtitle="We're cybersecurity and engineering graduates who built a phishing training platform because the existing solutions weren't good enough." />
     <Section className="!pt-0">
       <div className="grid md:grid-cols-2 gap-16 items-start">
         <div className="space-y-8">
           <div className="text-center md:text-left text-lg text-gray-300 leading-relaxed">
             <h3 className="text-2xl font-bold text-white mb-4">Why We Started HumanLayer Security</h3>
-            <p className="mb-4">It began with a realization during a red team engagement. We spent weeks building advanced malware, only to find the easiest way in was a simple phone call.</p>
-            <p className="mb-4">The cybersecurity industry keeps buying brighter boxes and smarter firewalls, but the attackers have moved on. They aren't hacking machines anymore; they're hacking people.</p>
+            <p className="mb-4">We studied cybersecurity and electrical engineering. We learned how attacks work. How social engineering bypasses every technical defense. How one convincing email can compromise an entire organization.</p>
+            <p className="mb-4">Then we looked at how companies actually train their employees against these attacks. Annual compliance videos. Generic "be careful with emails" warnings. Boring slide decks that people click through while checking their phone.</p>
+            <p className="mb-4">It doesn't work. And we knew why it doesn't work.</p>
+            <p className="mb-4">Real learning happens in the moment. You don't get better at recognizing phishing by watching videos—you get better by practicing with realistic examples and getting immediate feedback when you make a mistake.</p>
+            <p className="mb-4">So we built what we wished existed: a platform that tests people with realistic phishing attacks and teaches them instantly when they click. No shame. No punishment. Just practice and learning until recognizing phishing becomes instinct.</p>
+            <p className="mb-4">That's HumanLayer Security.</p>
             <div className="bg-white/5 border-l-4 border-primary p-6 my-8 rounded-r-xl">
-              <h4 className="text-white font-bold mb-2 uppercase tracking-widest text-sm">Our Philosophy</h4>
-              <p className="italic text-white/80">"Employees shouldn't be the weakest link. They should be the first line of defense."</p>
+              <h4 className="text-white font-bold mb-2 uppercase tracking-widest text-sm">What We Believe</h4>
+              <p className="italic text-white/80">"Your employees aren't stupid. They're busy, distracted, and untrained. Give them realistic practice with immediate feedback, and they get better fast. That's not philosophy. That's how learning works."</p>
             </div>
-            <p className="mb-4">We believe in a future where security awareness isn't a compliance checkbox, but a core cultural pillar. By empowering people instead of blaming them, we're changing the DNA of security culture across the globe.</p>
+            <p className="mb-4">We're not a legacy security company. We're a small team that saw a massive problem and built a solution. We're confident in what we built because we built it the right way. And we're committed to helping every company we work with actually solve their phishing problem—not just check a compliance box.</p>
           </div>
           <div className="flex gap-4 pt-4 justify-center md:justify-start">
-            <Link to="/services"><Button>Explore Our Services</Button></Link>
-            <Link to="/contact"><Button variant="outline">Ready to talk? Contact Us</Button></Link>
+            <Link to="/services"><Button>See What We Built</Button></Link>
+            <Link to="/contact"><Button variant="outline">Let's Talk</Button></Link>
           </div>
         </div>
 
@@ -552,7 +557,7 @@ const About = () => (
                 <div>
                   <div className="text-xl font-bold text-white">{CONTACT_INFO.founder}</div>
                   <div className="text-primary font-mono text-xs mb-2">FOUNDER & PRINCIPAL</div>
-                  <p className="text-gray-500 text-sm">Offensive Security Expert & Human Risk Specialist.</p>
+                  <p className="text-gray-500 text-sm">Founder. FIU Cybersecurity. Built the phishing simulation engine and platform architecture.</p>
                 </div>
               </div>
               {/* Alejandro */}
@@ -563,7 +568,7 @@ const About = () => (
                 <div>
                   <div className="text-xl font-bold text-white">Alejandro Marcone</div>
                   <div className="text-primary font-mono text-xs mb-2">CO-FOUNDER & CYBER ANALYST</div>
-                  <p className="text-gray-500 text-sm">Expert in human-centric security analysis.</p>
+                  <p className="text-gray-500 text-sm">Co-Founder. ISIL Cybersecurity (Peru). Designed training methodology and threat analysis systems.</p>
                 </div>
               </div>
               {/* Branco */}
@@ -574,14 +579,14 @@ const About = () => (
                 <div>
                   <div className="text-xl font-bold text-white">Branco Forti</div>
                   <div className="text-primary font-mono text-xs mb-2">CO-FOUNDER & ELECTRICAL ENGINEER</div>
-                  <p className="text-gray-500 text-sm">Technical visionary and systems architect.</p>
+                  <p className="text-gray-500 text-sm">Co-Founder. FIU Electrical Engineering. Built platform infrastructure and automation systems.</p>
                 </div>
               </div>
             </div>
           </div>
 
           <div className="p-8 rounded-3xl border border-white/10 bg-surface/50">
-            <p className="text-xl font-bold text-white italic">"Call us crazy, but we believe your employees are your best defense, not your biggest risk."</p>
+            <p className="text-xl font-bold text-white italic">"We built this to solve a real problem. Now we're helping companies actually solve it."</p>
           </div>
         </div>
       </div>
@@ -595,7 +600,7 @@ const Partnership = () => (
       <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/10 to-transparent opacity-30 pointer-events-none" />
       <motion.div initial="hidden" animate="visible" variants={fadeInUp} className="max-w-7xl mx-auto relative z-10">
         <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight">Partnership</h1>
-        <p className="text-xl text-gray-400 max-w-2xl leading-relaxed border-l-4 border-primary pl-6">Security is a team sport. We enable MSPs and agencies to offer elite human-layer defense.</p>
+        <p className="text-xl text-gray-400 max-w-2xl leading-relaxed border-l-4 border-primary pl-6">Partner with us. Offer phishing training under your brand. Earn recurring revenue on every client.</p>
       </motion.div>
     </section>
     <Section className="relative !pt-8">
@@ -619,31 +624,33 @@ const Partnership = () => (
             {/* Data Overlays matching Home Page vibe */}
             <div className="absolute bottom-6 left-6 right-6 grid grid-cols-2 gap-4 z-30">
               <div className="bg-black/40 backdrop-blur-md p-3 rounded-xl border border-white/10">
-                <div className="text-[10px] text-green-400 font-mono mb-1 uppercase tracking-wider">Partner Status</div>
-                <div className="text-lg font-bold text-white flex items-center gap-2">ACTIVE</div>
+                <div className="text-[10px] text-green-400 font-mono mb-1 uppercase tracking-wider">Partnership</div>
+                <div className="text-lg font-bold text-white flex items-center gap-2">AVAILABLE</div>
               </div>
               <div className="bg-black/40 backdrop-blur-md p-3 rounded-xl border border-white/10">
-                <div className="text-[10px] text-green-400 font-mono mb-1 uppercase tracking-wider">Commission</div>
-                <div className="text-lg font-bold text-white">UNCAPPED</div>
+                <div className="text-[10px] text-green-400 font-mono mb-1 uppercase tracking-wider">Revenue</div>
+                <div className="text-lg font-bold text-white">RECURRING</div>
               </div>
             </div>
           </div>
         </motion.div>
 
         <div className="flex-1 space-y-8 z-10 order-2 md:order-1">
-          <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight">We Believe in <span className="text-primary">Partnerships</span></h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight">Let's Grow Together</h2>
           <div className="space-y-6 text-gray-400 text-lg leading-relaxed">
-            <p>At HumanLayer Security, we don't just work for organizations—we work with them. True cybersecurity isn't a product you buy; it's a culture you build. That's why we approach every client relationship as a partnership, not a transaction.</p>
-            <p>Your team knows your organization better than anyone. Our expertise is in human behavior and social engineering tactics. Together, we create a security-aware culture that's authentic to your company and sustainable over time.</p>
+            <p>If you work with businesses that need security training—MSPs, IT consultants, compliance advisors—you already know your clients need phishing protection.</p>
+            <p>Building a phishing training platform would take you months and cost tens of thousands of dollars. We've already built it. White-label our platform and offer it to your clients under your brand.</p>
+            <p>Here's how it works: We provide the platform. You provide the client relationship. We handle infrastructure, updates, and technical support. You earn recurring revenue on every client you bring on.</p>
+            <p>Your clients get better security. You get a new revenue stream. We get to help more companies. Everyone wins.</p>
           </div>
         </div>
       </div>
 
       <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid md:grid-cols-3 gap-8 mb-24">
         {[
-          { t: "White Label", d: "Deploy our high-fidelity simulations under your own brand identity.", i: FileText },
-          { t: "Rev Share", d: "Earn recurring commissions for every client referral.", i: Award },
-          { t: "Sales Support", d: "We provide technical expertise to help you close the deal.", i: Users }
+          { t: "Your Brand, Our Platform", d: "We customize the platform with your logo, your colors, your domain. Your clients see your brand on every email, dashboard, and report. You own the relationship. We power the technology behind it.", i: FileText },
+          { t: "Recurring Revenue Share", d: "You bring the client. We deliver the platform. You earn a percentage of monthly subscription revenue as long as they're a customer. Build predictable, recurring income without building the technology.", i: Award },
+          { t: "We Handle the Technical Side", d: "Platform questions? We'll answer them. Customer support? We'll handle it. New features? We'll build them. Security updates? We'll deploy them. You focus on your clients. We focus on making the platform excellent.", i: Users }
         ].map((s, i) => (
           <motion.div variants={fadeInUp} key={i} className="group relative p-8 rounded-3xl bg-surface/40 hover:bg-surface/60 border border-white/10 hover:border-primary/30 transition-all duration-500 overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -664,8 +671,8 @@ const Partnership = () => (
 
         <div className="relative z-10 max-w-2xl mx-auto">
           <h2 className="text-3xl font-bold mb-6 text-white">Become a <span className="text-primary">Partner</span></h2>
-          <p className="text-gray-400 mb-10 text-lg">Join our network of elite security providers and start offering premium human-layer defense today.</p>
-          <a href={`mailto:${CONTACT_INFO.email}?subject=Partnership Inquiry`}><Button size="lg" className="shadow-[0_0_30px_rgba(34,197,94,0.3)] hover:shadow-[0_0_50px_rgba(34,197,94,0.5)]">Contact Partner Team</Button></a>
+          <p className="text-gray-400 mb-10 text-lg">We're building a network of partners who help small and medium businesses improve their security. If you work with companies that need phishing training, let's talk about working together.</p>
+          <a href={`mailto:${CONTACT_INFO.email}?subject=Partnership Inquiry`}><Button size="lg" className="shadow-[0_0_30px_rgba(34,197,94,0.3)] hover:shadow-[0_0_50px_rgba(34,197,94,0.5)]">Let's Discuss Partnership</Button></a>
         </div>
       </div>
     </Section>
@@ -676,13 +683,13 @@ const Partnership = () => (
 
 const Contact = () => (
   <div className="min-h-screen bg-background text-white pb-20">
-    <PageHeader title="Contact Us" subtitle="Ready to transform your users from risk to defense?" />
+    <PageHeader title="Get Started" subtitle="See the platform. Ask questions. Get pricing for your team size. No pressure, just information." />
     <Section className="!pt-0">
       <div className="max-w-4xl mx-auto">
         <div className="p-10 rounded-3xl bg-surface border border-white/10 flex flex-col items-center text-center group hover:border-primary/50 transition-colors">
           <Mail className="w-16 h-16 text-gray-400 group-hover:text-primary mb-6 transition-colors" />
           <h3 className="text-2xl font-bold text-white mb-2">Email Us</h3>
-          <p className="text-gray-400 mb-6">For general inquiries and partnership opportunities.</p>
+          <p className="text-gray-400 mb-6">For demos, pricing, partnership inquiries, or any questions about the platform.</p>
           <a href={`mailto:${CONTACT_INFO.email}`} className="text-xl font-bold text-primary hover:underline">{CONTACT_INFO.email}</a>
         </div>
       </div>
@@ -733,3 +740,4 @@ function App() {
 }
 
 export default App;
+
