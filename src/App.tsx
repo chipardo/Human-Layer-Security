@@ -134,7 +134,7 @@ const Footer = () => (
               <span className="font-display font-bold text-primary text-sm tracking-[0.25em] leading-none">SECURITY</span>
             </div>
           </Link>
-          <h2 className="text-3xl font-bold text-white mb-6 max-w-sm leading-tight">Train your people. Stop the attacks.</h2>
+          <h2 className="text-3xl font-bold text-white mb-6 max-w-sm leading-tight">Train your people. <span className="text-primary">Stop the attacks.</span></h2>
           <div className="flex gap-4">
             <Link to="/contact"><Button>Contact Us</Button></Link>
           </div>
@@ -175,8 +175,9 @@ const Home = () => {
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold mb-8 uppercase tracking-widest">
               <span className="w-2 h-2 rounded-full bg-primary animate-pulse" /> Phishing Defense Platform
             </div>
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-8 leading-[1.1] tracking-tight max-w-6xl">
-              One phishing email can destroy your business. <span className="text-primary block mt-2">We train your team to recognize it before they click.</span>
+            <h1 className="text-4xl md:text-6xl font-bold text-white mb-8 leading-[1.1] tracking-tight max-w-6xl">
+              One phishing email can <span className="text-primary">destroy your business.</span> <br className="hidden md:block" />
+              We train your team to <span className="text-primary">recognize it before they click.</span>
             </h1>
             <p className="text-xl text-gray-400 mb-10 max-w-lg leading-relaxed">
               We send realistic phishing tests to your employees. When someone clicks, they get instant training on what they missed. Your team gets better every month. Your company gets safer every day.
@@ -200,11 +201,11 @@ const Home = () => {
               <div className="absolute bottom-8 left-8 right-8 grid grid-cols-2 gap-4 z-30">
                 <div className="bg-black/40 backdrop-blur-md p-4 rounded-xl border border-white/10">
                   <div className="text-xs text-green-400 font-mono mb-1 uppercase tracking-wider">Team Awareness</div>
-                  <div className="text-2xl font-bold text-white flex items-center gap-2">GROWING</div>
+                  <div className="text-2xl font-bold text-white flex items-center gap-2">GROWING <span className="text-primary animate-pulse">▲</span></div>
                 </div>
                 <div className="bg-black/40 backdrop-blur-md p-4 rounded-xl border border-white/10">
                   <div className="text-xs text-green-400 font-mono mb-1 uppercase tracking-wider">Training Style</div>
-                  <div className="text-2xl font-bold text-white">INSTANT</div>
+                  <div className="text-2xl font-bold text-white">INSTANT <span className="text-primary">⚡</span></div>
                 </div>
               </div>
             </div>
@@ -243,7 +244,11 @@ const Home = () => {
 
               <div className="absolute top-0 right-0 p-4 text-7xl font-bold text-white/5 font-display select-none group-hover:text-white/10 transition-colors z-0">0{i + 1}</div>
               <div className="w-12 h-12 bg-black/50 border border-white/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-105 transition-transform relative z-10 group-hover:border-primary/30"><s.i className="w-6 h-6 text-gray-400 group-hover:text-primary transition-colors" /></div>
-              <h3 className="text-xl font-bold text-white mb-2 relative z-10 group-hover:text-primary transition-colors">{s.t}</h3>
+              <h3 className="text-xl font-bold text-white mb-2 relative z-10 group-hover:text-primary transition-colors">
+                {s.t.split(' ').map((word, i, arr) => (
+                  <span key={i} className={i >= arr.length / 2 ? "text-primary" : "text-white"}>{word} </span>
+                ))}
+              </h3>
               <p className="text-gray-400 text-sm leading-relaxed relative z-10">{s.d}</p>
 
 
@@ -277,7 +282,7 @@ const Home = () => {
             <Shield className="w-16 h-16 text-gray-400 mb-auto group-hover:text-primary transition-colors relative z-10" />
 
             <div className="relative z-10">
-              <h3 className="text-3xl font-bold text-white mb-3 group-hover:text-primary transition-colors">Realistic Attack Simulations</h3>
+              <h3 className="text-3xl font-bold text-white mb-3 group-hover:text-primary transition-colors">Realistic Attack <span className="text-primary">Simulations</span></h3>
               <p className="text-gray-300 text-lg leading-relaxed">We send phishing emails that look and feel exactly like real attacks—because they're based on real attacks. Your employees see them in their actual inbox. They make decisions under real conditions. But when they click, they learn instead of getting compromised.</p>
             </div>
 
@@ -298,7 +303,7 @@ const Home = () => {
             <Users className="w-16 h-16 text-gray-400 mb-auto group-hover:text-primary transition-colors relative z-10" />
 
             <div className="relative z-10">
-              <h3 className="text-3xl font-bold text-white mb-3 group-hover:text-primary transition-colors">Training at the Point of Failure</h3>
+              <h3 className="text-3xl font-bold text-white mb-3 group-hover:text-primary transition-colors">Training at the Point <span className="text-primary">of Failure</span></h3>
               <p className="text-gray-300 text-lg leading-relaxed">The second someone clicks a phishing link, they see what they missed and why it worked. Not next week in a training session. Not in an annual compliance video. Right now, while the mistake is fresh and the lesson will stick.</p>
             </div>
 
@@ -318,14 +323,14 @@ const Home = () => {
               <li className="flex gap-4 items-start">
                 <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0 text-primary font-bold">1</div>
                 <div>
-                  <h4 className="font-bold text-white mb-1">No Shame, Real Learning</h4>
+                  <h4 className="font-bold text-white mb-1">No Shame, <span className="text-primary">Real Learning</span></h4>
                   <p className="text-gray-400 text-sm">We don't report clicks to management. We don't shame anyone. We just teach. Because fear kills learning. When people aren't afraid of consequences, they engage honestly with training and actually improve.</p>
                 </div>
               </li>
               <li className="flex gap-4 items-start">
                 <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0 text-primary font-bold">2</div>
                 <div>
-                  <h4 className="font-bold text-white mb-1">You'll See the Difference</h4>
+                  <h4 className="font-bold text-white mb-1">You'll See <span className="text-primary">the Difference</span></h4>
                   <p className="text-gray-400 text-sm">Month by month, you'll watch click rates drop. You'll see employees start forwarding suspicious emails to IT. You'll notice the shift from "I hope this is safe" to "I know what to look for." The data proves what you'll feel—your team is getting sharper.</p>
                 </div>
               </li>
@@ -434,7 +439,9 @@ const Services = () => (
             </div>
 
             <div className="relative z-10 flex-1">
-              <h3 className="text-2xl font-bold mb-3 text-white group-hover:text-primary transition-colors">{s.t}</h3>
+              <h3 className="text-2xl font-bold mb-3 text-white group-hover:text-primary transition-colors">
+                {s.t.split(' ').slice(0, Math.ceil(s.t.split(' ').length / 2)).join(' ')} <span className="text-primary">{s.t.split(' ').slice(Math.ceil(s.t.split(' ').length / 2)).join(' ')}</span>
+              </h3>
               <p className="text-gray-400 leading-relaxed text-sm md:text-base">{s.d}</p>
             </div>
 
@@ -461,7 +468,9 @@ const Services = () => (
 
               <div className="absolute top-0 right-0 p-4 text-7xl font-bold text-white/5 font-display select-none group-hover:text-white/10 transition-colors z-0">0{i + 1}</div>
               <div className="w-12 h-12 bg-black/50 border border-white/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-105 transition-transform relative z-10 group-hover:border-primary/30"><s.i className="w-6 h-6 text-gray-400 group-hover:text-primary transition-colors" /></div>
-              <h3 className="text-xl font-bold text-white mb-2 relative z-10 group-hover:text-primary transition-colors">{s.t}</h3>
+              <h3 className="text-xl font-bold text-white mb-2 relative z-10 group-hover:text-primary transition-colors">
+                {s.t} <span className="text-primary group-hover:text-white transition-colors">Phase</span>
+              </h3>
               <p className="text-gray-400 text-sm leading-relaxed relative z-10">{s.d}</p>
 
 
@@ -533,7 +542,7 @@ const About = () => (
             <p className="mb-4">So we built what we wished existed: a platform that tests people with realistic phishing attacks and teaches them instantly when they click. No shame. No punishment. Just practice and learning until recognizing phishing becomes instinct.</p>
             <p className="mb-4">That's HumanLayer Security.</p>
             <div className="bg-white/5 border-l-4 border-primary p-6 my-8 rounded-r-xl">
-              <h4 className="text-white font-bold mb-2 uppercase tracking-widest text-sm">What We Believe</h4>
+              <h4 className="text-white font-bold mb-2 uppercase tracking-widest text-sm">What We <span className="text-primary">Believe</span></h4>
               <p className="italic text-white/80">"Your employees aren't stupid. They're busy, distracted, and untrained. Give them realistic practice with immediate feedback, and they get better fast. That's not philosophy. That's how learning works."</p>
             </div>
             <p className="mb-4">We're not a legacy security company. We're a small team that saw a massive problem and built a solution. We're confident in what we built because we built it the right way. And we're committed to helping every company we work with actually solve their phishing problem—not just check a compliance box.</p>
@@ -659,6 +668,10 @@ const Partnership = () => (
               <s.i className="w-8 h-8 text-gray-400 group-hover:text-primary transition-colors" />
             </div>
 
+            <h3 className="text-2xl font-bold text-white mb-4 relative z-10">
+              {s.t.split(' ').slice(0, Math.ceil(s.t.split(' ').length / 2)).join(' ')} <span className="text-primary">{s.t.split(' ').slice(Math.ceil(s.t.split(' ').length / 2)).join(' ')}</span>
+            </h3>
+
             <h3 className="text-2xl font-bold text-white mb-3 relative z-10">{s.t}</h3>
             <p className="text-gray-400 text-sm leading-relaxed relative z-10">{s.d}</p>
           </motion.div>
@@ -740,3 +753,4 @@ function App() {
 }
 
 export default App;
+
