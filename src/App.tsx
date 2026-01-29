@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate, useLocation, Link } from 'react-router-dom';
 import { Shield, Menu, X, CheckCircle, Users, Mail, Activity, ArrowRight, Globe, Terminal, FileText, Award } from 'lucide-react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useScroll, useTransform, useSpring, useInView, useAnimation } from 'framer-motion';
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -27,19 +27,101 @@ const QUOTES = [
 
 
 // --- ANIMATION VARIANTS ---
+// --- ANIMATION SYSTEM ---
+const EASING = [0.22, 1, 0.36, 1]; // Custom cubic-bezier for "buttery" feel
+
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } }
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: EASING }
+  }
 };
 
 const staggerContainer = {
   hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1, delayChildren: 0.2 }
+  }
+};
+
+const scaleIn = {
+  hidden: { opacity: 0, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.6, ease: EASING }
+  }
+};
+
+// --- CUSTOM INTERACTION COMPONENTS ---
+
+const Reveal: React.FC<{ children: React.ReactNode, width?: "fit-content" | "100%", delay?: number, className?: string }> = ({ children, width = "fit-content", delay = 0, className = "" }) => {
+  const ref = React.useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-75px" });
+  const controls = useAnimation();
+
+  useEffect(() => {
+    if (isInView) {
+      controls.start("visible");
+    }
+  }, [isInView, controls]);
+
+  return (
+    <motion.div
+      ref={ref}
+      variants={{
+        hidden: { opacity: 0, y: 40 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.8, delay, ease: EASING } }
+      }}
+      initial="hidden"
+      animate={controls}
+      className={className}
+      style={{ width }}
+    >
+      {children}
+    </motion.div>
+  );
+};
+
+const CountUp: React.FC<{ from?: number, to: number, duration?: number, suffix?: string, className?: string }> = ({ from = 0, to, duration = 2, suffix = "", className }) => {
+  const ref = React.useRef(null);
+  const isInView = useInView(ref, { once: true });
+  const [count, setCount] = useState(from);
+
+  useEffect(() => {
+    if (isInView) {
+      let startTime: number;
+      let animationFrame: number;
+
+      const animate = (timestamp: number) => {
+        if (!startTime) startTime = timestamp;
+        const progress = timestamp - startTime;
+        const percentage = Math.min(progress / (duration * 1000), 1);
+
+        // Easing function: easeOutExpo
+        const ease = percentage === 1 ? 1 : 1 - Math.pow(2, -10 * percentage);
+
+        setCount(from + (to - from) * ease);
+
+        if (percentage < 1) {
+          animationFrame = requestAnimationFrame(animate);
+        }
+      };
+
+      animationFrame = requestAnimationFrame(animate);
+      return () => cancelAnimationFrame(animationFrame);
+    }
+  }, [isInView, from, to, duration]);
+
+  return <span ref={ref} className={className}>{Math.floor(count)}{suffix}</span>;
 };
 
 // --- UI COMPONENTS ---
 const Button: React.FC<React.ComponentProps<typeof motion.button> & { variant?: 'primary' | 'outline' | 'ghost', size?: 'sm' | 'md' | 'lg' }> = ({ className, variant = 'primary', size = 'md', children, ...props }) => {
-  const base = "inline-flex items-center justify-center font-display font-semibold transition-all focus:outline-none disabled:opacity-50 rounded-full cursor-pointer";
+  const base = "inline-flex items-center justify-center font-display font-semibold transition-all focus:outline-none disabled:opacity-50 rounded-full cursor-pointer relative overflow-hidden group";
   const vars = {
     primary: "bg-primary text-black hover:bg-green-400 shadow-[0_0_20px_rgba(34,197,94,0.4)] hover:shadow-[0_0_30px_rgba(34,197,94,0.6)] border border-transparent",
     outline: "border border-white/20 text-white hover:border-primary hover:text-primary bg-transparent hover:bg-white/5",
@@ -48,15 +130,29 @@ const Button: React.FC<React.ComponentProps<typeof motion.button> & { variant?: 
   const sizes = { sm: "h-9 px-4 text-xs", md: "h-12 px-8 text-sm", lg: "h-14 px-10 text-base" };
 
   return (
-    <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className={cn(base, vars[variant], sizes[size], className)} {...props}>
-      {children}
+    <motion.button
+      whileHover={{ scale: 1.02 }}
+      whileTap={{ scale: 0.98 }}
+      className={cn(base, vars[variant], sizes[size], className)}
+      {...props}
+    >
+      <span className="relative z-10 flex items-center gap-2">{children}</span>
+      {variant === 'primary' && (
+        <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
+      )}
     </motion.button>
   );
 };
 
 const Section: React.FC<{ children: React.ReactNode, className?: string, id?: string }> = ({ children, className = "", id }) => (
   <section id={id} className={cn("py-20 md:py-24 px-6 relative overflow-hidden", className)}>
-    <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={fadeInUp} className="max-w-7xl mx-auto relative z-10">
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-100px" }}
+      variants={staggerContainer}
+      className="max-w-7xl mx-auto relative z-10"
+    >
       {children}
     </motion.div>
   </section>
@@ -68,26 +164,28 @@ const HowWeWork = () => (
     <div className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent hidden md:block opacity-20" />
 
     <div className="text-center mb-20 relative z-10">
-      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold mb-6 uppercase tracking-widest">
-        <Activity className="w-3 h-3" /> Process
-      </div>
-      <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">How We <span className="text-primary">Work</span></h2>
-      <p className="text-gray-400 max-w-2xl mx-auto text-lg">Four steps to turn your biggest vulnerability into your strongest defense.</p>
+      <Reveal className="inline-block" width="100%">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold mb-6 uppercase tracking-widest">
+          <Activity className="w-3 h-3" /> Process
+        </div>
+      </Reveal>
+      <Reveal delay={0.1} width="100%"><h2 className="text-4xl md:text-5xl font-bold text-white mb-6">How We <span className="text-primary">Work</span></h2></Reveal>
+      <Reveal delay={0.2} width="100%"><p className="text-gray-400 max-w-2xl mx-auto text-lg">Four steps to turn your biggest vulnerability into your strongest defense.</p></Reveal>
     </div>
 
-    <div className="grid md:grid-cols-4 gap-6 relative z-10">
+    <motion.div variants={staggerContainer} className="grid md:grid-cols-4 gap-6 relative z-10">
       {[
         { t: "Test", d: "Realistic phishing emails. Custom templates. Real threats.", i: Mail, step: "01" },
         { t: "Catch", d: "Safe fail page. No shame. No reporting to manager.", i: FileText, step: "02" },
         { t: "Teach", d: "90-second instant lesson. Teach the 'why' and 'how'.", i: Activity, step: "03" },
         { t: "Improve", d: "Track metrics. Watch click rates drop. Export reports.", i: CheckCircle, step: "04" }
       ].map((s, i) => (
-        <motion.div variants={fadeInUp} key={i} className="group relative p-6 bg-black/40 border border-white/5 rounded-3xl hover:bg-white/5 hover:border-primary/50 transition-all duration-500">
+        <motion.div variants={fadeInUp} key={i} className="group relative p-6 bg-black/40 border border-white/5 rounded-3xl hover:bg-white/5 hover:border-primary/50 transition-all duration-500 hover:-translate-y-2">
           <div className="absolute -top-4 left-6 bg-surface px-2 py-1 border border-white/10 rounded-lg text-xs font-mono text-primary font-bold shadow-xl group-hover:border-primary/50 transition-colors">
             STEP {s.step}
           </div>
 
-          <div className="mt-4 mb-4 w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white group-hover:scale-110 group-hover:bg-primary group-hover:text-black transition-all duration-300">
+          <div className="mt-4 mb-4 w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white group-hover:scale-110 group-hover:bg-primary group-hover:text-black transition-all duration-300 shadow-[0_0_0_0_rgba(34,197,94,0)] group-hover:shadow-[0_0_20px_rgba(34,197,94,0.4)]">
             <s.i className="w-6 h-6" />
           </div>
 
@@ -95,22 +193,26 @@ const HowWeWork = () => (
           <p className="text-gray-400 text-sm leading-relaxed">{s.d}</p>
         </motion.div>
       ))}
-    </div>
+    </motion.div>
   </Section>
 );
 
 const WhyChoose = () => (
   <Section className="bg-black border-y border-white/5">
     <div className="text-center mb-16">
-      <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-        Why Companies Choose <span className="text-primary">Human Layer</span>
-      </h2>
-      <p className="text-gray-400 max-w-2xl mx-auto">
-        We built this platform to solve the problems other security training companies ignore.
-      </p>
+      <Reveal width="100%">
+        <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+          Why Companies Choose <span className="text-primary">Human Layer</span>
+        </h2>
+      </Reveal>
+      <Reveal delay={0.1} width="100%">
+        <p className="text-gray-400 max-w-2xl mx-auto">
+          We built this platform to solve the problems other security training companies ignore.
+        </p>
+      </Reveal>
     </div>
 
-    <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+    <motion.div variants={staggerContainer} className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
       {[
         { t: "Zero Shame", d: "No public humiliation. Just private, immediate training.", i: Shield, c: "text-green-500", b: "group-hover:border-green-500/50", bg: "group-hover:bg-green-500/10" },
         { t: "Compliance Ready", d: "Automatic SOC 2, ISO 27001, & HIPAA documentation.", i: Award, c: "text-yellow-500", b: "group-hover:border-yellow-500/50", bg: "group-hover:bg-yellow-500/10" },
@@ -119,15 +221,15 @@ const WhyChoose = () => (
         { t: "Clear Analytics", d: "Track improvement. Export reports for insurance.", i: Terminal, c: "text-purple-400", b: "group-hover:border-purple-400/50", bg: "group-hover:bg-purple-400/10" },
         { t: "Instant Learning", d: "Training happens the second they click. Not next week.", i: Mail, c: "text-orange-400", b: "group-hover:border-orange-400/50", bg: "group-hover:bg-orange-400/10" }
       ].map((f, i) => (
-        <motion.div variants={fadeInUp} key={i} className={cn("flex flex-col items-center text-center group p-8 rounded-3xl border border-white/5 transition-all duration-500 hover:bg-white/5", f.b)}>
-          <div className={cn("w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-6 py-4 border border-white/5 transition-all duration-500", f.bg)}>
+        <motion.div variants={fadeInUp} key={i} className={cn("flex flex-col items-center text-center group p-8 rounded-3xl border border-white/5 transition-all duration-500 hover:bg-white/5 hover:shadow-2xl hover:-translate-y-1 cursor-default", f.b)}>
+          <div className={cn("w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-6 py-4 border border-white/5 transition-all duration-500 group-hover:scale-110", f.bg)}>
             <f.i className={cn("w-8 h-8 text-gray-400 transition-colors duration-500", `group-hover:${f.c}`)} />
           </div>
           <h3 className="text-xl font-bold text-white mb-3 group-hover:text-white transition-colors">{f.t}</h3>
           <p className="text-gray-400 leading-relaxed text-sm max-w-xs">{f.d}</p>
         </motion.div>
       ))}
-    </div>
+    </motion.div>
   </Section>
 );
 
@@ -152,7 +254,7 @@ const Navbar = () => {
         "max-w-7xl mx-auto px-6 h-20 flex justify-between items-center transition-all duration-300",
         scrolled ? "glass rounded-full border border-white/10 shadow-lg shadow-black/50" : "bg-transparent border-transparent"
       )}>
-        <Link to="/" className="flex items-center gap-3 group">
+        <Link to="/" className="flex items-center gap-3 group relative z-10">
           <img src="/humanlayerlogo.png" alt="Human Layer Security" className="h-14 md:h-20 w-auto object-contain transition-all duration-300 group-hover:scale-102 filter drop-shadow-[0_0_8px_rgba(34,197,94,0.3)]" />
           <div className="flex flex-col justify-center">
             <span className="font-display font-bold text-white text-lg md:text-xl tracking-tight leading-none group-hover:text-primary transition-colors">HUMAN&nbsp;&nbsp;LAYER</span>
@@ -160,12 +262,15 @@ const Navbar = () => {
           </div>
         </Link>
 
-        <div className="hidden md:flex gap-1 bg-white/5 rounded-full p-1 border border-white/5 backdrop-blur-sm">
+        <div className="hidden md:flex gap-1 bg-white/5 rounded-full p-1 border border-white/5 backdrop-blur-sm relative z-10">
           {['SERVICES', 'ABOUT', 'PARTNERSHIP'].map((item) => (
-            <Link key={item} to={`/${item.toLowerCase()}`} className={cn(
-              "px-6 py-2 text-xs font-bold text-gray-300 hover:text-white rounded-full transition-all tracking-wide",
-              location.pathname === `/${item.toLowerCase()}` ? "bg-white/10 text-white shadow-inner" : "hover:bg-white/5"
-            )}>{item}</Link>
+            <Link key={item} to={`/${item.toLowerCase()}`} className="relative px-6 py-2 text-xs font-bold text-gray-300 hover:text-white rounded-full transition-colors tracking-wide group">
+              <span className="relative z-10">{item}</span>
+              {location.pathname === `/${item.toLowerCase()}` && (
+                <motion.div layoutId="navbar-indicator" className="absolute inset-0 bg-white/10 rounded-full" transition={{ type: "spring", bounce: 0.2, duration: 0.6 }} />
+              )}
+              <div className="absolute inset-x-0 bottom-0 h-px bg-primary/0 group-hover:bg-primary/50 transition-colors duration-300 origin-left scale-x-0 group-hover:scale-x-100" />
+            </Link>
           ))}
         </div>
 
@@ -238,6 +343,11 @@ const Home = () => {
   const navigate = useNavigate();
   const [quote, setQuote] = useState(QUOTES[0]);
 
+  const { scrollY } = useScroll();
+  const heroY = useTransform(scrollY, [0, 500], [0, 150]);
+  const heroOpacity = useTransform(scrollY, [0, 300], [1, 0]);
+  const bgScale = useTransform(scrollY, [0, 1000], [1, 1.2]);
+
   useEffect(() => {
     // Random quote on mount/refresh
     setQuote(QUOTES[Math.floor(Math.random() * QUOTES.length)]);
@@ -248,99 +358,118 @@ const Home = () => {
   return (
     <>
       {/* HERO */}
-      <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
+      <section className="relative min-h-screen flex items-center pt-20 overflow-hidden perspective-1000">
         {/* Animated Background */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_rgba(34,197,94,0.05),transparent_50%)]" />
+        <motion.div style={{ scale: bgScale }} className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_rgba(34,197,94,0.05),transparent_50%)]" />
         <div className="absolute top-0 right-0 w-2/3 h-full bg-gradient-to-l from-primary/10 via-primary/5 to-transparent opacity-60 pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-6 w-full grid md:grid-cols-2 gap-12 items-center relative z-10">
-          <motion.div initial="hidden" animate="visible" variants={fadeInUp}>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold mb-8 uppercase tracking-widest">
-              <span className="w-2 h-2 rounded-full bg-primary animate-pulse" /> Phishing Defense Platform
-            </div>
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-[1.1] tracking-tight max-w-6xl">
-              One phishing email can <span className="text-red-500 decoration-red-900/50 underline decoration-4 underline-offset-4">destroy your business.</span> <br className="hidden md:block" />
-              We train your team to <span className="text-primary decoration-primary/30 underline decoration-4 underline-offset-4">recognize it before they click.</span>
-            </h1>
+          <motion.div style={{ y: heroY, opacity: heroOpacity }} initial="hidden" animate="visible" variants={staggerContainer}>
+            <Reveal delay={0.1}>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold mb-8 uppercase tracking-widest">
+                <span className="w-2 h-2 rounded-full bg-primary animate-pulse" /> Phishing Defense Platform
+              </div>
+            </Reveal>
+
+            <Reveal delay={0.2}>
+              <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-[1.1] tracking-tight max-w-6xl">
+                One phishing email can <span className="text-red-500 decoration-red-900/50 underline decoration-4 underline-offset-4">destroy your business.</span> <br className="hidden md:block" />
+                We train your team to <span className="text-primary decoration-primary/30 underline decoration-4 underline-offset-4">recognize it before they click.</span>
+              </h1>
+            </Reveal>
 
             {/* Feature Pills */}
-            <div className="flex flex-wrap gap-3 mb-8">
-              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm">
-                <CheckCircle className="w-4 h-4 text-primary" />
-                <span className="text-sm font-bold text-primary">No Shame Policy</span>
+            <Reveal delay={0.3}>
+              <div className="flex flex-wrap gap-3 mb-8">
+                <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm">
+                  <CheckCircle className="w-4 h-4 text-primary" />
+                  <span className="text-sm font-bold text-primary">No Shame Policy</span>
+                </div>
+                <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm">
+                  <CheckCircle className="w-4 h-4 text-primary" />
+                  <span className="text-sm font-bold text-primary">Setup in 5 Minutes</span>
+                </div>
+                <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm">
+                  <CheckCircle className="w-4 h-4 text-primary" />
+                  <span className="text-sm font-bold text-primary">Compliance Certificates Included</span>
+                </div>
               </div>
-              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm">
-                <CheckCircle className="w-4 h-4 text-primary" />
-                <span className="text-sm font-bold text-primary">Setup in 5 Minutes</span>
-              </div>
-              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm">
-                <CheckCircle className="w-4 h-4 text-primary" />
-                <span className="text-sm font-bold text-primary">Compliance Certificates Included</span>
-              </div>
-            </div>
+            </Reveal>
 
-            <p className="text-xl text-white/80 mb-8 max-w-lg leading-relaxed">
-              We send realistic phishing tests to your employees. When someone clicks, they get instant training on what they missed. Your team gets better every month. Your company gets safer every day.
-            </p>
+            <Reveal delay={0.4}>
+              <p className="text-xl text-white/80 mb-8 max-w-lg leading-relaxed">
+                We send realistic phishing tests to your employees. When someone clicks, they get instant training on what they missed. Your team gets better every month. Your company gets safer every day.
+              </p>
+            </Reveal>
 
             {/* Social Proof */}
-            <div className="flex items-center gap-6 mb-8 flex-wrap">
-              <div className="flex items-center gap-2">
-                <div className="flex -space-x-2">
-                  {[1, 2, 3, 4].map((i) => (
-                    <div key={i} className="w-8 h-8 rounded-full bg-primary/20 border-2 border-background flex items-center justify-center text-xs font-bold text-primary">
-                      {String.fromCharCode(64 + i)}
-                    </div>
-                  ))}
+            <Reveal delay={0.5}>
+              <div className="flex items-center gap-6 mb-8 flex-wrap">
+                <div className="flex items-center gap-2">
+                  <div className="flex -space-x-2">
+                    {[1, 2, 3, 4].map((i) => (
+                      <div key={i} className="w-8 h-8 rounded-full bg-primary/20 border-2 border-background flex items-center justify-center text-xs font-bold text-primary">
+                        {String.fromCharCode(64 + i)}
+                      </div>
+                    ))}
+                  </div>
+                  <span className="text-sm text-gray-400">Trusted by 50+ companies</span>
                 </div>
-                <span className="text-sm text-gray-400">Trusted by 50+ companies</span>
+                <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20">
+                  <CheckCircle className="w-4 h-4 text-primary" />
+                  <span className="text-xs text-primary font-bold">4.8/5 avg reduction in click rates</span>
+                </div>
               </div>
-              <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20">
-                <CheckCircle className="w-4 h-4 text-primary" />
-                <span className="text-xs text-primary font-bold">4.8/5 avg reduction in click rates</span>
-              </div>
-            </div>
+            </Reveal>
 
             {/* Buttons */}
-            <div className="flex gap-4 flex-wrap">
-              <Link to="/contact">
-                <Button size="lg" className="bg-green-600 hover:bg-green-500 shadow-green-900/20 border-green-500/20 text-white">
-                  Get Free Risk Assessment
-                </Button>
-              </Link>
-              <Link to="/services">
-                <Button size="lg" variant="outline">
-                  Watch 2-Min Demo
-                </Button>
-              </Link>
-            </div>
-            {/* Trust Line */}
-            <p className="text-sm text-white/50 mt-4">
-              No credit card required • Setup in under 5 minutes • Cancel anytime
-            </p>
+            <Reveal delay={0.6}>
+              <div className="flex gap-4 flex-wrap">
+                <Link to="/contact">
+                  <Button size="lg" className="bg-green-600 hover:bg-green-500 shadow-green-900/20 border-green-500/20 text-white">
+                    Get Free Risk Assessment
+                  </Button>
+                </Link>
+                <Link to="/services">
+                  <Button size="lg" variant="outline">
+                    Watch 2-Min Demo
+                  </Button>
+                </Link>
+              </div>
+              {/* Trust Line */}
+              <p className="text-sm text-white/50 mt-4">
+                No credit card required • Setup in under 5 minutes • Cancel anytime
+              </p>
+            </Reveal>
           </motion.div>
-          <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-primary/20 bg-surface/50 backdrop-blur-sm transition-all duration-500">
+
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, ease: "circOut", delay: 0.5 }}
+            className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-primary/20 bg-surface/50 backdrop-blur-sm transition-all duration-500 group"
+          >
             {/* Decorative Elements */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full blur-[80px] pointer-events-none mix-blend-screen" />
             <div className="absolute bottom-0 left-0 w-48 h-48 bg-green-500/10 rounded-full blur-[60px] pointer-events-none mix-blend-screen" />
 
-            <img src="/hero-network.png" alt="Human Defense Network" className="w-full h-auto object-cover opacity-90 transition-transform duration-700 ease-out relative z-0" />
+            <img src="/hero-network.png" alt="Human Defense Network" className="w-full h-auto object-cover opacity-90 transition-transform duration-700 ease-out relative z-0 group-hover:scale-105" />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80 z-10" />
 
             {/* Scanline Effect */}
             <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent_50%,rgba(0,0,0,0.3)_50%)] bg-[length:100%_4px] pointer-events-none opacity-20 z-20" />
 
             <div className="absolute bottom-8 left-8 right-8 grid grid-cols-2 gap-4 z-30">
-              <div className="bg-black/40 backdrop-blur-md p-4 rounded-xl border border-white/10">
+              <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 1 }} className="bg-black/40 backdrop-blur-md p-4 rounded-xl border border-white/10">
                 <div className="text-xs text-green-400 font-mono mb-1 uppercase tracking-wider">Team Awareness</div>
                 <div className="text-2xl font-bold text-white flex items-center gap-2">GROWING</div>
-              </div>
-              <div className="bg-black/40 backdrop-blur-md p-4 rounded-xl border border-white/10">
+              </motion.div>
+              <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 1.2 }} className="bg-black/40 backdrop-blur-md p-4 rounded-xl border border-white/10">
                 <div className="text-xs text-green-400 font-mono mb-1 uppercase tracking-wider">Training Style</div>
                 <div className="text-2xl font-bold text-white">INSTANT</div>
-              </div>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -497,7 +626,7 @@ const Home = () => {
                 <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0 text-primary font-bold">1</div>
                 <div>
                   <h4 className="font-bold text-white mb-1">No Shame, <span className="text-primary">Real Learning</span></h4>
-                  <p className="text-gray-400 text-sm max-w-2xl">We don't report clicks to management. We don't shame anyone. We just teach. Because fear kills learning. When people aren't afraid of consequences, they engage honestly with training and actually improve.</p>
+                  <p className="text-gray-400 text-sm max-w-2xl">We don't report clicks to management. We don't publish 'walls of shame.' We don't make anyone feel stupid. When someone clicks, they see a private learning moment. Most employees actually appreciate the training because it helps them protect themselves.</p>
                 </div>
               </li>
               <li className="flex gap-4 items-start">
@@ -628,11 +757,15 @@ const Home = () => {
 const PageHeader: React.FC<{ title: string, subtitle: string }> = ({ title, subtitle }) => (
   <section className="pt-40 pb-20 px-6 relative overflow-hidden">
     <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/10 to-transparent opacity-30 pointer-events-none" />
-    <motion.div initial="hidden" animate="visible" variants={fadeInUp} className="max-w-7xl mx-auto relative z-10">
-      <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight">
-        {title.split(' ').slice(0, Math.ceil(title.split(' ').length / 2)).join(' ')} <span className="text-primary">{title.split(' ').slice(Math.ceil(title.split(' ').length / 2)).join(' ')}</span>
-      </h1>
-      <p className="text-xl text-gray-400 max-w-2xl leading-relaxed border-l-4 border-primary pl-6">{subtitle}</p>
+    <motion.div initial="hidden" animate="visible" variants={staggerContainer} className="max-w-7xl mx-auto relative z-10">
+      <Reveal>
+        <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight">
+          {title.split(' ').slice(0, Math.ceil(title.split(' ').length / 2)).join(' ')} <span className="text-primary">{title.split(' ').slice(Math.ceil(title.split(' ').length / 2)).join(' ')}</span>
+        </h1>
+      </Reveal>
+      <Reveal delay={0.2}>
+        <p className="text-xl text-gray-400 max-w-2xl leading-relaxed border-l-4 border-primary pl-6">{subtitle}</p>
+      </Reveal>
     </motion.div>
   </section>
 );
@@ -641,7 +774,7 @@ const Services = () => (
   <div className="min-h-screen bg-background text-white pb-20">
     <PageHeader title="Our Services" subtitle="Realistic phishing tests. Instant training. Clear analytics. Built by cybersecurity professionals who understand how attackers actually operate." />
     <Section className="!pt-0">
-      <div className="grid md:grid-cols-2 lg:grid-cols-6 gap-6">
+      <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="grid md:grid-cols-2 lg:grid-cols-6 gap-6">
         {[
           { t: "Monthly Phishing Simulations", d: "Regular phishing emails designed to mimic real attacks your team actually faces. Fake delivery notifications. Payroll updates. IT security alerts. Each one is a chance to practice under real conditions before a real attacker tries the same thing.", i: Activity, span: "lg:col-span-3" },
           { t: "Instant, Targeted Training", d: "The instant someone clicks a test, they see exactly what they missed in that specific email. Then a 90 second lesson on that exact tactic. No generic compliance videos. No scheduling training sessions. Just immediate, relevant learning when it counts most.", i: Globe, span: "lg:col-span-3" },
@@ -650,10 +783,7 @@ const Services = () => (
           { t: "Role-Specific Scenarios", d: "Different roles face different threats. Finance teams get fake invoice approvals. HR gets suspicious resumes. IT gets fake security alerts. Executives get targeted spear phishing. We customize scenarios to match the actual risks each department faces.", i: Mail, span: "lg:col-span-2" }
         ].map((s, i) => (
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.1 }}
+            variants={fadeInUp}
             key={i}
             className={twMerge(
               "flex flex-col p-8 border border-white/10 bg-surface/40 backdrop-blur-sm rounded-3xl hover:border-primary/50 hover:bg-surface/60 transition-all duration-500 group relative overflow-hidden min-h-[280px]",
@@ -681,7 +811,7 @@ const Services = () => (
 
           </motion.div>
         ))}
-      </div>
+      </motion.div>
 
       {/* COMPARISON SECTION */}
       <Section className="bg-surface/30 border-y border-white/5">
@@ -812,9 +942,16 @@ const Services = () => (
             <div className="relative w-40 h-40 flex items-center justify-center mb-6">
               <svg className="w-full h-full rotate-[-90deg]" viewBox="0 0 100 100">
                 <circle cx="50" cy="50" r="45" fill="none" stroke="#262626" strokeWidth="8" />
-                <circle cx="50" cy="50" r="45" fill="none" stroke="#22C55E" strokeWidth="8" strokeDasharray="283" strokeDashoffset="180" strokeLinecap="round" className="drop-shadow-[0_0_10px_rgba(34,197,94,0.5)]" />
+                <motion.circle
+                  cx="50" cy="50" r="45" fill="none" stroke="#22C55E" strokeWidth="8"
+                  strokeDasharray="283"
+                  initial={{ strokeDashoffset: 283 }}
+                  whileInView={{ strokeDashoffset: 180 }}
+                  transition={{ duration: 2, ease: "easeOut" }}
+                  strokeLinecap="round" className="drop-shadow-[0_0_10px_rgba(34,197,94,0.5)]"
+                />
               </svg>
-              <div className="absolute inset-0 flex items-center justify-center text-4xl font-bold text-white">37%</div>
+              <div className="absolute inset-0 flex items-center justify-center text-4xl font-bold text-white"><CountUp to={37} suffix="%" /></div>
             </div>
             <div className="text-sm text-gray-400 uppercase tracking-widest font-bold">Where Most Teams Start</div>
           </div>
@@ -824,7 +961,7 @@ const Services = () => (
             <div className="relative w-48 h-48 flex items-center justify-center mb-6">
               <div className="absolute inset-0 bg-primary/20 rounded-full animate-pulse filter blur-xl"></div>
               <div className="w-full h-full rounded-full border-4 border-primary/30 flex items-center justify-center relative bg-black/50 backdrop-blur-sm">
-                <div className="text-7xl font-bold text-primary tracking-tighter drop-shadow-[0_0_15px_rgba(34,197,94,1)]">4%</div>
+                <div className="text-7xl font-bold text-primary tracking-tighter drop-shadow-[0_0_15px_rgba(34,197,94,1)]"><CountUp to={4} suffix="%" /></div>
               </div>
             </div>
             <div className="text-sm text-gray-400 uppercase tracking-widest font-bold">Where You Can Be</div>
@@ -833,12 +970,12 @@ const Services = () => (
           {/* STAT 3: BAR GRAPHIC */}
           <div className="flex flex-col items-center justify-center group h-full">
             <div className="flex items-end gap-2 h-32 mb-6">
-              <div className="w-6 h-10 bg-white/10 rounded-t-lg"></div>
-              <div className="w-6 h-16 bg-white/20 rounded-t-lg"></div>
-              <div className="w-6 h-20 bg-white/30 rounded-t-lg"></div>
-              <div className="w-6 h-32 bg-primary rounded-t-lg shadow-[0_0_15px_rgba(34,197,94,0.5)]"></div>
+              <motion.div initial={{ height: 0 }} whileInView={{ height: 40 }} transition={{ duration: 0.5 }} className="w-6 bg-white/10 rounded-t-lg"></motion.div>
+              <motion.div initial={{ height: 0 }} whileInView={{ height: 64 }} transition={{ duration: 0.5, delay: 0.1 }} className="w-6 bg-white/20 rounded-t-lg"></motion.div>
+              <motion.div initial={{ height: 0 }} whileInView={{ height: 80 }} transition={{ duration: 0.5, delay: 0.2 }} className="w-6 bg-white/30 rounded-t-lg"></motion.div>
+              <motion.div initial={{ height: 0 }} whileInView={{ height: 128 }} transition={{ duration: 0.5, delay: 0.3 }} className="w-6 bg-primary rounded-t-lg shadow-[0_0_15px_rgba(34,197,94,0.5)]"></motion.div>
             </div>
-            <div className="text-5xl font-bold text-white mb-2">8x</div>
+            <div className="text-5xl font-bold text-white mb-2"><CountUp to={8} suffix="x" /></div>
             <div className="text-sm text-gray-400 uppercase tracking-widest font-bold">Improved Threat Response</div>
           </div>
         </div>
