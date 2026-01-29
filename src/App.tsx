@@ -13,6 +13,10 @@ const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia(
 // --- UTILS ---
 function cn(...inputs: ClassValue[]) { return twMerge(clsx(inputs)); }
 
+const ImageSkeleton: React.FC<{ className?: string }> = ({ className }) => (
+  <div className={cn("animate-pulse bg-white/5 rounded-3xl", className)} />
+);
+
 // --- DATA ---
 const CONTACT_INFO = { email: "contact@humanls.com", phone: "3052820302", founder: "Nicolas Su Nobrega Garces" };
 
@@ -248,8 +252,8 @@ const WhyChoose = () => (
         { t: "Instant Learning", d: "Training happens the second they click. Not next week.", i: Mail, c: "text-orange-400", b: "group-hover:border-orange-400/50", bg: "group-hover:bg-orange-400/10" }
       ].map((f, i) => (
         <motion.div variants={fadeInUp} key={i} className={cn("flex flex-col items-center text-center group p-8 rounded-3xl border border-white/5 transition-colors duration-300 hover:bg-white/5 hover:shadow-2xl cursor-default will-change-transform", f.b)} whileHover={{ y: -4, transition: { duration: 0.2 } }}>
-          <div className={cn("w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-6 py-4 border border-white/5 transition-all duration-500 group-hover:scale-110", f.bg)}>
-            <f.i className={cn("w-8 h-8 text-gray-400 transition-colors duration-500", `group-hover:${f.c}`)} />
+          <div className={cn("w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-6 py-4 border border-white/5 transition-all duration-300 group-hover:scale-110", f.bg)}>
+            <f.i className={cn("w-8 h-8 text-gray-400 transition-colors duration-300", `group-hover:${f.c}`)} />
           </div>
           <h3 className="text-xl font-bold text-white mb-3 group-hover:text-white transition-colors">{f.t}</h3>
           <p className="text-gray-400 leading-relaxed text-sm max-w-xs">{f.d}</p>
@@ -275,7 +279,7 @@ const Navbar = () => {
   useEffect(() => setIsOpen(false), [location]);
 
   return (
-    <nav className={cn("fixed w-full z-50 transition-all duration-500 px-4", scrolled ? "top-4" : "top-0")}>
+    <nav className={cn("fixed w-full z-50 transition-all duration-300 px-4", scrolled ? "top-4" : "top-0")}>
       <div className={cn(
         "max-w-7xl mx-auto px-6 h-20 flex justify-between items-center transition-all duration-300",
         scrolled ? "glass rounded-full border border-white/10 shadow-lg shadow-black/50" : "bg-transparent border-transparent"
@@ -368,6 +372,7 @@ const Footer = () => (
 const Home = () => {
   const navigate = useNavigate();
   const [quote, setQuote] = useState(QUOTES[0]);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   const { scrollY } = useScroll();
   const heroY = useTransform(scrollY, [0, 500], [0, 150]);
@@ -406,18 +411,18 @@ const Home = () => {
 
             {/* Feature Pills */}
             <Reveal delay={0.3}>
-              <div className="flex flex-wrap gap-3 mb-8">
-                <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm">
-                  <CheckCircle className="w-4 h-4 text-primary" />
-                  <span className="text-sm font-bold text-primary">No Shame Policy</span>
+              <div className="flex flex-wrap gap-2 sm:gap-3 mb-8">
+                <div className="flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm">
+                  <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-primary shrink-0" />
+                  <span className="text-xs sm:text-sm font-bold text-primary whitespace-nowrap">No Shame Policy</span>
                 </div>
-                <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm">
-                  <CheckCircle className="w-4 h-4 text-primary" />
-                  <span className="text-sm font-bold text-primary">Setup in 5 Minutes</span>
+                <div className="flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm">
+                  <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-primary shrink-0" />
+                  <span className="text-xs sm:text-sm font-bold text-primary whitespace-nowrap">Setup in 5 Minutes</span>
                 </div>
-                <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm">
-                  <CheckCircle className="w-4 h-4 text-primary" />
-                  <span className="text-sm font-bold text-primary">Compliance Certificates Included</span>
+                <div className="flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm">
+                  <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-primary shrink-0" />
+                  <span className="text-xs sm:text-sm font-bold text-primary whitespace-nowrap">Compliance Included</span>
                 </div>
               </div>
             </Reveal>
@@ -473,13 +478,24 @@ const Home = () => {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, ease: "circOut", delay: 0.5 }}
-            className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-primary/20 bg-surface/50 backdrop-blur-sm transition-all duration-500 group"
+            className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-primary/20 bg-surface/50 backdrop-blur-sm transition-all duration-300 group"
           >
             {/* Decorative Elements */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full blur-[80px] pointer-events-none mix-blend-screen" />
             <div className="absolute bottom-0 left-0 w-48 h-48 bg-green-500/10 rounded-full blur-[60px] pointer-events-none mix-blend-screen" />
 
-            <img src="/hero-network.png" alt="Human Defense Network" loading="lazy" decoding="async" className="w-full h-auto object-cover opacity-90 transition-transform duration-700 ease-out relative z-0 group-hover:scale-105" />
+            {!imageLoaded && <ImageSkeleton className="absolute inset-0" />}
+            <img
+              src="/hero-network.png"
+              alt="Human Defense Network"
+              loading="lazy"
+              decoding="async"
+              onLoad={() => setImageLoaded(true)}
+              className={cn(
+                "w-full h-auto object-cover opacity-90 transition-all duration-700 ease-out relative z-0 group-hover:scale-105",
+                imageLoaded ? "opacity-90" : "opacity-0"
+              )}
+            />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80 z-10" />
 
             {/* Scanline Effect */}
@@ -818,7 +834,7 @@ const Services = () => (
             variants={fadeInUp}
             key={i}
             className={twMerge(
-              "flex flex-col p-8 border border-white/10 bg-surface/40 backdrop-blur-sm rounded-3xl hover:border-primary/50 hover:bg-surface/60 transition-all duration-500 group relative overflow-hidden min-h-[280px]",
+              "flex flex-col p-8 border border-white/10 bg-surface/40 backdrop-blur-sm rounded-3xl hover:border-primary/50 hover:bg-surface/60 transition-all duration-300 group relative overflow-hidden min-h-[280px]",
               s.span
             )}
           >
@@ -905,7 +921,7 @@ const Services = () => (
         </div>
         <div className="flex-1 relative">
           <div className="absolute inset-0 bg-primary/20 blur-[100px] rounded-full opacity-30" />
-          <div className="relative p-8 rounded-2xl bg-surface/80 backdrop-blur-xl border border-white/10 rotate-3 hover:rotate-0 transition-transform duration-500">
+          <div className="relative p-8 rounded-2xl bg-surface/80 backdrop-blur-xl border border-white/10 rotate-3 hover:rotate-0 transition-transform duration-300">
             <div className="flex items-center gap-4 mb-6 border-b border-white/10 pb-4">
               <FileText className="w-8 h-8 text-primary" />
               <div>
@@ -957,7 +973,7 @@ const Services = () => (
     {/* TRUST BADGES */}
     <Section className="bg-black border-t border-white/5">
       <p className="text-center text-gray-500 text-sm mb-8 uppercase tracking-widest">Securing Teams At</p>
-      <div className="flex flex-wrap justify-center gap-12 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+      <div className="flex flex-wrap justify-center gap-12 opacity-50 grayscale hover:grayscale-0 transition-all duration-300">
         {['TechFlow', 'MediCorp', 'LegalShield', 'FinSecure', 'BuildRight'].map((brand, i) => (
           <div key={i} className="text-2xl font-bold text-white flex items-center gap-2">
             <div className="w-8 h-8 bg-white/20 rounded-full" /> {brand}
@@ -1142,12 +1158,20 @@ const Partnership = () => (
       <div className="mb-24 flex flex-col md:flex-row items-center gap-16">
         {/* Mobile: Image First | Desktop: Image Left */}
         <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }} className="flex-1 relative w-full group order-1 md:order-2">
-          <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-primary/20 bg-surface/50 backdrop-blur-sm transition-all duration-500">
+          <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-primary/20 bg-surface/50 backdrop-blur-sm transition-all duration-300">
             {/* Decorative Elements */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full blur-[80px] pointer-events-none mix-blend-screen" />
             <div className="absolute bottom-0 left-0 w-48 h-48 bg-green-500/10 rounded-full blur-[60px] pointer-events-none mix-blend-screen" />
 
-            <img src="/partnership-hero.png" alt="Strategic Partnership" className="w-full h-auto object-cover opacity-90 transition-transform duration-700 ease-out relative z-0" />
+            <img
+              src="/partnership-hero.png"
+              alt="Strategic Partnership"
+              loading="lazy"
+              decoding="async"
+              srcSet="/partnership-hero-mobile.png 768w, /partnership-hero.png 1920w"
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="w-full h-auto object-cover opacity-90 transition-transform duration-700 ease-out relative z-0"
+            />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80 z-10" />
 
             {/* Scanline Effect */}
@@ -1184,10 +1208,10 @@ const Partnership = () => (
           { t: "Recurring Revenue Share", d: "You bring the client. We deliver the platform. You earn a percentage of monthly subscription revenue as long as they're a customer. Build predictable, recurring income without building the technology.", i: Award },
           { t: "We Handle the Technical Side", d: "Platform questions? We'll answer them. Customer support? We'll handle it. New features? We'll build them. Security updates? We'll deploy them. You focus on your clients. We focus on making the platform excellent.", i: Users }
         ].map((s, i) => (
-          <motion.div variants={fadeInUp} key={i} className="group relative p-10 rounded-[2.5rem] bg-surface/40 hover:bg-surface/60 border border-white/10 hover:border-primary/30 transition-all duration-500 overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <motion.div variants={fadeInUp} key={i} className="group relative p-10 rounded-[2.5rem] bg-surface/40 hover:bg-surface/60 border border-white/10 hover:border-primary/30 transition-all duration-300 overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-            <div className="w-16 h-16 mb-6 rounded-2xl bg-black/50 border border-white/10 flex items-center justify-center group-hover:scale-105 group-hover:border-primary/30 transition-all duration-500 relative z-10 shadow-inner">
+            <div className="w-16 h-16 mb-6 rounded-2xl bg-black/50 border border-white/10 flex items-center justify-center group-hover:scale-105 group-hover:border-primary/30 transition-all duration-300 relative z-10 shadow-inner">
               <s.i className="w-8 h-8 text-gray-400 group-hover:text-primary transition-colors" />
             </div>
 
@@ -1349,16 +1373,32 @@ const RevenueCalculator = () => {
 
 const Contact = () => {
   const [formData, setFormData] = useState({ name: '', email: '', company: '', message: '' });
+  const [teamSize, setTeamSize] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('loading');
-    // Simulate API call
+
+    // Create mailto link as fallback
+    const subject = encodeURIComponent('Free Security Assessment Request');
+    const body = encodeURIComponent(`
+Name: ${formData.name}
+Email: ${formData.email}
+Company: ${formData.company}
+Team Size: ${teamSize || 'Not specified'}
+Message: ${formData.message}
+    `);
+
+    // In real implementation, send to your backend API
+    // For now, open mailto as fallback
+    window.location.href = `mailto:${CONTACT_INFO.email}?subject=${subject}&body=${body}`;
+
     setTimeout(() => {
       setStatus('success');
       setFormData({ name: '', email: '', company: '', message: '' });
-    }, 1500);
+      setTeamSize('');
+    }, 500);
   };
 
   return (
@@ -1382,7 +1422,7 @@ const Contact = () => {
               </p>
             </div>
 
-            <form className="space-y-6" onSubmit={handleSubmit}>
+            <form className="space-y-6" onSubmit={handleSubmit} aria-label="Contact form">
               {/* Name Input */}
               <div className="group">
                 <label className="block text-sm font-bold text-gray-400 mb-2 group-focus-within:text-primary transition-colors">
@@ -1438,7 +1478,13 @@ const Contact = () => {
                     <button
                       key={size}
                       type="button"
-                      className="px-4 py-3 bg-surface border border-white/10 rounded-xl text-white hover:border-primary hover:bg-primary/10 transition-all text-sm font-bold"
+                      onClick={() => setTeamSize(size)}
+                      className={cn(
+                        "px-4 py-3 rounded-xl text-sm font-bold transition-all",
+                        teamSize === size
+                          ? "bg-primary/20 border-2 border-primary text-white"
+                          : "bg-surface border border-white/10 text-white hover:border-primary hover:bg-primary/10"
+                      )}
                     >
                       {size}
                     </button>
@@ -1696,3 +1742,4 @@ function App() {
 }
 
 export default App;
+
