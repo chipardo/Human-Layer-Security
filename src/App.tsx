@@ -221,21 +221,23 @@ const HowWeWork = () => (
       className="grid md:grid-cols-4 gap-6 relative z-10"
     >
       {[
-        { t: "Test", d: "Realistic phishing emails. Custom templates. Real threats.", i: Mail, step: "01" },
-        { t: "Catch", d: "Safe fail page. No shame. No reporting to manager.", i: FileText, step: "02" },
-        { t: "Teach", d: "90-second instant lesson. Teach the 'why' and 'how'.", i: Activity, step: "03" },
-        { t: "Improve", d: "Track metrics. Watch click rates drop. Export reports.", i: CheckCircle, step: "04" }
+        { t: "Test", d: "Realistic phishing emails. Custom templates. Real threats.", i: Mail, step: "01", c: "text-blue-400", bg: "group-hover:bg-blue-500", shadow: "group-hover:shadow-[0_0_20px_rgba(59,130,246,0.5)]" },
+        { t: "Catch", d: "Safe fail page. No shame. No reporting to manager.", i: FileText, step: "02", c: "text-red-400", bg: "group-hover:bg-red-500", shadow: "group-hover:shadow-[0_0_20px_rgba(239,68,68,0.5)]" },
+        { t: "Teach", d: "90-second instant lesson. Teach the 'why' and 'how'.", i: Activity, step: "03", c: "text-amber-400", bg: "group-hover:bg-amber-500", shadow: "group-hover:shadow-[0_0_20px_rgba(245,158,11,0.5)]" },
+        { t: "Improve", d: "Track metrics. Watch click rates drop. Export reports.", i: CheckCircle, step: "04", c: "text-emerald-400", bg: "group-hover:bg-emerald-500", shadow: "group-hover:shadow-[0_0_20px_rgba(16,185,129,0.5)]" }
       ].map((s, i) => (
-        <motion.div variants={fadeInUp} key={i} className="group relative p-6 bg-black/40 border border-white/5 rounded-3xl hover:bg-white/5 hover:border-primary/50 transition-colors duration-300 will-change-transform" whileHover={{ y: -5, transition: { duration: 0.2 } }}>
-          <div className="absolute -top-4 left-6 bg-surface px-2 py-1 border border-white/10 rounded-lg text-xs font-mono text-primary font-bold shadow-xl group-hover:border-primary/50 transition-colors">
+        <motion.div variants={fadeInUp} key={i} className="group relative p-8 bg-black/40 border border-white/5 rounded-[2rem] hover:bg-white/5 hover:border-white/10 transition-colors duration-300 will-change-transform overflow-hidden" whileHover={{ y: -5, transition: { duration: 0.2 } }}>
+          <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-[40px] pointer-events-none group-hover:bg-white/10 transition-colors" />
+
+          <div className="absolute -top-4 left-8 bg-surface px-3 py-1 border border-white/10 rounded-full text-xs font-mono font-bold shadow-xl group-hover:border-white/20 transition-colors text-white">
             STEP {s.step}
           </div>
 
-          <div className="mt-4 mb-4 w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white group-hover:scale-110 group-hover:bg-primary group-hover:text-black transition-all duration-300 shadow-[0_0_0_0_rgba(34,197,94,0)] group-hover:shadow-[0_0_20px_rgba(34,197,94,0.4)]">
-            <s.i className="w-6 h-6" />
+          <div className={cn("mt-6 mb-6 w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center text-gray-400 group-hover:text-black transition-all duration-300 group-hover:scale-110", s.bg, s.shadow)}>
+            <s.i className="w-7 h-7" />
           </div>
 
-          <h3 className="text-lg font-bold text-white mb-2 group-hover:text-primary transition-colors">{s.t}</h3>
+          <h3 className="text-xl font-bold text-white mb-3 group-hover:text-white transition-colors">{s.t}</h3>
           <p className="text-gray-400 text-sm leading-relaxed">{s.d}</p>
         </motion.div>
       ))}
@@ -451,9 +453,10 @@ const Home = () => {
         description="AI-powered phishing defense that trains your employees in real-time. Shame-free, instant feedback. Setup in 5 minutes."
       />
       {/* HERO */}
-      <section className="relative min-h-screen flex items-center pt-20 overflow-hidden perspective-1000">
-        {/* Animated Background */}
-        <motion.div style={{ scale: bgScale }} className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_rgba(34,197,94,0.05),transparent_50%)]" />
+      <section className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden perspective-1000">
+        {/* Animated Background Grid */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
+        <motion.div style={{ scale: bgScale }} className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,_rgba(34,197,94,0.1),transparent_60%)] pointer-events-none" />
         <div className="absolute top-0 right-0 w-2/3 h-full bg-gradient-to-l from-primary/10 via-primary/5 to-transparent opacity-60 pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center relative z-10">
@@ -490,8 +493,8 @@ const Home = () => {
             </Reveal>
 
             <Reveal delay={0.4}>
-              <p className="text-xl text-white/80 mb-8 max-w-lg leading-relaxed">
-                We send realistic phishing tests to your employees. When someone clicks, they get instant training on what they missed. Your team gets better every month. Your company gets safer every day.
+              <p className="text-xl md:text-2xl text-gray-300 mb-10 max-w-xl leading-relaxed">
+                We send realistic phishing tests to your employees. When someone clicks, they get <span className="text-white font-bold">instant training</span> on what they missed. Your team gets better every month.
               </p>
             </Reveal>
 
@@ -569,10 +572,11 @@ const Home = () => {
               onLoad={() => setImageLoaded(true)}
               className={cn(
                 "w-full h-auto object-cover opacity-90 transition-all duration-700 ease-out relative z-0 group-hover:scale-105",
-                imageLoaded ? "opacity-90" : "opacity-0"
+                imageLoaded ? "opacity-100" : "opacity-0"
               )}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80 z-10" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 via-transparent to-blue-500/20 mix-blend-overlay z-10" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60 z-10" />
 
             {/* Scanline Effect */}
             <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent_50%,rgba(0,0,0,0.3)_50%)] bg-[length:100%_4px] pointer-events-none opacity-20 z-20" />
@@ -664,22 +668,28 @@ const Home = () => {
           <div className="mb-6 md:mb-0"><h2 className="text-4xl md:text-5xl font-bold text-white mb-6">What You <span className="text-primary">Get</span></h2><p className="text-gray-400 text-lg">Everything you need to build a security aware team. Nothing you don't.</p></div>
           <Button variant="outline" className="hidden md:flex" onClick={() => navigate('/services')}>View All Features</Button>
         </div>
-        <div className="space-y-4">
+        <div className="grid md:grid-cols-2 gap-6 relative z-10">
           {[
-            { t: "Realistic Attack Simulations", d: "We send phishing emails that look and feel exactly like real attacks—because they're based on real attacks. Your employees see them in their actual inbox. They make decisions under real conditions.", i: Shield },
-            { t: "Training at the Point of Failure", d: "The second someone clicks a phishing link, they see what they missed and why it worked. Not next week in a training session. Not in an annual compliance video. Right now.", i: Users },
-            { t: "Monthly Intelligence Reports", d: "See exactly where your vulnerabilities are. Who's clicking. What's working. Which departments need extra training. Export compliance reports for auditors.", i: FileText },
-            { t: "Compliance Documentation", d: "Generate documentation automatically. SOC 2, ISO 27001, CMMC — formatted correctly and ready to submit. Your auditor gets what they need. You get back to work.", i: Award }
+            { t: "Realistic Attack Simulations", d: "We send phishing emails that look and feel exactly like real attacks—because they're based on real attacks. Your employees see them in their actual inbox. They make decisions under real conditions.", i: Shield, c: "text-emerald-400", bg: "bg-emerald-500/10", border: "hover:border-emerald-500/50" },
+            { t: "Training at the Point of Failure", d: "The second someone clicks a phishing link, they see what they missed and why it worked. Not next week in a training session. Not in an annual compliance video. Right now.", i: Users, c: "text-blue-400", bg: "bg-blue-500/10", border: "hover:border-blue-500/50" },
+            { t: "Monthly Intelligence Reports", d: "See exactly where your vulnerabilities are. Who's clicking. What's working. Which departments need extra training. Export compliance reports for auditors.", i: FileText, c: "text-purple-400", bg: "bg-purple-500/10", border: "hover:border-purple-500/50" },
+            { t: "Compliance Documentation", d: "Generate documentation automatically. SOC 2, ISO 27001, CMMC — formatted correctly and ready to submit. Your auditor gets what they need. You get back to work.", i: Award, c: "text-amber-400", bg: "bg-amber-500/10", border: "hover:border-amber-500/50" }
           ].map((s, i) => (
-            <div key={i} className="flex gap-6 p-6 rounded-2xl hover:bg-white/5 transition-colors border border-transparent hover:border-white/10 items-start">
-              <div className="w-12 h-12 rounded-lg bg-surface flex items-center justify-center shrink-0 text-primary border border-white/10">
-                <s.i className="w-6 h-6" />
+            <motion.div
+              key={i}
+              className={cn("flex gap-6 p-8 rounded-[2rem] bg-surface/40 hover:bg-surface/60 transition-all duration-300 border border-white/5 items-start group relative overflow-hidden", s.border)}
+              whileHover={{ y: -5 }}
+            >
+              <div className={cn("absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-white/5 to-transparent")} />
+
+              <div className={cn("w-16 h-16 rounded-2xl flex items-center justify-center shrink-0 border border-white/10 group-hover:scale-110 transition-transform duration-300", s.bg)}>
+                <s.i className={cn("w-8 h-8 transition-colors", s.c)} />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-white mb-2">{s.t}</h3>
-                <p className="text-white/70 leading-relaxed">{s.d}</p>
+                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-white transition-colors">{s.t}</h3>
+                <p className="text-gray-400 leading-relaxed text-sm md:text-base">{s.d}</p>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
@@ -753,15 +763,15 @@ const Home = () => {
               <li className="flex gap-4 items-start">
                 <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0 text-primary font-bold">1</div>
                 <div>
-                  <h4 className="font-bold text-white mb-1">No Shame, <span className="text-primary">Real Learning</span></h4>
-                  <p className="text-gray-400 text-sm max-w-2xl">We don't report clicks to management. We don't publish 'walls of shame.' We don't make anyone feel stupid. When someone clicks, they see a private learning moment. Most employees actually appreciate the training because it helps them protect themselves.</p>
+                  <h4 className="text-2xl md:text-3xl font-bold text-white mb-2">No Shame, <span className="text-primary">Real Learning</span></h4>
+                  <p className="text-gray-400 text-lg md:text-xl max-w-2xl leading-relaxed">We don't report clicks to management. We don't publish 'walls of shame.' We don't make anyone feel stupid. When someone clicks, they see a private learning moment. Most employees actually appreciate the training because it helps them protect themselves.</p>
                 </div>
               </li>
               <li className="flex gap-4 items-start">
                 <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0 text-primary font-bold">2</div>
                 <div>
-                  <h4 className="font-bold text-white mb-1">You'll See <span className="text-primary">the Difference</span></h4>
-                  <p className="text-gray-400 text-sm max-w-2xl">Month by month, you'll watch click rates drop. You'll see employees start forwarding suspicious emails to IT. You'll notice the shift from "I hope this is safe" to "I know what to look for." The data proves what you'll feel—your team is getting sharper.</p>
+                  <h4 className="text-2xl md:text-3xl font-bold text-white mb-2">You'll See <span className="text-primary">the Difference</span></h4>
+                  <p className="text-gray-400 text-lg md:text-xl max-w-2xl leading-relaxed">Month by month, you'll watch click rates drop. You'll see employees start forwarding suspicious emails to IT. You'll notice the shift from "I hope this is safe" to "I know what to look for." The data proves what you'll feel—your team is getting sharper.</p>
                 </div>
               </li>
             </ul>
@@ -1303,7 +1313,7 @@ const Partnership = () => (
     <section className="pt-40 pb-16 px-6 relative overflow-hidden">
       <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/10 to-transparent opacity-30 pointer-events-none" />
       <motion.div initial="hidden" animate="visible" variants={fadeInUp} className="max-w-7xl mx-auto relative z-10">
-        <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight">Partner <span className="text-primary">ship</span></h1>
+        <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight">Partner<span className="text-primary">ship</span></h1>
         <p className="text-xl text-gray-400 max-w-2xl leading-relaxed border-l-4 border-primary pl-6">Partner with us. Offer phishing training under your brand. Earn recurring revenue on every client.</p>
       </motion.div>
     </section>
@@ -1494,25 +1504,48 @@ const RevenueCalculator = () => {
   const monthlyRevenue = clients * avgRevenue * partnerShare;
   const yearlyRevenue = monthlyRevenue * 12;
 
+  // Percentage for progress bar
+  const percentage = (clients / 50) * 100;
+
   return (
-    <div className="p-8 rounded-3xl bg-surface/50 border border-white/10">
-      <h3 className="text-2xl font-bold text-white mb-6">
+    <div className="p-10 rounded-[2.5rem] bg-gradient-to-br from-surface/50 to-black border border-white/10 shadow-2xl relative overflow-hidden group">
+      <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+      <h3 className="text-3xl font-bold text-white mb-8 text-center">
         Revenue <span className="text-primary">Calculator</span>
       </h3>
 
       {/* Slider */}
-      <div className="mb-8">
-        <label className="block text-sm font-bold text-gray-400 mb-4">
-          Number of Clients: <span className="text-primary">{clients}</span>
-        </label>
-        <input
-          type="range"
-          min="1"
-          max="50"
-          value={clients}
-          onChange={(e) => setClients(Number(e.target.value))}
-          className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-primary"
-        />
+      <div className="mb-12">
+        <div className="flex justify-between items-center mb-6">
+          <label className="text-sm font-bold text-gray-400 uppercase tracking-widest">
+            Number of Clients
+          </label>
+          <span className="text-2xl font-bold text-primary bg-primary/10 px-4 py-1 rounded-full border border-primary/20">{clients}</span>
+        </div>
+
+        <div className="relative h-4 bg-white/10 rounded-full w-full">
+          <div
+            className="absolute top-0 left-0 h-full bg-primary rounded-full transition-all duration-100"
+            style={{ width: `${percentage}%` }}
+          />
+          <input
+            type="range"
+            min="1"
+            max="50"
+            value={clients}
+            onChange={(e) => setClients(Number(e.target.value))}
+            className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+          />
+          <div
+            className="absolute top-0 h-6 w-6 bg-white rounded-full shadow-lg border-2 border-primary -mt-1 transition-all duration-100 pointer-events-none z-0 transform -translate-x-1/2"
+            style={{ left: `${percentage}%` }}
+          />
+        </div>
+        <div className="flex justify-between text-xs text-gray-500 mt-2 font-mono">
+          <span>1 Client</span>
+          <span>25 Clients</span>
+          <span>50+ Clients</span>
+        </div>
       </div>
 
       {/* Results */}
