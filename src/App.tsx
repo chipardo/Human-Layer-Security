@@ -6,7 +6,7 @@ import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
 // Explicitly check window to avoid SSR issues (though simple here)
-const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
 const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 
@@ -1365,4 +1365,3 @@ function App() {
 }
 
 export default App;
-
