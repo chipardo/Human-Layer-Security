@@ -845,7 +845,7 @@ const Services = () => (
               <div className="w-16 h-16 rounded-full border border-primary/20 dashed-border" />
             </div>
 
-            <div className="w-16 h-16 bg-black/50 rounded-2xl flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform shadow-inner border border-white/5 relative z-10 mb-6 group-hover:border-primary/30">
+            <div className="w-16 h-16 bg-black/50 rounded-2xl flex items-center justify-center shrink-0 group-hover:scale-105 transition-all duration-300 ease-out shadow-inner border border-white/5 relative z-10 mb-6 group-hover:border-primary/30 will-change-transform">
               <s.i className="w-8 h-8 text-gray-400 group-hover:text-primary transition-colors" />
             </div>
 
