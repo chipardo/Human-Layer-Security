@@ -13,6 +13,17 @@ export default {
         secondary: '#FFFFFF',  // White
         text: '#FFFFFF',       // White
         muted: '#A3A3A3',      // Neutral Gray
+        gray: {
+          100: '#f4f4f5',
+          200: '#e4e4e7',
+          300: '#d4d4d8',
+          400: '#a1a1aa', // Lighter than standard gray-400
+          500: '#71717a', // Lighter than standard gray-500
+          600: '#52525b',
+          700: '#3f3f46',
+          800: '#27272a',
+          900: '#18181b',
+        },
       },
       fontFamily: {
         mono: ['"JetBrains Mono"', 'monospace'],
