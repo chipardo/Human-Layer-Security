@@ -1065,6 +1065,7 @@ const Services = () => (
     </div>
   </>
 );
+};
 
 const About = () => (
   <div className="min-h-screen bg-background text-white pb-20">
