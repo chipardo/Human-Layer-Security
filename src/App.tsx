@@ -75,28 +75,24 @@ const HowWeWork = () => (
       <p className="text-gray-400 max-w-2xl mx-auto text-lg">Four steps to turn your biggest vulnerability into your strongest defense.</p>
     </div>
 
-    <div className="grid md:grid-cols-4 gap-8 relative z-10">
+    <div className="grid md:grid-cols-4 gap-6 relative z-10">
       {[
         { t: "Test", d: "Realistic phishing emails. Custom templates. Real threats.", i: Mail, step: "01" },
         { t: "Catch", d: "Safe fail page. No shame. No reporting to manager.", i: FileText, step: "02" },
         { t: "Teach", d: "90-second instant lesson. Teach the 'why' and 'how'.", i: Activity, step: "03" },
         { t: "Improve", d: "Track metrics. Watch click rates drop. Export reports.", i: CheckCircle, step: "04" }
       ].map((s, i) => (
-        <motion.div variants={fadeInUp} key={i} className="group relative pt-8 md:pt-12 md:text-center">
-          {/* Big Number Background */}
-          <div className="absolute top-0 left-0 md:left-1/2 md:-translate-x-1/2 text-[6rem] md:text-[8rem] font-bold text-white/5 font-display leading-none select-none -z-10 group-hover:text-primary/10 transition-colors">
-            {s.step}
+        <motion.div variants={fadeInUp} key={i} className="group relative p-6 bg-black/40 border border-white/5 rounded-3xl hover:bg-white/5 hover:border-primary/50 transition-all duration-500">
+          <div className="absolute -top-4 left-6 bg-surface px-2 py-1 border border-white/10 rounded-lg text-xs font-mono text-primary font-bold shadow-xl group-hover:border-primary/50 transition-colors">
+            STEP {s.step}
           </div>
 
-          <div className="w-4 h-4 bg-surface border-4 border-primary rounded-full mx-auto mb-6 hidden md:block relative z-10 shadow-[0_0_15px_rgba(34,197,94,0.5)]" />
-
-          <div className="md:px-4">
-            <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-white/5 border border-white/10 mb-6 text-primary group-hover:scale-110 transition-transform duration-300 group-hover:bg-primary group-hover:text-black">
-              <s.i className="w-6 h-6" />
-            </div>
-            <h3 className="text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors">{s.t}</h3>
-            <p className="text-gray-400 text-sm leading-relaxed max-w-[200px] md:mx-auto">{s.d}</p>
+          <div className="mt-4 mb-4 w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white group-hover:scale-110 group-hover:bg-primary group-hover:text-black transition-all duration-300">
+            <s.i className="w-6 h-6" />
           </div>
+
+          <h3 className="text-lg font-bold text-white mb-2 group-hover:text-primary transition-colors">{s.t}</h3>
+          <p className="text-gray-400 text-sm leading-relaxed">{s.d}</p>
         </motion.div>
       ))}
     </div>
@@ -114,20 +110,20 @@ const WhyChoose = () => (
       </p>
     </div>
 
-    <div className="grid md:grid-cols-3 gap-12 max-w-6xl mx-auto">
+    <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
       {[
-        { t: "Zero Shame", d: "No \"wall of shame\". No public humiliation. Just private, immediate training.", i: Shield },
-        { t: "Compliance Ready", d: "Automatic SOC 2, ISO 27001, & HIPAA documentation.", i: Award },
-        { t: "5-Minute Setup", d: "No IT department needed. Launch your first campaign today.", i: Activity },
-        { t: "Real Templates", d: "Law firms get court notices. Finance gets wire transfers. Real threats.", i: FileText },
-        { t: "Clear Analytics", d: "Track improvement. Export reports for insurance.", i: Terminal },
-        { t: "Instant Learning", d: "Training happens the second they click. Not next week.", i: Mail }
+        { t: "Zero Shame", d: "No public humiliation. Just private, immediate training.", i: Shield, c: "text-green-500", b: "group-hover:border-green-500/50", bg: "group-hover:bg-green-500/10" },
+        { t: "Compliance Ready", d: "Automatic SOC 2, ISO 27001, & HIPAA documentation.", i: Award, c: "text-yellow-500", b: "group-hover:border-yellow-500/50", bg: "group-hover:bg-yellow-500/10" },
+        { t: "5-Minute Setup", d: "No IT department needed. Launch your first campaign today.", i: Activity, c: "text-blue-400", b: "group-hover:border-blue-400/50", bg: "group-hover:bg-blue-400/10" },
+        { t: "Real Templates", d: "Law firms get court notices. Finance gets wire transfers.", i: FileText, c: "text-red-500", b: "group-hover:border-red-500/50", bg: "group-hover:bg-red-500/10" },
+        { t: "Clear Analytics", d: "Track improvement. Export reports for insurance.", i: Terminal, c: "text-purple-400", b: "group-hover:border-purple-400/50", bg: "group-hover:bg-purple-400/10" },
+        { t: "Instant Learning", d: "Training happens the second they click. Not next week.", i: Mail, c: "text-orange-400", b: "group-hover:border-orange-400/50", bg: "group-hover:bg-orange-400/10" }
       ].map((f, i) => (
-        <motion.div variants={fadeInUp} key={i} className="flex flex-col items-center text-center group">
-          <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-6 py-4 border border-white/5 group-hover:border-primary/50 group-hover:bg-primary/10 transition-all duration-500 rounded-2xl">
-            <f.i className="w-8 h-8 text-gray-300 group-hover:text-primary transition-colors" />
+        <motion.div variants={fadeInUp} key={i} className={cn("flex flex-col items-center text-center group p-8 rounded-3xl border border-white/5 transition-all duration-500 hover:bg-white/5", f.b)}>
+          <div className={cn("w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-6 py-4 border border-white/5 transition-all duration-500", f.bg)}>
+            <f.i className={cn("w-8 h-8 text-gray-400 transition-colors duration-500", `group-hover:${f.c}`)} />
           </div>
-          <h3 className="text-xl font-bold text-white mb-3">{f.t}</h3>
+          <h3 className="text-xl font-bold text-white mb-3 group-hover:text-white transition-colors">{f.t}</h3>
           <p className="text-gray-400 leading-relaxed text-sm max-w-xs">{f.d}</p>
         </motion.div>
       ))}
@@ -263,8 +259,8 @@ const Home = () => {
               <span className="w-2 h-2 rounded-full bg-primary animate-pulse" /> Phishing Defense Platform
             </div>
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-[1.1] tracking-tight max-w-6xl">
-              One phishing email can <span className="text-primary">destroy your business.</span> <br className="hidden md:block" />
-              We train your team to <span className="text-primary">recognize it before they click.</span>
+              One phishing email can <span className="text-red-500 decoration-red-900/50 underline decoration-4 underline-offset-4">destroy your business.</span> <br className="hidden md:block" />
+              We train your team to <span className="text-primary decoration-primary/30 underline decoration-4 underline-offset-4">recognize it before they click.</span>
             </h1>
 
             {/* Feature Pills */}
@@ -494,21 +490,21 @@ const Home = () => {
       {/* SOCIAL PROOF / VALUE PROP */}
       < Section className="bg-surface/50" >
         <div className="grid md:grid-cols-5 gap-12 items-center">
-          <div className="md:col-span-3">
+          <div className="md:col-span-4">
             <h2 className="text-4xl md:text-6xl font-bold text-white mb-8">Why This Approach <span className="text-primary">Works</span></h2>
             <ul className="space-y-6">
               <li className="flex gap-4 items-start">
                 <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0 text-primary font-bold">1</div>
                 <div>
                   <h4 className="font-bold text-white mb-1">No Shame, <span className="text-primary">Real Learning</span></h4>
-                  <p className="text-gray-400 text-sm">We don't report clicks to management. We don't shame anyone. We just teach. Because fear kills learning. When people aren't afraid of consequences, they engage honestly with training and actually improve.</p>
+                  <p className="text-gray-400 text-sm max-w-2xl">We don't report clicks to management. We don't shame anyone. We just teach. Because fear kills learning. When people aren't afraid of consequences, they engage honestly with training and actually improve.</p>
                 </div>
               </li>
               <li className="flex gap-4 items-start">
                 <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0 text-primary font-bold">2</div>
                 <div>
                   <h4 className="font-bold text-white mb-1">You'll See <span className="text-primary">the Difference</span></h4>
-                  <p className="text-gray-400 text-sm">Month by month, you'll watch click rates drop. You'll see employees start forwarding suspicious emails to IT. You'll notice the shift from "I hope this is safe" to "I know what to look for." The data proves what you'll feel—your team is getting sharper.</p>
+                  <p className="text-gray-400 text-sm max-w-2xl">Month by month, you'll watch click rates drop. You'll see employees start forwarding suspicious emails to IT. You'll notice the shift from "I hope this is safe" to "I know what to look for." The data proves what you'll feel—your team is getting sharper.</p>
                 </div>
               </li>
             </ul>
@@ -530,25 +526,25 @@ const Home = () => {
           </div>
 
           {/* DYNAMIC QUOTE COMPONENT */}
-          <div className="md:col-span-2 relative group perspective-1000 h-full min-h-[300px]">
+          <div className="md:col-span-1 relative group perspective-1000 h-full min-h-[400px]">
             {/* Simple Background */}
             <div className="absolute inset-0 bg-surface/30 rounded-[2rem] border border-white/10" />
 
-            <div className="relative h-full rounded-[2rem] p-8 flex flex-col justify-between overflow-hidden">
+            <div className="relative h-full rounded-[2rem] p-6 flex flex-col justify-between overflow-hidden">
               <div className="relative z-10">
-                <div className="inline-flex items-center gap-3 px-3 py-1 rounded-full bg-yellow-500/10 border border-yellow-500/20 mb-6">
+                <div className="inline-flex items-center gap-2 px-2 py-1 rounded-full bg-yellow-500/10 border border-yellow-500/20 mb-6">
                   <div className="w-1.5 h-1.5 rounded-full bg-yellow-500 animate-pulse" />
-                  <span className="text-yellow-500 text-[10px] font-bold tracking-[0.2em] uppercase">Security Tip</span>
+                  <span className="text-yellow-500 text-[9px] font-bold tracking-[0.1em] uppercase">Tip</span>
                 </div>
 
-                <blockquote className="text-xl font-display font-medium text-white leading-relaxed mb-6">
+                <blockquote className="text-lg font-display font-medium text-white leading-relaxed mb-6">
                   "{quote.text}"
                 </blockquote>
               </div>
 
               <div className="relative z-10 flex items-center gap-3">
-                <div className="w-6 h-[1px] bg-white/20" />
-                <div className="text-white/50 font-mono text-[10px] uppercase tracking-widest font-bold">
+                <div className="w-4 h-[1px] bg-white/20" />
+                <div className="text-white/50 font-mono text-[9px] uppercase tracking-widest font-bold">
                   {quote.author}
                 </div>
               </div>
@@ -1107,4 +1103,3 @@ function App() {
 }
 
 export default App;
-
