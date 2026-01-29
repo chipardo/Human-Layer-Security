@@ -1,7 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate, useLocation, Link } from 'react-router-dom';
 import { Shield, Menu, X, CheckCircle, Users, Mail, Activity, ArrowRight, Globe, Terminal, FileText, Award, Twitter, Linkedin, Building, Stethoscope, Scale } from 'lucide-react';
-import { Helmet, HelmetProvider } from 'react-helmet-async';
+// Custom SEO component to replace react-helmet-async
+const PageMeta = ({ title, description }: { title: string, description?: string }) => {
+  useEffect(() => {
+    document.title = title;
+    if (description) {
+      let meta = document.querySelector("meta[name='description']");
+      if (!meta) {
+        meta = document.createElement("meta");
+        meta.setAttribute("name", "description");
+        document.head.appendChild(meta);
+      }
+      meta.setAttribute("content", description);
+    }
+  }, [title, description]);
+  return null;
+};
 import { AnimatePresence, motion, useScroll, useTransform, useInView, useAnimation } from 'framer-motion';
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
@@ -402,10 +417,10 @@ const Home = () => {
 
   return (
     <>
-      <Helmet>
-        <title>HumanLayer Security | Stop Phishing Attacks Before They Click</title>
-        <meta name="description" content="AI-powered phishing defense that trains your employees in real-time. Shame-free, instant feedback. Setup in 5 minutes." />
-      </Helmet>
+      <PageMeta
+        title="HumanLayer Security | Stop Phishing Attacks Before They Click"
+        description="AI-powered phishing defense that trains your employees in real-time. Shame-free, instant feedback. Setup in 5 minutes."
+      />
       {/* HERO */}
       <section className="relative min-h-screen flex items-center pt-20 overflow-hidden perspective-1000">
         {/* Animated Background */}
@@ -852,10 +867,10 @@ const PageHeader: React.FC<{ title: string, subtitle: string }> = ({ title, subt
 
 const Services = () => (
   <div className="min-h-screen bg-background text-white pb-20">
-    <Helmet>
-      <title>Services | HumanLayer Security</title>
-      <meta name="description" content="Phishing simulations, real-time training, and compliance reporting. See our full suite of security tools." />
-    </Helmet>
+    <PageMeta
+      title="Services | HumanLayer Security"
+      description="Phishing simulations, real-time training, and compliance reporting. See our full suite of security tools."
+    />
     <PageHeader title="Our Services" subtitle="Realistic phishing tests. Instant training. Clear analytics. Built by cybersecurity professionals who understand how attackers actually operate." />
     <Section className="!pt-0">
       <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="grid md:grid-cols-2 lg:grid-cols-6 gap-6">
@@ -1104,10 +1119,10 @@ const Services = () => (
 
 const About = () => (
   <div className="min-h-screen bg-background text-white pb-20">
-    <Helmet>
-      <title>About Us | HumanLayer Security</title>
-      <meta name="description" content="Founded by cybersecurity and engineering experts. We're building the future of human risk management." />
-    </Helmet>
+    <PageMeta
+      title="About Us | HumanLayer Security"
+      description="Founded by cybersecurity and engineering experts. We're building the future of human risk management."
+    />
     <PageHeader title="Who We Are" subtitle="We're cybersecurity and engineering graduates who built a phishing training platform because the existing solutions weren't good enough." />
     <Section className="!pt-0">
       <div className="grid md:grid-cols-2 gap-16 items-start">
@@ -1190,10 +1205,10 @@ const About = () => (
 
 const Partnership = () => (
   <div className="min-h-screen bg-background text-white pb-20">
-    <Helmet>
-      <title>Partnership | HumanLayer Security</title>
-      <meta name="description" content="Partner with HumanLayer. White-label phishing defense for your clients. Recurring revenue." />
-    </Helmet>
+    <PageMeta
+      title="Partnership | HumanLayer Security"
+      description="Partner with HumanLayer. White-label phishing defense for your clients. Recurring revenue."
+    />
     <section className="pt-40 pb-16 px-6 relative overflow-hidden">
       <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/10 to-transparent opacity-30 pointer-events-none" />
       <motion.div initial="hidden" animate="visible" variants={fadeInUp} className="max-w-7xl mx-auto relative z-10">
@@ -1453,10 +1468,10 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen bg-background text-white pb-20">
-      <Helmet>
-        <title>Contact | HumanLayer Security</title>
-        <meta name="description" content="Get a free security assessment. Contact our team to secure your organization today." />
-      </Helmet>
+      <PageMeta
+        title="Contact | HumanLayer Security"
+        description="Get a free security assessment. Contact our team to secure your organization today."
+      />
       <PageHeader
         title="Let's Talk Security"
         subtitle="Get a free security assessment. See your team's baseline phishing risk in 24 hours."
@@ -1719,81 +1734,81 @@ function App() {
   }, []);
 
   return (
-    <HelmetProvider>
-      <div className={cn("min-h-screen bg-background text-white selection:bg-primary selection:text-white font-sans overflow-x-hidden transition-opacity duration-700", isLoaded ? "opacity-100" : "opacity-0")}>
-        <Navbar />
-        <AnimatePresence mode="wait">
-          <Routes location={location} key={location.pathname}>
-            <Route path="/" element={
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.4, ease: EASING }}
-                className="origin-top"
-              >
-                <Home />
-              </motion.div>
-            } />
-            <Route path="/services" element={
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.4, ease: EASING }}
-                className="origin-top"
-              >
-                <Services />
-              </motion.div>
-            } />
-            <Route path="/about" element={
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.4, ease: EASING }}
-                className="origin-top"
-              >
-                <About />
-              </motion.div>
-            } />
-            <Route path="/partnership" element={
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.4, ease: EASING }}
-                className="origin-top"
-              >
-                <Partnership />
-              </motion.div>
-            } />
-            <Route path="/privacy" element={<Legal />} />
-            <Route path="/terms" element={<Legal />} />
-            <Route path="/contact" element={
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.4, ease: EASING }}
-                className="origin-top"
-              >
-                <Contact />
-              </motion.div>
-            } />
-            <Route path="*" element={<Home />} />
-          </Routes>
-        </AnimatePresence>
-        <Footer />
-        {/* CSS Marquee Keyframes */}
-        <style>{`
+
+    <div className={cn("min-h-screen bg-background text-white selection:bg-primary selection:text-white font-sans overflow-x-hidden transition-opacity duration-700", isLoaded ? "opacity-100" : "opacity-0")}>
+      <Navbar />
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.4, ease: EASING }}
+              className="origin-top"
+            >
+              <Home />
+            </motion.div>
+          } />
+          <Route path="/services" element={
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.4, ease: EASING }}
+              className="origin-top"
+            >
+              <Services />
+            </motion.div>
+          } />
+          <Route path="/about" element={
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.4, ease: EASING }}
+              className="origin-top"
+            >
+              <About />
+            </motion.div>
+          } />
+          <Route path="/partnership" element={
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.4, ease: EASING }}
+              className="origin-top"
+            >
+              <Partnership />
+            </motion.div>
+          } />
+          <Route path="/privacy" element={<Legal />} />
+          <Route path="/terms" element={<Legal />} />
+          <Route path="/contact" element={
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.4, ease: EASING }}
+              className="origin-top"
+            >
+              <Contact />
+            </motion.div>
+          } />
+          <Route path="*" element={<Home />} />
+        </Routes>
+      </AnimatePresence>
+      <Footer />
+      {/* CSS Marquee Keyframes */}
+      <style>{`
         @keyframes marquee {
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }
         }
       `}</style>
-      </div>
-    </HelmetProvider>
+    </div>
+
   );
 }
 
