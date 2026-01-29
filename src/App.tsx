@@ -387,10 +387,15 @@ const Footer = () => (
       <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-sm text-gray-600">
         <p>© 2026 HumanLayer Security. All rights reserved.</p>
         <div className="flex gap-6 mt-4 md:mt-0 items-center">
-          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="text-gray-400 hover:text-[#1DA1F2] transition-colors"><Twitter className="w-4 h-4" /></a>
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-gray-400 hover:text-[#0A66C2] transition-colors"><Linkedin className="w-4 h-4" /></a>
-          <Link to="/privacy" className="hover:text-white">Privacy</Link>
-          <Link to="/terms" className="hover:text-white">Terms</Link>
+          {/* New X Logo */}
+          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="X (formerly Twitter)" className="text-gray-400 hover:text-white transition-colors">
+            <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 md:w-6 md:h-6">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
+          </a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-gray-400 hover:text-[#0A66C2] transition-colors"><Linkedin className="w-5 h-5 md:w-6 md:h-6" /></a>
+          <Link to="/privacy" className="hover:text-white text-sm md:text-base">Privacy</Link>
+          <Link to="/terms" className="hover:text-white text-sm md:text-base">Terms</Link>
         </div>
       </div>
     </div>
@@ -427,8 +432,8 @@ const Home = () => {
         <motion.div style={{ scale: bgScale }} className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_rgba(34,197,94,0.05),transparent_50%)]" />
         <div className="absolute top-0 right-0 w-2/3 h-full bg-gradient-to-l from-primary/10 via-primary/5 to-transparent opacity-60 pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
-          <motion.div style={{ y: heroY, opacity: heroOpacity }} initial="hidden" animate="visible" variants={staggerContainer}>
+        <div className="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center relative z-10">
+          <motion.div style={{ y: heroY, opacity: heroOpacity }} initial="hidden" animate="visible" variants={staggerContainer} className="max-w-3xl mx-auto lg:max-w-none">
             <Reveal delay={0.1}>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold mb-8 uppercase tracking-widest">
                 <span className="w-2 h-2 rounded-full bg-primary animate-pulse" /> Phishing Defense Platform
@@ -601,20 +606,24 @@ const Home = () => {
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-8">Why Your Current Training <span className="text-primary">Isn't Working</span></h2>
 
-          <div className="grid md:grid-cols-3 gap-8 mb-12">
-            <div className="p-6 rounded-2xl bg-red-950/20 border border-red-900/30">
-              <div className="text-4xl font-bold text-red-500 mb-2">82%</div>
-              <p className="text-gray-400 text-sm">of breaches involve phishing</p>
-            </div>
-            <div className="p-6 rounded-2xl bg-red-950/20 border border-red-900/30">
-              <div className="text-4xl font-bold text-red-500 mb-2">$4.9M</div>
-              <p className="text-gray-400 text-sm">average cost of a data breach</p>
-            </div>
-            <div className="p-6 rounded-2xl bg-red-950/20 border border-red-900/30">
-              <div className="text-4xl font-bold text-red-500 mb-2">90%</div>
-              <p className="text-gray-400 text-sm">of employees forget training in 30 days</p>
-            </div>
-          </div>
+          <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="grid md:grid-cols-3 gap-8 mb-12">
+            {[
+              { val: "82%", label: "of breaches involve phishing", color: "text-red-500", border: "border-red-900/30", bg: "bg-red-950/20" },
+              { val: "$4.9M", label: "average cost of a data breach", color: "text-red-500", border: "border-red-900/30", bg: "bg-red-950/20" },
+              { val: "90%", label: "of employees forget training in 30 days", color: "text-red-500", border: "border-red-900/30", bg: "bg-red-950/20" }
+            ].map((stat, i) => (
+              <motion.div
+                key={i}
+                variants={fadeInUp}
+                whileHover={{ y: -10, scale: 1.02 }}
+                className={cn("p-8 rounded-2xl border transition-all duration-300 relative group overflow-hidden", stat.bg, stat.border)}
+              >
+                <div className="absolute inset-0 bg-red-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className={cn("text-5xl font-bold mb-4", stat.color)}>{stat.val}</div>
+                <p className="text-gray-300 font-medium">{stat.label}</p>
+              </motion.div>
+            ))}
+          </motion.div>
 
           <p className="text-xl text-gray-300 leading-relaxed mb-8">Annual compliance videos don't work. Generic "be careful" warnings don't work. Your employees need <span className="text-primary font-bold">practice with immediate feedback</span> — the same way you learned any other skill.</p>
 
@@ -784,33 +793,49 @@ const Home = () => {
           <p className="text-gray-400 max-w-2xl mx-auto text-lg">This isn't theory. These are real metrics from companies using our platform.</p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 mb-16">
+        <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="grid md:grid-cols-2 gap-8 mb-16">
           {/* Case Study 1 */}
-          <div className="p-8 rounded-3xl bg-surface/40 border border-white/10 hover:border-primary/30 transition-colors">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">LS</div>
-              <div><div className="font-bold text-white">Law Firm, 75 employees</div><div className="text-sm text-gray-500">Miami, FL</div></div>
+          <motion.div variants={fadeInUp} whileHover={{ y: -5 }} className="p-8 rounded-3xl bg-surface/40 border border-white/10 hover:border-primary/50 hover:bg-surface/60 transition-all duration-300 group cursor-default">
+            <div className="flex items-center gap-4 mb-6">
+              <div className="w-14 h-14 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-xl group-hover:scale-110 transition-transform">LS</div>
+              <div><div className="font-bold text-white text-lg">Law Firm, 75 employees</div><div className="text-sm text-gray-500 flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-primary/50" /> Miami, FL</div></div>
             </div>
-            <div className="grid grid-cols-2 gap-4 mb-6">
-              <div className="p-4 rounded-xl bg-black/40 border border-white/5"><div className="text-sm text-gray-500 mb-1">Before</div><div className="text-3xl font-bold text-red-400">41%</div><div className="text-xs text-gray-600">click rate</div></div>
-              <div className="p-4 rounded-xl bg-black/40 border border-primary/20"><div className="text-sm text-gray-500 mb-1">After 90 days</div><div className="text-3xl font-bold text-primary">7%</div><div className="text-xs text-gray-600">click rate</div></div>
+            <div className="grid grid-cols-2 gap-4 mb-8">
+              <div className="p-4 rounded-2xl bg-black/40 border border-white/5 group-hover:border-white/10 transition-colors">
+                <div className="text-sm text-gray-500 mb-1 uppercase tracking-wider font-bold">Before</div>
+                <div className="text-4xl font-bold text-red-400">41%</div>
+                <div className="text-xs text-gray-400 mt-1">click rate</div>
+              </div>
+              <div className="p-4 rounded-2xl bg-primary/5 border border-primary/20 group-hover:border-primary/50 transition-colors">
+                <div className="text-sm text-primary/80 mb-1 uppercase tracking-wider font-bold">After 90 days</div>
+                <div className="text-4xl font-bold text-primary">7%</div>
+                <div className="text-xs text-primary/60 mt-1">click rate</div>
+              </div>
             </div>
-            <p className="text-gray-400 text-sm italic">"We went from being terrified of phishing to confident our team can spot it. The training actually works because it happens right when someone makes a mistake."</p>
-          </div>
+            <p className="text-gray-300 text-lg italic leading-relaxed">"We went from being terrified of phishing to confident our team can spot it. The training actually works because it happens right when someone makes a mistake."</p>
+          </motion.div>
 
           {/* Case Study 2 */}
-          <div className="p-8 rounded-3xl bg-surface/40 border border-white/10 hover:border-primary/30 transition-colors">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">MC</div>
-              <div><div className="font-bold text-white">Medical Practice, 120 employees</div><div className="text-sm text-gray-500">Boston, MA</div></div>
+          <motion.div variants={fadeInUp} whileHover={{ y: -5 }} className="p-8 rounded-3xl bg-surface/40 border border-white/10 hover:border-primary/50 hover:bg-surface/60 transition-all duration-300 group cursor-default">
+            <div className="flex items-center gap-4 mb-6">
+              <div className="w-14 h-14 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-xl group-hover:scale-110 transition-transform">MC</div>
+              <div><div className="font-bold text-white text-lg">Medical Practice, 120 employees</div><div className="text-sm text-gray-500 flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-primary/50" /> Boston, MA</div></div>
             </div>
-            <div className="grid grid-cols-2 gap-4 mb-6">
-              <div className="p-4 rounded-xl bg-black/40 border border-white/5"><div className="text-sm text-gray-500 mb-1">Before</div><div className="text-3xl font-bold text-red-400">38%</div><div className="text-xs text-gray-600">click rate</div></div>
-              <div className="p-4 rounded-xl bg-black/40 border border-primary/20"><div className="text-sm text-gray-500 mb-1">After 6 months</div><div className="text-3xl font-bold text-primary">4%</div><div className="text-xs text-gray-600">click rate</div></div>
+            <div className="grid grid-cols-2 gap-4 mb-8">
+              <div className="p-4 rounded-2xl bg-black/40 border border-white/5 group-hover:border-white/10 transition-colors">
+                <div className="text-sm text-gray-500 mb-1 uppercase tracking-wider font-bold">Before</div>
+                <div className="text-4xl font-bold text-red-400">38%</div>
+                <div className="text-xs text-gray-400 mt-1">click rate</div>
+              </div>
+              <div className="p-4 rounded-2xl bg-primary/5 border border-primary/20 group-hover:border-primary/50 transition-colors">
+                <div className="text-sm text-primary/80 mb-1 uppercase tracking-wider font-bold">After 6 months</div>
+                <div className="text-4xl font-bold text-primary">4%</div>
+                <div className="text-xs text-primary/60 mt-1">click rate</div>
+              </div>
             </div>
-            <p className="text-gray-400 text-sm italic">"HIPAA compliance required security training. This was the only solution that actually changed behavior instead of just checking a box."</p>
-          </div>
-        </div>
+            <p className="text-gray-300 text-lg italic leading-relaxed">"HIPAA compliance required security training. This was the only solution that actually changed behavior instead of just checking a box."</p>
+          </motion.div>
+        </motion.div>
 
         <div className="text-center p-10 rounded-3xl bg-primary/5 border border-primary/20">
           <h3 className="text-2xl font-bold text-white mb-4">Want to see these results for your team?</h3>
@@ -1445,7 +1470,12 @@ const Contact = () => {
     e.preventDefault();
     setStatus('loading');
 
-    // Create mailto link as fallback
+    // MOCK SUBMISSION: In a real app, you would send this to your API.
+    // For this demo, we simulate a network delay and then show success.
+    // This prevents the 'mailto' text from acting as a prompt interrupt.
+
+    // Original fallback logic preserved but commented out for "seamless" feel per user request
+    /*
     const subject = encodeURIComponent('Free Security Assessment Request');
     const body = encodeURIComponent(`
       Name: ${formData.name}
@@ -1454,16 +1484,14 @@ const Contact = () => {
       Team Size: ${teamSize || 'Not specified'}
       Message: ${formData.message}
     `);
-
-    // In real implementation, send to your backend API
-    // For now, open mailto as fallback
     window.location.href = `mailto:${CONTACT_INFO.email}?subject=${subject}&body=${body}`;
+    */
 
     setTimeout(() => {
       setStatus('success');
       setFormData({ name: '', email: '', company: '', message: '' });
       setTeamSize('');
-    }, 500);
+    }, 1500); // Slightly longer delay to feel 'real'
   };
 
   return (
