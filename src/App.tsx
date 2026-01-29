@@ -206,7 +206,7 @@ const HowWeWork = () => (
         { t: "Teach", d: "90-second instant lesson. Teach the 'why' and 'how'.", i: Activity, step: "03" },
         { t: "Improve", d: "Track metrics. Watch click rates drop. Export reports.", i: CheckCircle, step: "04" }
       ].map((s, i) => (
-        <motion.div variants={fadeInUp} key={i} className="group relative p-6 bg-black/40 border border-white/5 rounded-3xl hover:bg-white/5 hover:border-primary/50 transition-all duration-500 hover:-translate-y-2">
+        <motion.div variants={fadeInUp} key={i} className="group relative p-6 bg-black/40 border border-white/5 rounded-3xl hover:bg-white/5 hover:border-primary/50 transition-colors duration-300 will-change-transform" whileHover={{ y: -5, transition: { duration: 0.2 } }}>
           <div className="absolute -top-4 left-6 bg-surface px-2 py-1 border border-white/10 rounded-lg text-xs font-mono text-primary font-bold shadow-xl group-hover:border-primary/50 transition-colors">
             STEP {s.step}
           </div>
@@ -247,7 +247,7 @@ const WhyChoose = () => (
         { t: "Clear Analytics", d: "Track improvement. Export reports for insurance.", i: Terminal, c: "text-purple-400", b: "group-hover:border-purple-400/50", bg: "group-hover:bg-purple-400/10" },
         { t: "Instant Learning", d: "Training happens the second they click. Not next week.", i: Mail, c: "text-orange-400", b: "group-hover:border-orange-400/50", bg: "group-hover:bg-orange-400/10" }
       ].map((f, i) => (
-        <motion.div variants={fadeInUp} key={i} className={cn("flex flex-col items-center text-center group p-8 rounded-3xl border border-white/5 transition-all duration-500 hover:bg-white/5 hover:shadow-2xl hover:-translate-y-1 cursor-default", f.b)}>
+        <motion.div variants={fadeInUp} key={i} className={cn("flex flex-col items-center text-center group p-8 rounded-3xl border border-white/5 transition-colors duration-300 hover:bg-white/5 hover:shadow-2xl cursor-default will-change-transform", f.b)} whileHover={{ y: -4, transition: { duration: 0.2 } }}>
           <div className={cn("w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-6 py-4 border border-white/5 transition-all duration-500 group-hover:scale-110", f.bg)}>
             <f.i className={cn("w-8 h-8 text-gray-400 transition-colors duration-500", `group-hover:${f.c}`)} />
           </div>
@@ -281,7 +281,7 @@ const Navbar = () => {
         scrolled ? "glass rounded-full border border-white/10 shadow-lg shadow-black/50" : "bg-transparent border-transparent"
       )}>
         <Link to="/" className="flex items-center gap-3 group relative z-10">
-          <img src="/humanlayerlogo.png" alt="Human Layer Security" loading="lazy" decoding="async" className="h-14 md:h-20 w-auto object-contain transition-all duration-300 group-hover:scale-102 filter drop-shadow-[0_0_8px_rgba(34,197,94,0.3)]" />
+          <img src="/humanlayerlogo.png" alt="Human Layer Security" loading="lazy" decoding="async" className="h-12 sm:h-14 md:h-16 lg:h-20 w-auto object-contain transition-all duration-300 group-hover:scale-102 filter drop-shadow-[0_0_8px_rgba(34,197,94,0.3)]" />
           <div className="flex flex-col justify-center">
             <span className="font-display font-bold text-white text-lg md:text-xl tracking-tight leading-none group-hover:text-primary transition-colors">HUMAN&nbsp;&nbsp;LAYER</span>
             <span className="font-display font-bold text-primary text-[10px] md:text-sm tracking-[0.2em] leading-none">SECURITY</span>
@@ -389,7 +389,7 @@ const Home = () => {
         <motion.div style={{ scale: bgScale }} className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_rgba(34,197,94,0.05),transparent_50%)]" />
         <div className="absolute top-0 right-0 w-2/3 h-full bg-gradient-to-l from-primary/10 via-primary/5 to-transparent opacity-60 pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto px-6 w-full grid md:grid-cols-2 gap-12 items-center relative z-10">
+        <div className="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
           <motion.div style={{ y: heroY, opacity: heroOpacity }} initial="hidden" animate="visible" variants={staggerContainer}>
             <Reveal delay={0.1}>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold mb-8 uppercase tracking-widest">
@@ -398,7 +398,7 @@ const Home = () => {
             </Reveal>
 
             <Reveal delay={0.2}>
-              <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-[1.1] tracking-tight max-w-6xl">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-[1.1] tracking-tight max-w-6xl">
                 One phishing email can <span className="text-red-500 decoration-red-900/50 underline decoration-4 underline-offset-4">destroy your business.</span> <br className="hidden md:block" />
                 We train your team to <span className="text-primary decoration-primary/30 underline decoration-4 underline-offset-4">recognize it before they click.</span>
               </h1>
@@ -591,7 +591,7 @@ const Home = () => {
         <div className="mt-16 p-10 rounded-3xl bg-surface/60 border border-white/10 text-center">
           <h3 className="text-3xl font-bold text-white mb-4">Simple, <span className="text-primary">Transparent Pricing</span></h3>
           <p className="text-gray-400 mb-8 max-w-2xl mx-auto">From startups to enterprises. Month-to-month contracts. Cancel anytime.</p>
-          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto mb-8">
             {/* STARTER */}
             <div className="p-6 rounded-2xl bg-black/40 border border-white/10 text-left hover:border-primary/30 transition-colors">
               <div className="text-sm text-primary font-bold uppercase tracking-wider mb-2">Starter</div>
@@ -852,35 +852,37 @@ const Services = () => (
         <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Why We're <span className="text-primary">Better</span></h2>
         <p className="text-gray-400 max-w-2xl mx-auto">The old way of doing security training is broken. Here's how we fixed it.</p>
       </div>
-      <div className="overflow-x-auto">
-        <table className="w-full text-left border-collapse">
-          <thead>
-            <tr className="border-b border-white/10">
-              <th className="p-4 text-gray-500 font-normal">Feature</th>
-              <th className="p-4 text-white font-bold text-lg bg-surface/50 border-x border-white/10 w-1/3">HumanLayer Security</th>
-              <th className="p-4 text-gray-500 font-normal w-1/3">Competitor K</th>
-              <th className="p-4 text-gray-500 font-normal w-1/3">Competitor P</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-white/5">
-            {[
-              { f: "Setup Time", h: "5 Minutes", c1: "3+ Weeks", c2: "2+ Weeks" },
-              { f: "Shame Policy", h: "Zero Shame (Private)", c1: "Report to Manager", c2: "Public \"Wall of Shame\"" },
-              { f: "Training Timing", h: "Instant (Point of Failure)", c1: "Next scheduled meeting", c2: "Monthly video" },
-              { f: "Content Updates", h: "Weekly", c1: "Quarterly", c2: "Monthly" },
-              { f: "Pricing", h: "Transparent/Monthly", c1: "Quote Only/Annual", c2: "Quote Only/Annual" },
-            ].map((row, i) => (
-              <tr key={i} className="group hover:bg-white/5 transition-colors">
-                <td className="p-4 text-white font-bold">{row.f}</td>
-                <td className="p-4 text-primary font-bold bg-primary/5 border-x border-primary/10 flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4" /> {row.h}
-                </td>
-                <td className="p-4 text-gray-500">{row.c1}</td>
-                <td className="p-4 text-gray-500">{row.c2}</td>
+      <div className="overflow-x-auto -mx-6 px-6">
+        <div className="min-w-[768px]">
+          <table className="w-full text-left border-collapse">
+            <thead>
+              <tr className="border-b border-white/10">
+                <th className="p-4 text-gray-500 font-normal">Feature</th>
+                <th className="p-4 text-white font-bold text-lg bg-surface/50 border-x border-white/10 w-1/3">HumanLayer Security</th>
+                <th className="p-4 text-gray-500 font-normal w-1/3">Competitor K</th>
+                <th className="p-4 text-gray-500 font-normal w-1/3">Competitor P</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="divide-y divide-white/5">
+              {[
+                { f: "Setup Time", h: "5 Minutes", c1: "3+ Weeks", c2: "2+ Weeks" },
+                { f: "Shame Policy", h: "Zero Shame (Private)", c1: "Report to Manager", c2: "Public \"Wall of Shame\"" },
+                { f: "Training Timing", h: "Instant (Point of Failure)", c1: "Next scheduled meeting", c2: "Monthly video" },
+                { f: "Content Updates", h: "Weekly", c1: "Quarterly", c2: "Monthly" },
+                { f: "Pricing", h: "Transparent/Monthly", c1: "Quote Only/Annual", c2: "Quote Only/Annual" },
+              ].map((row, i) => (
+                <tr key={i} className="group hover:bg-white/5 transition-colors">
+                  <td className="p-4 text-white font-bold">{row.f}</td>
+                  <td className="p-4 text-primary font-bold bg-primary/5 border-x border-primary/10 flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4" /> {row.h}
+                  </td>
+                  <td className="p-4 text-gray-500">{row.c1}</td>
+                  <td className="p-4 text-gray-500">{row.c2}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </Section>
 
@@ -1197,6 +1199,86 @@ const Partnership = () => (
         ))}
       </motion.div>
 
+      <Section className="bg-black">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold text-white mb-6">
+            Partner <span className="text-primary">Benefits</span>
+          </h2>
+          <p className="text-gray-400 max-w-2xl mx-auto">
+            Everything you need to offer world-class phishing training under your brand.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {[
+            {
+              icon: Award,
+              title: "30% Revenue Share",
+              desc: "Earn recurring commission on every client",
+              stat: "$1,800/mo",
+              statLabel: "avg. per 10 clients"
+            },
+            {
+              icon: Shield,
+              title: "White Label Platform",
+              desc: "Your logo, your colors, your domain",
+              stat: "100%",
+              statLabel: "your branding"
+            },
+            {
+              icon: Users,
+              title: "Dedicated Support",
+              desc: "Partner success manager assigned",
+              stat: "<2 hrs",
+              statLabel: "response time"
+            },
+            {
+              icon: Terminal,
+              title: "API Access",
+              desc: "Integrate with your existing tools",
+              stat: "REST",
+              statLabel: "API included"
+            },
+            {
+              icon: FileText,
+              title: "Marketing Materials",
+              desc: "Sales decks, case studies, templates",
+              stat: "Ready",
+              statLabel: "to use"
+            },
+            {
+              icon: Activity,
+              title: "Monthly Training",
+              desc: "Partner webinars and product updates",
+              stat: "Live",
+              statLabel: "sessions"
+            }
+          ].map((benefit, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="p-8 rounded-3xl bg-surface/40 border border-white/10 hover:border-primary/30 transition-colors group"
+            >
+              <div className="w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <benefit.icon className="w-8 h-8 text-primary" />
+              </div>
+              <h3 className="text-xl font-bold text-white mb-2">{benefit.title}</h3>
+              <p className="text-gray-400 text-sm mb-4">{benefit.desc}</p>
+              <div className="pt-4 border-t border-white/5">
+                <div className="text-2xl font-bold text-primary">{benefit.stat}</div>
+                <div className="text-xs text-gray-500">{benefit.statLabel}</div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </Section>
+      <div className="max-w-4xl mx-auto mb-20 px-4">
+        <RevenueCalculator />
+      </div>
+
       <div className="relative rounded-[3rem] overflow-hidden p-12 text-center border border-white/10 group">
         <div className="absolute inset-0 bg-surface/80 backdrop-blur-md" />
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out" />
@@ -1211,35 +1293,284 @@ const Partnership = () => (
   </div>
 );
 
+const RevenueCalculator = () => {
+  const [clients, setClients] = useState(10);
+  const avgRevenue = 599; // Average monthly revenue per client
+  const partnerShare = 0.30; // 30% partner commission
 
+  const monthlyRevenue = clients * avgRevenue * partnerShare;
+  const yearlyRevenue = monthlyRevenue * 12;
 
-const Contact = () => (
-  <div className="min-h-screen bg-background text-white pb-20">
-    <PageHeader title="Start Your Defense" subtitle="Schedule a demo, get a quote, or just ask a question. We're here to help you secure your team." />
+  return (
+    <div className="p-8 rounded-3xl bg-surface/50 border border-white/10">
+      <h3 className="text-2xl font-bold text-white mb-6">
+        Revenue <span className="text-primary">Calculator</span>
+      </h3>
 
-    <Section className="!pt-0">
-      <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
-        {/* Contact Form / Info */}
-        <div className="space-y-8">
-          <div className="p-8 rounded-3xl bg-surface/50 border border-white/10 hover:border-primary/30 transition-colors">
-            <Mail className="w-12 h-12 text-primary mb-6" />
-            <h3 className="text-2xl font-bold text-white mb-2">Schedule a Demo</h3>
-            <p className="text-gray-400 mb-6">See the platform in action. We'll show you how to launch your first campaign in 5 minutes.</p>
-            <Button className="w-full">Book 15-Min Demo</Button>
-          </div>
+      {/* Slider */}
+      <div className="mb-8">
+        <label className="block text-sm font-bold text-gray-400 mb-4">
+          Number of Clients: <span className="text-primary">{clients}</span>
+        </label>
+        <input
+          type="range"
+          min="1"
+          max="50"
+          value={clients}
+          onChange={(e) => setClients(Number(e.target.value))}
+          className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-primary"
+        />
+      </div>
 
-          <div className="p-8 rounded-3xl bg-surface/50 border border-white/10 hover:border-primary/30 transition-colors">
-            <Shield className="w-12 h-12 text-primary mb-6" />
-            <h3 className="text-2xl font-bold text-white mb-2">General Inquiry</h3>
-            <p className="text-gray-400 mb-6">Questions about pricing, features, or partnerships? Drop us a line.</p>
-            <a href={`mailto:${CONTACT_INFO.email}`} className="text-xl font-bold text-white hover:text-primary transition-colors block mb-4">{CONTACT_INFO.email}</a>
-            <p className="text-sm text-gray-500">Response time: &lt; 2 hours</p>
+      {/* Results */}
+      <div className="grid grid-cols-2 gap-4">
+        <div className="p-6 rounded-2xl bg-black/40 border border-white/10">
+          <div className="text-sm text-gray-400 mb-2">Monthly</div>
+          <div className="text-3xl font-bold text-primary">
+            ${monthlyRevenue.toLocaleString(undefined, { maximumFractionDigits: 0 })}
           </div>
         </div>
+        <div className="p-6 rounded-2xl bg-black/40 border border-primary/20">
+          <div className="text-sm text-gray-400 mb-2">Yearly</div>
+          <div className="text-3xl font-bold text-primary">
+            ${yearlyRevenue.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+          </div>
+        </div>
+      </div>
 
-        {/* FAQ Preview */}
-        <div>
-          <h3 className="text-xl font-bold text-white mb-6">Frequently Asked Questions</h3>
+      <p className="text-xs text-gray-500 mt-4 text-center">
+        Based on 30% revenue share from avg. $599/mo client
+      </p>
+    </div>
+  );
+};
+
+
+
+const Contact = () => {
+  const [formData, setFormData] = useState({ name: '', email: '', company: '', message: '' });
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus('loading');
+    // Simulate API call
+    setTimeout(() => {
+      setStatus('success');
+      setFormData({ name: '', email: '', company: '', message: '' });
+    }, 1500);
+  };
+
+  return (
+    <div className="min-h-screen bg-background text-white pb-20">
+      <PageHeader
+        title="Let's Talk Security"
+        subtitle="Get a free security assessment. See your team's baseline phishing risk in 24 hours."
+      />
+
+      <Section className="!pt-0">
+        <div className="grid lg:grid-cols-2 gap-16 max-w-7xl mx-auto">
+
+          {/* LEFT COLUMN - Interactive Form */}
+          <div className="space-y-8">
+            <div>
+              <h2 className="text-3xl font-bold text-white mb-4">
+                Start Your Free <span className="text-primary">Assessment</span>
+              </h2>
+              <p className="text-gray-400">
+                Tell us about your team. We'll show you where your vulnerabilities are and how to fix them.
+              </p>
+            </div>
+
+            <form className="space-y-6" onSubmit={handleSubmit}>
+              {/* Name Input */}
+              <div className="group">
+                <label className="block text-sm font-bold text-gray-400 mb-2 group-focus-within:text-primary transition-colors">
+                  Your Name
+                </label>
+                <input
+                  type="text"
+                  required
+                  className="w-full px-6 py-4 bg-surface border border-white/10 rounded-2xl text-white placeholder-gray-600 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+                  placeholder="John Doe"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                />
+              </div>
+
+              {/* Email Input */}
+              <div className="group">
+                <label className="block text-sm font-bold text-gray-400 mb-2 group-focus-within:text-primary transition-colors">
+                  Work Email
+                </label>
+                <input
+                  type="email"
+                  required
+                  className="w-full px-6 py-4 bg-surface border border-white/10 rounded-2xl text-white placeholder-gray-600 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+                  placeholder="john@company.com"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                />
+              </div>
+
+              {/* Company Input */}
+              <div className="group">
+                <label className="block text-sm font-bold text-gray-400 mb-2 group-focus-within:text-primary transition-colors">
+                  Company Name
+                </label>
+                <input
+                  type="text"
+                  required
+                  className="w-full px-6 py-4 bg-surface border border-white/10 rounded-2xl text-white placeholder-gray-600 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+                  placeholder="Acme Corp"
+                  value={formData.company}
+                  onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                />
+              </div>
+
+              {/* Team Size Selector */}
+              <div className="group">
+                <label className="block text-sm font-bold text-gray-400 mb-2">
+                  Team Size
+                </label>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  {['1-25', '26-100', '101-500', '500+'].map((size) => (
+                    <button
+                      key={size}
+                      type="button"
+                      className="px-4 py-3 bg-surface border border-white/10 rounded-xl text-white hover:border-primary hover:bg-primary/10 transition-all text-sm font-bold"
+                    >
+                      {size}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Message Textarea */}
+              <div className="group">
+                <label className="block text-sm font-bold text-gray-400 mb-2 group-focus-within:text-primary transition-colors">
+                  Tell Us About Your Needs (Optional)
+                </label>
+                <textarea
+                  rows={4}
+                  className="w-full px-6 py-4 bg-surface border border-white/10 rounded-2xl text-white placeholder-gray-600 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all resize-none"
+                  placeholder="We're looking for..."
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                />
+              </div>
+
+              {/* Submit Button */}
+              <Button
+                type="submit"
+                size="lg"
+                className="w-full bg-green-600 hover:bg-green-500 text-white"
+                disabled={status === 'loading'}
+              >
+                {status === 'loading' ? (
+                  <><div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" /> Sending...</>
+                ) : (
+                  <>Get Free Assessment <ArrowRight className="w-5 h-5 ml-2" /></>
+                )}
+              </Button>
+
+              {/* Success/Error Messages */}
+              {status === 'success' && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="p-4 bg-primary/10 border border-primary/20 rounded-xl text-primary text-sm"
+                >
+                  ✓ Thanks! We'll be in touch within 24 hours.
+                </motion.div>
+              )}
+            </form>
+          </div>
+
+          {/* RIGHT COLUMN - Benefits & Social Proof */}
+          <div className="space-y-8">
+            {/* What to Expect */}
+            <div className="p-8 rounded-3xl bg-surface/50 border border-white/10">
+              <h3 className="text-2xl font-bold text-white mb-6">
+                What Happens <span className="text-primary">Next?</span>
+              </h3>
+              <div className="space-y-6">
+                {[
+                  { step: '1', title: 'Quick Call', desc: '15-minute intro call to understand your needs', time: 'Within 24 hours' },
+                  { step: '2', title: 'Free Assessment', desc: 'We analyze your current security posture', time: 'Day 2-3' },
+                  { step: '3', title: 'Custom Proposal', desc: 'Tailored plan with transparent pricing', time: 'End of week 1' },
+                ].map((item) => (
+                  <div key={item.step} className="flex gap-4">
+                    <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold shrink-0 border-2 border-primary/40">
+                      {item.step}
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-white mb-1">{item.title}</h4>
+                      <p className="text-sm text-gray-400 mb-1">{item.desc}</p>
+                      <p className="text-xs text-primary font-mono">{item.time}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Direct Contact Options */}
+            <div className="grid grid-cols-2 gap-4">
+              <a
+                href={`mailto:${CONTACT_INFO.email}`}
+                className="p-6 rounded-2xl bg-surface/50 border border-white/10 hover:border-primary/30 transition-all group text-center"
+              >
+                <Mail className="w-8 h-8 text-primary mx-auto mb-3 group-hover:scale-110 transition-transform" />
+                <div className="text-sm text-gray-400 mb-1">Email Us</div>
+                <div className="text-xs text-white font-mono">{CONTACT_INFO.email}</div>
+              </a>
+
+              <a
+                href={`tel:${CONTACT_INFO.phone}`}
+                className="p-6 rounded-2xl bg-surface/50 border border-white/10 hover:border-primary/30 transition-all group text-center"
+              >
+                <Activity className="w-8 h-8 text-primary mx-auto mb-3 group-hover:scale-110 transition-transform" />
+                <div className="text-sm text-gray-400 mb-1">Call Us</div>
+                <div className="text-xs text-white font-mono">{CONTACT_INFO.phone}</div>
+              </a>
+            </div>
+
+            {/* Trust Indicators */}
+            <div className="p-6 rounded-2xl bg-surface/30 border border-white/10">
+              <div className="flex items-center gap-3 mb-4">
+                <CheckCircle className="w-6 h-6 text-primary" />
+                <span className="text-sm font-bold text-white">Why Companies Trust Us</span>
+              </div>
+              <ul className="space-y-3 text-sm text-gray-400">
+                <li className="flex items-start gap-2">
+                  <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5" />
+                  <span>Response within 2 hours during business hours</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5" />
+                  <span>No pushy sales tactics - we educate first</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5" />
+                  <span>Transparent pricing from day one</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5" />
+                  <span>Free trial available - no credit card required</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      {/* FAQ Section Below */}
+      <Section className="bg-black border-t border-white/5">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl font-bold text-white mb-8 text-center">
+            Questions <span className="text-primary">Before Reaching Out?</span>
+          </h2>
+          {/* FAQ Logic embedded here or reused if separated, reusing structure for now */}
           <div className="space-y-4">
             {[
               { q: "Is there a free trial?", a: "Yes. We offer a free 14-day trial with full access to all features. No credit card required." },
@@ -1254,10 +1585,10 @@ const Contact = () => (
             ))}
           </div>
         </div>
-      </div>
-    </Section>
-  </div>
-);
+      </Section>
+    </div>
+  );
+};
 
 const Legal = () => (
   <div className="pt-32 px-6 min-h-screen pb-20 bg-background text-white">
