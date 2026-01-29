@@ -62,6 +62,79 @@ const Section: React.FC<{ children: React.ReactNode, className?: string, id?: st
   </section>
 );
 
+const HowWeWork = () => (
+  <Section className="bg-surface relative overflow-hidden">
+    {/* Background Trace */}
+    <div className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent hidden md:block opacity-20" />
+
+    <div className="text-center mb-20 relative z-10">
+      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold mb-6 uppercase tracking-widest">
+        <Activity className="w-3 h-3" /> Process
+      </div>
+      <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">How We <span className="text-primary">Work</span></h2>
+      <p className="text-gray-400 max-w-2xl mx-auto text-lg">Four steps to turn your biggest vulnerability into your strongest defense.</p>
+    </div>
+
+    <div className="grid md:grid-cols-4 gap-8 relative z-10">
+      {[
+        { t: "Test", d: "Realistic phishing emails. Custom templates. Real threats.", i: Mail, step: "01" },
+        { t: "Catch", d: "Safe fail page. No shame. No reporting to manager.", i: FileText, step: "02" },
+        { t: "Teach", d: "90-second instant lesson. Teach the 'why' and 'how'.", i: Activity, step: "03" },
+        { t: "Improve", d: "Track metrics. Watch click rates drop. Export reports.", i: CheckCircle, step: "04" }
+      ].map((s, i) => (
+        <motion.div variants={fadeInUp} key={i} className="group relative pt-8 md:pt-12 md:text-center">
+          {/* Big Number Background */}
+          <div className="absolute top-0 left-0 md:left-1/2 md:-translate-x-1/2 text-[6rem] md:text-[8rem] font-bold text-white/5 font-display leading-none select-none -z-10 group-hover:text-primary/10 transition-colors">
+            {s.step}
+          </div>
+
+          <div className="w-4 h-4 bg-surface border-4 border-primary rounded-full mx-auto mb-6 hidden md:block relative z-10 shadow-[0_0_15px_rgba(34,197,94,0.5)]" />
+
+          <div className="md:px-4">
+            <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-white/5 border border-white/10 mb-6 text-primary group-hover:scale-110 transition-transform duration-300 group-hover:bg-primary group-hover:text-black">
+              <s.i className="w-6 h-6" />
+            </div>
+            <h3 className="text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors">{s.t}</h3>
+            <p className="text-gray-400 text-sm leading-relaxed max-w-[200px] md:mx-auto">{s.d}</p>
+          </div>
+        </motion.div>
+      ))}
+    </div>
+  </Section>
+);
+
+const WhyChoose = () => (
+  <Section className="bg-black border-y border-white/5">
+    <div className="text-center mb-16">
+      <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+        Why Companies Choose <span className="text-primary">Human Layer</span>
+      </h2>
+      <p className="text-gray-400 max-w-2xl mx-auto">
+        We built this platform to solve the problems other security training companies ignore.
+      </p>
+    </div>
+
+    <div className="grid md:grid-cols-3 gap-12 max-w-6xl mx-auto">
+      {[
+        { t: "Zero Shame", d: "No \"wall of shame\". No public humiliation. Just private, immediate training.", i: Shield },
+        { t: "Compliance Ready", d: "Automatic SOC 2, ISO 27001, & HIPAA documentation.", i: Award },
+        { t: "5-Minute Setup", d: "No IT department needed. Launch your first campaign today.", i: Activity },
+        { t: "Real Templates", d: "Law firms get court notices. Finance gets wire transfers. Real threats.", i: FileText },
+        { t: "Clear Analytics", d: "Track improvement. Export reports for insurance.", i: Terminal },
+        { t: "Instant Learning", d: "Training happens the second they click. Not next week.", i: Mail }
+      ].map((f, i) => (
+        <motion.div variants={fadeInUp} key={i} className="flex flex-col items-center text-center group">
+          <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-6 py-4 border border-white/5 group-hover:border-primary/50 group-hover:bg-primary/10 transition-all duration-500 rounded-2xl">
+            <f.i className="w-8 h-8 text-gray-300 group-hover:text-primary transition-colors" />
+          </div>
+          <h3 className="text-xl font-bold text-white mb-3">{f.t}</h3>
+          <p className="text-gray-400 leading-relaxed text-sm max-w-xs">{f.d}</p>
+        </motion.div>
+      ))}
+    </div>
+  </Section>
+);
+
 
 
 const Navbar = () => {
@@ -84,7 +157,7 @@ const Navbar = () => {
         scrolled ? "glass rounded-full border border-white/10 shadow-lg shadow-black/50" : "bg-transparent border-transparent"
       )}>
         <Link to="/" className="flex items-center gap-3 group">
-          <img src="/humanlayerlogo.png" alt="HumanLayer Security" className="h-14 md:h-20 w-auto object-contain transition-all duration-300 group-hover:scale-102 filter drop-shadow-[0_0_8px_rgba(34,197,94,0.3)]" />
+          <img src="/humanlayerlogo.png" alt="Human Layer Security" className="h-14 md:h-20 w-auto object-contain transition-all duration-300 group-hover:scale-102 filter drop-shadow-[0_0_8px_rgba(34,197,94,0.3)]" />
           <div className="flex flex-col justify-center">
             <span className="font-display font-bold text-white text-lg md:text-xl tracking-tight leading-none group-hover:text-primary transition-colors">HUMAN&nbsp;&nbsp;LAYER</span>
             <span className="font-display font-bold text-primary text-[10px] md:text-sm tracking-[0.2em] leading-none">SECURITY</span>
@@ -140,7 +213,7 @@ const Footer = () => (
       <div className="grid md:grid-cols-4 gap-12 mb-20">
         <div className="col-span-1 md:col-span-2">
           <Link to="/" className="flex items-center gap-4 mb-6 group">
-            <img src="/humanlayerlogo.png" alt="HumanLayer Security" className="h-24 w-auto object-contain transition-transform group-hover:scale-102" />
+            <img src="/humanlayerlogo.png" alt="Human Layer Security" className="h-24 w-auto object-contain transition-transform group-hover:scale-102" />
             <div className="flex flex-col justify-center">
               <span className="font-display font-bold text-white text-2xl tracking-tight leading-none group-hover:text-primary transition-colors">HUMAN&nbsp;&nbsp;LAYER</span>
               <span className="font-display font-bold text-primary text-sm tracking-[0.25em] leading-none">SECURITY</span>
@@ -210,7 +283,7 @@ const Home = () => {
               </div>
             </div>
 
-            <p className="text-xl text-gray-400 mb-8 max-w-lg leading-relaxed">
+            <p className="text-xl text-white/80 mb-8 max-w-lg leading-relaxed">
               We send realistic phishing tests to your employees. When someone clicks, they get instant training on what they missed. Your team gets better every month. Your company gets safer every day.
             </p>
 
@@ -246,14 +319,14 @@ const Home = () => {
               </Link>
             </div>
             {/* Trust Line */}
-            <p className="text-sm text-gray-500 mt-4">
+            <p className="text-sm text-white/50 mt-4">
               No credit card required • Setup in under 5 minutes • Cancel anytime
             </p>
           </motion.div>
           <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-primary/20 bg-surface/50 backdrop-blur-sm transition-all duration-500">
             {/* Decorative Elements */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full blur-[80px] pointer-events-none mix-blend-screen" />
-            <div className="absolute bottom-0 left-0 w-48 h-48 bg-blue-500/10 rounded-full blur-[60px] pointer-events-none mix-blend-screen" />
+            <div className="absolute bottom-0 left-0 w-48 h-48 bg-green-500/10 rounded-full blur-[60px] pointer-events-none mix-blend-screen" />
 
             <img src="/hero-network.png" alt="Human Defense Network" className="w-full h-auto object-cover opacity-90 transition-transform duration-700 ease-out relative z-0" />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80 z-10" />
@@ -301,87 +374,7 @@ const Home = () => {
       </div>
 
       {/* WHY US SECTION */}
-      <Section className="bg-surface/50 border-y border-white/5">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Why Companies Choose <span className="text-primary">HumanLayer</span>
-          </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
-            We built this platform to solve the problems other security training companies ignore.
-          </p>
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-6">
-          {/* Feature 1: No Shame */}
-          <motion.div variants={fadeInUp} className="p-8 rounded-3xl bg-black/40 border border-white/10 hover:border-primary/30 transition-all group relative overflow-hidden">
-            <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
-              <div className="w-16 h-16 rounded-full border border-primary/20 dashed-border" />
-            </div>
-            <div className="w-14 h-14 rounded-2xl bg-primary/20 flex items-center justify-center mb-6 group-hover:scale-105 transition-transform"><Shield className="w-7 h-7 text-primary" /></div>
-            <h3 className="text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors">Zero Shame <span className="text-primary">Training</span></h3>
-            <p className="text-gray-400 text-sm leading-relaxed mb-4">We don't report clicks to management. No "wall of shame." No public humiliation. When someone clicks, they get private, immediate training. That's it.</p>
-            <div className="flex items-start gap-2 p-3 rounded-xl bg-primary/5 border border-primary/20"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /><span className="text-xs text-gray-300"><strong className="text-primary">Result:</strong> Employees engage honestly instead of hiding mistakes</span></div>
-          </motion.div>
-
-          {/* Feature 2: Compliance Certificates */}
-          <motion.div variants={fadeInUp} className="p-8 rounded-3xl bg-black/40 border border-white/10 hover:border-primary/30 transition-all group relative overflow-hidden">
-            <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
-              <div className="w-16 h-16 rounded-full border border-primary/20 dashed-border" />
-            </div>
-            <div className="w-14 h-14 rounded-2xl bg-primary/20 flex items-center justify-center mb-6 group-hover:scale-105 transition-transform"><Award className="w-7 h-7 text-primary" /></div>
-            <h3 className="text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors">Compliance <span className="text-primary">Certificates</span></h3>
-            <p className="text-gray-400 text-sm leading-relaxed mb-4">Automatic compliance documentation for SOC 2, ISO 27001, HIPAA, CMMC, cyber insurance. Export audit-ready reports with one click.</p>
-            <div className="flex items-start gap-2 p-3 rounded-xl bg-primary/5 border border-primary/20"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /><span className="text-xs text-gray-300"><strong className="text-primary">Result:</strong> Pass audits without manual documentation work</span></div>
-          </motion.div>
-
-          {/* Feature 3: Fast Setup */}
-          <motion.div variants={fadeInUp} className="p-8 rounded-3xl bg-black/40 border border-white/10 hover:border-primary/30 transition-all group relative overflow-hidden">
-            <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
-              <div className="w-16 h-16 rounded-full border border-primary/20 dashed-border" />
-            </div>
-            <div className="w-14 h-14 rounded-2xl bg-primary/20 flex items-center justify-center mb-6 group-hover:scale-105 transition-transform"><Activity className="w-7 h-7 text-primary" /></div>
-            <h3 className="text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors">5-Minute <span className="text-primary">Setup</span></h3>
-            <p className="text-gray-400 text-sm leading-relaxed mb-4">Upload your employee list. Choose a campaign. Launch. That's it. No IT department needed. No weeks of configuration. Start training today.</p>
-            <div className="flex items-start gap-2 p-3 rounded-xl bg-primary/5 border border-primary/20"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /><span className="text-xs text-gray-300"><strong className="text-primary">Result:</strong> Get protected this week, not next quarter</span></div>
-          </motion.div>
-        </div>
-
-        {/* Second Row */}
-        <div className="grid md:grid-cols-3 gap-6 mt-6">
-          {/* Feature 4: Custom Templates */}
-          <motion.div variants={fadeInUp} className="p-8 rounded-3xl bg-black/40 border border-white/10 hover:border-primary/30 transition-all group relative overflow-hidden">
-            <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
-              <div className="w-16 h-16 rounded-full border border-primary/20 dashed-border" />
-            </div>
-            <div className="w-14 h-14 rounded-2xl bg-primary/20 flex items-center justify-center mb-6 group-hover:scale-105 transition-transform"><FileText className="w-7 h-7 text-primary" /></div>
-            <h3 className="text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors">Industry-Specific <span className="text-primary">Templates</span></h3>
-            <p className="text-gray-400 text-sm leading-relaxed mb-4">Law firms get fake court notices. Medical practices get HIPAA alerts. Finance teams get wire transfer requests. We customize to your actual threats.</p>
-            <div className="flex items-start gap-2 p-3 rounded-xl bg-primary/5 border border-primary/20"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /><span className="text-xs text-gray-300"><strong className="text-primary">Result:</strong> Training that matches real-world attacks</span></div>
-          </motion.div>
-
-          {/* Feature 5: Monthly Reports */}
-          <motion.div variants={fadeInUp} className="p-8 rounded-3xl bg-black/40 border border-white/10 hover:border-primary/30 transition-all group relative overflow-hidden">
-            <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
-              <div className="w-16 h-16 rounded-full border border-primary/20 dashed-border" />
-            </div>
-            <div className="w-14 h-14 rounded-2xl bg-primary/20 flex items-center justify-center mb-6 group-hover:scale-105 transition-transform"><Terminal className="w-7 h-7 text-primary" /></div>
-            <h3 className="text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors">Clear Monthly <span className="text-primary">Analytics</span></h3>
-            <p className="text-gray-400 text-sm leading-relaxed mb-4">See who clicked, what worked, where vulnerabilities are. Track improvement over time. Export for executives, auditors, or insurance providers.</p>
-            <div className="flex items-start gap-2 p-3 rounded-xl bg-primary/5 border border-primary/20"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /><span className="text-xs text-gray-300"><strong className="text-primary">Result:</strong> Prove ROI with concrete metrics</span></div>
-          </motion.div>
-
-          {/* Feature 6: Instant Training */}
-          <motion.div variants={fadeInUp} className="p-8 rounded-3xl bg-black/40 border border-white/10 hover:border-primary/30 transition-all group relative overflow-hidden">
-            <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
-              <div className="w-16 h-16 rounded-full border border-primary/20 dashed-border" />
-            </div>
-            <div className="w-14 h-14 rounded-2xl bg-primary/20 flex items-center justify-center mb-6 group-hover:scale-105 transition-transform"><Mail className="w-7 h-7 text-primary" /></div>
-            <h3 className="text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors">Instant Learning <span className="text-primary">Moments</span></h3>
-            <p className="text-gray-400 text-sm leading-relaxed mb-4">Training happens the second someone clicks. Not next week in a meeting. Not in an annual video. Right when the lesson will stick.</p>
-            <div className="flex items-start gap-2 p-3 rounded-xl bg-primary/5 border border-primary/20"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /><span className="text-xs text-gray-300"><strong className="text-primary">Result:</strong> Behavior change that actually lasts</span></div>
-          </motion.div>
-        </div>
-      </Section >
+      <WhyChoose />
 
       {/* THE PROBLEM SECTION */}
       < Section className="bg-black border-y border-white/5" >
@@ -410,41 +403,7 @@ const Home = () => {
       </Section >
 
       {/* HOW WE WORK */}
-      < Section className="bg-surface" >
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">How We <span className="text-primary">Work</span></h2>
-          <p className="text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">Four steps to turn your biggest vulnerability into your strongest defense.</p>
-        </div>
-        <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="flex md:grid md:grid-cols-4 gap-4 mb-12 overflow-x-auto md:overflow-visible pb-8 md:pb-0 snap-x snap-mandatory px-4 md:px-0 -mx-4 md:mx-0">
-          {[
-            { t: "Test", d: "We send realistic phishing emails with custom templates for your industry. Law firms get fake court notices. Medical practices get HIPAA alerts. Real scenarios. Zero risk. Setup in 5 minutes.", i: Mail },
-            { t: "Catch", d: "Someone clicks? They land on a safe page with our no shame policy—no reporting to managers, no public humiliation. Just a private notification that they're about to learn something important.", i: FileText },
-            { t: "Teach", d: "Right there, a 90-second lesson explains exactly what they missed. The fake sender. The urgency tactic. The subtle signs. Instant training when their brain is most receptive—not in next week's meeting.", i: Activity },
-            { t: "Improve", d: "Watch click rates drop in your real-time dashboard. Monthly analytics show who's improving and where vulnerabilities remain. Export compliance certificates for auditors with one click.", i: CheckCircle }
-          ].map((s, i) => (
-            <motion.div variants={fadeInUp} key={i} className="group relative p-8 rounded-3xl bg-surface/40 backdrop-blur-sm border border-white/10 hover:bg-surface/60 transition-all duration-500 min-w-[300px] md:min-w-0 snap-center hover:border-primary/50 overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-              {/* Tech Decoration */}
-              <div className="absolute top-0 right-0 p-4 opacity-20 group-hover:opacity-40 transition-opacity">
-                <div className="w-12 h-12 rounded-full border border-primary/20 dashed-border animate-[spin_10s_linear_infinite]" />
-              </div>
-
-              <div className="absolute top-0 right-0 p-4 text-7xl font-bold text-primary/20 font-display select-none transition-colors z-0">0{i + 1}</div>
-              <div className="w-12 h-12 bg-black/50 border border-white/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-105 transition-transform relative z-10 group-hover:border-primary/30"><s.i className="w-6 h-6 text-gray-400 group-hover:text-primary transition-colors" /></div>
-              <h3 className="text-xl font-bold text-white mb-2 relative z-10 group-hover:text-primary transition-colors">
-                {s.t} <span className="text-primary">Phase</span>
-              </h3>
-              <p className="text-gray-400 text-sm leading-relaxed relative z-10">{s.d}</p>
-
-
-            </motion.div>
-          ))}
-        </motion.div>
-        <div className="flex justify-center">
-          <Link to="/about"><Button size="lg" variant="outline">Learn More About Us</Button></Link>
-        </div>
-      </Section >
+      <HowWeWork />
 
       {/* SERVICES PREVIEW */}
       < Section id="services-preview" >
@@ -452,27 +411,20 @@ const Home = () => {
           <div className="mb-6 md:mb-0"><h2 className="text-4xl md:text-5xl font-bold text-white mb-6">What You <span className="text-primary">Get</span></h2><p className="text-gray-400 text-lg">Everything you need to build a security aware team. Nothing you don't.</p></div>
           <Button variant="outline" className="hidden md:flex" onClick={() => navigate('/services')}>View All Features</Button>
         </div>
-        <div className="grid md:grid-cols-2 gap-6 mb-12">
+        <div className="space-y-4">
           {[
-            { t: "Realistic Attack Simulations", d: "We send phishing emails that look and feel exactly like real attacks—because they're based on real attacks. Your employees see them in their actual inbox. They make decisions under real conditions. But when they click, they learn instead of getting compromised.", i: Shield },
-            { t: "Training at the Point of Failure", d: "The second someone clicks a phishing link, they see what they missed and why it worked. Not next week in a training session. Not in an annual compliance video. Right now, while the mistake is fresh and the lesson will stick.", i: Users },
-            { t: "Monthly Intelligence Reports", d: "See exactly where your vulnerabilities are. Who's clicking. What's working. Which departments need extra training. Export compliance reports for auditors. Understand your security posture in plain English, not technical jargon.", i: FileText },
-            { t: "Compliance Documentation", d: "Need proof of security training for insurance, audits, or regulations? We generate the documentation automatically. SOC 2, ISO 27001, CMMC — formatted correctly and ready to submit. Your auditor gets what they need. You get back to work.", i: Award }
+            { t: "Realistic Attack Simulations", d: "We send phishing emails that look and feel exactly like real attacks—because they're based on real attacks. Your employees see them in their actual inbox. They make decisions under real conditions.", i: Shield },
+            { t: "Training at the Point of Failure", d: "The second someone clicks a phishing link, they see what they missed and why it worked. Not next week in a training session. Not in an annual compliance video. Right now.", i: Users },
+            { t: "Monthly Intelligence Reports", d: "See exactly where your vulnerabilities are. Who's clicking. What's working. Which departments need extra training. Export compliance reports for auditors.", i: FileText },
+            { t: "Compliance Documentation", d: "Generate documentation automatically. SOC 2, ISO 27001, CMMC — formatted correctly and ready to submit. Your auditor gets what they need. You get back to work.", i: Award }
           ].map((s, i) => (
-            <div key={i} className="p-10 rounded-3xl bg-surface/40 backdrop-blur-sm border border-white/10 flex flex-col justify-end group transition-all hover:border-primary/50 hover:bg-surface/60 min-h-[350px] relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
-                <div className="w-16 h-16 rounded-full border border-primary/20 dashed-border" />
+            <div key={i} className="flex gap-6 p-6 rounded-2xl hover:bg-white/5 transition-colors border border-transparent hover:border-white/10 items-start">
+              <div className="w-12 h-12 rounded-lg bg-surface flex items-center justify-center shrink-0 text-primary border border-white/10">
+                <s.i className="w-6 h-6" />
               </div>
-              <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-              <s.i className="w-16 h-16 text-gray-400 mb-auto group-hover:text-primary transition-colors relative z-10" />
-
-              <div className="relative z-10">
-                <h3 className="text-3xl font-bold text-white mb-3 group-hover:text-primary transition-colors">
-                  {s.t.split(' ').slice(0, Math.ceil(s.t.split(' ').length / 2)).join(' ')} <span className="text-primary">{s.t.split(' ').slice(Math.ceil(s.t.split(' ').length / 2)).join(' ')}</span>
-                </h3>
-                <p className="text-gray-300 text-lg leading-relaxed">{s.d}</p>
+              <div>
+                <h3 className="text-xl font-bold text-white mb-2">{s.t}</h3>
+                <p className="text-white/70 leading-relaxed">{s.d}</p>
               </div>
             </div>
           ))}
@@ -539,9 +491,10 @@ const Home = () => {
       </Section >
 
       {/* SOCIAL PROOF / VALUE PROP */}
+      {/* SOCIAL PROOF / VALUE PROP */}
       < Section className="bg-surface/50" >
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div>
+        <div className="grid md:grid-cols-5 gap-12 items-center">
+          <div className="md:col-span-3">
             <h2 className="text-4xl md:text-6xl font-bold text-white mb-8">Why This Approach <span className="text-primary">Works</span></h2>
             <ul className="space-y-6">
               <li className="flex gap-4 items-start">
@@ -577,36 +530,28 @@ const Home = () => {
           </div>
 
           {/* DYNAMIC QUOTE COMPONENT */}
-          <div className="relative group perspective-1000 h-full min-h-[400px]">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent rounded-[3rem] blur-xl opacity-50 group-hover:opacity-70 transition-opacity duration-1000" />
-            <div className="relative h-full rounded-[3rem] bg-black/80 backdrop-blur-xl border border-white/10 p-12 flex flex-col justify-between overflow-hidden group-hover:border-primary/30 transition-colors duration-500">
+          <div className="md:col-span-2 relative group perspective-1000 h-full min-h-[300px]">
+            {/* Simple Background */}
+            <div className="absolute inset-0 bg-surface/30 rounded-[2rem] border border-white/10" />
 
-              {/* Decorative Elements */}
-              <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-[80px] pointer-events-none" />
-              <div className="absolute bottom-0 left-0 w-48 h-48 bg-blue-500/5 rounded-full blur-[60px] pointer-events-none" />
-              <Quote className="absolute top-8 right-8 text-primary/10 w-32 h-32 rotate-12 transform group-hover:scale-105 group-hover:text-primary/20 transition-all duration-700" />
-
+            <div className="relative h-full rounded-[2rem] p-8 flex flex-col justify-between overflow-hidden">
               <div className="relative z-10">
-                <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-10">
-                  <div className="w-2 h-2 rounded-full bg-primary animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.8)]" />
-                  <span className="text-primary text-xs font-bold tracking-[0.2em] uppercase">Security Truth</span>
+                <div className="inline-flex items-center gap-3 px-3 py-1 rounded-full bg-yellow-500/10 border border-yellow-500/20 mb-6">
+                  <div className="w-1.5 h-1.5 rounded-full bg-yellow-500 animate-pulse" />
+                  <span className="text-yellow-500 text-[10px] font-bold tracking-[0.2em] uppercase">Security Tip</span>
                 </div>
 
-                <blockquote className="text-3xl md:text-4xl font-display font-bold text-white leading-[1.15] mb-8">
-                  <span className="text-white">"{quote.text.split(' ').slice(0, Math.ceil(quote.text.split(' ').length / 2)).join(' ')} </span>
-                  <span className="text-primary">{quote.text.split(' ').slice(Math.ceil(quote.text.split(' ').length / 2)).join(' ')}"</span>
+                <blockquote className="text-xl font-display font-medium text-white leading-relaxed mb-6">
+                  "{quote.text}"
                 </blockquote>
               </div>
 
-              <div className="relative z-10 flex items-center gap-4">
-                <div className="w-12 h-[1px] bg-primary/50" />
-                <div className="text-primary font-mono text-sm uppercase tracking-widest font-bold">
+              <div className="relative z-10 flex items-center gap-3">
+                <div className="w-6 h-[1px] bg-white/20" />
+                <div className="text-white/50 font-mono text-[10px] uppercase tracking-widest font-bold">
                   {quote.author}
                 </div>
               </div>
-
-              {/* Scanline Effect */}
-              <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent_50%,rgba(0,0,0,0.3)_50%)] bg-[length:100%_4px] pointer-events-none opacity-20" />
             </div>
           </div>
 
@@ -860,37 +805,8 @@ const Services = () => (
         </div>
       </Section>
 
-      {/* DUPLICATED HOW WE WORK SECTION */}
-      <div className="my-32">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">How We <span className="text-primary">Work</span></h2>
-          <p className="text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">Four steps to turn your biggest vulnerability into your strongest defense.</p>
-        </div>
-        <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="flex md:grid md:grid-cols-4 gap-4 mb-12 overflow-x-auto md:overflow-visible pb-8 md:pb-0 snap-x snap-mandatory px-4 md:px-0 -mx-4 md:mx-0">
-          {[{ t: "Test", d: "We send realistic phishing emails that look exactly like the attacks your team faces every day. Fake invoices. Urgent password resets. Requests from the CEO. Real scenarios. Zero risk.", i: Mail }, { t: "Catch", d: "Someone clicks? They land on a safe page that shows them it was a test. No consequences. No reporting to their manager. Just an immediate, private notification.", i: FileText }, { t: "Teach", d: "Right there, a 90 second lesson explains exactly what they missed. The fake sender address. The urgency tactic. The subtle signs. They learn in the moment when their brain is most receptive.", i: Activity }, { t: "Improve", d: "Over weeks and months, you watch the click rates drop. Employees start forwarding suspicious emails to IT instead of clicking them. Your team builds real instincts, not just memorized rules.", i: CheckCircle }].map((s, i) => (
-            <motion.div variants={fadeInUp} key={i} className="group relative p-10 rounded-[2.5rem] bg-surface/40 backdrop-blur-sm border border-white/10 hover:bg-surface/60 transition-all duration-500 min-w-[300px] md:min-w-0 snap-center hover:border-primary/50 overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-              {/* Tech Decoration */}
-              <div className="absolute top-0 right-0 p-4 opacity-20 group-hover:opacity-40 transition-opacity">
-                <div className="w-12 h-12 rounded-full border border-primary/20 dashed-border animate-[spin_10s_linear_infinite]" />
-              </div>
-
-              <div className="absolute top-0 right-0 p-4 text-7xl font-bold text-primary/20 font-display select-none transition-colors z-0">0{i + 1}</div>
-              <div className="w-12 h-12 bg-black/50 border border-white/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-105 transition-transform relative z-10 group-hover:border-primary/30"><s.i className="w-6 h-6 text-gray-400 group-hover:text-primary transition-colors" /></div>
-              <h3 className="text-xl font-bold text-white mb-2 relative z-10 group-hover:text-primary transition-colors">
-                {s.t} <span className="text-primary">Phase</span>
-              </h3>
-              <p className="text-gray-400 text-sm leading-relaxed relative z-10">{s.d}</p>
-
-
-            </motion.div>
-          ))}
-        </motion.div>
-        <div className="flex justify-center">
-          <Link to="/about"><Button size="lg" variant="outline">Learn More About Us</Button></Link>
-        </div>
-      </div>
+      {/* REUSED HOW WE WORK SECTION */}
+      <HowWeWork />
 
       <div className="mt-16 text-center bg-black/40 backdrop-blur-md p-16 rounded-[3rem] border border-white/10 relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
@@ -1032,7 +948,7 @@ const Partnership = () => (
           <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-primary/20 bg-surface/50 backdrop-blur-sm transition-all duration-500">
             {/* Decorative Elements */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full blur-[80px] pointer-events-none mix-blend-screen" />
-            <div className="absolute bottom-0 left-0 w-48 h-48 bg-blue-500/10 rounded-full blur-[60px] pointer-events-none mix-blend-screen" />
+            <div className="absolute bottom-0 left-0 w-48 h-48 bg-green-500/10 rounded-full blur-[60px] pointer-events-none mix-blend-screen" />
 
             <img src="/partnership-hero.png" alt="Strategic Partnership" className="w-full h-auto object-cover opacity-90 transition-transform duration-700 ease-out relative z-0" />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80 z-10" />
@@ -1191,6 +1107,3 @@ function App() {
 }
 
 export default App;
-
-
-
