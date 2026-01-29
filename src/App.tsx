@@ -5,6 +5,10 @@ import { AnimatePresence, motion, useScroll, useTransform, useInView, useAnimati
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
+// Explicitly check window to avoid SSR issues (though simple here)
+const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 
 // --- UTILS ---
 function cn(...inputs: ClassValue[]) { return twMerge(clsx(inputs)); }
@@ -31,11 +35,11 @@ const QUOTES = [
 const EASING = [0.22, 1, 0.36, 1]; // Custom cubic-bezier for "buttery" feel
 
 const fadeInUp = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 30 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.8, ease: EASING }
+    transition: { duration: prefersReducedMotion ? 0.01 : 0.8, ease: EASING }
   }
 };
 
@@ -43,7 +47,7 @@ const staggerContainer = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.1, delayChildren: 0.2 }
+    transition: { staggerChildren: 0.15, delayChildren: 0.2 }
   }
 };
 
@@ -66,13 +70,13 @@ const Reveal: React.FC<{ children: React.ReactNode, width?: "fit-content" | "100
     <motion.div
       ref={ref}
       variants={{
-        hidden: { opacity: 0, y: 40 },
+        hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 40 },
         visible: { opacity: 1, y: 0, transition: { duration: 0.8, delay, ease: EASING } }
       }}
       initial="hidden"
       animate={controls}
       className={className}
-      style={{ width }}
+      style={{ width, willChange: 'transform, opacity' }}
     >
       {children}
     </motion.div>
@@ -113,6 +117,7 @@ const CountUp: React.FC<{ from?: number, to: number, duration?: number, suffix?:
 };
 
 // --- UI COMPONENTS ---
+// --- UI COMPONENTS ---
 const Button: React.FC<Omit<React.ComponentProps<typeof motion.button>, 'children'> & { variant?: 'primary' | 'outline' | 'ghost', size?: 'sm' | 'md' | 'lg', children: React.ReactNode }> = ({ className, variant = 'primary', size = 'md', children, ...props }) => {
   const base = "inline-flex items-center justify-center font-display font-semibold transition-all focus:outline-none disabled:opacity-50 rounded-full cursor-pointer relative overflow-hidden group";
   const vars = {
@@ -124,8 +129,8 @@ const Button: React.FC<Omit<React.ComponentProps<typeof motion.button>, 'childre
 
   return (
     <motion.button
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
+      whileHover={{ scale: 1.02, boxShadow: variant === 'primary' ? "0 0 40px rgba(34,197,94,0.6)" : undefined }}
+      whileTap={{ scale: 0.98, boxShadow: variant === 'primary' ? "0 0 20px rgba(34,197,94,0.4)" : undefined }}
       className={cn(base, vars[variant], sizes[size], className)}
       {...props}
     >
@@ -136,6 +141,46 @@ const Button: React.FC<Omit<React.ComponentProps<typeof motion.button>, 'childre
     </motion.button>
   );
 };
+
+const MagneticButton: React.FC<{ children: React.ReactNode, className?: string } & React.ComponentProps<typeof motion.button>> = ({ children, className, ...props }) => {
+  const ref = React.useRef<HTMLButtonElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    const x = (e.clientX - rect.left - rect.width / 2) * 0.2;
+    const y = (e.clientY - rect.top - rect.height / 2) * 0.2;
+    ref.current.style.transform = `translate(${x}px, ${y}px)`;
+  };
+
+  const handleMouseLeave = () => {
+    if (!ref.current) return;
+    ref.current.style.transform = 'translate(0, 0)';
+  };
+
+  return (
+    <motion.button
+      ref={ref}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{ transition: 'transform 0.3s cubic-bezier(0.22, 1, 0.36, 1)' }}
+      whileTap={{ scale: 0.98 }}
+      className={className}
+      {...props}
+    >
+      {children}
+    </motion.button>
+  );
+};
+
+const SkeletonCard = () => (
+  <div className="animate-pulse p-8 rounded-3xl bg-surface/40 border border-white/10 h-full">
+    <div className="h-12 w-12 bg-white/10 rounded-full mb-4" />
+    <div className="h-6 bg-white/10 rounded w-3/4 mb-2" />
+    <div className="h-4 bg-white/10 rounded w-full mb-2" />
+    <div className="h-4 bg-white/10 rounded w-5/6" />
+  </div>
+);
 
 const Section: React.FC<{ children: React.ReactNode, className?: string, id?: string }> = ({ children, className = "", id }) => (
   <section id={id} className={cn("py-20 md:py-24 px-6 relative overflow-hidden", className)}>
@@ -166,7 +211,13 @@ const HowWeWork = () => (
       <Reveal delay={0.2} width="100%"><p className="text-gray-400 max-w-2xl mx-auto text-lg">Four steps to turn your biggest vulnerability into your strongest defense.</p></Reveal>
     </div>
 
-    <motion.div variants={staggerContainer} className="grid md:grid-cols-4 gap-6 relative z-10">
+    <motion.div
+      variants={staggerContainer}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-100px" }}
+      className="grid md:grid-cols-4 gap-6 relative z-10"
+    >
       {[
         { t: "Test", d: "Realistic phishing emails. Custom templates. Real threats.", i: Mail, step: "01" },
         { t: "Catch", d: "Safe fail page. No shame. No reporting to manager.", i: FileText, step: "02" },
@@ -205,7 +256,7 @@ const WhyChoose = () => (
       </Reveal>
     </div>
 
-    <motion.div variants={staggerContainer} className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+    <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer} className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
       {[
         { t: "Zero Shame", d: "No public humiliation. Just private, immediate training.", i: Shield, c: "text-green-500", b: "group-hover:border-green-500/50", bg: "group-hover:bg-green-500/10" },
         { t: "Compliance Ready", d: "Automatic SOC 2, ISO 27001, & HIPAA documentation.", i: Award, c: "text-yellow-500", b: "group-hover:border-yellow-500/50", bg: "group-hover:bg-yellow-500/10" },
@@ -248,7 +299,7 @@ const Navbar = () => {
         scrolled ? "glass rounded-full border border-white/10 shadow-lg shadow-black/50" : "bg-transparent border-transparent"
       )}>
         <Link to="/" className="flex items-center gap-3 group relative z-10">
-          <img src="/humanlayerlogo.png" alt="Human Layer Security" className="h-14 md:h-20 w-auto object-contain transition-all duration-300 group-hover:scale-102 filter drop-shadow-[0_0_8px_rgba(34,197,94,0.3)]" />
+          <img src="/humanlayerlogo.png" alt="Human Layer Security" loading="lazy" decoding="async" className="h-14 md:h-20 w-auto object-contain transition-all duration-300 group-hover:scale-102 filter drop-shadow-[0_0_8px_rgba(34,197,94,0.3)]" />
           <div className="flex flex-col justify-center">
             <span className="font-display font-bold text-white text-lg md:text-xl tracking-tight leading-none group-hover:text-primary transition-colors">HUMAN&nbsp;&nbsp;LAYER</span>
             <span className="font-display font-bold text-primary text-[10px] md:text-sm tracking-[0.2em] leading-none">SECURITY</span>
@@ -307,7 +358,7 @@ const Footer = () => (
       <div className="grid md:grid-cols-4 gap-12 mb-20">
         <div className="col-span-1 md:col-span-2">
           <Link to="/" className="flex items-center gap-4 mb-6 group">
-            <img src="/humanlayerlogo.png" alt="Human Layer Security" className="h-24 w-auto object-contain transition-transform group-hover:scale-102" />
+            <img src="/humanlayerlogo.png" alt="Human Layer Security" loading="lazy" decoding="async" className="h-24 w-auto object-contain transition-transform group-hover:scale-102" />
             <div className="flex flex-col justify-center">
               <span className="font-display font-bold text-white text-2xl tracking-tight leading-none group-hover:text-primary transition-colors">HUMAN&nbsp;&nbsp;LAYER</span>
               <span className="font-display font-bold text-primary text-sm tracking-[0.25em] leading-none">SECURITY</span>
@@ -446,7 +497,7 @@ const Home = () => {
             <div className="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full blur-[80px] pointer-events-none mix-blend-screen" />
             <div className="absolute bottom-0 left-0 w-48 h-48 bg-green-500/10 rounded-full blur-[60px] pointer-events-none mix-blend-screen" />
 
-            <img src="/hero-network.png" alt="Human Defense Network" className="w-full h-auto object-cover opacity-90 transition-transform duration-700 ease-out relative z-0 group-hover:scale-105" />
+            <img src="/hero-network.png" alt="Human Defense Network" loading="lazy" decoding="async" className="w-full h-auto object-cover opacity-90 transition-transform duration-700 ease-out relative z-0 group-hover:scale-105" />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80 z-10" />
 
             {/* Scanline Effect */}
@@ -468,9 +519,15 @@ const Home = () => {
 
       {/* MARQUEE */}
       <div className="bg-white/5 border-y border-white/5 backdrop-blur-sm overflow-hidden py-4 flex relative z-20">
-        <motion.div className="flex gap-20 whitespace-nowrap" animate={{ x: [0, -1000] }} transition={{ repeat: Infinity, duration: 40, ease: "linear" }}>
-          {[...Array(10)].map((_, i) => (
-            <React.Fragment key={i}>
+        <div
+          className="flex gap-20 whitespace-nowrap"
+          style={{ animation: 'marquee 40s linear infinite', willChange: 'transform' }}
+          onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => e.currentTarget.style.animationPlayState = 'paused'}
+          onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => e.currentTarget.style.animationPlayState = 'running'}
+        >
+          {/* Duplicate content 3 times for seamless loop on large screens */}
+          {[...Array(6)].map((_, setIndex) => (
+            <React.Fragment key={setIndex}>
               <span className="text-white/70 font-mono text-sm tracking-widest uppercase flex items-center gap-4">
                 <Shield className="text-primary w-4 h-4" /> Zero Shame Training Policy
               </span>
@@ -488,7 +545,7 @@ const Home = () => {
               </span>
             </React.Fragment>
           ))}
-        </motion.div>
+        </div>
       </div>
 
       {/* WHY US SECTION */}
@@ -929,9 +986,27 @@ const Services = () => (
 
       <div className="mt-16 text-center bg-black/40 backdrop-blur-md p-16 rounded-[3rem] border border-white/10 relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
-        <div className="grid md:grid-cols-3 gap-12 mb-12 relative z-10">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: { staggerChildren: 0.3 }
+            }
+          }}
+          className="grid md:grid-cols-3 gap-12 mb-12 relative z-10"
+        >
           {/* STAT 1: CIRCULAR GRAPHIC */}
-          <div className="flex flex-col items-center group">
+          <motion.div
+            variants={{
+              hidden: { opacity: 0, scale: 0.8, y: 20 },
+              visible: { opacity: 1, scale: 1, y: 0, transition: { type: "spring", bounce: 0.4, duration: 0.8 } }
+            }}
+            className="flex flex-col items-center group"
+          >
             <div className="relative w-40 h-40 flex items-center justify-center mb-6">
               <svg className="w-full h-full rotate-[-90deg]" viewBox="0 0 100 100">
                 <circle cx="50" cy="50" r="45" fill="none" stroke="#262626" strokeWidth="8" />
@@ -950,7 +1025,13 @@ const Services = () => (
           </div>
 
           {/* STAT 2: CENTRAL HERO GRAPHIC */}
-          <div className="flex flex-col items-center group">
+          <motion.div
+            variants={{
+              hidden: { opacity: 0, scale: 0.8, y: 20 },
+              visible: { opacity: 1, scale: 1, y: 0, transition: { type: "spring", bounce: 0.4, duration: 0.8 } }
+            }}
+            className="flex flex-col items-center group"
+          >
             <div className="relative w-48 h-48 flex items-center justify-center mb-6">
               <div className="absolute inset-0 bg-primary/20 rounded-full animate-pulse filter blur-xl"></div>
               <div className="w-full h-full rounded-full border-4 border-primary/30 flex items-center justify-center relative bg-black/50 backdrop-blur-sm">
@@ -961,7 +1042,13 @@ const Services = () => (
           </div>
 
           {/* STAT 3: BAR GRAPHIC */}
-          <div className="flex flex-col items-center justify-center group h-full">
+          <motion.div
+            variants={{
+              hidden: { opacity: 0, scale: 0.8, y: 20 },
+              visible: { opacity: 1, scale: 1, y: 0, transition: { type: "spring", bounce: 0.4, duration: 0.8 } }
+            }}
+            className="flex flex-col items-center justify-center group h-full"
+          >
             <div className="flex items-end gap-2 h-32 mb-6">
               <motion.div initial={{ height: 0 }} whileInView={{ height: 40 }} transition={{ duration: 0.5 }} className="w-6 bg-white/10 rounded-t-lg"></motion.div>
               <motion.div initial={{ height: 0 }} whileInView={{ height: 64 }} transition={{ duration: 0.5, delay: 0.1 }} className="w-6 bg-white/20 rounded-t-lg"></motion.div>
@@ -971,12 +1058,12 @@ const Services = () => (
             <div className="text-5xl font-bold text-white mb-2"><CountUp to={8} suffix="x" /></div>
             <div className="text-sm text-gray-400 uppercase tracking-widest font-bold">Improved Threat Response</div>
           </div>
-        </div>
-        <p className="text-3xl text-white font-bold mb-10 font-display italic">"This is what happens when training actually works."</p>
-        <Link to="/contact"><Button size="lg" className="bg-green-600 hover:bg-green-500 text-white h-auto min-h-[4rem] px-6 py-4 text-base md:text-lg whitespace-normal leading-tight text-center">Get These Results for Your Team</Button></Link>
       </div>
-    </Section>
+      <p className="text-3xl text-white font-bold mb-10 font-display italic">"This is what happens when training actually works."</p>
+      <Link to="/contact"><Button size="lg" className="bg-green-600 hover:bg-green-500 text-white h-auto min-h-[4rem] px-6 py-4 text-base md:text-lg whitespace-normal leading-tight text-center">Get These Results for Your Team</Button></Link>
   </div>
+    </Section >
+  </div >
 );
 
 const About = () => (
@@ -1205,29 +1292,92 @@ const Legal = () => (
 // --- MAIN APP ---
 function App() {
   const location = useLocation();
-
+  const [isLoaded, setIsLoaded] = useState(false);
 
   // Scroll to top on route change
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
 
+  // Entrance animation
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoaded(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <div className="min-h-screen bg-background text-white selection:bg-primary selection:text-white font-sans overflow-x-hidden">
+    <div className={cn("min-h-screen bg-background text-white selection:bg-primary selection:text-white font-sans overflow-x-hidden transition-opacity duration-700", isLoaded ? "opacity-100" : "opacity-0")}>
       <Navbar />
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
-          <Route path="/" element={<Home />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/partnership" element={<Partnership />} />
+          <Route path="/" element={
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.4, ease: EASING }}
+              className="origin-top"
+            >
+              <Home />
+            </motion.div>
+          } />
+          <Route path="/services" element={
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.4, ease: EASING }}
+              className="origin-top"
+            >
+              <Services />
+            </motion.div>
+          } />
+          <Route path="/about" element={
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.4, ease: EASING }}
+              className="origin-top"
+            >
+              <About />
+            </motion.div>
+          } />
+          <Route path="/partnership" element={
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.4, ease: EASING }}
+              className="origin-top"
+            >
+              <Partnership />
+            </motion.div>
+          } />
           <Route path="/privacy" element={<Legal />} />
           <Route path="/terms" element={<Legal />} />
-          <Route path="/contact" element={<Contact />} />
+          <Route path="/contact" element={
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.4, ease: EASING }}
+              className="origin-top"
+            >
+              <Contact />
+            </motion.div>
+          } />
           <Route path="*" element={<Home />} />
         </Routes>
       </AnimatePresence>
       <Footer />
+      {/* CSS Marquee Keyframes */}
+      <style>{`
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+      `}</style>
     </div>
   );
 }
