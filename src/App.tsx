@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate, useLocation, Link } from 'react-router-dom';
-import { Shield, Menu, X, CheckCircle, Users, Mail, Activity, ArrowRight, Globe, Terminal, FileText, Award } from 'lucide-react';
+import { Shield, Menu, X, CheckCircle, Users, Mail, Activity, ArrowRight, Globe, Terminal, FileText, Award, Twitter, Linkedin, Building, Stethoscope, Scale } from 'lucide-react';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { AnimatePresence, motion, useScroll, useTransform, useInView, useAnimation } from 'framer-motion';
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
@@ -304,8 +305,12 @@ const Navbar = () => {
           ))}
         </div>
 
-        <div className="hidden md:flex gap-4">
-          <Link to="/contact"><Button size="sm" className="gap-2 shadow-none hover:shadow-lg bg-green-600 hover:bg-green-500 border-green-500/50 shadow-green-900/20 text-white">Contact Us</Button></Link>
+        <div className="hidden md:flex gap-4 items-center">
+          <div className="flex items-center gap-3 pr-4 border-r border-white/10 mr-4">
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="text-gray-400 hover:text-[#1DA1F2] transition-colors"><Twitter className="w-4 h-4" /></a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-gray-400 hover:text-[#0A66C2] transition-colors"><Linkedin className="w-4 h-4" /></a>
+          </div>
+          <Link to="/contact"><Button size="sm" className="gap-2 shadow-none hover:shadow-lg bg-green-600 hover:bg-green-500 border-green-500/50 shadow-green-900/20 text-white">Secure My Team</Button></Link>
         </div>
 
         <button className="md:hidden text-white" onClick={() => setIsOpen(!isOpen)}>{isOpen ? <X /> : <Menu />}</button>
@@ -316,7 +321,11 @@ const Navbar = () => {
           <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="md:hidden bg-black border-b border-white/10 overflow-hidden absolute top-24 left-4 right-4 rounded-2xl border border-white/10 z-50 shadow-2xl">
             <div className="p-4 flex flex-col gap-2">
               {['SERVICES', 'ABOUT', 'PARTNERSHIP'].map((item) => <Link key={item} to={`/${item.toLowerCase()}`} className="block p-4 text-white hover:bg-white/5 rounded-xl font-bold font-display">{item}</Link>)}
-              <Link to="/contact" className="block p-4 bg-green-600/20 text-green-500 hover:bg-green-600/30 rounded-xl font-bold text-center border border-green-500/20">Contact Us</Link>
+              <div className="flex justify-center gap-6 py-4 border-t border-white/5">
+                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="text-gray-400 hover:text-[#1DA1F2] transition-colors"><Twitter className="w-6 h-6" /></a>
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-gray-400 hover:text-[#0A66C2] transition-colors"><Linkedin className="w-6 h-6" /></a>
+              </div>
+              <Link to="/contact" className="block p-4 bg-green-600/20 text-green-500 hover:bg-green-600/30 rounded-xl font-bold text-center border border-green-500/20">Secure My Team</Link>
             </div>
           </motion.div>
         )}
@@ -362,7 +371,12 @@ const Footer = () => (
       </div>
       <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-sm text-gray-600">
         <p>© 2026 HumanLayer Security. All rights reserved.</p>
-        <div className="flex gap-6 mt-4 md:mt-0"><Link to="/privacy" className="hover:text-white">Privacy</Link><Link to="/terms" className="hover:text-white">Terms</Link></div>
+        <div className="flex gap-6 mt-4 md:mt-0 items-center">
+          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="text-gray-400 hover:text-[#1DA1F2] transition-colors"><Twitter className="w-4 h-4" /></a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-gray-400 hover:text-[#0A66C2] transition-colors"><Linkedin className="w-4 h-4" /></a>
+          <Link to="/privacy" className="hover:text-white">Privacy</Link>
+          <Link to="/terms" className="hover:text-white">Terms</Link>
+        </div>
       </div>
     </div>
   </footer>
@@ -388,6 +402,10 @@ const Home = () => {
 
   return (
     <>
+      <Helmet>
+        <title>HumanLayer Security | Stop Phishing Attacks Before They Click</title>
+        <meta name="description" content="AI-powered phishing defense that trains your employees in real-time. Shame-free, instant feedback. Setup in 5 minutes." />
+      </Helmet>
       {/* HERO */}
       <section className="relative min-h-screen flex items-center pt-20 overflow-hidden perspective-1000">
         {/* Animated Background */}
@@ -449,6 +467,20 @@ const Home = () => {
                 <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20">
                   <CheckCircle className="w-4 h-4 text-primary" />
                   <span className="text-xs text-primary font-bold">4.8/5 avg reduction in click rates</span>
+                </div>
+              </div>
+
+              {/* TRUSTED INDUSTRIES MARQUEE */}
+              <div className="w-full overflow-hidden border-t border-white/5 pt-8 mb-12 relative mask-linear-fade">
+                <p className="text-xs text-gray-500 uppercase tracking-widest mb-4 font-bold">Trusted in High-Risk Sectors</p>
+                <div className="flex gap-12 animate-scroll whitespace-nowrap opacity-60">
+                  <div className="flex items-center gap-2"><Scale className="w-4 h-4 text-gray-400" /><span className="text-sm text-gray-300 font-mono">LEGAL</span></div>
+                  <div className="flex items-center gap-2"><Building className="w-4 h-4 text-gray-400" /><span className="text-sm text-gray-300 font-mono">FINANCE</span></div>
+                  <div className="flex items-center gap-2"><Stethoscope className="w-4 h-4 text-gray-400" /><span className="text-sm text-gray-300 font-mono">HEALTHCARE</span></div>
+                  {/* Duplicate for smooth loop */}
+                  <div className="flex items-center gap-2"><Scale className="w-4 h-4 text-gray-400" /><span className="text-sm text-gray-300 font-mono">LEGAL</span></div>
+                  <div className="flex items-center gap-2"><Building className="w-4 h-4 text-gray-400" /><span className="text-sm text-gray-300 font-mono">FINANCE</span></div>
+                  <div className="flex items-center gap-2"><Stethoscope className="w-4 h-4 text-gray-400" /><span className="text-sm text-gray-300 font-mono">HEALTHCARE</span></div>
                 </div>
               </div>
             </Reveal>
@@ -820,6 +852,10 @@ const PageHeader: React.FC<{ title: string, subtitle: string }> = ({ title, subt
 
 const Services = () => (
   <div className="min-h-screen bg-background text-white pb-20">
+    <Helmet>
+      <title>Services | HumanLayer Security</title>
+      <meta name="description" content="Phishing simulations, real-time training, and compliance reporting. See our full suite of security tools." />
+    </Helmet>
     <PageHeader title="Our Services" subtitle="Realistic phishing tests. Instant training. Clear analytics. Built by cybersecurity professionals who understand how attackers actually operate." />
     <Section className="!pt-0">
       <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="grid md:grid-cols-2 lg:grid-cols-6 gap-6">
@@ -1068,6 +1104,10 @@ const Services = () => (
 
 const About = () => (
   <div className="min-h-screen bg-background text-white pb-20">
+    <Helmet>
+      <title>About Us | HumanLayer Security</title>
+      <meta name="description" content="Founded by cybersecurity and engineering experts. We're building the future of human risk management." />
+    </Helmet>
     <PageHeader title="Who We Are" subtitle="We're cybersecurity and engineering graduates who built a phishing training platform because the existing solutions weren't good enough." />
     <Section className="!pt-0">
       <div className="grid md:grid-cols-2 gap-16 items-start">
@@ -1095,7 +1135,13 @@ const About = () => (
         <div className="space-y-8">
           <div className="bg-surface rounded-3xl p-8 border border-white/10 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 rounded-full blur-[60px] pointer-events-none" />
-            <h3 className="text-sm font-bold text-primary uppercase tracking-widest mb-8">Leadership</h3>
+            <div className="flex items-center justify-between mb-8">
+              <h3 className="text-sm font-bold text-primary uppercase tracking-widest">Leadership</h3>
+              <div className="px-3 py-1 rounded-full bg-primary/10 border border-primary/20 flex items-center gap-2">
+                <Award className="w-3 h-3 text-primary" />
+                <span className="text-[10px] font-bold text-white uppercase tracking-wider">FIU Research Backed</span>
+              </div>
+            </div>
             <div className="flex flex-col gap-8">
               {/* Nicolas */}
               <div className="flex gap-6 items-center">
@@ -1144,6 +1190,10 @@ const About = () => (
 
 const Partnership = () => (
   <div className="min-h-screen bg-background text-white pb-20">
+    <Helmet>
+      <title>Partnership | HumanLayer Security</title>
+      <meta name="description" content="Partner with HumanLayer. White-label phishing defense for your clients. Recurring revenue." />
+    </Helmet>
     <section className="pt-40 pb-16 px-6 relative overflow-hidden">
       <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/10 to-transparent opacity-30 pointer-events-none" />
       <motion.div initial="hidden" animate="visible" variants={fadeInUp} className="max-w-7xl mx-auto relative z-10">
@@ -1383,11 +1433,11 @@ const Contact = () => {
     // Create mailto link as fallback
     const subject = encodeURIComponent('Free Security Assessment Request');
     const body = encodeURIComponent(`
-Name: ${formData.name}
-Email: ${formData.email}
-Company: ${formData.company}
-Team Size: ${teamSize || 'Not specified'}
-Message: ${formData.message}
+      Name: ${formData.name}
+      Email: ${formData.email}
+      Company: ${formData.company}
+      Team Size: ${teamSize || 'Not specified'}
+      Message: ${formData.message}
     `);
 
     // In real implementation, send to your backend API
@@ -1403,6 +1453,10 @@ Message: ${formData.message}
 
   return (
     <div className="min-h-screen bg-background text-white pb-20">
+      <Helmet>
+        <title>Contact | HumanLayer Security</title>
+        <meta name="description" content="Get a free security assessment. Contact our team to secure your organization today." />
+      </Helmet>
       <PageHeader
         title="Let's Talk Security"
         subtitle="Get a free security assessment. See your team's baseline phishing risk in 24 hours."
@@ -1665,79 +1719,81 @@ function App() {
   }, []);
 
   return (
-    <div className={cn("min-h-screen bg-background text-white selection:bg-primary selection:text-white font-sans overflow-x-hidden transition-opacity duration-700", isLoaded ? "opacity-100" : "opacity-0")}>
-      <Navbar />
-      <AnimatePresence mode="wait">
-        <Routes location={location} key={location.pathname}>
-          <Route path="/" element={
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4, ease: EASING }}
-              className="origin-top"
-            >
-              <Home />
-            </motion.div>
-          } />
-          <Route path="/services" element={
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4, ease: EASING }}
-              className="origin-top"
-            >
-              <Services />
-            </motion.div>
-          } />
-          <Route path="/about" element={
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4, ease: EASING }}
-              className="origin-top"
-            >
-              <About />
-            </motion.div>
-          } />
-          <Route path="/partnership" element={
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4, ease: EASING }}
-              className="origin-top"
-            >
-              <Partnership />
-            </motion.div>
-          } />
-          <Route path="/privacy" element={<Legal />} />
-          <Route path="/terms" element={<Legal />} />
-          <Route path="/contact" element={
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4, ease: EASING }}
-              className="origin-top"
-            >
-              <Contact />
-            </motion.div>
-          } />
-          <Route path="*" element={<Home />} />
-        </Routes>
-      </AnimatePresence>
-      <Footer />
-      {/* CSS Marquee Keyframes */}
-      <style>{`
+    <HelmetProvider>
+      <div className={cn("min-h-screen bg-background text-white selection:bg-primary selection:text-white font-sans overflow-x-hidden transition-opacity duration-700", isLoaded ? "opacity-100" : "opacity-0")}>
+        <Navbar />
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname}>
+            <Route path="/" element={
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.4, ease: EASING }}
+                className="origin-top"
+              >
+                <Home />
+              </motion.div>
+            } />
+            <Route path="/services" element={
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.4, ease: EASING }}
+                className="origin-top"
+              >
+                <Services />
+              </motion.div>
+            } />
+            <Route path="/about" element={
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.4, ease: EASING }}
+                className="origin-top"
+              >
+                <About />
+              </motion.div>
+            } />
+            <Route path="/partnership" element={
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.4, ease: EASING }}
+                className="origin-top"
+              >
+                <Partnership />
+              </motion.div>
+            } />
+            <Route path="/privacy" element={<Legal />} />
+            <Route path="/terms" element={<Legal />} />
+            <Route path="/contact" element={
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.4, ease: EASING }}
+                className="origin-top"
+              >
+                <Contact />
+              </motion.div>
+            } />
+            <Route path="*" element={<Home />} />
+          </Routes>
+        </AnimatePresence>
+        <Footer />
+        {/* CSS Marquee Keyframes */}
+        <style>{`
         @keyframes marquee {
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }
         }
       `}</style>
-    </div>
+      </div>
+    </HelmetProvider>
   );
 }
 
