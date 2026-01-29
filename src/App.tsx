@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate, useLocation, Link } from 'react-router-dom';
-import { Shield, Menu, X, CheckCircle, Users, Mail, Activity, ArrowRight, Globe, Terminal, FileText, Award, Twitter, Linkedin, Building, Stethoscope, Scale } from 'lucide-react';
+import { Shield, Menu, X, CheckCircle, Users, Mail, Activity, ArrowRight, Globe, Terminal, FileText, Award, Twitter, Linkedin } from 'lucide-react';
 // Custom SEO component to replace react-helmet-async
 const PageMeta = ({ title, description }: { title: string, description?: string }) => {
   useEffect(() => {
@@ -29,9 +29,7 @@ const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia(
 // --- UTILS ---
 function cn(...inputs: ClassValue[]) { return twMerge(clsx(inputs)); }
 
-const ImageSkeleton: React.FC<{ className?: string }> = ({ className }) => (
-  <div className={cn("animate-pulse bg-white/5 rounded-3xl", className)} />
-);
+
 
 // --- DATA ---
 const CONTACT_INFO = { email: "contact@humanls.com", phone: "3052820302", founder: "Nicolas Su Nobrega Garces" };
@@ -428,7 +426,6 @@ const Footer = () => (
 const Home = () => {
   const navigate = useNavigate();
   const [quote, setQuote] = useState(QUOTES[0]);
-  const [imageLoaded, setImageLoaded] = useState(false);
 
   const { scrollY } = useScroll();
   const heroY = useTransform(scrollY, [0, 500], [0, 150]);
@@ -1887,5 +1884,4 @@ function App() {
 }
 
 export default App;
-
 
