@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate, useLocation, Link } from 'react-router-dom';
-import { Shield, Menu, X, CheckCircle, Users, Mail, Activity, ArrowRight, Globe, Terminal, FileText, Award, Twitter, Linkedin } from 'lucide-react';
+import { Shield, Menu, X, CheckCircle, Users, Mail, Activity, ArrowRight, Globe, Terminal, FileText, Award, Twitter, Linkedin, Building, Stethoscope, Scale } from 'lucide-react';
 // Custom SEO component to replace react-helmet-async
 const PageMeta = ({ title, description }: { title: string, description?: string }) => {
   useEffect(() => {
@@ -247,55 +247,74 @@ const WhyChoose = () => (
   <Section className="bg-black relative overflow-hidden">
     {/* Background Gradients */}
     <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
-    <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none" />
 
-    <div className="text-center mb-16 relative z-10">
-      <Reveal width="100%">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-gray-300 text-xs font-bold mb-6 uppercase tracking-widest backdrop-blur-md">
-          <Shield className="w-3 h-3 text-primary" /> The Standard
-        </div>
-      </Reveal>
-      <Reveal delay={0.1} width="100%">
-        <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-          Why Companies Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-emerald-400">Human Layer</span>
-        </h2>
-      </Reveal>
-      <Reveal delay={0.2} width="100%">
-        <p className="text-gray-400 max-w-2xl mx-auto text-lg">
-          We built this platform to solve the problems other security training companies ignore.
-        </p>
-      </Reveal>
-    </div>
-
-    <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer} className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto relative z-10">
-      {[
-        { t: "Zero Shame", d: "No public humiliation. Just private, immediate training.", i: Shield, c: "text-emerald-400", border: "group-hover:border-emerald-500/50", shadow: "group-hover:shadow-[0_0_50px_rgba(16,185,129,0.2)]", iconBg: "bg-emerald-500/10" },
-        { t: "Compliance Ready", d: "Automatic SOC 2, ISO 27001, & HIPAA documentation.", i: Award, c: "text-amber-400", border: "group-hover:border-amber-500/50", shadow: "group-hover:shadow-[0_0_50px_rgba(245,158,11,0.2)]", iconBg: "bg-amber-500/10" },
-        { t: "5-Minute Setup", d: "No IT department needed. Launch your first campaign today.", i: Activity, c: "text-cyan-400", border: "group-hover:border-cyan-400/50", shadow: "group-hover:shadow-[0_0_50px_rgba(34,211,238,0.2)]", iconBg: "bg-cyan-500/10" },
-        { t: "Real Templates", d: "Law firms get court notices. Finance gets wire transfers.", i: FileText, c: "text-rose-400", border: "group-hover:border-rose-500/50", shadow: "group-hover:shadow-[0_0_50px_rgba(244,63,94,0.2)]", iconBg: "bg-rose-500/10" },
-        { t: "Clear Analytics", d: "Track improvement. Export reports for insurance.", i: Terminal, c: "text-violet-400", border: "group-hover:border-violet-400/50", shadow: "group-hover:shadow-[0_0_50px_rgba(167,139,250,0.2)]", iconBg: "bg-violet-500/10" },
-        { t: "Instant Learning", d: "Training happens the second they click. Not next week.", i: Mail, c: "text-orange-400", border: "group-hover:border-orange-400/50", shadow: "group-hover:shadow-[0_0_50px_rgba(251,146,60,0.2)]", iconBg: "bg-orange-500/10" }
-      ].map((f, i) => (
-        <motion.div
-          variants={fadeInUp}
-          key={i}
-          className={cn(
-            "flex flex-col items-start text-left group p-8 rounded-[2rem] border border-white/5 bg-surface/30 backdrop-blur-sm transition-all duration-500 hover:bg-surface/50 cursor-default relative overflow-hidden",
-            f.border, f.shadow
-          )}
-          whileHover={{ y: -8 }}
-        >
-          <div className={cn("absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-white/5 to-transparent")} />
-
-          <div className={cn("w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-all duration-300 group-hover:scale-110 shadow-inner border border-white/5", f.iconBg)}>
-            <f.i className={cn("w-7 h-7 transition-colors duration-300", f.c)} />
+    <div className="grid lg:grid-cols-2 gap-16 items-center relative z-10 max-w-6xl mx-auto">
+      <div className="text-left">
+        <Reveal>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-gray-300 text-xs font-bold mb-6 uppercase tracking-widest backdrop-blur-md">
+            <Shield className="w-3 h-3 text-primary" /> The Standard
           </div>
-          <h3 className="text-xl font-bold text-white mb-3 relative z-10">{f.t}</h3>
-          <p className="text-gray-400 leading-relaxed text-sm relative z-10">{f.d}</p>
+        </Reveal>
+        <Reveal delay={0.1}>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            Why Companies Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-emerald-400">Human Layer</span>
+          </h2>
+        </Reveal>
+        <Reveal delay={0.2}>
+          <p className="text-gray-400 text-lg leading-relaxed mb-8">
+            We built this platform to solve the problems other security training companies ignore. Most training is boring, punitive, and forgotten in 5 minutes. Ours is different.
+          </p>
+        </Reveal>
 
-        </motion.div>
-      ))}
-    </motion.div>
+        <div className="grid gap-6">
+          {[
+            { t: "Zero Shame", d: "No public humiliation. Just private, immediate training.", i: Shield },
+            { t: "Compliance Ready", d: "Automatic SOC 2, ISO 27001, & HIPAA documentation.", i: Award },
+            { t: "5 Minute Setup", d: "No IT department needed. Launch your campaign today.", i: Activity }
+          ].map((item, i) => (
+            <Reveal key={i} delay={0.3 + (i * 0.1)} width="100%">
+              <div className="flex items-start gap-4 p-4 rounded-xl hover:bg-white/5 transition-colors border border-transparent hover:border-white/5">
+                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0 text-primary">
+                  <item.i className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="text-white font-bold mb-1">{item.t}</h4>
+                  <p className="text-sm text-gray-400">{item.d}</p>
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+
+      <div className="grid gap-6">
+        {[
+          { t: "Real Templates", d: "Law firms get court notices. Finance gets wire transfers.", i: FileText, c: "from-rose-500/20 to-orange-500/20", iconC: "text-rose-400" },
+          { t: "Clear Analytics", d: "Track improvement. Export reports for insurance.", i: Terminal, c: "from-violet-500/20 to-purple-500/20", iconC: "text-violet-400" },
+          { t: "Instant Learning", d: "Training happens the second they click. Not next week.", i: Mail, c: "from-blue-500/20 to-cyan-500/20", iconC: "text-blue-400" }
+        ].map((f, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 + (i * 0.1) }}
+            className="group relative overflow-hidden rounded-3xl border border-white/10 bg-surface/50 p-8 hover:border-white/20 transition-all duration-500"
+          >
+            <div className={cn("absolute inset-0 bg-gradient-to-r opacity-0 group-hover:opacity-100 transition-opacity duration-500", f.c)} />
+            <div className="relative z-10 flex items-center gap-6">
+              <div className={cn("w-12 h-12 rounded-2xl bg-black/50 flex items-center justify-center shrink-0 border border-white/10", f.iconC)}>
+                <f.i className="w-6 h-6" />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-white mb-2">{f.t}</h3>
+                <p className="text-gray-400 text-sm">{f.d}</p>
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </div>
   </Section>
 );
 
@@ -599,26 +618,30 @@ const Home = () => {
           <div className="mb-6 md:mb-0"><h2 className="text-4xl md:text-5xl font-bold text-white mb-6">What You <span className="text-primary">Get</span></h2><p className="text-gray-400 text-lg">Everything you need to build a security aware team. Nothing you don't.</p></div>
           <Button variant="outline" className="hidden md:flex" onClick={() => navigate('/services')}>View All Features</Button>
         </div>
-        <div className="grid md:grid-cols-2 gap-6 relative z-10">
+        <div className="grid grid-cols-1 gap-8 relative z-10">
           {[
-            { t: "Realistic Attack Simulations", d: "We send phishing emails that look and feel exactly like real attacks—because they're based on real attacks. Your employees see them in their actual inbox. They make decisions under real conditions.", i: Shield, c: "text-emerald-400", bg: "bg-emerald-500/10", border: "hover:border-emerald-500/50" },
-            { t: "Training at the Point of Failure", d: "The second someone clicks a phishing link, they see what they missed and why it worked. Not next week in a training session. Not in an annual compliance video. Right now.", i: Users, c: "text-blue-400", bg: "bg-blue-500/10", border: "hover:border-blue-500/50" },
-            { t: "Monthly Intelligence Reports", d: "See exactly where your vulnerabilities are. Who's clicking. What's working. Which departments need extra training. Export compliance reports for auditors.", i: FileText, c: "text-purple-400", bg: "bg-purple-500/10", border: "hover:border-purple-500/50" },
-            { t: "Compliance Documentation", d: "Generate documentation automatically. SOC 2, ISO 27001, CMMC — formatted correctly and ready to submit. Your auditor gets what they need. You get back to work.", i: Award, c: "text-amber-400", bg: "bg-amber-500/10", border: "hover:border-amber-500/50" }
+            { t: "Realistic Attack Simulations", d: "We send phishing emails that look and feel exactly like real attacks—because they're based on real attacks. Your employees see them in their actual inbox. They make decisions under real conditions.", i: Shield, c: "text-emerald-400", border: "border-emerald-500/20", gradient: "from-emerald-500/10 to-transparent" },
+            { t: "Training at the Point of Failure", d: "The second someone clicks a phishing link, they see what they missed and why it worked. Not next week in a training session. Not in an annual compliance video. Right now.", i: Users, c: "text-blue-400", border: "border-blue-500/20", gradient: "from-blue-500/10 to-transparent" },
+            { t: "Monthly Intelligence Reports", d: "See exactly where your vulnerabilities are. Who's clicking. What's working. Which departments need extra training. Export compliance reports for auditors.", i: FileText, c: "text-purple-400", border: "border-purple-500/20", gradient: "from-purple-500/10 to-transparent" },
+            { t: "Compliance Documentation", d: "Generate documentation automatically. SOC 2, ISO 27001, CMMC — formatted correctly and ready to submit. Your auditor gets what they need. You get back to work.", i: Award, c: "text-amber-400", border: "border-amber-500/20", gradient: "from-amber-500/10 to-transparent" }
           ].map((s, i) => (
             <motion.div
               key={i}
-              className={cn("flex gap-6 p-8 rounded-[2rem] bg-surface/40 hover:bg-surface/60 transition-all duration-300 border border-white/5 items-start group relative overflow-hidden", s.border)}
-              whileHover={{ y: -5 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className={cn("flex flex-col md:flex-row gap-8 p-8 md:p-10 rounded-[2rem] bg-surface/30 backdrop-blur-md border hover:border-white/20 transition-all duration-300 group hover:shadow-2xl", s.border)}
             >
-              <div className={cn("absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-white/5 to-transparent")} />
-
-              <div className={cn("w-16 h-16 rounded-2xl flex items-center justify-center shrink-0 border border-white/10 group-hover:scale-110 transition-transform duration-300", s.bg)}>
-                <s.i className={cn("w-8 h-8 transition-colors", s.c)} />
+              <div className="shrink-0 relative">
+                <div className={cn("absolute inset-0 bg-gradient-to-br blur-2xl opacity-20 group-hover:opacity-40 transition-opacity", s.gradient)} />
+                <div className="w-20 h-20 rounded-full bg-black/50 border border-white/10 flex items-center justify-center relative z-10">
+                  <s.i className={cn("w-10 h-10", s.c)} />
+                </div>
               </div>
               <div>
-                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-white transition-colors">{s.t}</h3>
-                <p className="text-gray-400 leading-relaxed text-sm md:text-base">{s.d}</p>
+                <h3 className="text-2xl font-bold text-white mb-4">{s.t}</h3>
+                <p className="text-gray-400 leading-relaxed text-lg">{s.d}</p>
               </div>
             </motion.div>
           ))}
@@ -724,25 +747,23 @@ const Home = () => {
           </div>
 
           {/* DYNAMIC QUOTE COMPONENT */}
-          <div className="md:col-span-1 relative group perspective-1000 h-full min-h-[400px]">
-            {/* Simple Background */}
-            <div className="absolute inset-0 bg-surface/30 rounded-[2rem] border border-white/10" />
+          <div className="md:col-span-1 relative group perspective-1000 h-full min-h-[250px] flex flex-col justify-center">
+            <div className="p-8 rounded-[2.5rem] bg-gradient-to-b from-surface/80 to-black border border-white/10 relative overflow-hidden backdrop-blur-xl">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-[50px]" />
 
-            <div className="relative h-full rounded-[2rem] p-6 flex flex-col justify-between overflow-hidden">
-              <div className="relative z-10">
-                <div className="inline-flex items-center gap-2 px-2 py-1 rounded-full bg-yellow-500/10 border border-yellow-500/20 mb-6">
-                  <div className="w-1.5 h-1.5 rounded-full bg-yellow-500 animate-pulse" />
-                  <span className="text-yellow-500 text-[9px] font-bold tracking-[0.1em] uppercase">Tip</span>
-                </div>
-
-                <blockquote className="text-lg font-display font-medium text-white leading-relaxed mb-6">
-                  "{quote.text}"
-                </blockquote>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-widest mb-6 border border-primary/20">
+                <Activity className="w-3 h-3" /> Security Tip
               </div>
 
-              <div className="relative z-10 flex items-center gap-3">
-                <div className="w-4 h-[1px] bg-white/20" />
-                <div className="text-white/50 font-mono text-[9px] uppercase tracking-widest font-bold">
+              <blockquote className="text-xl md:text-2xl font-bold text-white leading-tight mb-6">
+                "{quote.text}"
+              </blockquote>
+
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-xs font-bold text-white">
+                  {quote.author.split(' ')[0][0]}{quote.author.split(' ')[1]?.[0]}
+                </div>
+                <div className="text-sm font-mono text-gray-400 uppercase tracking-wider">
                   {quote.author}
                 </div>
               </div>
