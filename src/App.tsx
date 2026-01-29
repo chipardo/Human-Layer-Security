@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Routes, Route, useNavigate, useLocation, Link } from 'react-router-dom';
+import { Routes, Route, useLocation, Link } from 'react-router-dom';
 import { 
-  Shield, Menu, X, CheckCircle, Users, Mail, Activity, 
-  ArrowRight, Globe, Terminal, FileText, Award, Twitter, Linkedin 
+  Shield, Menu, X, CheckCircle, Mail, Activity, 
+  Globe, Terminal, FileText, Award, Twitter, Linkedin 
 } from 'lucide-react';
 import { AnimatePresence, motion, useScroll, useTransform, useInView, useAnimation } from 'framer-motion';
 import { clsx, type ClassValue } from "clsx";
@@ -94,33 +94,6 @@ const Reveal: React.FC<{ children: React.ReactNode, width?: "fit-content" | "100
       {children}
     </motion.div>
   );
-};
-
-const CountUp: React.FC<{ from?: number, to: number, duration?: number, suffix?: string, className?: string }> = ({ from = 0, to, duration = 2, suffix = "", className }) => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
-  const [count, setCount] = useState(from);
-
-  useEffect(() => {
-    if (isInView) {
-      let startTime: number;
-      let animationFrame: number;
-
-      const animate = (timestamp: number) => {
-        if (!startTime) startTime = timestamp;
-        const progress = timestamp - startTime;
-        const percentage = Math.min(progress / (duration * 1000), 1);
-        const ease = percentage === 1 ? 1 : 1 - Math.pow(2, -10 * percentage);
-        setCount(from + (to - from) * ease);
-        if (percentage < 1) animationFrame = requestAnimationFrame(animate);
-      };
-
-      animationFrame = requestAnimationFrame(animate);
-      return () => cancelAnimationFrame(animationFrame);
-    }
-  }, [isInView, from, to, duration]);
-
-  return <span ref={ref} className={className}>{Math.floor(count)}{suffix}</span>;
 };
 
 /**
@@ -406,15 +379,10 @@ const Footer = () => (
  * --- PAGES ---
  */
 const Home = () => {
-  const [quote, setQuote] = useState(QUOTES[0]);
   const { scrollY } = useScroll();
   const heroY = useTransform(scrollY, [0, 500], [0, 150]);
   const heroOpacity = useTransform(scrollY, [0, 300], [1, 0]);
   const bgScale = useTransform(scrollY, [0, 1000], [1, 1.2]);
-
-  useEffect(() => {
-    setQuote(QUOTES[Math.floor(Math.random() * QUOTES.length)]);
-  }, []);
 
   return (
     <>
@@ -459,6 +427,20 @@ const Home = () => {
 
       <WhyChoose />
       <HowWeWork />
+      
+      {/* Quote Section */}
+      <Section className="bg-surface/50">
+          <Reveal delay={0.1} width="100%">
+            <div className="max-w-3xl mx-auto text-center">
+              <blockquote className="text-2xl md:text-3xl font-bold text-white leading-tight mb-6">
+                "{QUOTES[0].text}"
+              </blockquote>
+              <div className="text-sm font-mono text-gray-400 uppercase tracking-wider">
+                — {QUOTES[0].author}
+              </div>
+            </div>
+          </Reveal>
+      </Section>
     </>
   );
 };
@@ -581,9 +563,6 @@ export default function App() {
         </Routes>
       </AnimatePresence>
       <Footer />
-      <style>{`
-        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-      `}</style>
     </div>
   );
 }
