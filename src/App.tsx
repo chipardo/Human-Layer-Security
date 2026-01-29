@@ -862,205 +862,207 @@ const Services = () => (
           </motion.div>
         ))}
       </motion.div>
+    </Section>
 
-      {/* COMPARISON SECTION */}
-      <Section className="bg-surface/30 border-y border-white/5">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Why We're <span className="text-primary">Better</span></h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">The old way of doing security training is broken. Here's how we fixed it.</p>
-        </div>
-        <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse">
-            <thead>
-              <tr className="border-b border-white/10">
-                <th className="p-4 text-gray-500 font-normal">Feature</th>
-                <th className="p-4 text-white font-bold text-lg bg-surface/50 border-x border-white/10 w-1/3">HumanLayer Security</th>
-                <th className="p-4 text-gray-500 font-normal w-1/3">Competitor K</th>
-                <th className="p-4 text-gray-500 font-normal w-1/3">Competitor P</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-white/5">
-              {[
-                { f: "Setup Time", h: "5 Minutes", c1: "3+ Weeks", c2: "2+ Weeks" },
-                { f: "Shame Policy", h: "Zero Shame (Private)", c1: "Report to Manager", c2: "Public \"Wall of Shame\"" },
-                { f: "Training Timing", h: "Instant (Point of Failure)", c1: "Next scheduled meeting", c2: "Monthly video" },
-                { f: "Content Updates", h: "Weekly", c1: "Quarterly", c2: "Monthly" },
-                { f: "Pricing", h: "Transparent/Monthly", c1: "Quote Only/Annual", c2: "Quote Only/Annual" },
-              ].map((row, i) => (
-                <tr key={i} className="group hover:bg-white/5 transition-colors">
-                  <td className="p-4 text-white font-bold">{row.f}</td>
-                  <td className="p-4 text-primary font-bold bg-primary/5 border-x border-primary/10 flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4" /> {row.h}
-                  </td>
-                  <td className="p-4 text-gray-500">{row.c1}</td>
-                  <td className="p-4 text-gray-500">{row.c2}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </Section>
-
-      {/* CERTIFICATES */}
-      <Section className="bg-black">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-12">
-          <div className="flex-1">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Compliance <span className="text-primary">Solved</span></h2>
-            <p className="text-gray-400 text-lg mb-8 leading-relaxed">
-              Stop stressing about audits. We generate the documentation you need automatically. Export perfectly formatted reports for SOC 2, ISO 27001, HIPAA, and cyber insurance carriers.
-            </p>
-            <div className="grid grid-cols-2 gap-4">
-              {['SOC 2 Type II', 'ISO 27001', 'HIPAA', 'CMMC 2.0', 'GDPR', 'PCI-DSS'].map((cert, i) => (
-                <div key={i} className="flex items-center gap-3 p-3 rounded-lg bg-surface/50 border border-white/10">
-                  <CheckCircle className="text-primary w-5 h-5 shrink-0" />
-                  <span className="text-white font-bold text-sm">{cert}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="flex-1 relative">
-            <div className="absolute inset-0 bg-primary/20 blur-[100px] rounded-full opacity-30" />
-            <div className="relative p-8 rounded-2xl bg-surface/80 backdrop-blur-xl border border-white/10 rotate-3 hover:rotate-0 transition-transform duration-500">
-              <div className="flex items-center gap-4 mb-6 border-b border-white/10 pb-4">
-                <FileText className="w-8 h-8 text-primary" />
-                <div>
-                  <div className="text-white font-bold">Compliance_Report_2026.pdf</div>
-                  <div className="text-xs text-gray-500">Generated 2 minutes ago</div>
-                </div>
-              </div>
-              <div className="space-y-3">
-                <div className="h-2 bg-white/10 rounded w-3/4" />
-                <div className="h-2 bg-white/10 rounded w-full" />
-                <div className="h-2 bg-white/10 rounded w-5/6" />
-                <div className="h-2 bg-white/10 rounded w-4/6" />
-              </div>
-              <div className="mt-6 flex justify-end">
-                <Button size="sm" variant="outline">Download PDF</Button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </Section>
-
-      {/* SETUP SPEED */}
-      <Section className="bg-gradient-to-b from-surface/20 to-black">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-white mb-12">Setup in <span className="text-primary">Minutes</span>, Not Weeks</h2>
-          <div className="relative pt-10">
-            <div className="absolute top-[2.5rem] left-0 right-0 h-1 bg-white/10 rounded-full" />
-            <div className="grid grid-cols-3 relative z-10">
-              <div className="flex flex-col items-center">
-                <div className="w-20 h-20 rounded-full bg-surface border-4 border-primary flex items-center justify-center text-2xl font-bold text-white mb-4 shadow-[0_0_20px_rgba(34,197,94,0.3)]">1</div>
-                <h3 className="text-white font-bold mb-2">Upload Details</h3>
-                <p className="text-xs text-gray-400 max-w-[150px]">Upload CSV of employees</p>
-              </div>
-              <div className="flex flex-col items-center">
-                <div className="w-20 h-20 rounded-full bg-surface border-4 border-white/20 flex items-center justify-center text-2xl font-bold text-gray-500 mb-4">2</div>
-                <h3 className="text-gray-300 font-bold mb-2">Select Campaign</h3>
-                <p className="text-xs text-gray-500 max-w-[150px]">Choose industry template</p>
-              </div>
-              <div className="flex flex-col items-center">
-                <div className="w-20 h-20 rounded-full bg-surface border-4 border-white/20 flex items-center justify-center text-2xl font-bold text-gray-500 mb-4">3</div>
-                <h3 className="text-gray-300 font-bold mb-2">Launch</h3>
-                <p className="text-xs text-gray-500 max-w-[150px]">Automatic training begins</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </Section>
-
-      {/* TRUST BADGES */}
-      <Section className="bg-black border-t border-white/5">
-        <p className="text-center text-gray-500 text-sm mb-8 uppercase tracking-widest">Securing Teams At</p>
-        <div className="flex flex-wrap justify-center gap-12 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
-          {['TechFlow', 'MediCorp', 'LegalShield', 'FinSecure', 'BuildRight'].map((brand, i) => (
-            <div key={i} className="text-2xl font-bold text-white flex items-center gap-2">
-              <div className="w-8 h-8 bg-white/20 rounded-full" /> {brand}
-            </div>
-          ))}
-        </div>
-      </Section>
-
-      {/* REUSED HOW WE WORK SECTION */}
-      <HowWeWork />
-
-      <div className="mt-16 text-center bg-black/40 backdrop-blur-md p-16 rounded-[3rem] border border-white/10 relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={{
-            hidden: { opacity: 0 },
-            visible: {
-              opacity: 1,
-              transition: { staggerChildren: 0.3 }
-            }
-          }}
-          className="grid md:grid-cols-3 gap-12 mb-12 relative z-10"
-        >
-          {/* STAT 1: CIRCULAR GRAPHIC */}
-          <motion.div
-            variants={{
-              hidden: { opacity: 0, scale: 0.8, y: 20 },
-              visible: { opacity: 1, scale: 1, y: 0, transition: { type: "spring", bounce: 0.4, duration: 0.8 } }
-            }}
-            className="flex flex-col items-center group"
-          >
-            <div className="relative w-40 h-40 flex items-center justify-center mb-6">
-              <svg className="w-full h-full rotate-[-90deg]" viewBox="0 0 100 100">
-                <circle cx="50" cy="50" r="45" fill="none" stroke="#262626" strokeWidth="8" />
-                <motion.circle
-                  cx="50" cy="50" r="45" fill="none" stroke="#22C55E" strokeWidth="8"
-                  strokeDasharray="283"
-                  initial={{ strokeDashoffset: 283 }}
-                  whileInView={{ strokeDashoffset: 180 }}
-                  transition={{ duration: 2, ease: "easeOut" }}
-                  strokeLinecap="round" className="drop-shadow-[0_0_10px_rgba(34,197,94,0.5)]"
-                />
-              </svg>
-              <div className="absolute inset-0 flex items-center justify-center text-4xl font-bold text-white"><CountUp to={37} suffix="%" /></div>
-            </div>
-            <div className="text-sm text-gray-400 uppercase tracking-widest font-bold">Where Most Teams Start</div>
-          </div>
-
-          {/* STAT 2: CENTRAL HERO GRAPHIC */}
-          <motion.div
-            variants={{
-              hidden: { opacity: 0, scale: 0.8, y: 20 },
-              visible: { opacity: 1, scale: 1, y: 0, transition: { type: "spring", bounce: 0.4, duration: 0.8 } }
-            }}
-            className="flex flex-col items-center group"
-          >
-            <div className="relative w-48 h-48 flex items-center justify-center mb-6">
-              <div className="absolute inset-0 bg-primary/20 rounded-full animate-pulse filter blur-xl"></div>
-              <div className="w-full h-full rounded-full border-4 border-primary/30 flex items-center justify-center relative bg-black/50 backdrop-blur-sm">
-                <div className="text-7xl font-bold text-primary tracking-tighter drop-shadow-[0_0_15px_rgba(34,197,94,1)]"><CountUp to={4} suffix="%" /></div>
-              </div>
-            </div>
-            <div className="text-sm text-gray-400 uppercase tracking-widest font-bold">Where You Can Be</div>
-          </div>
-
-          {/* STAT 3: BAR GRAPHIC */}
-          <motion.div
-            variants={{
-              hidden: { opacity: 0, scale: 0.8, y: 20 },
-              visible: { opacity: 1, scale: 1, y: 0, transition: { type: "spring", bounce: 0.4, duration: 0.8 } }
-            }}
-            className="flex flex-col items-center justify-center group h-full"
-          >
-            <div className="flex items-end gap-2 h-32 mb-6">
-              <motion.div initial={{ height: 0 }} whileInView={{ height: 40 }} transition={{ duration: 0.5 }} className="w-6 bg-white/10 rounded-t-lg"></motion.div>
-              <motion.div initial={{ height: 0 }} whileInView={{ height: 64 }} transition={{ duration: 0.5, delay: 0.1 }} className="w-6 bg-white/20 rounded-t-lg"></motion.div>
-              <motion.div initial={{ height: 0 }} whileInView={{ height: 80 }} transition={{ duration: 0.5, delay: 0.2 }} className="w-6 bg-white/30 rounded-t-lg"></motion.div>
-              <motion.div initial={{ height: 0 }} whileInView={{ height: 128 }} transition={{ duration: 0.5, delay: 0.3 }} className="w-6 bg-primary rounded-t-lg shadow-[0_0_15px_rgba(34,197,94,0.5)]"></motion.div>
-            </div>
-            <div className="text-5xl font-bold text-white mb-2"><CountUp to={8} suffix="x" /></div>
-            <div className="text-sm text-gray-400 uppercase tracking-widest font-bold">Improved Threat Response</div>
-          </div>
+    {/* COMPARISON SECTION */}
+    <Section className="bg-surface/30 border-y border-white/5">
+      <div className="text-center mb-16">
+        <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Why We're <span className="text-primary">Better</span></h2>
+        <p className="text-gray-400 max-w-2xl mx-auto">The old way of doing security training is broken. Here's how we fixed it.</p>
       </div>
-      <p className="text-3xl text-white font-bold mb-10 font-display italic">"This is what happens when training actually works."</p>
-      <Link to="/contact"><Button size="lg" className="bg-green-600 hover:bg-green-500 text-white h-auto min-h-[4rem] px-6 py-4 text-base md:text-lg whitespace-normal leading-tight text-center">Get These Results for Your Team</Button></Link>
+      <div className="overflow-x-auto">
+        <table className="w-full text-left border-collapse">
+          <thead>
+            <tr className="border-b border-white/10">
+              <th className="p-4 text-gray-500 font-normal">Feature</th>
+              <th className="p-4 text-white font-bold text-lg bg-surface/50 border-x border-white/10 w-1/3">HumanLayer Security</th>
+              <th className="p-4 text-gray-500 font-normal w-1/3">Competitor K</th>
+              <th className="p-4 text-gray-500 font-normal w-1/3">Competitor P</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-white/5">
+            {[
+              { f: "Setup Time", h: "5 Minutes", c1: "3+ Weeks", c2: "2+ Weeks" },
+              { f: "Shame Policy", h: "Zero Shame (Private)", c1: "Report to Manager", c2: "Public \"Wall of Shame\"" },
+              { f: "Training Timing", h: "Instant (Point of Failure)", c1: "Next scheduled meeting", c2: "Monthly video" },
+              { f: "Content Updates", h: "Weekly", c1: "Quarterly", c2: "Monthly" },
+              { f: "Pricing", h: "Transparent/Monthly", c1: "Quote Only/Annual", c2: "Quote Only/Annual" },
+            ].map((row, i) => (
+              <tr key={i} className="group hover:bg-white/5 transition-colors">
+                <td className="p-4 text-white font-bold">{row.f}</td>
+                <td className="p-4 text-primary font-bold bg-primary/5 border-x border-primary/10 flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4" /> {row.h}
+                </td>
+                <td className="p-4 text-gray-500">{row.c1}</td>
+                <td className="p-4 text-gray-500">{row.c2}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </Section>
+
+    {/* CERTIFICATES */}
+    <Section className="bg-black">
+      <div className="flex flex-col md:flex-row items-center justify-between gap-12">
+        <div className="flex-1">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Compliance <span className="text-primary">Solved</span></h2>
+          <p className="text-gray-400 text-lg mb-8 leading-relaxed">
+            Stop stressing about audits. We generate the documentation you need automatically. Export perfectly formatted reports for SOC 2, ISO 27001, HIPAA, and cyber insurance carriers.
+          </p>
+          <div className="grid grid-cols-2 gap-4">
+            {['SOC 2 Type II', 'ISO 27001', 'HIPAA', 'CMMC 2.0', 'GDPR', 'PCI-DSS'].map((cert, i) => (
+              <div key={i} className="flex items-center gap-3 p-3 rounded-lg bg-surface/50 border border-white/10">
+                <CheckCircle className="text-primary w-5 h-5 shrink-0" />
+                <span className="text-white font-bold text-sm">{cert}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="flex-1 relative">
+          <div className="absolute inset-0 bg-primary/20 blur-[100px] rounded-full opacity-30" />
+          <div className="relative p-8 rounded-2xl bg-surface/80 backdrop-blur-xl border border-white/10 rotate-3 hover:rotate-0 transition-transform duration-500">
+            <div className="flex items-center gap-4 mb-6 border-b border-white/10 pb-4">
+              <FileText className="w-8 h-8 text-primary" />
+              <div>
+                <div className="text-white font-bold">Compliance_Report_2026.pdf</div>
+                <div className="text-xs text-gray-500">Generated 2 minutes ago</div>
+              </div>
+            </div>
+            <div className="space-y-3">
+              <div className="h-2 bg-white/10 rounded w-3/4" />
+              <div className="h-2 bg-white/10 rounded w-full" />
+              <div className="h-2 bg-white/10 rounded w-5/6" />
+              <div className="h-2 bg-white/10 rounded w-4/6" />
+            </div>
+            <div className="mt-6 flex justify-end">
+              <Button size="sm" variant="outline">Download PDF</Button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Section>
+
+    {/* SETUP SPEED */}
+    <Section className="bg-gradient-to-b from-surface/20 to-black">
+      <div className="max-w-4xl mx-auto text-center">
+        <h2 className="text-3xl font-bold text-white mb-12">Setup in <span className="text-primary">Minutes</span>, Not Weeks</h2>
+        <div className="relative pt-10">
+          <div className="absolute top-[2.5rem] left-0 right-0 h-1 bg-white/10 rounded-full" />
+          <div className="grid grid-cols-3 relative z-10">
+            <div className="flex flex-col items-center">
+              <div className="w-20 h-20 rounded-full bg-surface border-4 border-primary flex items-center justify-center text-2xl font-bold text-white mb-4 shadow-[0_0_20px_rgba(34,197,94,0.3)]">1</div>
+              <h3 className="text-white font-bold mb-2">Upload Details</h3>
+              <p className="text-xs text-gray-400 max-w-[150px]">Upload CSV of employees</p>
+            </div>
+            <div className="flex flex-col items-center">
+              <div className="w-20 h-20 rounded-full bg-surface border-4 border-white/20 flex items-center justify-center text-2xl font-bold text-gray-500 mb-4">2</div>
+              <h3 className="text-gray-300 font-bold mb-2">Select Campaign</h3>
+              <p className="text-xs text-gray-500 max-w-[150px]">Choose industry template</p>
+            </div>
+            <div className="flex flex-col items-center">
+              <div className="w-20 h-20 rounded-full bg-surface border-4 border-white/20 flex items-center justify-center text-2xl font-bold text-gray-500 mb-4">3</div>
+              <h3 className="text-gray-300 font-bold mb-2">Launch</h3>
+              <p className="text-xs text-gray-500 max-w-[150px]">Automatic training begins</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Section>
+
+    {/* TRUST BADGES */}
+    <Section className="bg-black border-t border-white/5">
+      <p className="text-center text-gray-500 text-sm mb-8 uppercase tracking-widest">Securing Teams At</p>
+      <div className="flex flex-wrap justify-center gap-12 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+        {['TechFlow', 'MediCorp', 'LegalShield', 'FinSecure', 'BuildRight'].map((brand, i) => (
+          <div key={i} className="text-2xl font-bold text-white flex items-center gap-2">
+            <div className="w-8 h-8 bg-white/20 rounded-full" /> {brand}
+          </div>
+        ))}
+      </div>
+    </Section>
+
+    {/* REUSED HOW WE WORK SECTION */}
+    <HowWeWork />
+
+    <div className="mt-16 text-center bg-black/40 backdrop-blur-md p-16 rounded-[3rem] border border-white/10 relative overflow-hidden">
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={{
+          hidden: { opacity: 0 },
+          visible: {
+            opacity: 1,
+            transition: { staggerChildren: 0.3 }
+          }
+        }}
+        className="grid md:grid-cols-3 gap-12 mb-12 relative z-10"
+      >
+        {/* STAT 1: CIRCULAR GRAPHIC */}
+        <motion.div
+          variants={{
+            hidden: { opacity: 0, scale: 0.8, y: 20 },
+            visible: { opacity: 1, scale: 1, y: 0, transition: { type: "spring", bounce: 0.4, duration: 0.8 } }
+          }}
+          className="flex flex-col items-center group"
+        >
+          <div className="relative w-40 h-40 flex items-center justify-center mb-6">
+            <svg className="w-full h-full rotate-[-90deg]" viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="45" fill="none" stroke="#262626" strokeWidth="8" />
+              <motion.circle
+                cx="50" cy="50" r="45" fill="none" stroke="#22C55E" strokeWidth="8"
+                strokeDasharray="283"
+                initial={{ strokeDashoffset: 283 }}
+                whileInView={{ strokeDashoffset: 180 }}
+                transition={{ duration: 2, ease: "easeOut" }}
+                strokeLinecap="round" className="drop-shadow-[0_0_10px_rgba(34,197,94,0.5)]"
+              />
+            </svg>
+            <div className="absolute inset-0 flex items-center justify-center text-4xl font-bold text-white"><CountUp to={37} suffix="%" /></div>
+          </div>
+          <div className="text-sm text-gray-400 uppercase tracking-widest font-bold">Where Most Teams Start</div>
+        </motion.div>
+
+        {/* STAT 2: CENTRAL HERO GRAPHIC */}
+        <motion.div
+          variants={{
+            hidden: { opacity: 0, scale: 0.8, y: 20 },
+            visible: { opacity: 1, scale: 1, y: 0, transition: { type: "spring", bounce: 0.4, duration: 0.8 } }
+          }}
+          className="flex flex-col items-center group"
+        >
+          <div className="relative w-48 h-48 flex items-center justify-center mb-6">
+            <div className="absolute inset-0 bg-primary/20 rounded-full animate-pulse filter blur-xl"></div>
+            <div className="w-full h-full rounded-full border-4 border-primary/30 flex items-center justify-center relative bg-black/50 backdrop-blur-sm">
+              <div className="text-7xl font-bold text-primary tracking-tighter drop-shadow-[0_0_15px_rgba(34,197,94,1)]"><CountUp to={4} suffix="%" /></div>
+            </div>
+          </div>
+        </div>
+        <div className="text-sm text-gray-400 uppercase tracking-widest font-bold">Where You Can Be</div>
+      </motion.div>
+
+      {/* STAT 3: BAR GRAPHIC */}
+      <motion.div
+        variants={{
+          hidden: { opacity: 0, scale: 0.8, y: 20 },
+          visible: { opacity: 1, scale: 1, y: 0, transition: { type: "spring", bounce: 0.4, duration: 0.8 } }
+        }}
+        className="flex flex-col items-center justify-center group h-full"
+      >
+        <div className="flex items-end gap-2 h-32 mb-6">
+          <motion.div initial={{ height: 0 }} whileInView={{ height: 40 }} transition={{ duration: 0.5 }} className="w-6 bg-white/10 rounded-t-lg"></motion.div>
+          <motion.div initial={{ height: 0 }} whileInView={{ height: 64 }} transition={{ duration: 0.5, delay: 0.1 }} className="w-6 bg-white/20 rounded-t-lg"></motion.div>
+          <motion.div initial={{ height: 0 }} whileInView={{ height: 80 }} transition={{ duration: 0.5, delay: 0.2 }} className="w-6 bg-white/30 rounded-t-lg"></motion.div>
+          <motion.div initial={{ height: 0 }} whileInView={{ height: 128 }} transition={{ duration: 0.5, delay: 0.3 }} className="w-6 bg-primary rounded-t-lg shadow-[0_0_15px_rgba(34,197,94,0.5)]"></motion.div>
+        </div>
+        <div className="text-5xl font-bold text-white mb-2"><CountUp to={8} suffix="x" /></div>
+        <div className="text-sm text-gray-400 uppercase tracking-widest font-bold">Improved Threat Response</div>
+      </motion.div>
+    </motion.div>
+    <p className="text-3xl text-white font-bold mb-10 font-display italic">"This is what happens when training actually works."</p>
+    <Link to="/contact"><Button size="lg" className="bg-green-600 hover:bg-green-500 text-white h-auto min-h-[4rem] px-6 py-4 text-base md:text-lg whitespace-normal leading-tight text-center">Get These Results for Your Team</Button></Link>
   </div>
     </Section >
   </div >
