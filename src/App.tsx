@@ -1063,9 +1063,8 @@ const Services = () => (
       <p className="text-3xl text-white font-bold mb-10 font-display italic">"This is what happens when training actually works."</p>
       <Link to="/contact"><Button size="lg" className="bg-green-600 hover:bg-green-500 text-white h-auto min-h-[4rem] px-6 py-4 text-base md:text-lg whitespace-normal leading-tight text-center">Get These Results for Your Team</Button></Link>
     </div>
-  </>
+  </div>
 );
-};
 
 const About = () => (
   <div className="min-h-screen bg-background text-white pb-20">
@@ -1384,4 +1383,3 @@ function App() {
 }
 
 export default App;
-
