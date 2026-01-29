@@ -127,8 +127,26 @@ const Button: React.FC<Omit<React.ComponentProps<typeof motion.button>, 'childre
   };
   const sizes = { sm: "h-9 px-4 text-xs", md: "h-12 px-8 text-sm", lg: "h-14 px-10 text-base" };
 
+  // Magnetic Effect Logic
+  const ref = React.useRef<HTMLButtonElement>(null);
+  const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (variant !== 'primary' || !ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    const x = (e.clientX - rect.left - rect.width / 2) * 0.2;
+    const y = (e.clientY - rect.top - rect.height / 2) * 0.2;
+    ref.current.style.transform = `translate(${x}px, ${y}px)`;
+  };
+  const handleMouseLeave = () => {
+    if (!ref.current) return;
+    ref.current.style.transform = 'translate(0, 0)';
+  };
+
   return (
     <motion.button
+      ref={ref}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{ transition: 'transform 0.3s cubic-bezier(0.22, 1, 0.36, 1)' }}
       whileHover={{ scale: 1.02, boxShadow: variant === 'primary' ? "0 0 40px rgba(34,197,94,0.6)" : undefined }}
       whileTap={{ scale: 0.98, boxShadow: variant === 'primary' ? "0 0 20px rgba(34,197,94,0.4)" : undefined }}
       className={cn(base, vars[variant], sizes[size], className)}
@@ -142,45 +160,9 @@ const Button: React.FC<Omit<React.ComponentProps<typeof motion.button>, 'childre
   );
 };
 
-const MagneticButton: React.FC<{ children: React.ReactNode, className?: string } & React.ComponentProps<typeof motion.button>> = ({ children, className, ...props }) => {
-  const ref = React.useRef<HTMLButtonElement>(null);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (!ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-    const x = (e.clientX - rect.left - rect.width / 2) * 0.2;
-    const y = (e.clientY - rect.top - rect.height / 2) * 0.2;
-    ref.current.style.transform = `translate(${x}px, ${y}px)`;
-  };
 
-  const handleMouseLeave = () => {
-    if (!ref.current) return;
-    ref.current.style.transform = 'translate(0, 0)';
-  };
 
-  return (
-    <motion.button
-      ref={ref}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{ transition: 'transform 0.3s cubic-bezier(0.22, 1, 0.36, 1)' }}
-      whileTap={{ scale: 0.98 }}
-      className={className}
-      {...props}
-    >
-      {children}
-    </motion.button>
-  );
-};
-
-const SkeletonCard = () => (
-  <div className="animate-pulse p-8 rounded-3xl bg-surface/40 border border-white/10 h-full">
-    <div className="h-12 w-12 bg-white/10 rounded-full mb-4" />
-    <div className="h-6 bg-white/10 rounded w-3/4 mb-2" />
-    <div className="h-4 bg-white/10 rounded w-full mb-2" />
-    <div className="h-4 bg-white/10 rounded w-5/6" />
-  </div>
-);
 
 const Section: React.FC<{ children: React.ReactNode, className?: string, id?: string }> = ({ children, className = "", id }) => (
   <section id={id} className={cn("py-20 md:py-24 px-6 relative overflow-hidden", className)}>
@@ -1383,3 +1365,4 @@ function App() {
 }
 
 export default App;
+
