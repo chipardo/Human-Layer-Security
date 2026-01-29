@@ -229,11 +229,11 @@ const HowWeWork = () => (
         <motion.div variants={fadeInUp} key={i} className="group relative p-8 bg-black/40 border border-white/5 rounded-[2rem] hover:bg-white/5 hover:border-white/10 transition-colors duration-300 will-change-transform overflow-hidden" whileHover={{ y: -5, transition: { duration: 0.2 } }}>
           <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-[40px] pointer-events-none group-hover:bg-white/10 transition-colors" />
 
-          <div className="absolute -top-4 left-8 bg-surface px-3 py-1 border border-white/10 rounded-full text-xs font-mono font-bold shadow-xl group-hover:border-white/20 transition-colors text-white">
+          <div className="inline-block px-3 py-1 mb-6 border border-white/10 rounded-full text-xs font-mono font-bold shadow-xl group-hover:border-white/20 transition-colors text-white bg-surface">
             STEP {s.step}
           </div>
 
-          <div className={cn("mt-6 mb-6 w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center text-gray-400 group-hover:text-black transition-all duration-300 group-hover:scale-110", s.bg, s.shadow)}>
+          <div className={cn("mb-6 w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center text-gray-400 group-hover:text-black transition-all duration-300 group-hover:scale-110", s.bg, s.shadow)}>
             <s.i className="w-7 h-7" />
           </div>
 
@@ -295,10 +295,6 @@ const WhyChoose = () => (
           <h3 className="text-xl font-bold text-white mb-3 relative z-10">{f.t}</h3>
           <p className="text-gray-400 leading-relaxed text-sm relative z-10">{f.d}</p>
 
-          {/* Shine effect */}
-          <div className="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-            <ArrowRight className={cn("w-5 h-5 -rotate-45", f.c)} />
-          </div>
         </motion.div>
       ))}
     </motion.div>
@@ -460,7 +456,7 @@ const Home = () => {
         <div className="absolute top-0 right-0 w-2/3 h-full bg-gradient-to-l from-primary/10 via-primary/5 to-transparent opacity-60 pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center relative z-10">
-          <motion.div style={{ y: heroY, opacity: heroOpacity }} initial="hidden" animate="visible" variants={staggerContainer} className="relative z-20">
+          <motion.div style={{ y: heroY, opacity: heroOpacity }} initial="hidden" animate="visible" variants={staggerContainer} className="relative z-20 flex flex-col justify-center text-left lg:text-left">
             <Reveal delay={0.1}>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold mb-8 uppercase tracking-widest">
                 <span className="w-2 h-2 rounded-full bg-primary animate-pulse" /> Phishing Defense Platform
@@ -468,13 +464,12 @@ const Home = () => {
             </Reveal>
 
             <Reveal delay={0.2}>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-[1.1] tracking-tight max-w-6xl">
+              <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold text-white mb-6 leading-[1.1] tracking-tight max-w-4xl">
                 One phishing email can <span className="text-red-500 decoration-red-900/50 underline decoration-4 underline-offset-4">destroy your business.</span> <br className="hidden md:block" />
                 We train your team to <span className="text-primary decoration-primary/30 underline decoration-4 underline-offset-4">recognize it before they click.</span>
               </h1>
             </Reveal>
 
-            {/* Feature Pills */}
             <Reveal delay={0.3}>
               <div className="flex flex-wrap gap-2 sm:gap-3 mb-8">
                 <div className="flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm">
@@ -482,11 +477,11 @@ const Home = () => {
                   <span className="text-xs sm:text-sm font-bold text-primary whitespace-nowrap">No Shame Policy</span>
                 </div>
                 <div className="flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm">
-                  <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-primary shrink-0" />
+                  <Activity className="w-3 h-3 sm:w-4 sm:h-4 text-primary shrink-0" />
                   <span className="text-xs sm:text-sm font-bold text-primary whitespace-nowrap">Setup in 5 Minutes</span>
                 </div>
                 <div className="flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm">
-                  <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-primary shrink-0" />
+                  <Award className="w-3 h-3 sm:w-4 sm:h-4 text-primary shrink-0" />
                   <span className="text-xs sm:text-sm font-bold text-primary whitespace-nowrap">Compliance Included</span>
                 </div>
               </div>
@@ -498,41 +493,6 @@ const Home = () => {
               </p>
             </Reveal>
 
-            {/* Social Proof */}
-            <Reveal delay={0.5}>
-              <div className="flex items-center gap-6 mb-8 flex-wrap">
-                <div className="flex items-center gap-2">
-                  <div className="flex -space-x-2">
-                    {[1, 2, 3, 4].map((i) => (
-                      <div key={i} className="w-8 h-8 rounded-full bg-primary/20 border-2 border-background flex items-center justify-center text-xs font-bold text-primary">
-                        {String.fromCharCode(64 + i)}
-                      </div>
-                    ))}
-                  </div>
-                  <span className="text-sm text-gray-400">Trusted by 50+ companies</span>
-                </div>
-                <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20">
-                  <CheckCircle className="w-4 h-4 text-primary" />
-                  <span className="text-xs text-primary font-bold">4.8/5 avg reduction in click rates</span>
-                </div>
-              </div>
-
-              {/* TRUSTED INDUSTRIES MARQUEE */}
-              <div className="w-full overflow-hidden border-t border-white/5 pt-8 mb-12 relative mask-linear-fade">
-                <p className="text-xs text-gray-500 uppercase tracking-widest mb-4 font-bold">Trusted in High-Risk Sectors</p>
-                <div className="flex gap-12 animate-scroll whitespace-nowrap opacity-60">
-                  <div className="flex items-center gap-2"><Scale className="w-4 h-4 text-gray-400" /><span className="text-sm text-gray-300 font-mono">LEGAL</span></div>
-                  <div className="flex items-center gap-2"><Building className="w-4 h-4 text-gray-400" /><span className="text-sm text-gray-300 font-mono">FINANCE</span></div>
-                  <div className="flex items-center gap-2"><Stethoscope className="w-4 h-4 text-gray-400" /><span className="text-sm text-gray-300 font-mono">HEALTHCARE</span></div>
-                  {/* Duplicate for smooth loop */}
-                  <div className="flex items-center gap-2"><Scale className="w-4 h-4 text-gray-400" /><span className="text-sm text-gray-300 font-mono">LEGAL</span></div>
-                  <div className="flex items-center gap-2"><Building className="w-4 h-4 text-gray-400" /><span className="text-sm text-gray-300 font-mono">FINANCE</span></div>
-                  <div className="flex items-center gap-2"><Stethoscope className="w-4 h-4 text-gray-400" /><span className="text-sm text-gray-300 font-mono">HEALTHCARE</span></div>
-                </div>
-              </div>
-            </Reveal>
-
-            {/* Buttons */}
             <Reveal delay={0.6}>
               <div className="flex gap-4 flex-wrap">
                 <Link to="/contact">
@@ -542,11 +502,10 @@ const Home = () => {
                 </Link>
                 <Link to="/services">
                   <Button size="lg" variant="outline">
-                    Watch 2-Min Demo
+                    Watch 2 Min Demo
                   </Button>
                 </Link>
               </div>
-              {/* Trust Line */}
               <p className="text-sm text-white/50 mt-4">
                 No credit card required • Setup in under 5 minutes • Cancel anytime
               </p>
@@ -554,42 +513,17 @@ const Home = () => {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, ease: "circOut", delay: 0.5 }}
-            className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-primary/20 bg-surface/50 backdrop-blur-sm transition-all duration-300 group"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
+            className="relative lg:h-[800px] flex items-center justify-center pointer-events-none"
           >
-            {/* Decorative Elements */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full blur-[80px] pointer-events-none mix-blend-screen" />
-            <div className="absolute bottom-0 left-0 w-48 h-48 bg-green-500/10 rounded-full blur-[60px] pointer-events-none mix-blend-screen" />
-
-            {!imageLoaded && <ImageSkeleton className="absolute inset-0" />}
-            <img
-              src="/hero-network.png"
-              alt="Human Defense Network"
-              loading="lazy"
-              decoding="async"
-              onLoad={() => setImageLoaded(true)}
-              className={cn(
-                "w-full h-auto object-cover opacity-90 transition-all duration-700 ease-out relative z-0 group-hover:scale-105",
-                imageLoaded ? "opacity-100" : "opacity-0"
-              )}
-            />
-            <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 via-transparent to-blue-500/20 mix-blend-overlay z-10" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60 z-10" />
-
-            {/* Scanline Effect */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent_50%,rgba(0,0,0,0.3)_50%)] bg-[length:100%_4px] pointer-events-none opacity-20 z-20" />
-
-            <div className="absolute bottom-8 left-8 right-8 grid grid-cols-2 gap-4 z-30">
-              <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 1 }} className="bg-black/40 backdrop-blur-md p-4 rounded-xl border border-white/10">
-                <div className="text-xs text-green-400 font-mono mb-1 uppercase tracking-wider">Team Awareness</div>
-                <div className="text-2xl font-bold text-white flex items-center gap-2">GROWING</div>
-              </motion.div>
-              <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 1.2 }} className="bg-black/40 backdrop-blur-md p-4 rounded-xl border border-white/10">
-                <div className="text-xs text-green-400 font-mono mb-1 uppercase tracking-wider">Training Style</div>
-                <div className="text-2xl font-bold text-white">INSTANT</div>
-              </motion.div>
+            <div className="relative w-full max-w-[140%] -mr-[20%] z-10 transition-transform duration-700 hover:scale-[1.02]">
+              <img
+                src="/hero-network.png"
+                alt="Human Defense Network"
+                className="w-full h-auto object-contain drop-shadow-2xl"
+              />
             </div>
           </motion.div>
         </div>
@@ -887,7 +821,7 @@ const Home = () => {
               { q: "Won't this upset our employees?", a: "No — and here's why: We don't report clicks to management. We don't publish 'walls of shame.' We don't make anyone feel stupid. When someone clicks, they see a private learning moment. Most employees actually appreciate the training because it helps them protect themselves." },
               { q: "How is this different from KnowBe4 or Proofpoint?", a: "Three main differences: (1) We're faster to set up (minutes vs weeks), (2) Our scenarios are more realistic because we customize to your actual threats, (3) Our pricing is transparent and simple. Most importantly, we built this platform from scratch in 2024 with modern technology — not legacy systems from 2010." },
               { q: "What if employees figure out it's a test?", a: "That's actually good! It means they're being vigilant. The goal isn't to trick people — it's to build instincts. If someone thinks 'this might be a phishing test,' they're already thinking more carefully about email security. That's exactly what we want." },
-              { q: "How long until we see results?", a: "Most companies see measurable improvement within 60-90 days. Click rates typically drop 50-80% within the first six months. But you'll notice behavioral changes sooner — employees start forwarding suspicious emails to IT instead of clicking them." },
+              { q: "How long until we see results?", a: "Most companies see measurable improvement within 60–90 days. Click rates typically drop 50–80% within the first six months. But you'll notice behavioral changes sooner — employees start forwarding suspicious emails to IT instead of clicking them." },
               { q: "Do you handle the technical setup?", a: "Yes. Setup takes under 5 minutes. We handle email authentication, domain configuration, and platform setup. You just provide your employee list and select your first campaign. We take care of the technical details." },
               { q: "Can we cancel anytime?", a: "Yes. Month-to-month contracts. Cancel with 30 days notice. No long-term commitments. No cancellation fees. We're confident you'll see value, so we don't lock you in." }
             ].map((faq, i) => (
@@ -1953,4 +1887,5 @@ function App() {
 }
 
 export default App;
+
 
