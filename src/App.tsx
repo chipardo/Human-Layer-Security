@@ -244,35 +244,59 @@ const HowWeWork = () => (
 );
 
 const WhyChoose = () => (
-  <Section className="bg-black border-y border-white/5">
-    <div className="text-center mb-16">
+  <Section className="bg-black relative overflow-hidden">
+    {/* Background Gradients */}
+    <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
+    <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none" />
+
+    <div className="text-center mb-16 relative z-10">
       <Reveal width="100%">
-        <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-          Why Companies Choose <span className="text-primary">Human Layer</span>
-        </h2>
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-gray-300 text-xs font-bold mb-6 uppercase tracking-widest backdrop-blur-md">
+          <Shield className="w-3 h-3 text-primary" /> The Standard
+        </div>
       </Reveal>
       <Reveal delay={0.1} width="100%">
-        <p className="text-gray-400 max-w-2xl mx-auto">
+        <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+          Why Companies Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-emerald-400">Human Layer</span>
+        </h2>
+      </Reveal>
+      <Reveal delay={0.2} width="100%">
+        <p className="text-gray-400 max-w-2xl mx-auto text-lg">
           We built this platform to solve the problems other security training companies ignore.
         </p>
       </Reveal>
     </div>
 
-    <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer} className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+    <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer} className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto relative z-10">
       {[
-        { t: "Zero Shame", d: "No public humiliation. Just private, immediate training.", i: Shield, c: "text-green-500", b: "group-hover:border-green-500/50", bg: "group-hover:bg-green-500/10" },
-        { t: "Compliance Ready", d: "Automatic SOC 2, ISO 27001, & HIPAA documentation.", i: Award, c: "text-yellow-500", b: "group-hover:border-yellow-500/50", bg: "group-hover:bg-yellow-500/10" },
-        { t: "5-Minute Setup", d: "No IT department needed. Launch your first campaign today.", i: Activity, c: "text-blue-400", b: "group-hover:border-blue-400/50", bg: "group-hover:bg-blue-400/10" },
-        { t: "Real Templates", d: "Law firms get court notices. Finance gets wire transfers.", i: FileText, c: "text-red-500", b: "group-hover:border-red-500/50", bg: "group-hover:bg-red-500/10" },
-        { t: "Clear Analytics", d: "Track improvement. Export reports for insurance.", i: Terminal, c: "text-purple-400", b: "group-hover:border-purple-400/50", bg: "group-hover:bg-purple-400/10" },
-        { t: "Instant Learning", d: "Training happens the second they click. Not next week.", i: Mail, c: "text-orange-400", b: "group-hover:border-orange-400/50", bg: "group-hover:bg-orange-400/10" }
+        { t: "Zero Shame", d: "No public humiliation. Just private, immediate training.", i: Shield, c: "text-emerald-400", border: "group-hover:border-emerald-500/50", shadow: "group-hover:shadow-[0_0_50px_rgba(16,185,129,0.2)]", iconBg: "bg-emerald-500/10" },
+        { t: "Compliance Ready", d: "Automatic SOC 2, ISO 27001, & HIPAA documentation.", i: Award, c: "text-amber-400", border: "group-hover:border-amber-500/50", shadow: "group-hover:shadow-[0_0_50px_rgba(245,158,11,0.2)]", iconBg: "bg-amber-500/10" },
+        { t: "5-Minute Setup", d: "No IT department needed. Launch your first campaign today.", i: Activity, c: "text-cyan-400", border: "group-hover:border-cyan-400/50", shadow: "group-hover:shadow-[0_0_50px_rgba(34,211,238,0.2)]", iconBg: "bg-cyan-500/10" },
+        { t: "Real Templates", d: "Law firms get court notices. Finance gets wire transfers.", i: FileText, c: "text-rose-400", border: "group-hover:border-rose-500/50", shadow: "group-hover:shadow-[0_0_50px_rgba(244,63,94,0.2)]", iconBg: "bg-rose-500/10" },
+        { t: "Clear Analytics", d: "Track improvement. Export reports for insurance.", i: Terminal, c: "text-violet-400", border: "group-hover:border-violet-400/50", shadow: "group-hover:shadow-[0_0_50px_rgba(167,139,250,0.2)]", iconBg: "bg-violet-500/10" },
+        { t: "Instant Learning", d: "Training happens the second they click. Not next week.", i: Mail, c: "text-orange-400", border: "group-hover:border-orange-400/50", shadow: "group-hover:shadow-[0_0_50px_rgba(251,146,60,0.2)]", iconBg: "bg-orange-500/10" }
       ].map((f, i) => (
-        <motion.div variants={fadeInUp} key={i} className={cn("flex flex-col items-center text-center group p-8 rounded-3xl border border-white/5 transition-colors duration-300 hover:bg-white/5 hover:shadow-2xl cursor-default will-change-transform", f.b)} whileHover={{ y: -4, transition: { duration: 0.2 } }}>
-          <div className={cn("w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-6 py-4 border border-white/5 transition-all duration-300 group-hover:scale-110", f.bg)}>
-            <f.i className={cn("w-8 h-8 text-gray-400 transition-colors duration-300", `group-hover:${f.c}`)} />
+        <motion.div
+          variants={fadeInUp}
+          key={i}
+          className={cn(
+            "flex flex-col items-start text-left group p-8 rounded-[2rem] border border-white/5 bg-surface/30 backdrop-blur-sm transition-all duration-500 hover:bg-surface/50 cursor-default relative overflow-hidden",
+            f.border, f.shadow
+          )}
+          whileHover={{ y: -8 }}
+        >
+          <div className={cn("absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-white/5 to-transparent")} />
+
+          <div className={cn("w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-all duration-300 group-hover:scale-110 shadow-inner border border-white/5", f.iconBg)}>
+            <f.i className={cn("w-7 h-7 transition-colors duration-300", f.c)} />
           </div>
-          <h3 className="text-xl font-bold text-white mb-3 group-hover:text-white transition-colors">{f.t}</h3>
-          <p className="text-gray-400 leading-relaxed text-sm max-w-xs">{f.d}</p>
+          <h3 className="text-xl font-bold text-white mb-3 relative z-10">{f.t}</h3>
+          <p className="text-gray-400 leading-relaxed text-sm relative z-10">{f.d}</p>
+
+          {/* Shine effect */}
+          <div className="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+            <ArrowRight className={cn("w-5 h-5 -rotate-45", f.c)} />
+          </div>
         </motion.div>
       ))}
     </motion.div>
@@ -433,7 +457,7 @@ const Home = () => {
         <div className="absolute top-0 right-0 w-2/3 h-full bg-gradient-to-l from-primary/10 via-primary/5 to-transparent opacity-60 pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center relative z-10">
-          <motion.div style={{ y: heroY, opacity: heroOpacity }} initial="hidden" animate="visible" variants={staggerContainer} className="max-w-3xl mx-auto lg:max-w-none">
+          <motion.div style={{ y: heroY, opacity: heroOpacity }} initial="hidden" animate="visible" variants={staggerContainer} className="relative z-20">
             <Reveal delay={0.1}>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold mb-8 uppercase tracking-widest">
                 <span className="w-2 h-2 rounded-full bg-primary animate-pulse" /> Phishing Defense Platform
@@ -615,8 +639,8 @@ const Home = () => {
               <motion.div
                 key={i}
                 variants={fadeInUp}
-                whileHover={{ y: -10, scale: 1.02 }}
-                className={cn("p-8 rounded-2xl border transition-all duration-300 relative group overflow-hidden", stat.bg, stat.border)}
+                whileHover={{ borderColor: "rgba(255,255,255,0.2)", backgroundColor: "rgba(255,255,255,0.02)" }}
+                className={cn("p-8 rounded-2xl border transition-colors duration-300 relative group overflow-hidden", stat.bg, stat.border)}
               >
                 <div className="absolute inset-0 bg-red-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className={cn("text-5xl font-bold mb-4", stat.color)}>{stat.val}</div>
@@ -795,7 +819,7 @@ const Home = () => {
 
         <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="grid md:grid-cols-2 gap-8 mb-16">
           {/* Case Study 1 */}
-          <motion.div variants={fadeInUp} whileHover={{ y: -5 }} className="p-8 rounded-3xl bg-surface/40 border border-white/10 hover:border-primary/50 hover:bg-surface/60 transition-all duration-300 group cursor-default">
+          <motion.div variants={fadeInUp} whileHover={{ borderColor: "rgba(34,197,94,0.4)" }} className="p-8 rounded-3xl bg-surface/40 border border-white/10 transition-colors duration-300 group cursor-default">
             <div className="flex items-center gap-4 mb-6">
               <div className="w-14 h-14 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-xl group-hover:scale-110 transition-transform">LS</div>
               <div><div className="font-bold text-white text-lg">Law Firm, 75 employees</div><div className="text-sm text-gray-500 flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-primary/50" /> Miami, FL</div></div>
@@ -816,7 +840,7 @@ const Home = () => {
           </motion.div>
 
           {/* Case Study 2 */}
-          <motion.div variants={fadeInUp} whileHover={{ y: -5 }} className="p-8 rounded-3xl bg-surface/40 border border-white/10 hover:border-primary/50 hover:bg-surface/60 transition-all duration-300 group cursor-default">
+          <motion.div variants={fadeInUp} whileHover={{ borderColor: "rgba(34,197,94,0.4)" }} className="p-8 rounded-3xl bg-surface/40 border border-white/10 transition-colors duration-300 group cursor-default">
             <div className="flex items-center gap-4 mb-6">
               <div className="w-14 h-14 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-xl group-hover:scale-110 transition-transform">MC</div>
               <div><div className="font-bold text-white text-lg">Medical Practice, 120 employees</div><div className="text-sm text-gray-500 flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-primary/50" /> Boston, MA</div></div>
@@ -916,12 +940,11 @@ const Services = () => (
           >
             <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-            {/* Tech Decoration */}
-            <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
-              <div className="w-16 h-16 rounded-full border border-primary/20 dashed-border" />
+            <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-20 transition-opacity transform group-hover:rotate-90 duration-700">
+              <s.i className="w-32 h-32" />
             </div>
 
-            <div className="w-16 h-16 bg-black/50 rounded-2xl flex items-center justify-center shrink-0 group-hover:scale-105 transition-all duration-300 ease-out shadow-inner border border-white/5 relative z-10 mb-6 group-hover:border-primary/30 will-change-transform">
+            <div className="w-16 h-16 bg-surface rounded-2xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-all duration-300 ease-out shadow-lg border border-white/5 relative z-10 mb-6 group-hover:border-primary/50 group-hover:shadow-[0_0_30px_rgba(34,197,94,0.3)] will-change-transform">
               <s.i className="w-8 h-8 text-gray-400 group-hover:text-primary transition-colors" />
             </div>
 
@@ -1020,27 +1043,61 @@ const Services = () => (
     </Section>
 
     {/* SETUP SPEED */}
-    <Section className="bg-gradient-to-b from-surface/20 to-black">
-      <div className="max-w-4xl mx-auto text-center">
-        <h2 className="text-3xl font-bold text-white mb-12">Setup in <span className="text-primary">Minutes</span>, Not Weeks</h2>
-        <div className="relative pt-10">
-          <div className="absolute top-[2.5rem] left-0 right-0 h-1 bg-white/10 rounded-full" />
-          <div className="grid grid-cols-3 relative z-10">
-            <div className="flex flex-col items-center">
-              <div className="w-20 h-20 rounded-full bg-surface border-4 border-primary flex items-center justify-center text-2xl font-bold text-white mb-4 shadow-[0_0_20px_rgba(34,197,94,0.3)]">1</div>
-              <h3 className="text-white font-bold mb-2">Upload Details</h3>
-              <p className="text-xs text-gray-400 max-w-[150px]">Upload CSV of employees</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <div className="w-20 h-20 rounded-full bg-surface border-4 border-white/20 flex items-center justify-center text-2xl font-bold text-gray-500 mb-4">2</div>
-              <h3 className="text-gray-300 font-bold mb-2">Select Campaign</h3>
-              <p className="text-xs text-gray-500 max-w-[150px]">Choose industry template</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <div className="w-20 h-20 rounded-full bg-surface border-4 border-white/20 flex items-center justify-center text-2xl font-bold text-gray-500 mb-4">3</div>
-              <h3 className="text-gray-300 font-bold mb-2">Launch</h3>
-              <p className="text-xs text-gray-500 max-w-[150px]">Automatic training begins</p>
-            </div>
+    <Section className="bg-black relative overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_rgba(34,197,94,0.05),transparent_70%)]" />
+      <div className="max-w-4xl mx-auto text-center relative z-10">
+        <h2 className="text-4xl font-bold text-white mb-16">Setup in <span className="text-primary">Minutes</span>, Not Weeks</h2>
+
+        <div className="relative">
+          {/* Animated Connecting Line */}
+          <div className="absolute top-[2.5rem] left-[10%] right-[10%] h-0.5 bg-white/10 rounded-full overflow-hidden">
+            <motion.div
+              initial={{ width: "0%" }}
+              whileInView={{ width: "100%" }}
+              transition={{ duration: 1.5, ease: "easeInOut" }}
+              className="h-full bg-gradient-to-r from-transparent via-primary to-transparent"
+            />
+          </div>
+
+          <div className="grid grid-cols-3 relative z-10 gap-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="flex flex-col items-center group cursor-default"
+            >
+              <div className="w-20 h-20 rounded-full bg-black border-4 border-primary flex items-center justify-center text-2xl font-bold text-white mb-6 shadow-[0_0_30px_rgba(34,197,94,0.4)] relative z-10 group-hover:scale-110 transition-transform duration-300">
+                1
+              </div>
+              <h3 className="text-white font-bold text-lg mb-2 group-hover:text-primary transition-colors">Upload Details</h3>
+              <p className="text-sm text-gray-400 max-w-[180px]">Simply upload a CSV of your employees. We parse it automatically.</p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className="flex flex-col items-center group cursor-default"
+            >
+              <div className="w-20 h-20 rounded-full bg-surface border-4 border-white/10 group-hover:border-primary/50 flex items-center justify-center text-2xl font-bold text-gray-500 group-hover:text-white mb-6 transition-all duration-300 relative z-10 bg-black">
+                2
+              </div>
+              <h3 className="text-gray-300 group-hover:text-white font-bold text-lg mb-2 transition-colors">Select Campaign</h3>
+              <p className="text-sm text-gray-500 group-hover:text-gray-400 max-w-[180px] transition-colors">Choose from our industry-specific, ready-to-launch templates.</p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.7 }}
+              className="flex flex-col items-center group cursor-default"
+            >
+              <div className="w-20 h-20 rounded-full bg-surface border-4 border-white/10 group-hover:border-primary/50 flex items-center justify-center text-2xl font-bold text-gray-500 group-hover:text-white mb-6 transition-all duration-300 relative z-10 bg-black">
+                3
+              </div>
+              <h3 className="text-gray-300 group-hover:text-white font-bold text-lg mb-2 transition-colors">Launch</h3>
+              <p className="text-sm text-gray-500 group-hover:text-gray-400 max-w-[180px] transition-colors">Training begins immediately. Analytics update in real-time.</p>
+            </motion.div>
           </div>
         </div>
       </div>
@@ -1152,23 +1209,32 @@ const About = () => (
     <Section className="!pt-0">
       <div className="grid md:grid-cols-2 gap-16 items-start">
         <div className="space-y-8">
-          <div className="text-center md:text-left text-lg text-gray-300 leading-relaxed">
-            <h3 className="text-3xl font-bold text-white mb-6">Why We Started <span className="text-primary">Human Layer Security</span></h3>
-            <p className="mb-4">We studied cybersecurity and electrical engineering. We learned how attacks work. How social engineering bypasses every technical defense. How one convincing email can compromise an entire organization.</p>
-            <p className="mb-4">Then we looked at how companies actually train their employees against these attacks. Annual compliance videos. Generic "be careful with emails" warnings. Boring slide decks that people click through while checking their phone.</p>
-            <p className="mb-4">It doesn't work. And we knew why it doesn't work.</p>
-            <p className="mb-4">Real learning happens in the moment. You don't get better at recognizing phishing by watching videos—you get better by practicing with realistic examples and getting immediate feedback when you make a mistake.</p>
-            <p className="mb-4">So we built what we wished existed: a platform that tests people with realistic phishing attacks and teaches them instantly when they click. No shame. No punishment. Just practice and learning until recognizing phishing becomes instinct.</p>
-            <p className="mb-4">That's HumanLayer Security.</p>
-            <div className="bg-white/5 border-l-4 border-primary p-6 my-8 rounded-r-xl">
-              <h4 className="text-white font-bold mb-2 uppercase tracking-widest text-sm">What We <span className="text-primary">Believe</span></h4>
-              <p className="italic text-white/80">"Your employees aren't stupid. They're busy, distracted, and untrained. Give them realistic practice with immediate feedback, and they get better fast. That's not philosophy. That's how learning works."</p>
+          <div className="text-center md:text-left text-lg text-gray-300 leading-relaxed relative">
+            {/* Decoration */}
+            <div className="absolute -left-12 -top-12 w-32 h-32 bg-primary/10 rounded-full blur-[50px] pointer-events-none" />
+
+            <h3 className="text-4xl font-bold text-white mb-8 relative z-10">Why We Started <span className="text-primary">Human Layer Security</span></h3>
+
+            <div className="prose prose-lg prose-invert max-w-none space-y-6">
+              <p>We studied cybersecurity and electrical engineering. We learned how attacks work. How social engineering bypasses every technical defense. <span className="text-white font-semibold">How one convincing email can compromise an entire organization.</span></p>
+              <p>Then we looked at how companies actually train their employees against these attacks. Annual compliance videos. Generic "be careful with emails" warnings. Boring slide decks that people click through while checking their phone.</p>
+              <p>It doesn't work. And we knew why it doesn't work.</p>
+              <p>Real learning happens in the moment. You don't get better at recognizing phishing by watching videos—you get better by <span className="text-primary font-bold">practicing with realistic examples</span> and getting immediate feedback.</p>
+              <p>So we built what we wished existed: a platform that tests people with realistic phishing attacks and teaches them instantly when they click. No shame. No punishment. Just practice and learning until recognizing phishing becomes instinct.</p>
+              <p>That's HumanLayer Security.</p>
             </div>
-            <p className="mb-4">We're not a legacy security company. We're a small team that saw a massive problem and built a solution. We're confident in what we built because we built it the right way. And we're committed to helping every company we work with actually solve their phishing problem—not just check a compliance box.</p>
+
+            <div className="bg-gradient-to-r from-surface to-black/50 border-l-4 border-primary p-8 my-10 rounded-r-2xl relative overflow-hidden group">
+              <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+              <h4 className="text-primary font-bold mb-3 uppercase tracking-widest text-xs">Core Philosophy</h4>
+              <p className="italic text-white text-xl font-display leading-relaxed">"Your employees aren't stupid. They're busy, distracted, and untrained. Give them realistic practice with immediate feedback, and they get better fast. That's not philosophy. That's how learning works."</p>
+            </div>
+
+            <p className="mb-8">We're not a legacy security company. We're a small team that saw a massive problem and built a solution. We're confident in what we built because we built it the right way.</p>
           </div>
           <div className="flex gap-4 pt-4 justify-center md:justify-start">
-            <Link to="/services"><Button>See What We Built</Button></Link>
-            <Link to="/contact"><Button variant="outline">Let's Talk</Button></Link>
+            <Link to="/services"><Button size="lg" className="shadow-lg shadow-primary/20">See What We Built</Button></Link>
+            <Link to="/contact"><Button variant="outline" size="lg">Let's Talk</Button></Link>
           </div>
         </div>
 
@@ -1282,12 +1348,17 @@ const Partnership = () => (
         </motion.div>
 
         <div className="flex-1 space-y-8 z-10 order-2 md:order-1">
-          <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-8">Let's Grow <span className="text-primary">Together</span></h2>
+          <h2 className="text-5xl md:text-6xl font-bold text-white leading-[1.1] mb-8">Let's Grow <span className="text-primary">Together</span></h2>
           <div className="space-y-6 text-gray-400 text-lg leading-relaxed">
-            <p>If you work with businesses that need security training — MSPs, IT consultants, compliance advisors — you already know your clients need phishing protection.</p>
-            <p>Building a phishing training platform would take you months and cost tens of thousands of dollars. We've already built it. White label our platform and offer it to your clients under your brand.</p>
-            <p>Here's how it works: We provide the platform. You provide the client relationship. We handle infrastructure, updates, and technical support. You earn recurring revenue on every client you bring on.</p>
-            <p>Your clients get better security. You get a new revenue stream. We get to help more companies. Everyone wins.</p>
+            <p className="border-l-2 border-white/10 pl-6">If you work with businesses that need security training — MSPs, IT consultants, compliance advisors — you already know your clients need phishing protection.</p>
+            <p>Building a phishing training platform would take you months and cost tens of thousands of dollars. <span className="text-white font-bold">We've already built it.</span> White label our platform and offer it to your clients under your brand.</p>
+
+            <div className="bg-surface/40 border border-white/10 p-6 rounded-2xl">
+              <h4 className="text-primary font-bold text-sm uppercase tracking-widest mb-2">How It Works</h4>
+              <p className="text-base">We provide the platform. You provide the client relationship. We handle infrastructure, updates, and technical support. <span className="text-white">You earn recurring revenue on every client you bring on.</span></p>
+            </div>
+
+            <p className="text-sm text-gray-500">Your clients get better security. You get a new revenue stream. We get to help more companies. Everyone wins.</p>
           </div>
         </div>
       </div>
@@ -1313,17 +1384,20 @@ const Partnership = () => (
         ))}
       </motion.div>
 
-      <Section className="bg-black">
-        <div className="text-center mb-16">
+      <Section className="bg-black relative overflow-hidden">
+        {/* Background Gradients */}
+        <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
+
+        <div className="text-center mb-16 relative z-10">
           <h2 className="text-4xl font-bold text-white mb-6">
             Partner <span className="text-primary">Benefits</span>
           </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
+          <p className="text-gray-400 max-w-2xl mx-auto text-lg">
             Everything you need to offer world-class phishing training under your brand.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
           {[
             {
               icon: Award,
@@ -1374,16 +1448,21 @@ const Partnership = () => (
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="p-8 rounded-3xl bg-surface/40 border border-white/10 hover:border-primary/30 transition-colors group"
+              whileHover={{ y: -5 }}
+              className="p-8 rounded-[2rem] bg-surface/30 backdrop-blur-sm border border-white/10 hover:border-primary/40 hover:bg-surface/50 transition-all duration-300 group relative overflow-hidden"
             >
-              <div className="w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <benefit.icon className="w-8 h-8 text-primary" />
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+              <div className="w-16 h-16 rounded-2xl bg-black/50 border border-white/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-inner group-hover:shadow-[0_0_20px_rgba(34,197,94,0.2)]">
+                <benefit.icon className="w-8 h-8 text-gray-400 group-hover:text-primary transition-colors" />
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">{benefit.title}</h3>
-              <p className="text-gray-400 text-sm mb-4">{benefit.desc}</p>
-              <div className="pt-4 border-t border-white/5">
-                <div className="text-2xl font-bold text-primary">{benefit.stat}</div>
-                <div className="text-xs text-gray-500">{benefit.statLabel}</div>
+
+              <h3 className="text-xl font-bold text-white mb-2 relative z-10">{benefit.title}</h3>
+              <p className="text-gray-400 text-sm mb-6 relative z-10">{benefit.desc}</p>
+
+              <div className="pt-4 border-t border-white/5 relative z-10">
+                <div className="text-2xl font-bold text-white group-hover:text-primary transition-colors">{benefit.stat}</div>
+                <div className="text-xs text-gray-500 uppercase tracking-wider font-bold mt-1">{benefit.statLabel}</div>
               </div>
             </motion.div>
           ))}
