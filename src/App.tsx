@@ -1039,33 +1039,31 @@ const Services = () => (
               <div className="text-7xl font-bold text-primary tracking-tighter drop-shadow-[0_0_15px_rgba(34,197,94,1)]"><CountUp to={4} suffix="%" /></div>
             </div>
           </div>
-        </div>
-        <div className="text-sm text-gray-400 uppercase tracking-widest font-bold">Where You Can Be</div>
-      </motion.div>
+          <div className="text-sm text-gray-400 uppercase tracking-widest font-bold">Where You Can Be</div>
+        </motion.div>
 
-      {/* STAT 3: BAR GRAPHIC */}
-      <motion.div
-        variants={{
-          hidden: { opacity: 0, scale: 0.8, y: 20 },
-          visible: { opacity: 1, scale: 1, y: 0, transition: { type: "spring", bounce: 0.4, duration: 0.8 } }
-        }}
-        className="flex flex-col items-center justify-center group h-full"
-      >
-        <div className="flex items-end gap-2 h-32 mb-6">
-          <motion.div initial={{ height: 0 }} whileInView={{ height: 40 }} transition={{ duration: 0.5 }} className="w-6 bg-white/10 rounded-t-lg"></motion.div>
-          <motion.div initial={{ height: 0 }} whileInView={{ height: 64 }} transition={{ duration: 0.5, delay: 0.1 }} className="w-6 bg-white/20 rounded-t-lg"></motion.div>
-          <motion.div initial={{ height: 0 }} whileInView={{ height: 80 }} transition={{ duration: 0.5, delay: 0.2 }} className="w-6 bg-white/30 rounded-t-lg"></motion.div>
-          <motion.div initial={{ height: 0 }} whileInView={{ height: 128 }} transition={{ duration: 0.5, delay: 0.3 }} className="w-6 bg-primary rounded-t-lg shadow-[0_0_15px_rgba(34,197,94,0.5)]"></motion.div>
-        </div>
-        <div className="text-5xl font-bold text-white mb-2"><CountUp to={8} suffix="x" /></div>
-        <div className="text-sm text-gray-400 uppercase tracking-widest font-bold">Improved Threat Response</div>
+        {/* STAT 3: BAR GRAPHIC */}
+        <motion.div
+          variants={{
+            hidden: { opacity: 0, scale: 0.8, y: 20 },
+            visible: { opacity: 1, scale: 1, y: 0, transition: { type: "spring", bounce: 0.4, duration: 0.8 } }
+          }}
+          className="flex flex-col items-center justify-center group h-full"
+        >
+          <div className="flex items-end gap-2 h-32 mb-6">
+            <motion.div initial={{ height: 0 }} whileInView={{ height: 40 }} transition={{ duration: 0.5 }} className="w-6 bg-white/10 rounded-t-lg"></motion.div>
+            <motion.div initial={{ height: 0 }} whileInView={{ height: 64 }} transition={{ duration: 0.5, delay: 0.1 }} className="w-6 bg-white/20 rounded-t-lg"></motion.div>
+            <motion.div initial={{ height: 0 }} whileInView={{ height: 80 }} transition={{ duration: 0.5, delay: 0.2 }} className="w-6 bg-white/30 rounded-t-lg"></motion.div>
+            <motion.div initial={{ height: 0 }} whileInView={{ height: 128 }} transition={{ duration: 0.5, delay: 0.3 }} className="w-6 bg-primary rounded-t-lg shadow-[0_0_15px_rgba(34,197,94,0.5)]"></motion.div>
+          </div>
+          <div className="text-5xl font-bold text-white mb-2"><CountUp to={8} suffix="x" /></div>
+          <div className="text-sm text-gray-400 uppercase tracking-widest font-bold">Improved Threat Response</div>
+        </motion.div>
       </motion.div>
-    </motion.div>
-    <p className="text-3xl text-white font-bold mb-10 font-display italic">"This is what happens when training actually works."</p>
-    <Link to="/contact"><Button size="lg" className="bg-green-600 hover:bg-green-500 text-white h-auto min-h-[4rem] px-6 py-4 text-base md:text-lg whitespace-normal leading-tight text-center">Get These Results for Your Team</Button></Link>
-  </div>
-    </Section >
-  </div >
+      <p className="text-3xl text-white font-bold mb-10 font-display italic">"This is what happens when training actually works."</p>
+      <Link to="/contact"><Button size="lg" className="bg-green-600 hover:bg-green-500 text-white h-auto min-h-[4rem] px-6 py-4 text-base md:text-lg whitespace-normal leading-tight text-center">Get These Results for Your Team</Button></Link>
+    </div>
+  </>
 );
 
 const About = () => (
@@ -1385,3 +1383,4 @@ function App() {
 }
 
 export default App;
+
