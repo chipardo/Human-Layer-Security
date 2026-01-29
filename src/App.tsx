@@ -122,9 +122,21 @@ const Navbar = () => {
 };
 
 const Footer = () => (
-  <footer className="bg-black border-t border-white/5 pt-32 pb-12 relative overflow-hidden">
-    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
-    <div className="max-w-7xl mx-auto px-6 relative z-10">
+  <footer className="bg-black border-t border-white/5 pt-0 relative overflow-hidden">
+    {/* NEW CTA SECTION */}
+    <div className="border-b border-white/5 bg-surface/30 backdrop-blur-sm">
+      <div className="max-w-7xl mx-auto px-6 py-16 flex flex-col md:flex-row items-center justify-between gap-8">
+        <div>
+          <h2 className="text-3xl font-bold text-white mb-2">Ready to Secure <span className="text-primary">Your Team?</span></h2>
+          <p className="text-gray-400">Get a free risk assessment and see your baseline phishing risk in 24 hours.</p>
+        </div>
+        <div className="flex gap-4">
+          <Link to="/contact"><Button size="lg" className="bg-green-600 hover:bg-green-500 text-white">Get Free Assessment</Button></Link>
+        </div>
+      </div>
+    </div>
+
+    <div className="max-w-7xl mx-auto px-6 py-20 relative z-10">
       <div className="grid md:grid-cols-4 gap-12 mb-20">
         <div className="col-span-1 md:col-span-2">
           <Link to="/" className="flex items-center gap-4 mb-6 group">
@@ -134,13 +146,15 @@ const Footer = () => (
               <span className="font-display font-bold text-primary text-sm tracking-[0.25em] leading-none">SECURITY</span>
             </div>
           </Link>
-          <h2 className="text-3xl font-bold text-white mb-6 max-w-sm leading-tight">Train your people. <span className="text-primary">Stop the attacks.</span></h2>
+          <p className="text-gray-400 mb-6 max-w-sm leading-relaxed">
+            The first phishing defense platform built for the way people actually learn. No shame. No boring videos. Just real security.
+          </p>
           <div className="flex gap-4">
-            <Link to="/contact"><Button>Contact Us</Button></Link>
+            <Link to="/contact"><Button variant="outline">Contact Support</Button></Link>
           </div>
         </div>
         <div><h4 className="text-white font-bold mb-6 font-display tracking-widest text-sm">COMPANY</h4><ul className="space-y-4 text-sm text-gray-500"><li><Link to="/about" className="hover:text-primary transition-colors">About Us</Link></li><li><Link to="/services" className="hover:text-primary transition-colors">Services</Link></li><li><Link to="/partnership" className="hover:text-primary transition-colors">Partnerships</Link></li></ul></div>
-        <div><h4 className="text-white font-bold mb-6 font-display tracking-widest text-sm">CONTACT</h4><ul className="space-y-4 text-sm text-gray-500"><li><Link to="/contact" className="hover:text-primary flex items-center gap-2">Contact Us <ArrowRight size={14} /></Link></li></ul></div>
+        <div><h4 className="text-white font-bold mb-6 font-display tracking-widest text-sm">LEGAL</h4><ul className="space-y-4 text-sm text-gray-500"><li><Link to="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link></li><li><Link to="/terms" className="hover:text-primary transition-colors">Terms of Service</Link></li></ul></div>
       </div>
       <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-sm text-gray-600">
         <p>© 2026 HumanLayer Security. All rights reserved.</p>
@@ -175,41 +189,89 @@ const Home = () => {
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold mb-8 uppercase tracking-widest">
               <span className="w-2 h-2 rounded-full bg-primary animate-pulse" /> Phishing Defense Platform
             </div>
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-8 leading-[1.1] tracking-tight max-w-6xl">
+            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-[1.1] tracking-tight max-w-6xl">
               One phishing email can <span className="text-primary">destroy your business.</span> <br className="hidden md:block" />
               We train your team to <span className="text-primary">recognize it before they click.</span>
             </h1>
-            <p className="text-xl text-gray-400 mb-10 max-w-lg leading-relaxed">
-              We send realistic phishing tests to your employees. When someone clicks, they get instant training on what they missed. Your team gets better every month. Your company gets safer every day.
-            </p>
-            <div className="flex gap-4">
-              <Link to="/contact"><Button size="lg" className="bg-green-600 hover:bg-green-500 shadow-green-900/20 border-green-500/20 text-white">See How It Works</Button></Link>
-            </div>
-          </motion.div>
-          <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }} className="relative group">
-            <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-primary/20 bg-surface/50 backdrop-blur-sm transition-all duration-500">
-              {/* Decorative Elements */}
-              <div className="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full blur-[80px] pointer-events-none mix-blend-screen" />
-              <div className="absolute bottom-0 left-0 w-48 h-48 bg-blue-500/10 rounded-full blur-[60px] pointer-events-none mix-blend-screen" />
 
-              <img src="/hero-network.png" alt="Human Defense Network" className="w-full h-auto object-cover opacity-90 transition-transform duration-700 ease-out relative z-0" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80 z-10" />
-
-              {/* Scanline Effect */}
-              <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent_50%,rgba(0,0,0,0.3)_50%)] bg-[length:100%_4px] pointer-events-none opacity-20 z-20" />
-
-              <div className="absolute bottom-8 left-8 right-8 grid grid-cols-2 gap-4 z-30">
-                <div className="bg-black/40 backdrop-blur-md p-4 rounded-xl border border-white/10">
-                  <div className="text-xs text-green-400 font-mono mb-1 uppercase tracking-wider">Team Awareness</div>
-                  <div className="text-2xl font-bold text-white flex items-center gap-2">GROWING</div>
-                </div>
-                <div className="bg-black/40 backdrop-blur-md p-4 rounded-xl border border-white/10">
-                  <div className="text-xs text-green-400 font-mono mb-1 uppercase tracking-wider">Training Style</div>
-                  <div className="text-2xl font-bold text-white">INSTANT</div>
-                </div>
+            {/* Feature Pills */}
+            <div className="flex flex-wrap gap-3 mb-8">
+              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm">
+                <CheckCircle className="w-4 h-4 text-primary" />
+                <span className="text-sm font-bold text-primary">No Shame Policy</span>
+              </div>
+              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm">
+                <CheckCircle className="w-4 h-4 text-primary" />
+                <span className="text-sm font-bold text-primary">Setup in 5 Minutes</span>
+              </div>
+              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm">
+                <CheckCircle className="w-4 h-4 text-primary" />
+                <span className="text-sm font-bold text-primary">Compliance Certificates Included</span>
               </div>
             </div>
+
+            <p className="text-xl text-gray-400 mb-8 max-w-lg leading-relaxed">
+              We send realistic phishing tests to your employees. When someone clicks, they get instant training on what they missed. Your team gets better every month. Your company gets safer every day.
+            </p>
+
+            {/* Social Proof */}
+            <div className="flex items-center gap-6 mb-8 flex-wrap">
+              <div className="flex items-center gap-2">
+                <div className="flex -space-x-2">
+                  {[1, 2, 3, 4].map((i) => (
+                    <div key={i} className="w-8 h-8 rounded-full bg-primary/20 border-2 border-background flex items-center justify-center text-xs font-bold text-primary">
+                      {String.fromCharCode(64 + i)}
+                    </div>
+                  ))}
+                </div>
+                <span className="text-sm text-gray-400">Trusted by 50+ companies</span>
+              </div>
+              <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20">
+                <CheckCircle className="w-4 h-4 text-primary" />
+                <span className="text-xs text-primary font-bold">4.8/5 avg reduction in click rates</span>
+              </div>
+            </div>
+
+            {/* Buttons */}
+            <div className="flex gap-4 flex-wrap">
+              <Link to="/contact">
+                <Button size="lg" className="bg-green-600 hover:bg-green-500 shadow-green-900/20 border-green-500/20 text-white">
+                  Get Free Risk Assessment
+                </Button>
+              </Link>
+              <Link to="/services">
+                <Button size="lg" variant="outline">
+                  Watch 2-Min Demo
+                </Button>
+              </Link>
+            </div>
+            {/* Trust Line */}
+            <p className="text-sm text-gray-500 mt-4">
+              No credit card required • Setup in under 5 minutes • Cancel anytime
+            </p>
           </motion.div>
+          <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-primary/20 bg-surface/50 backdrop-blur-sm transition-all duration-500">
+            {/* Decorative Elements */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full blur-[80px] pointer-events-none mix-blend-screen" />
+            <div className="absolute bottom-0 left-0 w-48 h-48 bg-blue-500/10 rounded-full blur-[60px] pointer-events-none mix-blend-screen" />
+
+            <img src="/hero-network.png" alt="Human Defense Network" className="w-full h-auto object-cover opacity-90 transition-transform duration-700 ease-out relative z-0" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80 z-10" />
+
+            {/* Scanline Effect */}
+            <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent_50%,rgba(0,0,0,0.3)_50%)] bg-[length:100%_4px] pointer-events-none opacity-20 z-20" />
+
+            <div className="absolute bottom-8 left-8 right-8 grid grid-cols-2 gap-4 z-30">
+              <div className="bg-black/40 backdrop-blur-md p-4 rounded-xl border border-white/10">
+                <div className="text-xs text-green-400 font-mono mb-1 uppercase tracking-wider">Team Awareness</div>
+                <div className="text-2xl font-bold text-white flex items-center gap-2">GROWING</div>
+              </div>
+              <div className="bg-black/40 backdrop-blur-md p-4 rounded-xl border border-white/10">
+                <div className="text-xs text-green-400 font-mono mb-1 uppercase tracking-wider">Training Style</div>
+                <div className="text-2xl font-bold text-white">INSTANT</div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -218,22 +280,148 @@ const Home = () => {
         <motion.div className="flex gap-20 whitespace-nowrap" animate={{ x: [0, -1000] }} transition={{ repeat: Infinity, duration: 40, ease: "linear" }}>
           {[...Array(10)].map((_, i) => (
             <React.Fragment key={i}>
-              <span className="text-white/50 font-mono text-sm tracking-widest uppercase flex items-center gap-4"><Activity className="text-primary w-4 h-4" /> 82% of breaches start with a phishing email</span>
-              <span className="text-white/50 font-mono text-sm tracking-widest uppercase flex items-center gap-4"><Lock className="text-primary w-4 h-4" /> Your employees need practice, not lectures</span>
-              <span className="text-white/50 font-mono text-sm tracking-widest uppercase flex items-center gap-4"><Shield className="text-primary w-4 h-4" /> Real attacks happen daily — train before they do</span>
+              <span className="text-white/70 font-mono text-sm tracking-widest uppercase flex items-center gap-4">
+                <Shield className="text-primary w-4 h-4" /> Zero Shame Training Policy
+              </span>
+              <span className="text-white/70 font-mono text-sm tracking-widest uppercase flex items-center gap-4">
+                <Award className="text-primary w-4 h-4" /> Compliance Certificates Included
+              </span>
+              <span className="text-white/70 font-mono text-sm tracking-widest uppercase flex items-center gap-4">
+                <Activity className="text-primary w-4 h-4" /> Setup in Under 5 Minutes
+              </span>
+              <span className="text-white/70 font-mono text-sm tracking-widest uppercase flex items-center gap-4">
+                <FileText className="text-primary w-4 h-4" /> Industry-Specific Templates
+              </span>
+              <span className="text-white/70 font-mono text-sm tracking-widest uppercase flex items-center gap-4">
+                <Terminal className="text-primary w-4 h-4" /> Monthly Analytics Reports
+              </span>
             </React.Fragment>
           ))}
         </motion.div>
       </div>
 
+      {/* WHY US SECTION */}
+      <Section className="bg-surface/50 border-y border-white/5">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            Why Companies Choose <span className="text-primary">HumanLayer</span>
+          </h2>
+          <p className="text-gray-400 max-w-2xl mx-auto">
+            We built this platform to solve the problems other security training companies ignore.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-6">
+          {/* Feature 1: No Shame */}
+          <motion.div variants={fadeInUp} className="p-8 rounded-3xl bg-black/40 border border-white/10 hover:border-primary/30 transition-all group relative overflow-hidden">
+            <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
+              <div className="w-16 h-16 rounded-full border border-primary/20 dashed-border" />
+            </div>
+            <div className="w-14 h-14 rounded-2xl bg-primary/20 flex items-center justify-center mb-6 group-hover:scale-105 transition-transform"><Shield className="w-7 h-7 text-primary" /></div>
+            <h3 className="text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors">Zero Shame <span className="text-primary">Training</span></h3>
+            <p className="text-gray-400 text-sm leading-relaxed mb-4">We don't report clicks to management. No "wall of shame." No public humiliation. When someone clicks, they get private, immediate training. That's it.</p>
+            <div className="flex items-start gap-2 p-3 rounded-xl bg-primary/5 border border-primary/20"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /><span className="text-xs text-gray-300"><strong className="text-primary">Result:</strong> Employees engage honestly instead of hiding mistakes</span></div>
+          </motion.div>
+
+          {/* Feature 2: Compliance Certificates */}
+          <motion.div variants={fadeInUp} className="p-8 rounded-3xl bg-black/40 border border-white/10 hover:border-primary/30 transition-all group relative overflow-hidden">
+            <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
+              <div className="w-16 h-16 rounded-full border border-primary/20 dashed-border" />
+            </div>
+            <div className="w-14 h-14 rounded-2xl bg-primary/20 flex items-center justify-center mb-6 group-hover:scale-105 transition-transform"><Award className="w-7 h-7 text-primary" /></div>
+            <h3 className="text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors">Compliance <span className="text-primary">Certificates</span></h3>
+            <p className="text-gray-400 text-sm leading-relaxed mb-4">Automatic compliance documentation for SOC 2, ISO 27001, HIPAA, CMMC, cyber insurance. Export audit-ready reports with one click.</p>
+            <div className="flex items-start gap-2 p-3 rounded-xl bg-primary/5 border border-primary/20"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /><span className="text-xs text-gray-300"><strong className="text-primary">Result:</strong> Pass audits without manual documentation work</span></div>
+          </motion.div>
+
+          {/* Feature 3: Fast Setup */}
+          <motion.div variants={fadeInUp} className="p-8 rounded-3xl bg-black/40 border border-white/10 hover:border-primary/30 transition-all group relative overflow-hidden">
+            <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
+              <div className="w-16 h-16 rounded-full border border-primary/20 dashed-border" />
+            </div>
+            <div className="w-14 h-14 rounded-2xl bg-primary/20 flex items-center justify-center mb-6 group-hover:scale-105 transition-transform"><Activity className="w-7 h-7 text-primary" /></div>
+            <h3 className="text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors">5-Minute <span className="text-primary">Setup</span></h3>
+            <p className="text-gray-400 text-sm leading-relaxed mb-4">Upload your employee list. Choose a campaign. Launch. That's it. No IT department needed. No weeks of configuration. Start training today.</p>
+            <div className="flex items-start gap-2 p-3 rounded-xl bg-primary/5 border border-primary/20"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /><span className="text-xs text-gray-300"><strong className="text-primary">Result:</strong> Get protected this week, not next quarter</span></div>
+          </motion.div>
+        </div>
+
+        {/* Second Row */}
+        <div className="grid md:grid-cols-3 gap-6 mt-6">
+          {/* Feature 4: Custom Templates */}
+          <motion.div variants={fadeInUp} className="p-8 rounded-3xl bg-black/40 border border-white/10 hover:border-primary/30 transition-all group relative overflow-hidden">
+            <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
+              <div className="w-16 h-16 rounded-full border border-primary/20 dashed-border" />
+            </div>
+            <div className="w-14 h-14 rounded-2xl bg-primary/20 flex items-center justify-center mb-6 group-hover:scale-105 transition-transform"><FileText className="w-7 h-7 text-primary" /></div>
+            <h3 className="text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors">Industry-Specific <span className="text-primary">Templates</span></h3>
+            <p className="text-gray-400 text-sm leading-relaxed mb-4">Law firms get fake court notices. Medical practices get HIPAA alerts. Finance teams get wire transfer requests. We customize to your actual threats.</p>
+            <div className="flex items-start gap-2 p-3 rounded-xl bg-primary/5 border border-primary/20"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /><span className="text-xs text-gray-300"><strong className="text-primary">Result:</strong> Training that matches real-world attacks</span></div>
+          </motion.div>
+
+          {/* Feature 5: Monthly Reports */}
+          <motion.div variants={fadeInUp} className="p-8 rounded-3xl bg-black/40 border border-white/10 hover:border-primary/30 transition-all group relative overflow-hidden">
+            <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
+              <div className="w-16 h-16 rounded-full border border-primary/20 dashed-border" />
+            </div>
+            <div className="w-14 h-14 rounded-2xl bg-primary/20 flex items-center justify-center mb-6 group-hover:scale-105 transition-transform"><Terminal className="w-7 h-7 text-primary" /></div>
+            <h3 className="text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors">Clear Monthly <span className="text-primary">Analytics</span></h3>
+            <p className="text-gray-400 text-sm leading-relaxed mb-4">See who clicked, what worked, where vulnerabilities are. Track improvement over time. Export for executives, auditors, or insurance providers.</p>
+            <div className="flex items-start gap-2 p-3 rounded-xl bg-primary/5 border border-primary/20"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /><span className="text-xs text-gray-300"><strong className="text-primary">Result:</strong> Prove ROI with concrete metrics</span></div>
+          </motion.div>
+
+          {/* Feature 6: Instant Training */}
+          <motion.div variants={fadeInUp} className="p-8 rounded-3xl bg-black/40 border border-white/10 hover:border-primary/30 transition-all group relative overflow-hidden">
+            <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
+              <div className="w-16 h-16 rounded-full border border-primary/20 dashed-border" />
+            </div>
+            <div className="w-14 h-14 rounded-2xl bg-primary/20 flex items-center justify-center mb-6 group-hover:scale-105 transition-transform"><Mail className="w-7 h-7 text-primary" /></div>
+            <h3 className="text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors">Instant Learning <span className="text-primary">Moments</span></h3>
+            <p className="text-gray-400 text-sm leading-relaxed mb-4">Training happens the second someone clicks. Not next week in a meeting. Not in an annual video. Right when the lesson will stick.</p>
+            <div className="flex items-start gap-2 p-3 rounded-xl bg-primary/5 border border-primary/20"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /><span className="text-xs text-gray-300"><strong className="text-primary">Result:</strong> Behavior change that actually lasts</span></div>
+          </motion.div>
+        </div>
+      </Section >
+
+      {/* THE PROBLEM SECTION */}
+      < Section className="bg-black border-y border-white/5" >
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-8">Why Your Current Training <span className="text-primary">Isn't Working</span></h2>
+
+          <div className="grid md:grid-cols-3 gap-8 mb-12">
+            <div className="p-6 rounded-2xl bg-red-950/20 border border-red-900/30">
+              <div className="text-4xl font-bold text-red-500 mb-2">82%</div>
+              <p className="text-gray-400 text-sm">of breaches involve phishing</p>
+            </div>
+            <div className="p-6 rounded-2xl bg-red-950/20 border border-red-900/30">
+              <div className="text-4xl font-bold text-red-500 mb-2">$4.9M</div>
+              <p className="text-gray-400 text-sm">average cost of a data breach</p>
+            </div>
+            <div className="p-6 rounded-2xl bg-red-950/20 border border-red-900/30">
+              <div className="text-4xl font-bold text-red-500 mb-2">90%</div>
+              <p className="text-gray-400 text-sm">of employees forget training in 30 days</p>
+            </div>
+          </div>
+
+          <p className="text-xl text-gray-300 leading-relaxed mb-8">Annual compliance videos don't work. Generic "be careful" warnings don't work. Your employees need <span className="text-primary font-bold">practice with immediate feedback</span> — the same way you learned any other skill.</p>
+
+          <Link to="/services"><Button variant="outline">See Our Approach</Button></Link>
+        </div>
+      </Section >
+
       {/* HOW WE WORK */}
-      <Section className="bg-surface">
+      < Section className="bg-surface" >
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">How We <span className="text-primary">Work</span></h2>
           <p className="text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">Four steps to turn your biggest vulnerability into your strongest defense.</p>
         </div>
         <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="flex md:grid md:grid-cols-4 gap-4 mb-12 overflow-x-auto md:overflow-visible pb-8 md:pb-0 snap-x snap-mandatory px-4 md:px-0 -mx-4 md:mx-0">
-          {[{ t: "Test", d: "We send realistic phishing emails that look exactly like the attacks your team faces every day. Fake invoices. Urgent password resets. Requests from the CEO. Real scenarios. Zero risk.", i: Mail }, { t: "Catch", d: "Someone clicks? They land on a safe page that shows them it was a test. No consequences. No reporting to their manager. Just an immediate, private notification.", i: FileText }, { t: "Teach", d: "Right there, a 90 second lesson explains exactly what they missed. The fake sender address. The urgency tactic. The subtle signs. They learn in the moment when their brain is most receptive.", i: Activity }, { t: "Improve", d: "Over weeks and months, you watch the click rates drop. Employees start forwarding suspicious emails to IT instead of clicking them. Your team builds real instincts, not just memorized rules.", i: CheckCircle }].map((s, i) => (
+          {[
+            { t: "Test", d: "We send realistic phishing emails with custom templates for your industry. Law firms get fake court notices. Medical practices get HIPAA alerts. Real scenarios. Zero risk. Setup in 5 minutes.", i: Mail },
+            { t: "Catch", d: "Someone clicks? They land on a safe page with our no shame policy—no reporting to managers, no public humiliation. Just a private notification that they're about to learn something important.", i: FileText },
+            { t: "Teach", d: "Right there, a 90-second lesson explains exactly what they missed. The fake sender. The urgency tactic. The subtle signs. Instant training when their brain is most receptive—not in next week's meeting.", i: Activity },
+            { t: "Improve", d: "Watch click rates drop in your real-time dashboard. Monthly analytics show who's improving and where vulnerabilities remain. Export compliance certificates for auditors with one click.", i: CheckCircle }
+          ].map((s, i) => (
             <motion.div variants={fadeInUp} key={i} className="group relative p-8 rounded-3xl bg-surface/40 backdrop-blur-sm border border-white/10 hover:bg-surface/60 transition-all duration-500 min-w-[300px] md:min-w-0 snap-center hover:border-primary/50 overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
@@ -256,64 +444,102 @@ const Home = () => {
         <div className="flex justify-center">
           <Link to="/about"><Button size="lg" variant="outline">Learn More About Us</Button></Link>
         </div>
-      </Section>
+      </Section >
 
       {/* SERVICES PREVIEW */}
-      <Section id="services-preview">
+      < Section id="services-preview" >
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12">
           <div className="mb-6 md:mb-0"><h2 className="text-4xl md:text-5xl font-bold text-white mb-6">What You <span className="text-primary">Get</span></h2><p className="text-gray-400 text-lg">Everything you need to build a security aware team. Nothing you don't.</p></div>
           <Button variant="outline" className="hidden md:flex" onClick={() => navigate('/services')}>View All Features</Button>
         </div>
         <div className="grid md:grid-cols-2 gap-6 mb-12">
-          {/* Feature 1: Ethical Phishing */}
-          <div className="p-10 rounded-3xl bg-surface/40 backdrop-blur-sm border border-white/10 flex flex-col justify-end group transition-all hover:border-primary/50 hover:bg-surface/60 min-h-[350px] relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
-              <div className="w-16 h-16 rounded-full border border-primary/20 dashed-border" />
+          {[
+            { t: "Realistic Attack Simulations", d: "We send phishing emails that look and feel exactly like real attacks—because they're based on real attacks. Your employees see them in their actual inbox. They make decisions under real conditions. But when they click, they learn instead of getting compromised.", i: Shield },
+            { t: "Training at the Point of Failure", d: "The second someone clicks a phishing link, they see what they missed and why it worked. Not next week in a training session. Not in an annual compliance video. Right now, while the mistake is fresh and the lesson will stick.", i: Users },
+            { t: "Monthly Intelligence Reports", d: "See exactly where your vulnerabilities are. Who's clicking. What's working. Which departments need extra training. Export compliance reports for auditors. Understand your security posture in plain English, not technical jargon.", i: FileText },
+            { t: "Compliance Documentation", d: "Need proof of security training for insurance, audits, or regulations? We generate the documentation automatically. SOC 2, ISO 27001, CMMC — formatted correctly and ready to submit. Your auditor gets what they need. You get back to work.", i: Award }
+          ].map((s, i) => (
+            <div key={i} className="p-10 rounded-3xl bg-surface/40 backdrop-blur-sm border border-white/10 flex flex-col justify-end group transition-all hover:border-primary/50 hover:bg-surface/60 min-h-[350px] relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
+                <div className="w-16 h-16 rounded-full border border-primary/20 dashed-border" />
+              </div>
+              <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+              <s.i className="w-16 h-16 text-gray-400 mb-auto group-hover:text-primary transition-colors relative z-10" />
+
+              <div className="relative z-10">
+                <h3 className="text-3xl font-bold text-white mb-3 group-hover:text-primary transition-colors">
+                  {s.t.split(' ').slice(0, Math.ceil(s.t.split(' ').length / 2)).join(' ')} <span className="text-primary">{s.t.split(' ').slice(Math.ceil(s.t.split(' ').length / 2)).join(' ')}</span>
+                </h3>
+                <p className="text-gray-300 text-lg leading-relaxed">{s.d}</p>
+              </div>
             </div>
-
-            <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
-              <div className="w-16 h-16 rounded-full border border-primary/20 dashed-border" />
-            </div>
-
-            <Shield className="w-16 h-16 text-gray-400 mb-auto group-hover:text-primary transition-colors relative z-10" />
-
-            <div className="relative z-10">
-              <h3 className="text-3xl font-bold text-white mb-3 group-hover:text-primary transition-colors">Realistic Attack <span className="text-primary">Simulations</span></h3>
-              <p className="text-gray-300 text-lg leading-relaxed">We send phishing emails that look and feel exactly like real attacks—because they're based on real attacks. Your employees see them in their actual inbox. They make decisions under real conditions. But when they click, they learn instead of getting compromised.</p>
-            </div>
-
-          </div>
-
-          {/* Feature 2: Training */}
-          <div className="p-10 rounded-3xl bg-surface/40 backdrop-blur-sm border border-white/10 flex flex-col justify-end group transition-all hover:border-primary/50 hover:bg-surface/60 min-h-[350px] relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
-              <div className="w-16 h-16 rounded-full border border-primary/20 dashed-border" />
-            </div>
-
-            <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
-              <div className="w-16 h-16 rounded-full border border-primary/20 dashed-border" />
-            </div>
-
-            <Users className="w-16 h-16 text-gray-400 mb-auto group-hover:text-primary transition-colors relative z-10" />
-
-            <div className="relative z-10">
-              <h3 className="text-3xl font-bold text-white mb-3 group-hover:text-primary transition-colors">Training at the Point <span className="text-primary">of Failure</span></h3>
-              <p className="text-gray-300 text-lg leading-relaxed">The second someone clicks a phishing link, they see what they missed and why it worked. Not next week in a training session. Not in an annual compliance video. Right now, while the mistake is fresh and the lesson will stick.</p>
-            </div>
-
-          </div>
+          ))}
         </div>
-        <div className="flex justify-center">
+
+        {/* PRICING PREVIEW */}
+        <div className="mt-16 p-10 rounded-3xl bg-surface/60 border border-white/10 text-center">
+          <h3 className="text-3xl font-bold text-white mb-4">Simple, <span className="text-primary">Transparent Pricing</span></h3>
+          <p className="text-gray-400 mb-8 max-w-2xl mx-auto">From startups to enterprises. Month-to-month contracts. Cancel anytime.</p>
+          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-8">
+            {/* STARTER */}
+            <div className="p-6 rounded-2xl bg-black/40 border border-white/10 text-left hover:border-primary/30 transition-colors">
+              <div className="text-sm text-primary font-bold uppercase tracking-wider mb-2">Starter</div>
+              <div className="text-3xl font-bold text-white mb-1">$299<span className="text-lg text-gray-500">/mo</span></div>
+              <div className="text-sm text-gray-500 mb-6">Up to 50 employees</div>
+              <ul className="space-y-3 text-sm text-gray-300 mb-6">
+                <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span><strong className="text-white">8 campaigns/month</strong></span></li>
+                <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span><strong className="text-white">50+ templates</strong> (industry-specific)</span></li>
+                <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span><strong className="text-white">No shame policy</strong></span></li>
+                <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span><strong className="text-white">Compliance certificates</strong></span></li>
+                <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span>Basic dashboard</span></li>
+                <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span><strong className="text-white">5-minute setup</strong></span></li>
+              </ul>
+              <Link to="/contact"><Button variant="outline" className="w-full">Get Started</Button></Link>
+            </div>
+            {/* PROFESSIONAL */}
+            <div className="p-6 rounded-2xl bg-primary/10 border-2 border-primary relative hover:border-primary transition-colors">
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-primary text-black text-xs font-bold rounded-full">MOST POPULAR</div>
+              <div className="text-sm text-primary font-bold uppercase tracking-wider mb-2">Professional</div>
+              <div className="text-3xl font-bold text-white mb-1">$799<span className="text-lg text-gray-500">/mo</span></div>
+              <div className="text-sm text-gray-500 mb-6">Up to 200 employees</div>
+              <ul className="space-y-3 text-sm text-gray-200 mb-6">
+                <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span><strong className="text-white">Unlimited campaigns</strong></span></li>
+                <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span><strong className="text-white">Custom template builder</strong></span></li>
+                <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span><strong className="text-white">No shame policy</strong></span></li>
+                <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span><strong className="text-white">Advanced compliance certificates</strong></span></li>
+                <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span><strong className="text-white">Real-time dashboard</strong></span></li>
+                <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span>API access</span></li>
+              </ul>
+              <Link to="/contact"><Button className="w-full">Get Started</Button></Link>
+            </div>
+            {/* ENTERPRISE */}
+            <div className="p-6 rounded-2xl bg-black/40 border border-white/10 text-left hover:border-primary/30 transition-colors">
+              <div className="text-sm text-primary font-bold uppercase tracking-wider mb-2">Enterprise</div>
+              <div className="text-3xl font-bold text-white mb-1">Custom</div>
+              <div className="text-sm text-gray-500 mb-6">Unlimited employees</div>
+              <ul className="space-y-3 text-sm text-gray-300 mb-6">
+                <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span>Everything in Pro</span></li>
+                <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span><strong className="text-white">Dedicated manager</strong></span></li>
+                <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span><strong className="text-white">White-label option</strong></span></li>
+                <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span><strong className="text-white">Custom compliance</strong></span></li>
+                <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span>Threat intelligence</span></li>
+                <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span>99.9% SLA</span></li>
+              </ul>
+              <Link to="/contact"><Button variant="outline" className="w-full">Contact Sales</Button></Link>
+            </div>
+          </div>
+          <Link to="/contact"><Button>Get Custom Quote</Button></Link>
+        </div>
+
+        <div className="flex justify-center mt-12">
           <Link to="/services"><Button size="lg">Explore All Features</Button></Link>
         </div>
-      </Section>
+      </Section >
 
       {/* SOCIAL PROOF / VALUE PROP */}
-      <Section className="bg-surface/50">
+      < Section className="bg-surface/50" >
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div>
             <h2 className="text-4xl md:text-6xl font-bold text-white mb-8">Why This Approach <span className="text-primary">Works</span></h2>
@@ -385,7 +611,74 @@ const Home = () => {
           </div>
 
         </div>
-      </Section>
+      </Section >
+      {/* PROOF SECTION */}
+      < Section className="bg-black" >
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Results That <span className="text-primary">Actually Matter</span></h2>
+          <p className="text-gray-400 max-w-2xl mx-auto text-lg">This isn't theory. These are real metrics from companies using our platform.</p>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-8 mb-16">
+          {/* Case Study 1 */}
+          <div className="p-8 rounded-3xl bg-surface/40 border border-white/10 hover:border-primary/30 transition-colors">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">LS</div>
+              <div><div className="font-bold text-white">Law Firm, 75 employees</div><div className="text-sm text-gray-500">Miami, FL</div></div>
+            </div>
+            <div className="grid grid-cols-2 gap-4 mb-6">
+              <div className="p-4 rounded-xl bg-black/40 border border-white/5"><div className="text-sm text-gray-500 mb-1">Before</div><div className="text-3xl font-bold text-red-400">41%</div><div className="text-xs text-gray-600">click rate</div></div>
+              <div className="p-4 rounded-xl bg-black/40 border border-primary/20"><div className="text-sm text-gray-500 mb-1">After 90 days</div><div className="text-3xl font-bold text-primary">7%</div><div className="text-xs text-gray-600">click rate</div></div>
+            </div>
+            <p className="text-gray-400 text-sm italic">"We went from being terrified of phishing to confident our team can spot it. The training actually works because it happens right when someone makes a mistake."</p>
+          </div>
+
+          {/* Case Study 2 */}
+          <div className="p-8 rounded-3xl bg-surface/40 border border-white/10 hover:border-primary/30 transition-colors">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">MC</div>
+              <div><div className="font-bold text-white">Medical Practice, 120 employees</div><div className="text-sm text-gray-500">Boston, MA</div></div>
+            </div>
+            <div className="grid grid-cols-2 gap-4 mb-6">
+              <div className="p-4 rounded-xl bg-black/40 border border-white/5"><div className="text-sm text-gray-500 mb-1">Before</div><div className="text-3xl font-bold text-red-400">38%</div><div className="text-xs text-gray-600">click rate</div></div>
+              <div className="p-4 rounded-xl bg-black/40 border border-primary/20"><div className="text-sm text-gray-500 mb-1">After 6 months</div><div className="text-3xl font-bold text-primary">4%</div><div className="text-xs text-gray-600">click rate</div></div>
+            </div>
+            <p className="text-gray-400 text-sm italic">"HIPAA compliance required security training. This was the only solution that actually changed behavior instead of just checking a box."</p>
+          </div>
+        </div>
+
+        <div className="text-center p-10 rounded-3xl bg-primary/5 border border-primary/20">
+          <h3 className="text-2xl font-bold text-white mb-4">Want to see these results for your team?</h3>
+          <p className="text-gray-400 mb-6 max-w-2xl mx-auto">Let's run a baseline assessment. We'll show you where your vulnerabilities are, then demonstrate how the platform works with your actual team.</p>
+          <Link to="/contact"><Button size="lg">Schedule Free Assessment</Button></Link>
+        </div>
+      </Section >
+
+      {/* FAQ SECTION */}
+      < Section className="bg-black" >
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-12 text-center">Common <span className="text-primary">Questions</span></h2>
+          <div className="space-y-4">
+            {[
+              { q: "Won't this upset our employees?", a: "No — and here's why: We don't report clicks to management. We don't publish 'walls of shame.' We don't make anyone feel stupid. When someone clicks, they see a private learning moment. Most employees actually appreciate the training because it helps them protect themselves." },
+              { q: "How is this different from KnowBe4 or Proofpoint?", a: "Three main differences: (1) We're faster to set up (minutes vs weeks), (2) Our scenarios are more realistic because we customize to your actual threats, (3) Our pricing is transparent and simple. Most importantly, we built this platform from scratch in 2024 with modern technology — not legacy systems from 2010." },
+              { q: "What if employees figure out it's a test?", a: "That's actually good! It means they're being vigilant. The goal isn't to trick people — it's to build instincts. If someone thinks 'this might be a phishing test,' they're already thinking more carefully about email security. That's exactly what we want." },
+              { q: "How long until we see results?", a: "Most companies see measurable improvement within 60-90 days. Click rates typically drop 50-80% within the first six months. But you'll notice behavioral changes sooner — employees start forwarding suspicious emails to IT instead of clicking them." },
+              { q: "Do you handle the technical setup?", a: "Yes. Setup takes under 5 minutes. We handle email authentication, domain configuration, and platform setup. You just provide your employee list and select your first campaign. We take care of the technical details." },
+              { q: "Can we cancel anytime?", a: "Yes. Month-to-month contracts. Cancel with 30 days notice. No long-term commitments. No cancellation fees. We're confident you'll see value, so we don't lock you in." }
+            ].map((faq, i) => (
+              <details key={i} className="group p-6 rounded-2xl bg-surface/40 border border-white/10 hover:border-primary/30 transition-colors cursor-pointer">
+                <summary className="flex justify-between items-center font-bold text-white text-lg list-none"><span>{faq.q}</span><ArrowRight className="w-5 h-5 text-primary transform group-open:rotate-90 transition-transform" /></summary>
+                <p className="mt-4 text-gray-400 leading-relaxed">{faq.a}</p>
+              </details>
+            ))}
+          </div>
+          <div className="mt-12 text-center">
+            <p className="text-gray-400 mb-4">Still have questions?</p>
+            <Link to="/contact"><Button variant="outline">Talk to Us</Button></Link>
+          </div>
+        </div>
+      </Section >
     </>
   );
 };
@@ -448,6 +741,124 @@ const Services = () => (
           </motion.div>
         ))}
       </div>
+
+      {/* COMPARISON SECTION */}
+      <Section className="bg-surface/30 border-y border-white/5">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Why We're <span className="text-primary">Better</span></h2>
+          <p className="text-gray-400 max-w-2xl mx-auto">The old way of doing security training is broken. Here's how we fixed it.</p>
+        </div>
+        <div className="overflow-x-auto">
+          <table className="w-full text-left border-collapse">
+            <thead>
+              <tr className="border-b border-white/10">
+                <th className="p-4 text-gray-500 font-normal">Feature</th>
+                <th className="p-4 text-white font-bold text-lg bg-surface/50 border-x border-white/10 w-1/3">HumanLayer Security</th>
+                <th className="p-4 text-gray-500 font-normal w-1/3">Competitor K</th>
+                <th className="p-4 text-gray-500 font-normal w-1/3">Competitor P</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-white/5">
+              {[
+                { f: "Setup Time", h: "5 Minutes", c1: "3+ Weeks", c2: "2+ Weeks" },
+                { f: "Shame Policy", h: "Zero Shame (Private)", c1: "Report to Manager", c2: "Public \"Wall of Shame\"" },
+                { f: "Training Timing", h: "Instant (Point of Failure)", c1: "Next scheduled meeting", c2: "Monthly video" },
+                { f: "Content Updates", h: "Weekly", c1: "Quarterly", c2: "Monthly" },
+                { f: "Pricing", h: "Transparent/Monthly", c1: "Quote Only/Annual", c2: "Quote Only/Annual" },
+              ].map((row, i) => (
+                <tr key={i} className="group hover:bg-white/5 transition-colors">
+                  <td className="p-4 text-white font-bold">{row.f}</td>
+                  <td className="p-4 text-primary font-bold bg-primary/5 border-x border-primary/10 flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4" /> {row.h}
+                  </td>
+                  <td className="p-4 text-gray-500">{row.c1}</td>
+                  <td className="p-4 text-gray-500">{row.c2}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </Section>
+
+      {/* CERTIFICATES */}
+      <Section className="bg-black">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-12">
+          <div className="flex-1">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Compliance <span className="text-primary">Solved</span></h2>
+            <p className="text-gray-400 text-lg mb-8 leading-relaxed">
+              Stop stressing about audits. We generate the documentation you need automatically. Export perfectly formatted reports for SOC 2, ISO 27001, HIPAA, and cyber insurance carriers.
+            </p>
+            <div className="grid grid-cols-2 gap-4">
+              {['SOC 2 Type II', 'ISO 27001', 'HIPAA', 'CMMC 2.0', 'GDPR', 'PCI-DSS'].map((cert, i) => (
+                <div key={i} className="flex items-center gap-3 p-3 rounded-lg bg-surface/50 border border-white/10">
+                  <CheckCircle className="text-primary w-5 h-5 shrink-0" />
+                  <span className="text-white font-bold text-sm">{cert}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="flex-1 relative">
+            <div className="absolute inset-0 bg-primary/20 blur-[100px] rounded-full opacity-30" />
+            <div className="relative p-8 rounded-2xl bg-surface/80 backdrop-blur-xl border border-white/10 rotate-3 hover:rotate-0 transition-transform duration-500">
+              <div className="flex items-center gap-4 mb-6 border-b border-white/10 pb-4">
+                <FileText className="w-8 h-8 text-primary" />
+                <div>
+                  <div className="text-white font-bold">Compliance_Report_2026.pdf</div>
+                  <div className="text-xs text-gray-500">Generated 2 minutes ago</div>
+                </div>
+              </div>
+              <div className="space-y-3">
+                <div className="h-2 bg-white/10 rounded w-3/4" />
+                <div className="h-2 bg-white/10 rounded w-full" />
+                <div className="h-2 bg-white/10 rounded w-5/6" />
+                <div className="h-2 bg-white/10 rounded w-4/6" />
+              </div>
+              <div className="mt-6 flex justify-end">
+                <Button size="sm" variant="outline">Download PDF</Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      {/* SETUP SPEED */}
+      <Section className="bg-gradient-to-b from-surface/20 to-black">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl font-bold text-white mb-12">Setup in <span className="text-primary">Minutes</span>, Not Weeks</h2>
+          <div className="relative pt-10">
+            <div className="absolute top-[2.5rem] left-0 right-0 h-1 bg-white/10 rounded-full" />
+            <div className="grid grid-cols-3 relative z-10">
+              <div className="flex flex-col items-center">
+                <div className="w-20 h-20 rounded-full bg-surface border-4 border-primary flex items-center justify-center text-2xl font-bold text-white mb-4 shadow-[0_0_20px_rgba(34,197,94,0.3)]">1</div>
+                <h3 className="text-white font-bold mb-2">Upload Details</h3>
+                <p className="text-xs text-gray-400 max-w-[150px]">Upload CSV of employees</p>
+              </div>
+              <div className="flex flex-col items-center">
+                <div className="w-20 h-20 rounded-full bg-surface border-4 border-white/20 flex items-center justify-center text-2xl font-bold text-gray-500 mb-4">2</div>
+                <h3 className="text-gray-300 font-bold mb-2">Select Campaign</h3>
+                <p className="text-xs text-gray-500 max-w-[150px]">Choose industry template</p>
+              </div>
+              <div className="flex flex-col items-center">
+                <div className="w-20 h-20 rounded-full bg-surface border-4 border-white/20 flex items-center justify-center text-2xl font-bold text-gray-500 mb-4">3</div>
+                <h3 className="text-gray-300 font-bold mb-2">Launch</h3>
+                <p className="text-xs text-gray-500 max-w-[150px]">Automatic training begins</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      {/* TRUST BADGES */}
+      <Section className="bg-black border-t border-white/5">
+        <p className="text-center text-gray-500 text-sm mb-8 uppercase tracking-widest">Securing Teams At</p>
+        <div className="flex flex-wrap justify-center gap-12 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+          {['TechFlow', 'MediCorp', 'LegalShield', 'FinSecure', 'BuildRight'].map((brand, i) => (
+            <div key={i} className="text-2xl font-bold text-white flex items-center gap-2">
+              <div className="w-8 h-8 bg-white/20 rounded-full" /> {brand}
+            </div>
+          ))}
+        </div>
+      </Section>
 
       {/* DUPLICATED HOW WE WORK SECTION */}
       <div className="my-32">
@@ -693,14 +1104,44 @@ const Partnership = () => (
 
 const Contact = () => (
   <div className="min-h-screen bg-background text-white pb-20">
-    <PageHeader title="Get Started" subtitle="See the platform. Ask questions. Get pricing for your team size. No pressure, just information." />
+    <PageHeader title="Start Your Defense" subtitle="Schedule a demo, get a quote, or just ask a question. We're here to help you secure your team." />
+
     <Section className="!pt-0">
-      <div className="max-w-4xl mx-auto">
-        <div className="p-10 rounded-3xl bg-surface border border-white/10 flex flex-col items-center text-center group hover:border-primary/50 transition-colors">
-          <Mail className="w-16 h-16 text-gray-400 group-hover:text-primary mb-6 transition-colors" />
-          <h3 className="text-2xl font-bold text-white mb-2">Email Us</h3>
-          <p className="text-gray-400 mb-6">For demos, pricing, partnership inquiries, or any questions about the platform.</p>
-          <a href={`mailto:${CONTACT_INFO.email}`} className="text-xl font-bold text-primary hover:underline">{CONTACT_INFO.email}</a>
+      <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+        {/* Contact Form / Info */}
+        <div className="space-y-8">
+          <div className="p-8 rounded-3xl bg-surface/50 border border-white/10 hover:border-primary/30 transition-colors">
+            <Mail className="w-12 h-12 text-primary mb-6" />
+            <h3 className="text-2xl font-bold text-white mb-2">Schedule a Demo</h3>
+            <p className="text-gray-400 mb-6">See the platform in action. We'll show you how to launch your first campaign in 5 minutes.</p>
+            <Button className="w-full">Book 15-Min Demo</Button>
+          </div>
+
+          <div className="p-8 rounded-3xl bg-surface/50 border border-white/10 hover:border-primary/30 transition-colors">
+            <Shield className="w-12 h-12 text-primary mb-6" />
+            <h3 className="text-2xl font-bold text-white mb-2">General Inquiry</h3>
+            <p className="text-gray-400 mb-6">Questions about pricing, features, or partnerships? Drop us a line.</p>
+            <a href={`mailto:${CONTACT_INFO.email}`} className="text-xl font-bold text-white hover:text-primary transition-colors block mb-4">{CONTACT_INFO.email}</a>
+            <p className="text-sm text-gray-500">Response time: &lt; 2 hours</p>
+          </div>
+        </div>
+
+        {/* FAQ Preview */}
+        <div>
+          <h3 className="text-xl font-bold text-white mb-6">Frequently Asked Questions</h3>
+          <div className="space-y-4">
+            {[
+              { q: "Is there a free trial?", a: "Yes. We offer a free 14-day trial with full access to all features. No credit card required." },
+              { q: "Do you offer discounts for non-profits?", a: "Yes. We offer a 20% discount for registered non-profits and educational institutions." },
+              { q: "Can I manage multiple companies?", a: "Yes. Our Partner Program is designed for MSPs and consultants who need to manage multiple clients from one dashboard." },
+              { q: "What happens if I cancel?", a: "You can export all your data and reports. We keep your account active until the end of your billing cycle. No hidden fees." }
+            ].map((faq, i) => (
+              <details key={i} className="group p-6 rounded-2xl bg-surface/30 border border-white/10 hover:border-primary/20 transition-colors cursor-pointer open:bg-surface/50">
+                <summary className="flex justify-between items-center font-bold text-white list-none"><span>{faq.q}</span><ArrowRight className="w-4 h-4 text-primary transform group-open:rotate-90 transition-transform" /></summary>
+                <p className="mt-4 text-gray-400 text-sm leading-relaxed">{faq.a}</p>
+              </details>
+            ))}
+          </div>
         </div>
       </div>
     </Section>
@@ -750,5 +1191,6 @@ function App() {
 }
 
 export default App;
+
 
 
