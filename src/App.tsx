@@ -196,6 +196,8 @@ const Section: React.FC<{ children: React.ReactNode, className?: string, id?: st
   </section>
 );
 
+
+
 const HowWeWork = () => (
   <Section className="bg-surface relative overflow-hidden">
     {/* Background Trace */}
@@ -247,74 +249,55 @@ const WhyChoose = () => (
   <Section className="bg-black relative overflow-hidden">
     {/* Background Gradients */}
     <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
+    <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none" />
 
-    <div className="grid lg:grid-cols-2 gap-16 items-center relative z-10 max-w-6xl mx-auto">
-      <div className="text-left">
-        <Reveal>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-gray-300 text-xs font-bold mb-6 uppercase tracking-widest backdrop-blur-md">
-            <Shield className="w-3 h-3 text-primary" /> The Standard
-          </div>
-        </Reveal>
-        <Reveal delay={0.1}>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Why Companies Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-emerald-400">Human Layer</span>
-          </h2>
-        </Reveal>
-        <Reveal delay={0.2}>
-          <p className="text-gray-400 text-lg leading-relaxed mb-8">
-            We built this platform to solve the problems other security training companies ignore. Most training is boring, punitive, and forgotten in 5 minutes. Ours is different.
-          </p>
-        </Reveal>
-
-        <div className="grid gap-6">
-          {[
-            { t: "Zero Shame", d: "No public humiliation. Just private, immediate training.", i: Shield },
-            { t: "Compliance Ready", d: "Automatic SOC 2, ISO 27001, & HIPAA documentation.", i: Award },
-            { t: "5 Minute Setup", d: "No IT department needed. Launch your campaign today.", i: Activity }
-          ].map((item, i) => (
-            <Reveal key={i} delay={0.3 + (i * 0.1)} width="100%">
-              <div className="flex items-start gap-4 p-4 rounded-xl hover:bg-white/5 transition-colors border border-transparent hover:border-white/5">
-                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0 text-primary">
-                  <item.i className="w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="text-white font-bold mb-1">{item.t}</h4>
-                  <p className="text-sm text-gray-400">{item.d}</p>
-                </div>
-              </div>
-            </Reveal>
-          ))}
+    <div className="text-center mb-16 relative z-10">
+      <Reveal width="100%">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-gray-300 text-xs font-bold mb-6 uppercase tracking-widest backdrop-blur-md">
+          <Shield className="w-3 h-3 text-primary" /> The Standard
         </div>
-      </div>
-
-      <div className="grid gap-6">
-        {[
-          { t: "Real Templates", d: "Law firms get court notices. Finance gets wire transfers.", i: FileText, c: "from-rose-500/20 to-orange-500/20", iconC: "text-rose-400" },
-          { t: "Clear Analytics", d: "Track improvement. Export reports for insurance.", i: Terminal, c: "from-violet-500/20 to-purple-500/20", iconC: "text-violet-400" },
-          { t: "Instant Learning", d: "Training happens the second they click. Not next week.", i: Mail, c: "from-blue-500/20 to-cyan-500/20", iconC: "text-blue-400" }
-        ].map((f, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 + (i * 0.1) }}
-            className="group relative overflow-hidden rounded-3xl border border-white/10 bg-surface/50 p-8 hover:border-white/20 transition-all duration-500"
-          >
-            <div className={cn("absolute inset-0 bg-gradient-to-r opacity-0 group-hover:opacity-100 transition-opacity duration-500", f.c)} />
-            <div className="relative z-10 flex items-center gap-6">
-              <div className={cn("w-12 h-12 rounded-2xl bg-black/50 flex items-center justify-center shrink-0 border border-white/10", f.iconC)}>
-                <f.i className="w-6 h-6" />
-              </div>
-              <div>
-                <h3 className="text-xl font-bold text-white mb-2">{f.t}</h3>
-                <p className="text-gray-400 text-sm">{f.d}</p>
-              </div>
-            </div>
-          </motion.div>
-        ))}
-      </div>
+      </Reveal>
+      <Reveal delay={0.1} width="100%">
+        <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+          Why Companies Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-emerald-400">Human Layer</span>
+        </h2>
+      </Reveal>
+      <Reveal delay={0.2} width="100%">
+        <p className="text-gray-400 max-w-2xl mx-auto text-lg">
+          We built this platform to solve the problems other security training companies ignore.
+        </p>
+      </Reveal>
     </div>
+
+    <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer} className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto relative z-10">
+      {[
+        { t: "Zero Shame", d: "No public humiliation. Just private, immediate training.", i: Shield, c: "text-emerald-400", border: "group-hover:border-emerald-500/50", shadow: "group-hover:shadow-[0_0_50px_rgba(16,185,129,0.2)]", iconBg: "bg-emerald-500/10" },
+        { t: "Compliance Ready", d: "Automatic SOC 2, ISO 27001, & HIPAA documentation.", i: Award, c: "text-amber-400", border: "group-hover:border-amber-500/50", shadow: "group-hover:shadow-[0_0_50px_rgba(245,158,11,0.2)]", iconBg: "bg-amber-500/10" },
+        { t: "5 Minute Setup", d: "No IT department needed. Launch your first campaign today.", i: Activity, c: "text-cyan-400", border: "group-hover:border-cyan-400/50", shadow: "group-hover:shadow-[0_0_50px_rgba(34,211,238,0.2)]", iconBg: "bg-cyan-500/10" },
+        { t: "Real Templates", d: "Law firms get court notices. Finance gets wire transfers.", i: FileText, c: "text-rose-400", border: "group-hover:border-rose-500/50", shadow: "group-hover:shadow-[0_0_50px_rgba(244,63,94,0.2)]", iconBg: "bg-rose-500/10" },
+        { t: "Clear Analytics", d: "Track improvement. Export reports for insurance.", i: Terminal, c: "text-violet-400", border: "group-hover:border-violet-400/50", shadow: "group-hover:shadow-[0_0_50px_rgba(167,139,250,0.2)]", iconBg: "bg-violet-500/10" },
+        { t: "Instant Learning", d: "Training happens the second they click. Not next week.", i: Mail, c: "text-orange-400", border: "group-hover:border-orange-400/50", shadow: "group-hover:shadow-[0_0_50px_rgba(251,146,60,0.2)]", iconBg: "bg-orange-500/10" }
+      ].map((f, i) => (
+        <motion.div
+          variants={fadeInUp}
+          key={i}
+          className={cn(
+            "flex flex-col items-start text-left group p-8 rounded-[2rem] border border-white/5 bg-surface/30 backdrop-blur-sm transition-all duration-500 hover:bg-surface/50 cursor-default relative overflow-hidden",
+            f.border, f.shadow
+          )}
+          whileHover={{ y: -8 }}
+        >
+          <div className={cn("absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-white/5 to-transparent")} />
+
+          <div className={cn("w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-all duration-300 group-hover:scale-110 shadow-inner border border-white/5", f.iconBg)}>
+            <f.i className={cn("w-7 h-7 transition-colors duration-300", f.c)} />
+          </div>
+          <h3 className="text-xl font-bold text-white mb-3 relative z-10">{f.t}</h3>
+          <p className="text-gray-400 leading-relaxed text-sm relative z-10">{f.d}</p>
+
+        </motion.div>
+      ))}
+    </motion.div>
   </Section>
 );
 
@@ -566,7 +549,7 @@ const Home = () => {
                 <Activity className="text-primary w-4 h-4" /> Setup in Under 5 Minutes
               </span>
               <span className="text-white/70 font-mono text-sm tracking-widest uppercase flex items-center gap-4">
-                <FileText className="text-primary w-4 h-4" /> Industry-Specific Templates
+                <FileText className="text-primary w-4 h-4" /> Industry Specific Templates
               </span>
               <span className="text-white/70 font-mono text-sm tracking-widest uppercase flex items-center gap-4">
                 <Terminal className="text-primary w-4 h-4" /> Monthly Analytics Reports
@@ -650,7 +633,7 @@ const Home = () => {
         {/* PRICING PREVIEW */}
         <div className="mt-16 p-10 rounded-3xl bg-surface/60 border border-white/10 text-center">
           <h3 className="text-3xl font-bold text-white mb-4">Simple, <span className="text-primary">Transparent Pricing</span></h3>
-          <p className="text-gray-400 mb-8 max-w-2xl mx-auto">From startups to enterprises. Month-to-month contracts. Cancel anytime.</p>
+          <p className="text-gray-400 mb-8 max-w-2xl mx-auto">From startups to enterprises. Month to month contracts. Cancel anytime.</p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto mb-8">
             {/* STARTER */}
             <div className="p-6 rounded-2xl bg-black/40 border border-white/10 text-left hover:border-primary/30 transition-colors">
@@ -663,7 +646,7 @@ const Home = () => {
                 <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span><strong className="text-white">No shame policy</strong></span></li>
                 <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span><strong className="text-white">Compliance certificates</strong></span></li>
                 <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span>Basic dashboard</span></li>
-                <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span><strong className="text-white">5-minute setup</strong></span></li>
+                <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span><strong className="text-white">5 minute setup</strong></span></li>
               </ul>
               <Link to="/contact"><Button variant="outline" className="w-full">Get Started</Button></Link>
             </div>
@@ -691,7 +674,7 @@ const Home = () => {
               <ul className="space-y-3 text-sm text-gray-300 mb-6">
                 <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span>Everything in Pro</span></li>
                 <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span><strong className="text-white">Dedicated manager</strong></span></li>
-                <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span><strong className="text-white">White-label option</strong></span></li>
+                <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span><strong className="text-white">White label option</strong></span></li>
                 <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span><strong className="text-white">Custom compliance</strong></span></li>
                 <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span>Threat intelligence</span></li>
                 <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span>99.9% SLA</span></li>
@@ -1485,7 +1468,7 @@ const RevenueCalculator = () => {
             min="1"
             max="50"
             value={clients}
-            onChange={(e) => setClients(Number(e.target.value))}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setClients(Number(e.target.value))}
             className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
           />
           <div
@@ -1595,7 +1578,7 @@ const Contact = () => {
                   className="w-full px-6 py-4 bg-surface border border-white/10 rounded-2xl text-white placeholder-gray-600 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
                   placeholder="John Doe"
                   value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, name: e.target.value })}
                 />
               </div>
 
@@ -1610,7 +1593,7 @@ const Contact = () => {
                   className="w-full px-6 py-4 bg-surface border border-white/10 rounded-2xl text-white placeholder-gray-600 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
                   placeholder="john@company.com"
                   value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, email: e.target.value })}
                 />
               </div>
 
@@ -1625,7 +1608,7 @@ const Contact = () => {
                   className="w-full px-6 py-4 bg-surface border border-white/10 rounded-2xl text-white placeholder-gray-600 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
                   placeholder="Acme Corp"
                   value={formData.company}
-                  onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, company: e.target.value })}
                 />
               </div>
 
@@ -1780,8 +1763,8 @@ const Contact = () => {
           {/* FAQ Logic embedded here or reused if separated, reusing structure for now */}
           <div className="space-y-4">
             {[
-              { q: "Is there a free trial?", a: "Yes. We offer a free 14-day trial with full access to all features. No credit card required." },
-              { q: "Do you offer discounts for non-profits?", a: "Yes. We offer a 20% discount for registered non-profits and educational institutions." },
+              { q: "Is there a free trial?", a: "Yes. We offer a free 14 day trial with full access to all features. No credit card required." },
+              { q: "Do you offer discounts for nonprofits?", a: "Yes. We offer a 20% discount for registered nonprofits and educational institutions." },
               { q: "Can I manage multiple companies?", a: "Yes. Our Partner Program is designed for MSPs and consultants who need to manage multiple clients from one dashboard." },
               { q: "What happens if I cancel?", a: "You can export all your data and reports. We keep your account active until the end of your billing cycle. No hidden fees." }
             ].map((faq, i) => (
