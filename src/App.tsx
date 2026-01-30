@@ -647,6 +647,57 @@ const FAQ = () => {
   );
 };
 
+const BackgroundLayers = () => (
+  <div className="fixed inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
+    {/* Noise Overlay */}
+    <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay">
+      <svg width="100%" height="100%">
+        <filter id="global-noise">
+          <feTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="3" stitchTiles="stitch" />
+        </filter>
+        <rect width="100%" height="100%" filter="url(#global-noise)" />
+      </svg>
+    </div>
+
+    {/* Global Gradient Grid */}
+    <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+
+    {/* Primary Glow */}
+    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,_rgba(34,197,94,0.08),transparent_70%)]" />
+
+    {/* Animated Orbs */}
+    <motion.div
+      className="absolute top-[-10%] left-[-10%] w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px]"
+      animate={{ x: [0, 50, 0], y: [0, -30, 0], scale: [1, 1.1, 1] }}
+      transition={{ duration: 20, ease: "easeInOut", repeat: Infinity }}
+    />
+    <motion.div
+      className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[120px]"
+      animate={{ x: [0, -50, 0], y: [0, 30, 0], scale: [1, 1.2, 1] }}
+      transition={{ duration: 25, ease: "easeInOut", repeat: Infinity }}
+    />
+  </div>
+);
+
+const ScrollMouse = () => (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 1.5, duration: 1 }}
+    className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-3 cursor-pointer"
+    onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
+  >
+    <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500 animate-pulse">Scroll to Explore</span>
+    <div className="w-6 h-10 border-2 border-white/20 rounded-full flex justify-center p-1 backdrop-blur-sm bg-black/20 group hover:border-white/40 transition-colors">
+      <motion.div
+        className="w-1.5 h-1.5 bg-primary rounded-full shadow-[0_0_10px_rgba(34,197,94,1)]"
+        animate={{ y: [0, 20, 0] }}
+        transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+      />
+    </div>
+  </motion.div>
+);
+
 const Home = () => {
   const navigate = useNavigate();
   const [quote, setQuote] = useState(QUOTES[0]);
@@ -664,26 +715,15 @@ const Home = () => {
   return (
     <>
       <ScrollProgress />
-      <div className="fixed inset-0 pointer-events-none z-0 opacity-[0.015]">
-        <svg width="100%" height="100%">
-          <filter id="noise">
-            <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" />
-          </filter>
-          <rect width="100%" height="100%" filter="url(#noise)" />
-        </svg>
-      </div>
+      <BackgroundLayers />
+
       <PageMeta
         title="HumanLayer Security | Stop Phishing Attacks Before They Click"
         description="AI-powered phishing defense that trains your employees in real-time. Shame-free, instant feedback. Setup in 5 minutes."
       />
       {/* HERO */}
-      <section className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden perspective-1000">
-        {/* Animated Background Grid */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
-        <motion.div style={{ scale: bgScale }} className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,_rgba(34,197,94,0.1),transparent_60%)] pointer-events-none" />
-        <div className="absolute top-0 right-0 w-2/3 h-full bg-gradient-to-l from-primary/10 via-primary/5 to-transparent opacity-60 pointer-events-none" />
-
-        <div className="absolute top-0 right-0 w-2/3 h-full bg-gradient-to-l from-primary/10 via-primary/5 to-transparent opacity-60 pointer-events-none" />
+      <section className="relative min-h-[95vh] flex items-center pt-20 overflow-hidden perspective-1000">
+        <ScrollMouse />
 
         <div className="max-w-7xl mx-auto px-6 w-full flex flex-col items-center text-center pt-10 pb-20 relative z-10">
 
@@ -1124,20 +1164,8 @@ const PageHeader: React.FC<{ title: string, subtitle: string }> = ({ title, subt
 );
 
 const Services = () => (
-  <div className="min-h-screen bg-background text-white pb-20 relative overflow-hidden">
-    {/* MANDATORY BACKGROUND LAYERS */}
-    <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none -z-10" />
-    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,_rgba(34,197,94,0.1),transparent_60%)] pointer-events-none -z-10" />
-    <motion.div
-      className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] pointer-events-none -z-10"
-      animate={{ x: [0, 50, 0], y: [0, -30, 0], scale: [1, 1.1, 1] }}
-      transition={{ duration: 20, ease: "easeInOut", repeat: Infinity }}
-    />
-    <motion.div
-      className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none -z-10"
-      animate={{ x: [0, -50, 0], y: [0, 30, 0], scale: [1, 1.2, 1] }}
-      transition={{ duration: 25, ease: "easeInOut", repeat: Infinity }}
-    />
+  <div className="min-h-screen bg-background text-white pb-20 relative">
+    <BackgroundLayers />
     <PageMeta
       title="Services | HumanLayer Security"
       description="Phishing simulations, real-time training, and compliance reporting. See our full suite of security tools."
@@ -1421,20 +1449,8 @@ const Services = () => (
 );
 
 const About = () => (
-  <div className="min-h-screen bg-background text-white pb-20 relative overflow-hidden">
-    {/* MANDATORY BACKGROUND LAYERS */}
-    <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none -z-10" />
-    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,_rgba(34,197,94,0.1),transparent_60%)] pointer-events-none -z-10" />
-    <motion.div
-      className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] pointer-events-none -z-10"
-      animate={{ x: [0, 50, 0], y: [0, -30, 0], scale: [1, 1.1, 1] }}
-      transition={{ duration: 20, ease: "easeInOut", repeat: Infinity }}
-    />
-    <motion.div
-      className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none -z-10"
-      animate={{ x: [0, -50, 0], y: [0, 30, 0], scale: [1, 1.2, 1] }}
-      transition={{ duration: 25, ease: "easeInOut", repeat: Infinity }}
-    />
+  <div className="min-h-screen bg-background text-white pb-20 relative">
+    <BackgroundLayers />
     <PageMeta
       title="About Us | HumanLayer Security"
       description="Founded by cybersecurity and engineering experts. We're building the future of human risk management."
@@ -1516,20 +1532,8 @@ const About = () => (
 );
 
 const Partnership = () => (
-  <div className="min-h-screen bg-background text-white pb-20 relative overflow-hidden">
-    {/* MANDATORY BACKGROUND LAYERS */}
-    <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none -z-10" />
-    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,_rgba(34,197,94,0.1),transparent_60%)] pointer-events-none -z-10" />
-    <motion.div
-      className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] pointer-events-none -z-10"
-      animate={{ x: [0, 50, 0], y: [0, -30, 0], scale: [1, 1.1, 1] }}
-      transition={{ duration: 20, ease: "easeInOut", repeat: Infinity }}
-    />
-    <motion.div
-      className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none -z-10"
-      animate={{ x: [0, -50, 0], y: [0, 30, 0], scale: [1, 1.2, 1] }}
-      transition={{ duration: 25, ease: "easeInOut", repeat: Infinity }}
-    />
+  <div className="min-h-screen bg-background text-white pb-20 relative">
+    <BackgroundLayers />
     <PageMeta
       title="Partnership | HumanLayer Security"
       description="Partner with HumanLayer. White-label phishing defense for your clients. Recurring revenue."
@@ -1800,20 +1804,8 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background text-white pb-20 relative overflow-hidden">
-      {/* MANDATORY BACKGROUND LAYERS */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none -z-10" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,_rgba(34,197,94,0.1),transparent_60%)] pointer-events-none -z-10" />
-      <motion.div
-        className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] pointer-events-none -z-10"
-        animate={{ x: [0, 50, 0], y: [0, -30, 0], scale: [1, 1.1, 1] }}
-        transition={{ duration: 20, ease: "easeInOut", repeat: Infinity }}
-      />
-      <motion.div
-        className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none -z-10"
-        animate={{ x: [0, -50, 0], y: [0, 30, 0], scale: [1, 1.2, 1] }}
-        transition={{ duration: 25, ease: "easeInOut", repeat: Infinity }}
-      />
+    <div className="min-h-screen bg-background text-white pb-20 relative">
+      <BackgroundLayers />
       <PageMeta
         title="Contact | HumanLayer Security"
         description="Get a free security assessment. Contact our team to secure your organization today."
@@ -2160,4 +2152,5 @@ function App() {
 }
 
 export default App;
+
 
