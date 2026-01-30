@@ -430,8 +430,6 @@ const Home = () => {
   const [quote, setQuote] = useState(QUOTES[0]);
 
   const { scrollY } = useScroll();
-  const heroY = useTransform(scrollY, [0, 500], [0, 150]);
-  const heroOpacity = useTransform(scrollY, [0, 300], [1, 0]);
   const bgScale = useTransform(scrollY, [0, 1000], [1, 1.2]);
 
   useEffect(() => {
