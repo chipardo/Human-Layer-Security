@@ -50,11 +50,19 @@ const QUOTES = [
 const EASING = [0.22, 1, 0.36, 1]; // Custom cubic-bezier for "buttery" feel
 
 const fadeInUp = {
-  hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 30 },
+  hidden: {
+    opacity: 0,
+    y: prefersReducedMotion ? 0 : 40,
+    scale: 0.95
+  },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: prefersReducedMotion ? 0.01 : 0.8, ease: EASING }
+    scale: 1,
+    transition: {
+      duration: prefersReducedMotion ? 0.01 : 0.6,
+      ease: [0.25, 0.1, 0.25, 1]
+    }
   }
 };
 
@@ -62,7 +70,11 @@ const staggerContainer = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.15, delayChildren: 0.2 }
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.1,
+      when: "beforeChildren"
+    }
   }
 };
 
@@ -131,46 +143,154 @@ const CountUp: React.FC<{ from?: number, to: number, duration?: number, suffix?:
   return <span ref={ref} className={className}>{Math.floor(count)}{suffix}</span>;
 };
 
+const TextReveal: React.FC<{ children: string, className?: string }> = ({ children, className }) => {
+  const ref = React.useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
+
+  return (
+    <span ref={ref} className={cn("inline-block overflow-hidden", className)}>
+      <motion.span
+        initial={{ y: "100%", opacity: 0 }}
+        animate={isInView ? { y: 0, opacity: 1 } : {}}
+        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+        className="inline-block"
+      >
+        {children}
+      </motion.span>
+    </span>
+  );
+};
+
+const CardShimmer = () => (
+  <div className="absolute inset-0 overflow-hidden rounded-[inherit] pointer-events-none">
+    <motion.div
+      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
+      initial={{ x: "-100%" }}
+      animate={{ x: "200%" }}
+      transition={{
+        duration: 2,
+        ease: "easeInOut",
+        repeat: Infinity,
+        repeatDelay: 5
+      }}
+    />
+  </div>
+);
+
+const CardWithMagnet: React.FC<{ children: React.ReactNode, className?: string, onClick?: () => void }> = ({ children, className, ...props }) => {
+  const ref = React.useRef<HTMLDivElement>(null);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    const x = (e.clientX - rect.left - rect.width / 2) / 20;
+    const y = (e.clientY - rect.top - rect.height / 2) / 20;
+    setMousePosition({ x, y });
+  };
+
+  const handleMouseLeave = () => {
+    setMousePosition({ x: 0, y: 0 });
+  };
+
+  return (
+    <motion.div
+      ref={ref}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      animate={{ x: mousePosition.x, y: mousePosition.y }}
+      transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
+      className={className}
+      {...props}
+    >
+      {children}
+    </motion.div>
+  );
+};
+
+const ImageWithLoad: React.FC<{ src: string, alt: string, className?: string }> = ({ src, alt, className }) => {
+  const [loaded, setLoaded] = useState(false);
+
+  return (
+    <div className="relative">
+      <motion.div
+        initial={{ opacity: 1 }}
+        animate={{ opacity: loaded ? 0 : 1 }}
+        className="absolute inset-0 bg-surface/50 backdrop-blur-sm flex items-center justify-center pointer-events-none z-10"
+      >
+        <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+      </motion.div>
+
+      <motion.img
+        src={src}
+        alt={alt}
+        className={className}
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: loaded ? 1 : 0, scale: loaded ? 1 : 0.95 }}
+        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        onLoad={() => setLoaded(true)}
+      />
+    </div>
+  );
+};
+
+const ScrollProgress = () => {
+  const { scrollYProgress } = useScroll();
+
+  return (
+    <motion.div
+      className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-emerald-400 to-primary origin-left z-50"
+      style={{ scaleX: scrollYProgress }}
+    />
+  );
+};
+
 // --- UI COMPONENTS ---
 // --- UI COMPONENTS ---
 const Button: React.FC<Omit<React.ComponentProps<typeof motion.button>, 'children'> & { variant?: 'primary' | 'outline' | 'ghost', size?: 'sm' | 'md' | 'lg', children: React.ReactNode }> = ({ className, variant = 'primary', size = 'md', children, ...props }) => {
-  const base = "inline-flex items-center justify-center font-display font-semibold transition-all focus:outline-none disabled:opacity-50 rounded-full cursor-pointer relative overflow-hidden group";
+  const base = "inline-flex items-center justify-center font-display font-semibold transition-all focus:outline-none disabled:opacity-50 rounded-full cursor-pointer relative overflow-hidden group transform-gpu";
   const vars = {
-    primary: "bg-primary text-black hover:bg-green-400 shadow-[0_0_20px_rgba(34,197,94,0.4)] hover:shadow-[0_0_30px_rgba(34,197,94,0.6)] border border-transparent",
+    primary: "bg-primary text-black hover:bg-green-400 shadow-[0_0_30px_rgba(34,197,94,0.4),0_0_60px_rgba(34,197,94,0.2),0_0_90px_rgba(34,197,94,0.1)] hover:shadow-[0_0_40px_rgba(34,197,94,0.6),0_0_80px_rgba(34,197,94,0.3),0_0_120px_rgba(34,197,94,0.15)] border border-transparent",
     outline: "border border-white/20 text-white hover:border-primary hover:text-primary bg-transparent hover:bg-white/5",
     ghost: "text-white/70 hover:text-white hover:bg-white/5"
   };
   const sizes = { sm: "h-9 px-4 text-xs", md: "h-12 px-8 text-sm", lg: "h-14 px-10 text-base" };
 
-  // Magnetic Effect Logic
-  const ref = React.useRef<HTMLButtonElement>(null);
-  const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (variant !== 'primary' || !ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-    const x = (e.clientX - rect.left - rect.width / 2) * 0.2;
-    const y = (e.clientY - rect.top - rect.height / 2) * 0.2;
-    ref.current.style.transform = `translate(${x}px, ${y}px)`;
-  };
-  const handleMouseLeave = () => {
-    if (!ref.current) return;
-    ref.current.style.transform = 'translate(0, 0)';
+  const [ripples, setRipples] = useState<Array<{ x: number; y: number; id: number }>>([]);
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const id = Date.now();
+
+    setRipples(prev => [...prev, { x, y, id }]);
+    setTimeout(() => {
+      setRipples(prev => prev.filter(r => r.id !== id));
+    }, 600);
+
+    if (props.onClick) props.onClick(e);
   };
 
   return (
     <motion.button
-      ref={ref}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{ transition: 'transform 0.3s cubic-bezier(0.22, 1, 0.36, 1)' }}
-      whileHover={{ scale: 1.05, boxShadow: variant === 'primary' ? "0 0 40px rgba(34,197,94,0.6)" : undefined }}
-      whileTap={{ scale: 0.98, boxShadow: variant === 'primary' ? "0 0 20px rgba(34,197,94,0.4)" : undefined }}
+      onClick={handleClick}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
       className={cn(base, vars[variant], sizes[size], className)}
       {...props}
     >
+      {ripples.map(ripple => (
+        <motion.span
+          key={ripple.id}
+          className="absolute rounded-full bg-white/30"
+          initial={{ width: 0, height: 0, x: ripple.x, y: ripple.y }}
+          animate={{ width: 300, height: 300, x: ripple.x - 150, y: ripple.y - 150, opacity: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          style={{ pointerEvents: 'none' }}
+        />
+      ))}
       <span className="relative z-10 flex items-center gap-2">{children}</span>
-      {variant === 'primary' && (
-        <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
-      )}
     </motion.button>
   );
 };
@@ -191,8 +311,21 @@ const ACCENT_COLORS: Record<string, { text: string; border: string; bg: string; 
 const Section: React.FC<{ children: React.ReactNode, className?: string, id?: string }> = ({ children, className = "", id }) => (
   <section id={id} className={cn("py-20 md:py-24 px-6 relative overflow-hidden bg-transparent", className)}>
     {/* Animated Background Grid - ADD TO ALL PAGES */}
+    {/* Animated Background Grid - ADD TO ALL PAGES */}
     <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none -z-10" />
     <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,_rgba(34,197,94,0.1),transparent_60%)] pointer-events-none -z-10" />
+
+    {/* Floating Gradient Orbs */}
+    <motion.div
+      className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] pointer-events-none -z-10"
+      animate={{ x: [0, 50, 0], y: [0, -30, 0], scale: [1, 1.1, 1] }}
+      transition={{ duration: 20, ease: "easeInOut", repeat: Infinity }}
+    />
+    <motion.div
+      className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none -z-10"
+      animate={{ x: [0, -50, 0], y: [0, 30, 0], scale: [1, 1.2, 1] }}
+      transition={{ duration: 25, ease: "easeInOut", repeat: Infinity }}
+    />
 
     <motion.div
       initial="hidden"
@@ -435,6 +568,85 @@ const Footer = () => (
 );
 
 // --- HOME PAGE ---
+const FAQ = () => {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const faqs = [
+    { q: "Won't this upset our employees?", a: "No — and here's why: We don't report clicks to management. We don't publish 'walls of shame.' We don't make anyone feel stupid. When someone clicks, they see a private learning moment. Most employees actually appreciate the training because it helps them protect themselves." },
+    { q: "How is this different from KnowBe4 or Proofpoint?", a: "Three main differences: (1) We're faster to set up (minutes vs weeks), (2) Our scenarios are more realistic because we customize to your actual threats, (3) Our pricing is transparent and simple. Most importantly, we built this platform from scratch in 2024 with modern technology — not legacy systems from 2010." },
+    { q: "What if employees figure out it's a test?", a: "That's actually good! It means they're being vigilant. The goal isn't to trick people — it's to build instincts. If someone thinks 'this might be a phishing test,' they're already thinking more carefully about email security. That's exactly what we want." },
+    { q: "How long until we see results?", a: "Most companies see measurable improvement within 60–90 days. Click rates typically drop 50–80% within the first six months. But you'll notice behavioral changes sooner — employees start forwarding suspicious emails to IT instead of clicking them." },
+    { q: "Do you handle the technical setup?", a: "Yes. Setup takes under 5 minutes. We handle email authentication, domain configuration, and platform setup. You just provide your employee list and select your first campaign. We take care of the technical details." },
+    { q: "Can we cancel anytime?", a: "Yes. Month-to-month contracts. Cancel with 30 days notice. No long-term commitments. No cancellation fees. We're confident you'll see value, so we don't lock you in." }
+  ];
+
+  return (
+    <Section className="bg-black">
+      <div className="max-w-4xl mx-auto">
+        <h2 className="text-4xl md:text-5xl font-bold text-white mb-12 text-center">
+          Common <span className="text-primary">Questions</span>
+        </h2>
+
+        <div className="space-y-4">
+          {faqs.map((faq, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.05 }}
+              className={cn(
+                "p-6 rounded-2xl border transition-all duration-300 cursor-pointer group relative overflow-hidden",
+                openIndex === i
+                  ? "bg-surface/60 border-primary/30"
+                  : "bg-surface/40 border-white/10 hover:border-primary/20"
+              )}
+              onClick={() => setOpenIndex(openIndex === i ? null : i)}
+            >
+              {/* Gradient background on open */}
+              <div className={cn(
+                "absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 transition-opacity duration-300",
+                openIndex === i && "opacity-100"
+              )} />
+
+              {/* Question */}
+              <div className="flex justify-between items-center relative z-10">
+                <span className="font-bold text-white text-lg pr-4">{faq.q}</span>
+                <motion.div
+                  animate={{ rotate: openIndex === i ? 90 : 0 }}
+                  transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <ArrowRight className="w-5 h-5 text-primary shrink-0" />
+                </motion.div>
+              </div>
+
+              {/* Answer */}
+              <AnimatePresence>
+                {openIndex === i && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                    className="overflow-hidden"
+                  >
+                    <p className="mt-4 text-gray-400 leading-relaxed relative z-10">{faq.a}</p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
+          ))}
+        </div>
+
+        <div className="mt-12 text-center">
+          <p className="text-gray-400 mb-4">Still have questions?</p>
+          <Link to="/contact"><Button variant="outline">Talk to Us</Button></Link>
+        </div>
+      </div>
+    </Section>
+  );
+};
+
 const Home = () => {
   const navigate = useNavigate();
   const [quote, setQuote] = useState(QUOTES[0]);
@@ -486,7 +698,7 @@ const Home = () => {
             className="relative w-full max-w-3xl mb-12 sm:mb-16 group px-4"
           >
             <div className="absolute inset-0 bg-primary/20 blur-[100px] rounded-full opacity-20 pointer-events-none" />
-            <img src="/hero-network.png" alt="Human Defense Network" className="relative z-10 w-full h-auto object-contain drop-shadow-2xl max-h-[250px] sm:max-h-[300px] md:max-h-[400px]" />
+            <img src="/hero-network.png" alt="Human Defense Network" className="relative z-10 w-full h-auto object-contain drop-shadow-2xl max-h-[250px] sm:max-h-[300px] md:max-h-[400px] opacity-80 mix-blend-screen hover:opacity-100 hover:mix-blend-normal transition-all duration-700" />
 
             {/* Float Badge 1: Team Awareness */}
             <motion.div
@@ -524,11 +736,11 @@ const Home = () => {
           </motion.div>
 
           {/* 3. SUBTEXT & CTA */}
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.4 }} className="max-w-3xl mx-auto">
-            <h2 className="text-2xl md:text-3xl font-medium text-white mb-8">
-              We train your team to <span className="text-primary border-b-2 border-primary/30 pb-1">recognize threats</span> before they click.
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.4 }} className="max-w-5xl mx-auto">
+            <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-10 leading-[1.1] tracking-tight">
+              We train your team to <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-emerald-300">recognize threats</span><br className="hidden md:block" /> before they click.
             </h2>
-            <div className="flex gap-4 justify-center flex-wrap mb-12">
+            <div className="flex gap-4 justify-center flex-wrap mb-16">
               <Link to="/contact">
                 <Button size="lg" className="bg-green-600 hover:bg-green-500 shadow-[0_0_30px_rgba(34,197,94,0.3)] text-white h-16 px-12 text-lg">
                   Get Free Risk Assessment
@@ -821,80 +1033,69 @@ const Home = () => {
 
         <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="grid md:grid-cols-2 gap-8 mb-16">
           {/* Case Study 1 */}
-          <motion.div variants={fadeInUp} whileHover={{ borderColor: "rgba(34,197,94,0.4)" }} className="p-8 rounded-3xl bg-surface/40 border border-white/10 transition-colors duration-300 group cursor-default">
-            <div className="flex items-center gap-4 mb-6">
-              <div className="w-14 h-14 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-xl group-hover:scale-110 transition-transform">LS</div>
-              <div><div className="font-bold text-white text-lg">Law Firm, 75 employees</div><div className="text-sm text-gray-500 flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-primary/50" /> Miami, FL</div></div>
-            </div>
-            <div className="grid grid-cols-2 gap-4 mb-8">
-              <div className="p-4 rounded-2xl bg-black/40 border border-white/5 group-hover:border-white/10 transition-colors">
-                <div className="text-sm text-gray-500 mb-1 uppercase tracking-wider font-bold">Before</div>
-                <div className="text-4xl font-bold text-red-400">41%</div>
-                <div className="text-xs text-gray-400 mt-1">click rate</div>
+          <CardWithMagnet className="p-8 rounded-3xl bg-surface/40 border border-white/10 transition-colors duration-300 group cursor-default">
+            <CardShimmer />
+            <div className="relative z-10">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-14 h-14 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-xl group-hover:scale-110 transition-transform">LS</div>
+                <div><div className="font-bold text-white text-lg">Law Firm, 75 employees</div><div className="text-sm text-gray-500 flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-primary/50" /> Miami, FL</div></div>
               </div>
-              <div className="p-4 rounded-2xl bg-primary/5 border border-primary/20 group-hover:border-primary/50 transition-colors">
-                <div className="text-sm text-primary/80 mb-1 uppercase tracking-wider font-bold">After 90 days</div>
-                <div className="text-4xl font-bold text-primary">7%</div>
-                <div className="text-xs text-primary/60 mt-1">click rate</div>
+              <div className="grid grid-cols-2 gap-4 mb-8">
+                <div className="p-4 rounded-2xl bg-black/40 border border-white/5 group-hover:border-white/10 transition-colors">
+                  <div className="text-sm text-gray-500 mb-1 uppercase tracking-wider font-bold">Before</div>
+                  <div className="text-4xl font-bold text-red-400">41%</div>
+                  <div className="text-xs text-gray-400 mt-1">click rate</div>
+                </div>
+                <div className="p-4 rounded-2xl bg-primary/5 border border-primary/20 group-hover:border-primary/50 transition-colors">
+                  <div className="text-sm text-primary/80 mb-1 uppercase tracking-wider font-bold">After 90 days</div>
+                  <div className="text-4xl font-bold text-primary">7%</div>
+                  <div className="text-xs text-primary/60 mt-1">click rate</div>
+                </div>
               </div>
+              <p className="text-gray-300 text-lg italic leading-relaxed">"We went from being terrified of phishing to confident our team can spot it. The training actually works because it happens right when someone makes a mistake."</p>
             </div>
-            <p className="text-gray-300 text-lg italic leading-relaxed">"We went from being terrified of phishing to confident our team can spot it. The training actually works because it happens right when someone makes a mistake."</p>
-          </motion.div>
+          </CardWithMagnet>
 
           {/* Case Study 2 */}
-          <motion.div variants={fadeInUp} whileHover={{ borderColor: "rgba(34,197,94,0.4)" }} className="p-8 rounded-3xl bg-surface/40 border border-white/10 transition-colors duration-300 group cursor-default">
-            <div className="flex items-center gap-4 mb-6">
-              <div className="w-14 h-14 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-xl group-hover:scale-110 transition-transform">MC</div>
-              <div><div className="font-bold text-white text-lg">Medical Practice, 120 employees</div><div className="text-sm text-gray-500 flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-primary/50" /> Boston, MA</div></div>
-            </div>
-            <div className="grid grid-cols-2 gap-4 mb-8">
-              <div className="p-4 rounded-2xl bg-black/40 border border-white/5 group-hover:border-white/10 transition-colors">
-                <div className="text-sm text-gray-500 mb-1 uppercase tracking-wider font-bold">Before</div>
-                <div className="text-4xl font-bold text-red-400">38%</div>
-                <div className="text-xs text-gray-400 mt-1">click rate</div>
+          <CardWithMagnet className="p-8 rounded-3xl bg-surface/40 border border-white/10 transition-colors duration-300 group cursor-default">
+            <CardShimmer />
+            <div className="relative z-10">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-14 h-14 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-xl group-hover:scale-110 transition-transform">MC</div>
+                <div><div className="font-bold text-white text-lg">Medical Practice, 120 employees</div><div className="text-sm text-gray-500 flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-primary/50" /> Boston, MA</div></div>
               </div>
-              <div className="p-4 rounded-2xl bg-primary/5 border border-primary/20 group-hover:border-primary/50 transition-colors">
-                <div className="text-sm text-primary/80 mb-1 uppercase tracking-wider font-bold">After 6 months</div>
-                <div className="text-4xl font-bold text-primary">4%</div>
-                <div className="text-xs text-primary/60 mt-1">click rate</div>
+              <div className="grid grid-cols-2 gap-4 mb-8">
+                <div className="p-4 rounded-2xl bg-black/40 border border-white/5 group-hover:border-white/10 transition-colors">
+                  <div className="text-sm text-gray-500 mb-1 uppercase tracking-wider font-bold">Before</div>
+                  <div className="text-4xl font-bold text-red-400">38%</div>
+                  <div className="text-xs text-gray-400 mt-1">click rate</div>
+                </div>
+                <div className="p-4 rounded-2xl bg-primary/5 border border-primary/20 group-hover:border-primary/50 transition-colors">
+                  <div className="text-sm text-primary/80 mb-1 uppercase tracking-wider font-bold">After 6 months</div>
+                  <div className="text-4xl font-bold text-primary">2.4%</div>
+                  <div className="text-xs text-primary/60 mt-1">click rate</div>
+                </div>
               </div>
+              <p className="text-gray-300 text-lg italic leading-relaxed">"It's set-and-forget for me. The platform automatically handles the campaigns and training. I just check the monthly report and see the numbers going down."</p>
             </div>
-            <p className="text-gray-300 text-lg italic leading-relaxed">"HIPAA compliance required security training. This was the only solution that actually changed behavior instead of just checking a box."</p>
-          </motion.div>
-        </motion.div>
+          </CardWithMagnet>
+        </motion.div>                <div className="text-4xl font-bold text-primary">4%</div>
+        <div className="text-xs text-primary/60 mt-1">click rate</div>
+      </div>
+    </div >
+      <p className="text-gray-300 text-lg italic leading-relaxed">"HIPAA compliance required security training. This was the only solution that actually changed behavior instead of just checking a box."</p>
+          </motion.div >
+        </motion.div >
 
-        <div className="text-center p-10 rounded-3xl bg-primary/5 border border-primary/20">
-          <h3 className="text-2xl font-bold text-white mb-4">Want to see these results for your team?</h3>
-          <p className="text-gray-400 mb-6 max-w-2xl mx-auto">Let's run a baseline assessment. We'll show you where your vulnerabilities are, then demonstrate how the platform works with your actual team.</p>
-          <Link to="/contact"><Button size="lg">Schedule Free Assessment</Button></Link>
-        </div>
+  <div className="text-center p-10 rounded-3xl bg-primary/5 border border-primary/20">
+    <h3 className="text-2xl font-bold text-white mb-4">Want to see these results for your team?</h3>
+    <p className="text-gray-400 mb-6 max-w-2xl mx-auto">Let's run a baseline assessment. We'll show you where your vulnerabilities are, then demonstrate how the platform works with your actual team.</p>
+    <Link to="/contact"><Button size="lg">Schedule Free Assessment</Button></Link>
+  </div>
       </Section >
 
-      {/* FAQ SECTION */}
-      < Section className="bg-black" >
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-12 text-center">Common <span className="text-primary">Questions</span></h2>
-          <div className="space-y-4">
-            {[
-              { q: "Won't this upset our employees?", a: "No — and here's why: We don't report clicks to management. We don't publish 'walls of shame.' We don't make anyone feel stupid. When someone clicks, they see a private learning moment. Most employees actually appreciate the training because it helps them protect themselves." },
-              { q: "How is this different from KnowBe4 or Proofpoint?", a: "Three main differences: (1) We're faster to set up (minutes vs weeks), (2) Our scenarios are more realistic because we customize to your actual threats, (3) Our pricing is transparent and simple. Most importantly, we built this platform from scratch in 2024 with modern technology — not legacy systems from 2010." },
-              { q: "What if employees figure out it's a test?", a: "That's actually good! It means they're being vigilant. The goal isn't to trick people — it's to build instincts. If someone thinks 'this might be a phishing test,' they're already thinking more carefully about email security. That's exactly what we want." },
-              { q: "How long until we see results?", a: "Most companies see measurable improvement within 60–90 days. Click rates typically drop 50–80% within the first six months. But you'll notice behavioral changes sooner — employees start forwarding suspicious emails to IT instead of clicking them." },
-              { q: "Do you handle the technical setup?", a: "Yes. Setup takes under 5 minutes. We handle email authentication, domain configuration, and platform setup. You just provide your employee list and select your first campaign. We take care of the technical details." },
-              { q: "Can we cancel anytime?", a: "Yes. Month-to-month contracts. Cancel with 30 days notice. No long-term commitments. No cancellation fees. We're confident you'll see value, so we don't lock you in." }
-            ].map((faq, i) => (
-              <details key={i} className="group p-6 rounded-2xl bg-surface/40 border border-white/10 hover:border-primary/30 transition-colors cursor-pointer">
-                <summary className="flex justify-between items-center font-bold text-white text-lg list-none"><span>{faq.q}</span><ArrowRight className="w-5 h-5 text-primary transform group-open:rotate-90 transition-transform" /></summary>
-                <p className="mt-4 text-gray-400 leading-relaxed">{faq.a}</p>
-              </details>
-            ))}
-          </div>
-          <div className="mt-12 text-center">
-            <p className="text-gray-400 mb-4">Still have questions?</p>
-            <Link to="/contact"><Button variant="outline">Talk to Us</Button></Link>
-          </div>
-        </div>
-      </Section >
+  {/* FAQ SECTION */ }
+  < FAQ />
     </>
   );
 };
@@ -902,7 +1103,10 @@ const Home = () => {
 // --- INNER PAGES ---
 const PageHeader: React.FC<{ title: string, subtitle: string }> = ({ title, subtitle }) => (
   <section className="pt-40 pb-20 px-6 relative overflow-hidden">
+    {/* ADD GRADIENT BACKGROUND */}
     <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/10 to-transparent opacity-30 pointer-events-none" />
+    <div className="absolute top-0 left-0 w-1/2 h-full bg-gradient-to-r from-blue-500/5 to-transparent opacity-20 pointer-events-none" />
+
     <motion.div initial="hidden" animate="visible" variants={staggerContainer} className="max-w-7xl mx-auto relative z-10">
       <Reveal>
         <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight">
@@ -917,7 +1121,20 @@ const PageHeader: React.FC<{ title: string, subtitle: string }> = ({ title, subt
 );
 
 const Services = () => (
-  <div className="min-h-screen bg-background text-white pb-20">
+  <div className="min-h-screen bg-background text-white pb-20 relative overflow-hidden">
+    {/* MANDATORY BACKGROUND LAYERS */}
+    <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none -z-10" />
+    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,_rgba(34,197,94,0.1),transparent_60%)] pointer-events-none -z-10" />
+    <motion.div
+      className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] pointer-events-none -z-10"
+      animate={{ x: [0, 50, 0], y: [0, -30, 0], scale: [1, 1.1, 1] }}
+      transition={{ duration: 20, ease: "easeInOut", repeat: Infinity }}
+    />
+    <motion.div
+      className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none -z-10"
+      animate={{ x: [0, -50, 0], y: [0, 30, 0], scale: [1, 1.2, 1] }}
+      transition={{ duration: 25, ease: "easeInOut", repeat: Infinity }}
+    />
     <PageMeta
       title="Services | HumanLayer Security"
       description="Phishing simulations, real-time training, and compliance reporting. See our full suite of security tools."
@@ -942,6 +1159,7 @@ const Services = () => (
               "hover:" + ACCENT_COLORS[s.accent].shadow
             )}
           >
+            <CardShimmer />
             <div className={cn(
               "w-16 h-16 rounded-2xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-all duration-300 ease-out shadow-lg border border-white/5 relative z-10 mb-6",
               ACCENT_COLORS[s.accent].bg,
@@ -1200,7 +1418,20 @@ const Services = () => (
 );
 
 const About = () => (
-  <div className="min-h-screen bg-background text-white pb-20">
+  <div className="min-h-screen bg-background text-white pb-20 relative overflow-hidden">
+    {/* MANDATORY BACKGROUND LAYERS */}
+    <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none -z-10" />
+    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,_rgba(34,197,94,0.1),transparent_60%)] pointer-events-none -z-10" />
+    <motion.div
+      className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] pointer-events-none -z-10"
+      animate={{ x: [0, 50, 0], y: [0, -30, 0], scale: [1, 1.1, 1] }}
+      transition={{ duration: 20, ease: "easeInOut", repeat: Infinity }}
+    />
+    <motion.div
+      className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none -z-10"
+      animate={{ x: [0, -50, 0], y: [0, 30, 0], scale: [1, 1.2, 1] }}
+      transition={{ duration: 25, ease: "easeInOut", repeat: Infinity }}
+    />
     <PageMeta
       title="About Us | HumanLayer Security"
       description="Founded by cybersecurity and engineering experts. We're building the future of human risk management."
@@ -1282,7 +1513,20 @@ const About = () => (
 );
 
 const Partnership = () => (
-  <div className="min-h-screen bg-background text-white pb-20">
+  <div className="min-h-screen bg-background text-white pb-20 relative overflow-hidden">
+    {/* MANDATORY BACKGROUND LAYERS */}
+    <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none -z-10" />
+    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,_rgba(34,197,94,0.1),transparent_60%)] pointer-events-none -z-10" />
+    <motion.div
+      className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] pointer-events-none -z-10"
+      animate={{ x: [0, 50, 0], y: [0, -30, 0], scale: [1, 1.1, 1] }}
+      transition={{ duration: 20, ease: "easeInOut", repeat: Infinity }}
+    />
+    <motion.div
+      className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none -z-10"
+      animate={{ x: [0, -50, 0], y: [0, 30, 0], scale: [1, 1.2, 1] }}
+      transition={{ duration: 25, ease: "easeInOut", repeat: Infinity }}
+    />
     <PageMeta
       title="Partnership | HumanLayer Security"
       description="Partner with HumanLayer. White-label phishing defense for your clients. Recurring revenue."
@@ -1553,7 +1797,20 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background text-white pb-20">
+    <div className="min-h-screen bg-background text-white pb-20 relative overflow-hidden">
+      {/* MANDATORY BACKGROUND LAYERS */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none -z-10" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,_rgba(34,197,94,0.1),transparent_60%)] pointer-events-none -z-10" />
+      <motion.div
+        className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] pointer-events-none -z-10"
+        animate={{ x: [0, 50, 0], y: [0, -30, 0], scale: [1, 1.1, 1] }}
+        transition={{ duration: 20, ease: "easeInOut", repeat: Infinity }}
+      />
+      <motion.div
+        className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none -z-10"
+        animate={{ x: [0, -50, 0], y: [0, 30, 0], scale: [1, 1.2, 1] }}
+        transition={{ duration: 25, ease: "easeInOut", repeat: Infinity }}
+      />
       <PageMeta
         title="Contact | HumanLayer Security"
         description="Get a free security assessment. Contact our team to secure your organization today."
