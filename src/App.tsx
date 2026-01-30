@@ -183,7 +183,7 @@ const Button: React.FC<Omit<React.ComponentProps<typeof motion.button>, 'childre
 
 
 const Section: React.FC<{ children: React.ReactNode, className?: string, id?: string }> = ({ children, className = "", id }) => (
-  <section id={id} className={cn("py-20 md:py-24 px-6 relative overflow-hidden", className)}>
+  <section id={id} className={cn("py-20 md:py-24 px-6 relative overflow-hidden bg-transparent", className)}>
     <motion.div
       initial="hidden"
       whileInView="visible"
@@ -199,7 +199,7 @@ const Section: React.FC<{ children: React.ReactNode, className?: string, id?: st
 
 
 const HowWeWork = () => (
-  <Section className="bg-surface relative overflow-hidden">
+  <Section className="bg-transparent relative overflow-hidden">
     {/* Background Trace */}
     <div className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent hidden md:block opacity-20" />
 
@@ -246,7 +246,7 @@ const HowWeWork = () => (
 );
 
 const WhyChoose = () => (
-  <Section className="bg-black relative overflow-hidden">
+  <Section className="bg-transparent relative overflow-hidden">
     {/* Background Gradients */}
     <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
     <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none" />
@@ -454,77 +454,98 @@ const Home = () => {
         <motion.div style={{ scale: bgScale }} className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,_rgba(34,197,94,0.1),transparent_60%)] pointer-events-none" />
         <div className="absolute top-0 right-0 w-2/3 h-full bg-gradient-to-l from-primary/10 via-primary/5 to-transparent opacity-60 pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center relative z-10">
-          <motion.div style={{ y: heroY, opacity: heroOpacity }} initial="hidden" animate="visible" variants={staggerContainer} className="relative z-20 flex flex-col justify-center text-left lg:text-left">
-            <Reveal delay={0.1}>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold mb-8 uppercase tracking-widest">
+        <div className="absolute top-0 right-0 w-2/3 h-full bg-gradient-to-l from-primary/10 via-primary/5 to-transparent opacity-60 pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-6 w-full flex flex-col items-center text-center pt-10 pb-20 relative z-10">
+
+          {/* 1. TITLE SECTION */}
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="max-w-5xl mx-auto mb-12">
+            <Reveal>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold mb-8 uppercase tracking-widest mx-auto">
                 <span className="w-2 h-2 rounded-full bg-primary animate-pulse" /> Phishing Defense Platform
               </div>
             </Reveal>
-
-            <Reveal delay={0.2}>
-              <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold text-white mb-6 leading-[1.1] tracking-tight max-w-4xl">
-                One phishing email can <span className="text-red-500 decoration-red-900/50 underline decoration-4 underline-offset-4">destroy your business.</span> <br className="hidden md:block" />
-                We train your team to <span className="text-primary decoration-primary/30 underline decoration-4 underline-offset-4">recognize it before they click.</span>
-              </h1>
-            </Reveal>
-
-            <Reveal delay={0.3}>
-              <div className="flex flex-wrap gap-2 sm:gap-3 mb-8">
-                <div className="flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm">
-                  <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-primary shrink-0" />
-                  <span className="text-xs sm:text-sm font-bold text-primary whitespace-nowrap">No Shame Policy</span>
-                </div>
-                <div className="flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm">
-                  <Activity className="w-3 h-3 sm:w-4 sm:h-4 text-primary shrink-0" />
-                  <span className="text-xs sm:text-sm font-bold text-primary whitespace-nowrap">Setup in 5 Minutes</span>
-                </div>
-                <div className="flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm">
-                  <Award className="w-3 h-3 sm:w-4 sm:h-4 text-primary shrink-0" />
-                  <span className="text-xs sm:text-sm font-bold text-primary whitespace-nowrap">Compliance Included</span>
-                </div>
-              </div>
-            </Reveal>
-
-            <Reveal delay={0.4}>
-              <p className="text-xl md:text-2xl text-gray-300 mb-10 max-w-xl leading-relaxed">
-                We send realistic phishing tests to your employees. When someone clicks, they get <span className="text-white font-bold">instant training</span> on what they missed. Your team gets better every month.
-              </p>
-            </Reveal>
-
-            <Reveal delay={0.6}>
-              <div className="flex gap-4 flex-wrap">
-                <Link to="/contact">
-                  <Button size="lg" className="bg-green-600 hover:bg-green-500 shadow-green-900/20 border-green-500/20 text-white">
-                    Get Free Risk Assessment
-                  </Button>
-                </Link>
-                <Link to="/services">
-                  <Button size="lg" variant="outline">
-                    Watch 2 Min Demo
-                  </Button>
-                </Link>
-              </div>
-              <p className="text-sm text-white/50 mt-4">
-                No credit card required • Setup in under 5 minutes • Cancel anytime
-              </p>
-            </Reveal>
+            <h1 className="text-5xl sm:text-6xl md:text-8xl font-bold text-white mb-6 leading-[1.1] tracking-tight">
+              One phishing email can <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-500">destroy your business.</span>
+            </h1>
           </motion.div>
 
+          {/* 2. IMAGE SECTION WITH BADGES */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
-            className="relative lg:h-[800px] flex items-center justify-center pointer-events-none"
+            transition={{ duration: 1, delay: 0.2 }}
+            className="relative w-full max-w-5xl mb-16 group"
           >
-            <div className="relative w-full max-w-[140%] -mr-[20%] z-10 transition-transform duration-700 hover:scale-[1.02]">
-              <img
-                src="/hero-network.png"
-                alt="Human Defense Network"
-                className="w-full h-auto object-contain drop-shadow-2xl"
-              />
+            <div className="absolute inset-0 bg-primary/20 blur-[100px] rounded-full opacity-20 pointer-events-none" />
+            <img src="/hero-network.png" alt="Human Defense Network" className="relative z-10 w-full h-auto object-contain drop-shadow-2xl" />
+
+            {/* Float Badge 1: Team Awareness */}
+            <motion.div
+              initial={{ x: -50, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ delay: 0.8, duration: 0.8 }}
+              className="absolute top-[20%] left-[5%] md:left-[-5%] z-20 bg-black/80 backdrop-blur-md border border-white/10 p-4 rounded-2xl shadow-2xl flex items-center gap-4"
+            >
+              <div className="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400">
+                <Activity className="w-5 h-5" />
+              </div>
+              <div className="text-left">
+                <div className="text-xs text-gray-400 font-bold uppercase tracking-wider">Team Awareness</div>
+                <div className="text-white font-bold text-lg flex items-center gap-2">
+                  Growing <span className="text-emerald-400 text-xs bg-emerald-500/10 px-2 py-0.5 rounded-full">+124%</span>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Float Badge 2: Training Style */}
+            <motion.div
+              initial={{ x: 50, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ delay: 1, duration: 0.8 }}
+              className="absolute bottom-[20%] right-[5%] md:right-[-5%] z-20 bg-black/80 backdrop-blur-md border border-white/10 p-4 rounded-2xl shadow-2xl flex items-center gap-4"
+            >
+              <div className="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400">
+                <CheckCircle className="w-5 h-5" />
+              </div>
+              <div className="text-left">
+                <div className="text-xs text-gray-400 font-bold uppercase tracking-wider">Training Style</div>
+                <div className="text-white font-bold text-lg">Instant & Active</div>
+              </div>
+            </motion.div>
+          </motion.div>
+
+          {/* 3. SUBTEXT & CTA */}
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.4 }} className="max-w-3xl mx-auto">
+            <h2 className="text-2xl md:text-3xl font-medium text-white mb-8">
+              We train your team to <span className="text-primary border-b-2 border-primary/30 pb-1">recognize threats</span> before they click.
+            </h2>
+            <div className="flex gap-4 justify-center flex-wrap mb-12">
+              <Link to="/contact">
+                <Button size="lg" className="bg-green-600 hover:bg-green-500 shadow-[0_0_30px_rgba(34,197,94,0.3)] text-white h-16 px-12 text-lg">
+                  Get Free Risk Assessment
+                </Button>
+              </Link>
+              <Link to="/services">
+                <Button size="lg" variant="outline" className="h-16 px-12 text-lg bg-black/50 backdrop-blur-md">
+                  See How It Works
+                </Button>
+              </Link>
+            </div>
+
+            <div className="flex flex-wrap justify-center gap-4 sm:gap-8 text-sm font-medium text-gray-400">
+              <div className="flex items-center gap-2">
+                <CheckCircle className="w-4 h-4 text-primary" /> No Shame Policy
+              </div>
+              <div className="flex items-center gap-2">
+                <Activity className="w-4 h-4 text-primary" /> Setup in 5 Minutes
+              </div>
+              <div className="flex items-center gap-2">
+                <Award className="w-4 h-4 text-primary" /> Compliance Included
+              </div>
             </div>
           </motion.div>
+
         </div>
       </section>
 
