@@ -703,7 +703,7 @@ const Home = () => {
   const [quote, setQuote] = useState(QUOTES[0]);
 
   const { scrollY } = useScroll();
-  const bgScale = useTransform(scrollY, [0, 1000], [1, 1.2]);
+
 
   useEffect(() => {
     // Random quote on mount/refresh
