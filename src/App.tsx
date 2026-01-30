@@ -663,6 +663,15 @@ const Home = () => {
 
   return (
     <>
+      <ScrollProgress />
+      <div className="fixed inset-0 pointer-events-none z-0 opacity-[0.015]">
+        <svg width="100%" height="100%">
+          <filter id="noise">
+            <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" />
+          </filter>
+          <rect width="100%" height="100%" filter="url(#noise)" />
+        </svg>
+      </div>
       <PageMeta
         title="HumanLayer Security | Stop Phishing Attacks Before They Click"
         description="AI-powered phishing defense that trains your employees in real-time. Shame-free, instant feedback. Setup in 5 minutes."
@@ -686,7 +695,7 @@ const Home = () => {
               </div>
             </Reveal>
             <h1 className="text-5xl sm:text-6xl md:text-8xl font-bold text-white mb-6 leading-[1.1] tracking-tight">
-              One phishing email can <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-500">destroy your business.</span>
+              <TextReveal>One phishing email can</TextReveal> <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-500">destroy your business.</span>
             </h1>
           </motion.div>
 
@@ -698,7 +707,7 @@ const Home = () => {
             className="relative w-full max-w-3xl mb-12 sm:mb-16 group px-4"
           >
             <div className="absolute inset-0 bg-primary/20 blur-[100px] rounded-full opacity-20 pointer-events-none" />
-            <img src="/hero-network.png" alt="Human Defense Network" className="relative z-10 w-full h-auto object-contain drop-shadow-2xl max-h-[250px] sm:max-h-[300px] md:max-h-[400px] opacity-80 mix-blend-screen hover:opacity-100 hover:mix-blend-normal transition-all duration-700" />
+            <ImageWithLoad src="/hero-network.png" alt="Human Defense Network" className="relative z-10 w-full h-auto object-contain drop-shadow-2xl max-h-[250px] sm:max-h-[300px] md:max-h-[400px] opacity-80 mix-blend-screen hover:opacity-100 hover:mix-blend-normal transition-all duration-700" />
 
             {/* Float Badge 1: Team Awareness */}
             <motion.div
