@@ -36,13 +36,10 @@ const CONTACT_INFO = { email: "contact@humanls.com", phone: "3052820302", founde
 
 const QUOTES = [
   { text: "Amateurs hack systems, professionals hack people.", author: "Bruce Schneier" },
-  { text: "Humans are the weakest link in security.", author: "Kevin Mitnick" },
-  { text: "Social engineering is the art of manipulating people so they give up confidential information.", author: "Kevin Mitnick" },
-  { text: "Security is not a product, it’s a process.", author: "Bruce Schneier" },
-  { text: "The human factor is truly security's weakest link.", author: "Kevin Mitnick" },
-  { text: "The only truly secure system is one that is powered off...", author: "Gene Spafford" },
-  { text: "There are only two types of companies: those that have been hacked and those that will be.", author: "Robert Mueller" },
-  { text: "Trust, but verify.", author: "Ronald Reagan" }
+  { text: "There is no patch for human stupidity.", author: "Kevin Mitnick" },
+  { text: "Security is not a product, but a process.", author: "Bruce Schneier" },
+  { text: "Social engineering bypasses all technologies.", author: "Kevin Mitnick" },
+  { text: "Humans are the weakest link in security.", author: "Kevin Mitnick" }
 ];
 
 
@@ -165,7 +162,7 @@ const Button: React.FC<Omit<React.ComponentProps<typeof motion.button>, 'childre
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{ transition: 'transform 0.3s cubic-bezier(0.22, 1, 0.36, 1)' }}
-      whileHover={{ scale: 1.02, boxShadow: variant === 'primary' ? "0 0 40px rgba(34,197,94,0.6)" : undefined }}
+      whileHover={{ scale: 1.05, boxShadow: variant === 'primary' ? "0 0 40px rgba(34,197,94,0.6)" : undefined }}
       whileTap={{ scale: 0.98, boxShadow: variant === 'primary' ? "0 0 20px rgba(34,197,94,0.4)" : undefined }}
       className={cn(base, vars[variant], sizes[size], className)}
       {...props}
@@ -182,8 +179,21 @@ const Button: React.FC<Omit<React.ComponentProps<typeof motion.button>, 'childre
 
 
 
+const ACCENT_COLORS: Record<string, { text: string; border: string; bg: string; shadow: string }> = {
+  emerald: { text: "text-emerald-400", border: "border-emerald-500/20", bg: "bg-emerald-500/10", shadow: "shadow-[0_0_50px_rgba(16,185,129,0.2)]" },
+  amber: { text: "text-amber-400", border: "border-amber-500/20", bg: "bg-amber-500/10", shadow: "shadow-[0_0_50px_rgba(245,158,11,0.2)]" },
+  cyan: { text: "text-cyan-400", border: "border-cyan-400/20", bg: "bg-cyan-500/10", shadow: "shadow-[0_0_50px_rgba(34,211,238,0.2)]" },
+  rose: { text: "text-rose-400", border: "border-rose-500/20", bg: "bg-rose-500/10", shadow: "shadow-[0_0_50px_rgba(244,63,94,0.2)]" },
+  violet: { text: "text-violet-400", border: "border-violet-400/20", bg: "bg-violet-500/10", shadow: "shadow-[0_0_50px_rgba(167,139,250,0.2)]" },
+  orange: { text: "text-orange-400", border: "border-orange-400/20", bg: "bg-orange-500/10", shadow: "shadow-[0_0_50px_rgba(251,146,60,0.2)]" }
+};
+
 const Section: React.FC<{ children: React.ReactNode, className?: string, id?: string }> = ({ children, className = "", id }) => (
   <section id={id} className={cn("py-20 md:py-24 px-6 relative overflow-hidden bg-transparent", className)}>
+    {/* Animated Background Grid - ADD TO ALL PAGES */}
+    <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none -z-10" />
+    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,_rgba(34,197,94,0.1),transparent_60%)] pointer-events-none -z-10" />
+
     <motion.div
       initial="hidden"
       whileInView="visible"
@@ -473,10 +483,10 @@ const Home = () => {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="relative w-full max-w-5xl mb-16 group"
+            className="relative w-full max-w-3xl mb-12 sm:mb-16 group px-4"
           >
             <div className="absolute inset-0 bg-primary/20 blur-[100px] rounded-full opacity-20 pointer-events-none" />
-            <img src="/hero-network.png" alt="Human Defense Network" className="relative z-10 w-full h-auto object-contain drop-shadow-2xl" />
+            <img src="/hero-network.png" alt="Human Defense Network" className="relative z-10 w-full h-auto object-contain drop-shadow-2xl max-h-[250px] sm:max-h-[300px] md:max-h-[400px]" />
 
             {/* Float Badge 1: Team Awareness */}
             <motion.div
@@ -916,38 +926,36 @@ const Services = () => (
     <Section className="!pt-0">
       <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="grid md:grid-cols-2 lg:grid-cols-6 gap-6">
         {[
-          { t: "Monthly Phishing Simulations", d: "Regular phishing emails designed to mimic real attacks your team actually faces. Fake delivery notifications. Payroll updates. IT security alerts. Each one is a chance to practice under real conditions before a real attacker tries the same thing.", i: Activity, span: "lg:col-span-3" },
-          { t: "Instant, Targeted Training", d: "The instant someone clicks a test, they see exactly what they missed in that specific email. Then a 90 second lesson on that exact tactic. No generic compliance videos. No scheduling training sessions. Just immediate, relevant learning when it counts most.", i: Globe, span: "lg:col-span-3" },
-          { t: "Clear Analytics Dashboard", d: "See who's clicking, which attacks are working, and where your vulnerabilities are concentrated. Track improvement over time. Identify patterns. Export reports for compliance audits. Understand your real security posture in plain English.", i: Terminal, span: "lg:col-span-2" },
-          { t: "Direct Platform Support", d: "Questions about a campaign? Want to customize scenarios? Need help interpreting results? Direct access to the team that built this platform. We're invested in your success because your success is our success.", i: Shield, span: "lg:col-span-2" },
-          { t: "Role-Specific Scenarios", d: "Different roles face different threats. Finance teams get fake invoice approvals. HR gets suspicious resumes. IT gets fake security alerts. Executives get targeted spear phishing. We customize scenarios to match the actual risks each department faces.", i: Mail, span: "lg:col-span-2" }
+          { t: "Monthly Phishing Simulations", d: "Regular phishing emails designed to mimic real attacks.", i: Activity, span: "lg:col-span-3", accent: "emerald" },
+          { t: "Instant, Targeted Training", d: "Brief, relevant learning moments right when failures occur.", i: Globe, span: "lg:col-span-3", accent: "cyan" },
+          { t: "Clear Analytics Dashboard", d: "Track improvement, identify patterns, and export reports.", i: Terminal, span: "lg:col-span-2", accent: "violet" },
+          { t: "Direct Platform Support", d: "Direct access to the security team that built the platform.", i: Shield, span: "lg:col-span-2", accent: "amber" },
+          { t: "Role-Specific Scenarios", d: "Customized threats for Finance, HR, IT, and Executives.", i: Mail, span: "lg:col-span-2", accent: "rose" }
         ].map((s, i) => (
           <motion.div
             variants={fadeInUp}
             key={i}
             className={twMerge(
-              "flex flex-col p-8 border border-white/10 bg-surface/40 backdrop-blur-sm rounded-3xl hover:border-primary/50 hover:bg-surface/60 transition-all duration-300 group relative overflow-hidden min-h-[280px]",
-              s.span
+              "flex flex-col p-8 border bg-surface/40 backdrop-blur-sm rounded-3xl hover:bg-surface/60 transition-all duration-300 group relative overflow-hidden min-h-[280px]",
+              s.span,
+              ACCENT_COLORS[s.accent].border,
+              "hover:" + ACCENT_COLORS[s.accent].shadow
             )}
           >
-            <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-            <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-20 transition-opacity transform group-hover:rotate-90 duration-700">
-              <s.i className="w-32 h-32" />
-            </div>
-
-            <div className="w-16 h-16 bg-surface rounded-2xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-all duration-300 ease-out shadow-lg border border-white/5 relative z-10 mb-6 group-hover:border-primary/50 group-hover:shadow-[0_0_30px_rgba(34,197,94,0.3)] will-change-transform">
-              <s.i className="w-8 h-8 text-gray-400 group-hover:text-primary transition-colors" />
+            <div className={cn(
+              "w-16 h-16 rounded-2xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-all duration-300 ease-out shadow-lg border border-white/5 relative z-10 mb-6",
+              ACCENT_COLORS[s.accent].bg,
+              "group-hover:shadow-[0_0_30px_rgba(34,197,94,0.3)]"
+            )}>
+              <s.i className={cn("w-8 h-8 transition-colors", ACCENT_COLORS[s.accent].text)} />
             </div>
 
             <div className="relative z-10 flex-1">
               <h3 className="text-2xl font-bold mb-3 text-white group-hover:text-primary transition-colors">
-                {s.t.split(' ').slice(0, Math.ceil(s.t.split(' ').length / 2)).join(' ')} <span className="text-primary">{s.t.split(' ').slice(Math.ceil(s.t.split(' ').length / 2)).join(' ')}</span>
+                {s.t}
               </h3>
               <p className="text-gray-400 leading-relaxed text-sm md:text-base">{s.d}</p>
             </div>
-
-
           </motion.div>
         ))}
       </motion.div>
@@ -1240,40 +1248,27 @@ const About = () => (
                 <span className="text-[10px] font-bold text-white uppercase tracking-wider">FIU Research Backed</span>
               </div>
             </div>
-            <div className="flex flex-col gap-8">
-              {/* Nicolas */}
-              <div className="flex gap-6 items-center">
-                <div className="w-20 h-20 rounded-full bg-black border-2 border-primary/20 flex items-center justify-center text-xl font-bold text-white overflow-hidden relative">
-                  NS
+            <div className="flex flex-col gap-6">
+              {[
+                { name: CONTACT_INFO.founder, role: "FOUNDER & PRINCIPAL", desc: "Founder. FIU Cybersecurity. Built the phishing simulation engine and platform architecture.", init: "NS" },
+                { name: "Alejandro Marcone", role: "CO-FOUNDER & CYBER ANALYST", desc: "Co-Founder. ISIL Cybersecurity (Peru). Designed training methodology and threat analysis systems.", init: "AM" },
+                { name: "Branco Forti", role: "CO-FOUNDER & ELECTRICAL ENGINEER", desc: "Co-Founder. FIU Electrical Engineering. Built platform infrastructure and automation systems.", init: "BF" }
+              ].map((member, i) => (
+                <div key={i} className="flex gap-6 items-start group cursor-default hover:bg-white/5 p-4 rounded-2xl transition-all border border-transparent hover:border-white/5">
+                  <div className="relative shrink-0">
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary to-emerald-400 rounded-full blur-md opacity-0 group-hover:opacity-50 transition-opacity duration-500" />
+                    <div className="relative w-20 h-20 rounded-full bg-gradient-to-br from-surface to-black border-2 border-primary/30 group-hover:border-primary flex items-center justify-center text-xl font-bold text-white transition-all overflow-hidden z-10 shadow-lg">
+                      {member.init}
+                    </div>
+                  </div>
+
+                  <div className="flex-1 min-w-0">
+                    <div className="text-xl font-bold text-white group-hover:text-primary transition-colors">{member.name}</div>
+                    <div className="text-primary font-mono text-xs mb-3 uppercase tracking-wider">{member.role}</div>
+                    <p className="text-gray-400 text-sm leading-relaxed">{member.desc}</p>
+                  </div>
                 </div>
-                <div>
-                  <div className="text-xl font-bold text-white">{CONTACT_INFO.founder}</div>
-                  <div className="text-primary font-mono text-xs mb-2">FOUNDER & PRINCIPAL</div>
-                  <p className="text-gray-500 text-sm">Founder. FIU Cybersecurity. Built the phishing simulation engine and platform architecture.</p>
-                </div>
-              </div>
-              {/* Alejandro */}
-              <div className="flex gap-6 items-center">
-                <div className="w-20 h-20 rounded-full bg-black border-2 border-primary/20 flex items-center justify-center text-xl font-bold text-white overflow-hidden relative">
-                  AM
-                </div>
-                <div>
-                  <div className="text-xl font-bold text-white">Alejandro Marcone</div>
-                  <div className="text-primary font-mono text-xs mb-2">CO-FOUNDER & CYBER ANALYST</div>
-                  <p className="text-gray-500 text-sm">Co-Founder. ISIL Cybersecurity (Peru). Designed training methodology and threat analysis systems.</p>
-                </div>
-              </div>
-              {/* Branco */}
-              <div className="flex gap-6 items-center">
-                <div className="w-20 h-20 rounded-full bg-black border-2 border-primary/20 flex items-center justify-center text-xl font-bold text-white overflow-hidden relative">
-                  BF
-                </div>
-                <div>
-                  <div className="text-xl font-bold text-white">Branco Forti</div>
-                  <div className="text-primary font-mono text-xs mb-2">CO-FOUNDER & ELECTRICAL ENGINEER</div>
-                  <p className="text-gray-500 text-sm">Co-Founder. FIU Electrical Engineering. Built platform infrastructure and automation systems.</p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
 
@@ -1391,48 +1386,12 @@ const Partnership = () => (
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
           {[
-            {
-              icon: Award,
-              title: "30% Revenue Share",
-              desc: "Earn recurring commission on every client",
-              stat: "$1,800/mo",
-              statLabel: "avg. per 10 clients"
-            },
-            {
-              icon: Shield,
-              title: "White Label Platform",
-              desc: "Your logo, your colors, your domain",
-              stat: "100%",
-              statLabel: "your branding"
-            },
-            {
-              icon: Users,
-              title: "Dedicated Support",
-              desc: "Partner success manager assigned",
-              stat: "<2 hrs",
-              statLabel: "response time"
-            },
-            {
-              icon: Terminal,
-              title: "API Access",
-              desc: "Integrate with your existing tools",
-              stat: "REST",
-              statLabel: "API included"
-            },
-            {
-              icon: FileText,
-              title: "Marketing Materials",
-              desc: "Sales decks, case studies, templates",
-              stat: "Ready",
-              statLabel: "to use"
-            },
-            {
-              icon: Activity,
-              title: "Monthly Training",
-              desc: "Partner webinars and product updates",
-              stat: "Live",
-              statLabel: "sessions"
-            }
+            { icon: Award, title: "30% Revenue Share", desc: "Earn recurring commission on every client", stat: "$1,800/mo", statLabel: "avg. per 10 clients", accent: "emerald" },
+            { icon: Shield, title: "White Label Platform", desc: "Your logo, your colors, your domain", stat: "100%", statLabel: "your branding", accent: "cyan" },
+            { icon: Users, title: "Dedicated Support", desc: "Partner success manager assigned", stat: "<2 hrs", statLabel: "response time", accent: "amber" },
+            { icon: Terminal, title: "API Access", desc: "Integrate with your existing tools", stat: "REST", statLabel: "API included", accent: "violet" },
+            { icon: FileText, title: "Marketing Materials", desc: "Sales decks, case studies, templates", stat: "Ready", statLabel: "to use", accent: "rose" },
+            { icon: Activity, title: "Monthly Training", desc: "Partner webinars and product updates", stat: "Live", statLabel: "sessions", accent: "orange" }
           ].map((benefit, i) => (
             <motion.div
               key={i}
@@ -1441,12 +1400,17 @@ const Partnership = () => (
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
               whileHover={{ y: -5 }}
-              className="p-8 rounded-[2rem] bg-surface/30 backdrop-blur-sm border border-white/10 hover:border-primary/40 hover:bg-surface/50 transition-all duration-300 group relative overflow-hidden"
+              className={cn(
+                "p-8 rounded-[2rem] bg-surface/30 backdrop-blur-sm border hover:bg-surface/50 transition-all duration-300 group relative overflow-hidden",
+                ACCENT_COLORS[benefit.accent].border,
+                "hover:" + ACCENT_COLORS[benefit.accent].shadow
+              )}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-              <div className="w-16 h-16 rounded-2xl bg-black/50 border border-white/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-inner group-hover:shadow-[0_0_20px_rgba(34,197,94,0.2)]">
-                <benefit.icon className="w-8 h-8 text-gray-400 group-hover:text-primary transition-colors" />
+              <div className={cn(
+                "w-16 h-16 rounded-2xl border border-white/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-inner",
+                ACCENT_COLORS[benefit.accent].bg
+              )}>
+                <benefit.icon className={cn("w-8 h-8 transition-colors", ACCENT_COLORS[benefit.accent].text)} />
               </div>
 
               <h3 className="text-xl font-bold text-white mb-2 relative z-10">{benefit.title}</h3>
@@ -1622,7 +1586,7 @@ const Contact = () => {
                 <input
                   type="text"
                   required
-                  className="w-full px-6 py-4 bg-surface border border-white/10 rounded-2xl text-white placeholder-gray-600 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+                  className="w-full px-6 py-4 bg-surface border-2 border-white/10 rounded-2xl text-white placeholder-gray-600 focus:border-primary focus:bg-surface/80 focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all duration-300"
                   placeholder="John Doe"
                   value={formData.name}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, name: e.target.value })}
@@ -1637,7 +1601,7 @@ const Contact = () => {
                 <input
                   type="email"
                   required
-                  className="w-full px-6 py-4 bg-surface border border-white/10 rounded-2xl text-white placeholder-gray-600 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+                  className="w-full px-6 py-4 bg-surface border-2 border-white/10 rounded-2xl text-white placeholder-gray-600 focus:border-primary focus:bg-surface/80 focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all duration-300"
                   placeholder="john@company.com"
                   value={formData.email}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, email: e.target.value })}
@@ -1652,7 +1616,7 @@ const Contact = () => {
                 <input
                   type="text"
                   required
-                  className="w-full px-6 py-4 bg-surface border border-white/10 rounded-2xl text-white placeholder-gray-600 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+                  className="w-full px-6 py-4 bg-surface border-2 border-white/10 rounded-2xl text-white placeholder-gray-600 focus:border-primary focus:bg-surface/80 focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all duration-300"
                   placeholder="Acme Corp"
                   value={formData.company}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, company: e.target.value })}
@@ -1671,13 +1635,14 @@ const Contact = () => {
                       type="button"
                       onClick={() => setTeamSize(size)}
                       className={cn(
-                        "px-4 py-3 rounded-xl text-sm font-bold transition-all",
+                        "px-4 py-3 rounded-xl text-sm font-bold transition-all duration-300 relative overflow-hidden group",
                         teamSize === size
-                          ? "bg-primary/20 border-2 border-primary text-white"
-                          : "bg-surface border border-white/10 text-white hover:border-primary hover:bg-primary/10"
+                          ? "bg-primary/20 border-2 border-primary text-white shadow-[0_0_20px_rgba(34,197,94,0.3)]"
+                          : "bg-surface border-2 border-white/10 text-white hover:border-primary/50 hover:bg-surface/80"
                       )}
                     >
-                      {size}
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+                      <span className="relative z-10">{size}</span>
                     </button>
                   ))}
                 </div>
