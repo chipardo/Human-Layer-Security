@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate, useLocation, Link } from 'react-router-dom';
-import { Shield, Menu, X, CheckCircle, Users, Mail, Activity, ArrowRight, Globe, Terminal, FileText, Award, Twitter, Linkedin } from 'lucide-react';
+import { Shield, Menu, X, CheckCircle, Users, Mail, Activity, ArrowRight, Globe, Terminal, FileText, Award, Twitter, Linkedin, Building, Stethoscope, Scale } from 'lucide-react';
 // Custom SEO component to replace react-helmet-async
 const PageMeta = ({ title, description }: { title: string, description?: string }) => {
   useEffect(() => {
@@ -529,30 +529,58 @@ const Home = () => {
       </section>
 
       {/* MARQUEE */}
-      <div className="bg-white/5 border-y border-white/5 backdrop-blur-sm overflow-hidden py-4 flex relative z-20">
+      {/* TRUSTED SECTORS & COMPANIES */}
+      <div className="border-y border-white/5 bg-black/40 backdrop-blur-sm relative z-20">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row">
+
+          {/* High Risk Sectors */}
+          <div className="flex-1 p-6 border-b md:border-b-0 md:border-r border-white/5 flex items-center justify-center md:justify-start gap-6 overflow-hidden">
+            <span className="text-gray-500 font-mono text-[10px] font-bold tracking-widest uppercase shrink-0">Trusted in High-Risk Sectors</span>
+            <div className="flex gap-8 opacity-60">
+              <div className="flex items-center gap-2 text-gray-300"><Scale className="w-4 h-4" /><span className="text-xs font-bold tracking-wider">LEGAL</span></div>
+              <div className="flex items-center gap-2 text-gray-300"><Building className="w-4 h-4" /><span className="text-xs font-bold tracking-wider">FINANCE</span></div>
+              <div className="flex items-center gap-2 text-gray-300"><Stethoscope className="w-4 h-4" /><span className="text-xs font-bold tracking-wider">HEALTHCARE</span></div>
+            </div>
+          </div>
+
+          {/* Trusted By Companies (Placeholder) */}
+          <div className="flex-1 p-6 flex items-center justify-center md:justify-start gap-6 overflow-hidden">
+            <span className="text-gray-500 font-mono text-[10px] font-bold tracking-widest uppercase shrink-0">Trusted By</span>
+            <div className="flex gap-8 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+              {/* Text Logos for Premium Feel */}
+              <span className="text-lg font-display font-bold text-white">Lumina</span>
+              <span className="text-lg font-display font-bold text-white">Vanguard</span>
+              <span className="text-lg font-display font-bold text-white">Apex</span>
+              <span className="text-lg font-display font-bold text-white">Nexus</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* FEATURE MARQUEE */}
+      <div className="bg-primary/5 border-b border-white/5 backdrop-blur-sm overflow-hidden py-3 flex relative z-20">
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black z-10 pointer-events-none" />
         <div
           className="flex gap-20 whitespace-nowrap"
-          style={{ animation: 'marquee 40s linear infinite', willChange: 'transform' }}
-          onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => e.currentTarget.style.animationPlayState = 'paused'}
-          onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => e.currentTarget.style.animationPlayState = 'running'}
+          style={{ animation: 'marquee 60s linear infinite', willChange: 'transform' }}
         >
-          {/* Duplicate content 3 times for seamless loop on large screens */}
+          {/* Duplicate content for loop */}
           {[...Array(6)].map((_, setIndex) => (
             <React.Fragment key={setIndex}>
-              <span className="text-white/70 font-mono text-sm tracking-widest uppercase flex items-center gap-4">
-                <Shield className="text-primary w-4 h-4" /> Zero Shame Training Policy
+              <span className="text-primary/80 font-mono text-xs tracking-[0.2em] uppercase flex items-center gap-3 font-bold">
+                <Shield className="w-4 h-4" /> Zero Shame Training
               </span>
-              <span className="text-white/70 font-mono text-sm tracking-widest uppercase flex items-center gap-4">
-                <Award className="text-primary w-4 h-4" /> Compliance Certificates Included
+              <span className="text-primary/80 font-mono text-xs tracking-[0.2em] uppercase flex items-center gap-3 font-bold">
+                <Award className="w-4 h-4" /> Compliance Ready
               </span>
-              <span className="text-white/70 font-mono text-sm tracking-widest uppercase flex items-center gap-4">
-                <Activity className="text-primary w-4 h-4" /> Setup in Under 5 Minutes
+              <span className="text-primary/80 font-mono text-xs tracking-[0.2em] uppercase flex items-center gap-3 font-bold">
+                <Activity className="w-4 h-4" /> 5 Minute Setup
               </span>
-              <span className="text-white/70 font-mono text-sm tracking-widest uppercase flex items-center gap-4">
-                <FileText className="text-primary w-4 h-4" /> Industry Specific Templates
+              <span className="text-primary/80 font-mono text-xs tracking-[0.2em] uppercase flex items-center gap-3 font-bold">
+                <FileText className="w-4 h-4" /> Industry Specific
               </span>
-              <span className="text-white/70 font-mono text-sm tracking-widest uppercase flex items-center gap-4">
-                <Terminal className="text-primary w-4 h-4" /> Monthly Analytics Reports
+              <span className="text-primary/80 font-mono text-xs tracking-[0.2em] uppercase flex items-center gap-3 font-bold">
+                <Terminal className="w-4 h-4" /> Monthly Analytics
               </span>
             </React.Fragment>
           ))}
@@ -1888,3 +1916,4 @@ function App() {
 }
 
 export default App;
+
