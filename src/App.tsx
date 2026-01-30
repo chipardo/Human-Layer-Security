@@ -1079,23 +1079,17 @@ const Home = () => {
               <p className="text-gray-300 text-lg italic leading-relaxed">"It's set-and-forget for me. The platform automatically handles the campaigns and training. I just check the monthly report and see the numbers going down."</p>
             </div>
           </CardWithMagnet>
-        </motion.div>                <div className="text-4xl font-bold text-primary">4%</div>
-        <div className="text-xs text-primary/60 mt-1">click rate</div>
-      </div>
-    </div >
-      <p className="text-gray-300 text-lg italic leading-relaxed">"HIPAA compliance required security training. This was the only solution that actually changed behavior instead of just checking a box."</p>
-          </motion.div >
-        </motion.div >
+        </motion.div>
 
-  <div className="text-center p-10 rounded-3xl bg-primary/5 border border-primary/20">
-    <h3 className="text-2xl font-bold text-white mb-4">Want to see these results for your team?</h3>
-    <p className="text-gray-400 mb-6 max-w-2xl mx-auto">Let's run a baseline assessment. We'll show you where your vulnerabilities are, then demonstrate how the platform works with your actual team.</p>
-    <Link to="/contact"><Button size="lg">Schedule Free Assessment</Button></Link>
-  </div>
+        <div className="text-center p-10 rounded-3xl bg-primary/5 border border-primary/20">
+          <h3 className="text-2xl font-bold text-white mb-4">Want to see these results for your team?</h3>
+          <p className="text-gray-400 mb-6 max-w-2xl mx-auto">Let's run a baseline assessment. We'll show you where your vulnerabilities are, then demonstrate how the platform works with your actual team.</p>
+          <Link to="/contact"><Button size="lg">Schedule Free Assessment</Button></Link>
+        </div>
       </Section >
 
-  {/* FAQ SECTION */ }
-  < FAQ />
+      {/* FAQ SECTION */}
+      < FAQ />
     </>
   );
 };
@@ -2157,3 +2151,4 @@ function App() {
 }
 
 export default App;
+
