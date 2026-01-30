@@ -17,7 +17,7 @@ const PageMeta = ({ title, description }: { title: string, description?: string 
   }, [title, description]);
   return null;
 };
-import { AnimatePresence, motion, useScroll, useTransform, useInView, useAnimation } from 'framer-motion';
+import { AnimatePresence, motion, useScroll, useInView, useAnimation } from 'framer-motion';
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -702,7 +702,7 @@ const Home = () => {
   const navigate = useNavigate();
   const [quote, setQuote] = useState(QUOTES[0]);
 
-  const { scrollY } = useScroll();
+
 
 
   useEffect(() => {
@@ -2152,5 +2152,4 @@ function App() {
 }
 
 export default App;
-
 
