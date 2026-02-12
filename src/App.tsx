@@ -239,7 +239,7 @@ const ScrollProgress = () => {
 
   return (
     <motion.div
-      className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-emerald-400 to-primary origin-left z-50"
+      className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-primary to-emerald-400 origin-left z-50"
       style={{ scaleX: scrollYProgress }}
     />
   );
@@ -299,33 +299,19 @@ const Button: React.FC<Omit<React.ComponentProps<typeof motion.button>, 'childre
 
 
 
-const ACCENT_COLORS: Record<string, { text: string; border: string; bg: string; shadow: string }> = {
-  emerald: { text: "text-emerald-400", border: "border-emerald-500/20", bg: "bg-emerald-500/10", shadow: "shadow-[0_0_50px_rgba(16,185,129,0.2)]" },
-  amber: { text: "text-amber-400", border: "border-amber-500/20", bg: "bg-amber-500/10", shadow: "shadow-[0_0_50px_rgba(245,158,11,0.2)]" },
-  cyan: { text: "text-cyan-400", border: "border-cyan-400/20", bg: "bg-cyan-500/10", shadow: "shadow-[0_0_50px_rgba(34,211,238,0.2)]" },
-  rose: { text: "text-rose-400", border: "border-rose-500/20", bg: "bg-rose-500/10", shadow: "shadow-[0_0_50px_rgba(244,63,94,0.2)]" },
-  violet: { text: "text-violet-400", border: "border-violet-400/20", bg: "bg-violet-500/10", shadow: "shadow-[0_0_50px_rgba(167,139,250,0.2)]" },
-  orange: { text: "text-orange-400", border: "border-orange-400/20", bg: "bg-orange-500/10", shadow: "shadow-[0_0_50px_rgba(251,146,60,0.2)]" }
+const ACCENT_COLORS: Record<string, { text: string; border: string; bg: string; shadow: string; hoverShadow: string }> = {
+  emerald: { text: "text-emerald-400", border: "border-emerald-500/20", bg: "bg-emerald-500/10", shadow: "shadow-[0_0_50px_rgba(16,185,129,0.2)]", hoverShadow: "hover:shadow-[0_0_40px_rgba(16,185,129,0.15)]" },
+  amber: { text: "text-amber-400", border: "border-amber-500/20", bg: "bg-amber-500/10", shadow: "shadow-[0_0_50px_rgba(245,158,11,0.2)]", hoverShadow: "hover:shadow-[0_0_40px_rgba(245,158,11,0.15)]" },
+  cyan: { text: "text-cyan-400", border: "border-cyan-400/20", bg: "bg-cyan-500/10", shadow: "shadow-[0_0_50px_rgba(34,211,238,0.2)]", hoverShadow: "hover:shadow-[0_0_40px_rgba(34,211,238,0.15)]" },
+  rose: { text: "text-rose-400", border: "border-rose-500/20", bg: "bg-rose-500/10", shadow: "shadow-[0_0_50px_rgba(244,63,94,0.2)]", hoverShadow: "hover:shadow-[0_0_40px_rgba(244,63,94,0.15)]" },
+  violet: { text: "text-violet-400", border: "border-violet-400/20", bg: "bg-violet-500/10", shadow: "shadow-[0_0_50px_rgba(167,139,250,0.2)]", hoverShadow: "hover:shadow-[0_0_40px_rgba(167,139,250,0.15)]" },
+  orange: { text: "text-orange-400", border: "border-orange-400/20", bg: "bg-orange-500/10", shadow: "shadow-[0_0_50px_rgba(251,146,60,0.2)]", hoverShadow: "hover:shadow-[0_0_40px_rgba(251,146,60,0.15)]" }
 };
 
 const Section: React.FC<{ children: React.ReactNode, className?: string, id?: string }> = ({ children, className = "", id }) => (
   <section id={id} className={cn("py-20 md:py-24 px-6 relative overflow-hidden bg-transparent", className)}>
-    {/* Animated Background Grid - ADD TO ALL PAGES */}
-    {/* Animated Background Grid - ADD TO ALL PAGES */}
-    <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none -z-10" />
-    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,_rgba(34,197,94,0.1),transparent_60%)] pointer-events-none -z-10" />
-
-    {/* Floating Gradient Orbs */}
-    <motion.div
-      className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] pointer-events-none -z-10"
-      animate={{ x: [0, 50, 0], y: [0, -30, 0], scale: [1, 1.1, 1] }}
-      transition={{ duration: 20, ease: "easeInOut", repeat: Infinity }}
-    />
-    <motion.div
-      className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none -z-10"
-      animate={{ x: [0, -50, 0], y: [0, 30, 0], scale: [1, 1.2, 1] }}
-      transition={{ duration: 25, ease: "easeInOut", repeat: Infinity }}
-    />
+    {/* Subtle grid overlay — global BackgroundLayers handles the heavy lifting */}
+    <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none -z-10" />
 
     <motion.div
       initial="hidden"
@@ -343,8 +329,6 @@ const Section: React.FC<{ children: React.ReactNode, className?: string, id?: st
 
 const HowWeWork = () => (
   <Section className="bg-transparent relative overflow-hidden">
-    {/* Background Trace */}
-    <div className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent hidden md:block opacity-20" />
 
     <div className="text-center mb-20 relative z-10">
       <Reveal className="inline-block" width="100%">
@@ -364,23 +348,23 @@ const HowWeWork = () => (
       className="grid md:grid-cols-4 gap-6 relative z-10"
     >
       {[
-        { t: "Test", d: "Realistic phishing emails. Custom templates. Real threats.", i: Mail, step: "01", c: "text-blue-400", bg: "group-hover:bg-blue-500", shadow: "group-hover:shadow-[0_0_20px_rgba(59,130,246,0.5)]" },
-        { t: "Catch", d: "Safe fail page. No shame. No reporting to manager.", i: FileText, step: "02", c: "text-red-400", bg: "group-hover:bg-red-500", shadow: "group-hover:shadow-[0_0_20px_rgba(239,68,68,0.5)]" },
-        { t: "Teach", d: "90-second instant lesson. Teach the 'why' and 'how'.", i: Activity, step: "03", c: "text-amber-400", bg: "group-hover:bg-amber-500", shadow: "group-hover:shadow-[0_0_20px_rgba(245,158,11,0.5)]" },
-        { t: "Improve", d: "Track metrics. Watch click rates drop. Export reports.", i: CheckCircle, step: "04", c: "text-emerald-400", bg: "group-hover:bg-emerald-500", shadow: "group-hover:shadow-[0_0_20px_rgba(16,185,129,0.5)]" }
+        { t: "Test", d: "Realistic phishing emails. Custom templates. Real threats.", i: Mail, step: "01", c: "text-cyan-400", bg: "group-hover:bg-cyan-500/20", shadow: "group-hover:shadow-[0_0_25px_rgba(34,211,238,0.15)]" },
+        { t: "Catch", d: "Safe fail page. No shame. No reporting to manager.", i: FileText, step: "02", c: "text-rose-400", bg: "group-hover:bg-rose-500/20", shadow: "group-hover:shadow-[0_0_25px_rgba(244,63,94,0.15)]" },
+        { t: "Teach", d: "90-second instant lesson. Teach the 'why' and 'how'.", i: Activity, step: "03", c: "text-amber-400", bg: "group-hover:bg-amber-500/20", shadow: "group-hover:shadow-[0_0_25px_rgba(245,158,11,0.15)]" },
+        { t: "Improve", d: "Track metrics. Watch click rates drop. Export reports.", i: CheckCircle, step: "04", c: "text-emerald-400", bg: "group-hover:bg-emerald-500/20", shadow: "group-hover:shadow-[0_0_25px_rgba(16,185,129,0.15)]" }
       ].map((s, i) => (
-        <motion.div variants={fadeInUp} key={i} className="group relative p-8 bg-black/40 border border-white/5 rounded-[2rem] hover:bg-white/5 hover:border-white/10 transition-colors duration-300 will-change-transform overflow-hidden" whileHover={{ y: -5, transition: { duration: 0.2 } }}>
-          <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-[40px] pointer-events-none group-hover:bg-white/10 transition-colors" />
+        <motion.div variants={fadeInUp} key={i} className="group relative p-8 bg-black/40 border border-white/5 rounded-[2rem] hover:bg-white/[0.03] hover:border-white/10 transition-all duration-300 will-change-transform overflow-hidden" whileHover={{ y: -5, transition: { duration: 0.3 } }}>
+          <div className="absolute top-0 right-0 w-32 h-32 bg-white/[0.03] rounded-full blur-[40px] pointer-events-none group-hover:bg-white/[0.06] transition-colors" />
 
-          <div className="inline-block px-3 py-1 mb-6 border border-white/10 rounded-full text-xs font-mono font-bold shadow-xl group-hover:border-white/20 transition-colors text-white bg-surface">
+          <div className="inline-block px-3 py-1 mb-6 border border-white/10 rounded-full text-xs font-mono font-bold group-hover:border-white/20 transition-colors text-gray-400 bg-surface">
             STEP {s.step}
           </div>
 
-          <div className={cn("mb-6 w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center text-gray-400 group-hover:text-black transition-all duration-300 group-hover:scale-110", s.bg, s.shadow)}>
+          <div className={cn("mb-6 w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center transition-all duration-300 group-hover:scale-110", s.c, s.bg, s.shadow)}>
             <s.i className="w-7 h-7" />
           </div>
 
-          <h3 className="text-xl font-bold text-white mb-3 group-hover:text-white transition-colors">{s.t}</h3>
+          <h3 className="text-xl font-bold text-white mb-3">{s.t}</h3>
           <p className="text-gray-400 text-sm leading-relaxed">{s.d}</p>
         </motion.div>
       ))}
@@ -390,9 +374,6 @@ const HowWeWork = () => (
 
 const WhyChoose = () => (
   <Section className="bg-transparent relative overflow-hidden">
-    {/* Background Gradients */}
-    <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
-    <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none" />
 
     <div className="text-center mb-16 relative z-10">
       <Reveal width="100%">
@@ -428,7 +409,7 @@ const WhyChoose = () => (
             "flex flex-col items-start text-left group p-8 rounded-[2rem] border border-white/5 bg-surface/30 backdrop-blur-sm transition-all duration-500 hover:bg-surface/50 cursor-default relative overflow-hidden",
             f.border, f.shadow
           )}
-          whileHover={{ y: -8 }}
+          whileHover={{ y: -4 }}
         >
           <div className={cn("absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-white/5 to-transparent")} />
 
@@ -466,8 +447,8 @@ const Navbar = () => {
         scrolled ? "glass rounded-full border border-white/10 shadow-lg shadow-black/50" : "bg-transparent border-transparent"
       )}>
         <Link to="/" className="flex items-center gap-3 group relative z-10">
-          <img src="/humanlayerlogo.png" alt="Human Layer Security" loading="lazy" decoding="async" className="h-12 sm:h-14 md:h-16 lg:h-20 w-auto object-contain transition-all duration-300 group-hover:scale-102 filter drop-shadow-[0_0_8px_rgba(34,197,94,0.3)]" />
-          <div className="flex flex-col justify-center">
+          <img src="/humanlayerlogo.png" alt="Human Layer Security" loading="lazy" decoding="async" className="h-10 sm:h-12 md:h-14 w-auto object-contain transition-all duration-300 group-hover:scale-105 filter drop-shadow-[0_0_8px_rgba(34,197,94,0.3)]" />
+          <div className="flex flex-col justify-center gap-0.5">
             <span className="font-display font-bold text-white text-lg md:text-xl tracking-tight leading-none group-hover:text-primary transition-colors">HUMAN&nbsp;&nbsp;LAYER</span>
             <span className="font-display font-bold text-primary text-[10px] md:text-sm tracking-[0.2em] leading-none">SECURITY</span>
           </div>
@@ -518,12 +499,12 @@ const Footer = () => (
   <footer className="bg-black border-t border-white/5 pt-0 relative overflow-hidden">
     {/* NEW CTA SECTION */}
     <div className="border-b border-white/5 bg-surface/30 backdrop-blur-sm">
-      <div className="max-w-7xl mx-auto px-6 py-16 flex flex-col md:flex-row items-center justify-between gap-8">
+      <div className="max-w-7xl mx-auto px-6 py-16 flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
         <div>
           <h2 className="text-3xl font-bold text-white mb-2">Ready to Secure <span className="text-primary">Your Team?</span></h2>
-          <p className="text-gray-400">Get a free risk assessment and see your baseline phishing risk in 24 hours.</p>
+          <p className="text-gray-400 max-w-lg">Get a free risk assessment and see your baseline phishing risk in 24 hours.</p>
         </div>
-        <div className="flex gap-4">
+        <div className="flex gap-4 shrink-0">
           <Link to="/contact"><Button size="lg" className="bg-green-600 hover:bg-green-500 text-white">Get Free Assessment</Button></Link>
         </div>
       </div>
@@ -650,7 +631,7 @@ const FAQ = () => {
 const BackgroundLayers = () => (
   <div className="fixed inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
     {/* Noise Overlay */}
-    <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay">
+    <div className="absolute inset-0 opacity-[0.02] mix-blend-overlay">
       <svg width="100%" height="100%">
         <filter id="global-noise">
           <feTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="3" stitchTiles="stitch" />
@@ -660,43 +641,57 @@ const BackgroundLayers = () => (
     </div>
 
     {/* Global Gradient Grid */}
-    <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+    <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808006_1px,transparent_1px),linear-gradient(to_bottom,#80808006_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
 
-    {/* Primary Glow */}
-    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,_rgba(34,197,94,0.08),transparent_70%)]" />
+    {/* Primary Glow — single, subtle */}
+    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,_rgba(34,197,94,0.06),transparent_60%)]" />
 
-    {/* Animated Orbs */}
+    {/* Single slow-moving orb for depth */}
     <motion.div
-      className="absolute top-[-10%] left-[-10%] w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px]"
-      animate={{ x: [0, 50, 0], y: [0, -30, 0], scale: [1, 1.1, 1] }}
-      transition={{ duration: 20, ease: "easeInOut", repeat: Infinity }}
+      className="absolute top-[-10%] left-[20%] w-[700px] h-[700px] bg-primary/[0.03] rounded-full blur-[150px]"
+      animate={{ x: [0, 60, 0], y: [0, -40, 0] }}
+      transition={{ duration: 30, ease: "easeInOut", repeat: Infinity }}
     />
     <motion.div
-      className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[120px]"
-      animate={{ x: [0, -50, 0], y: [0, 30, 0], scale: [1, 1.2, 1] }}
-      transition={{ duration: 25, ease: "easeInOut", repeat: Infinity }}
+      className="absolute bottom-[-15%] right-[10%] w-[500px] h-[500px] bg-emerald-500/[0.02] rounded-full blur-[150px]"
+      animate={{ x: [0, -40, 0], y: [0, 30, 0] }}
+      transition={{ duration: 35, ease: "easeInOut", repeat: Infinity }}
     />
   </div>
 );
 
-const ScrollMouse = () => (
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ delay: 1.5, duration: 1 }}
-    className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-3 cursor-pointer"
-    onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
-  >
-    <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500 animate-pulse">Scroll to Explore</span>
-    <div className="w-6 h-10 border-2 border-white/20 rounded-full flex justify-center p-1 backdrop-blur-sm bg-black/20 group hover:border-white/40 transition-colors">
-      <motion.div
-        className="w-1.5 h-1.5 bg-primary rounded-full shadow-[0_0_10px_rgba(34,197,94,1)]"
-        animate={{ y: [0, 20, 0] }}
-        transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-      />
-    </div>
-  </motion.div>
-);
+const ScrollMouse = () => {
+  const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 100) setVisible(false);
+      else setVisible(true);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : 10 }}
+      transition={{ duration: 0.5 }}
+      className="flex flex-col items-center gap-2 cursor-pointer mt-8 pointer-events-auto"
+      onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
+      style={{ pointerEvents: visible ? 'auto' : 'none' }}
+    >
+      <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500">Scroll to Explore</span>
+      <div className="w-6 h-10 border-2 border-white/20 rounded-full flex justify-center p-1 bg-black/30 hover:border-primary/40 transition-colors">
+        <motion.div
+          className="w-1.5 h-1.5 bg-primary rounded-full shadow-[0_0_6px_rgba(34,197,94,0.8)]"
+          animate={{ y: [0, 18, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+        />
+      </div>
+    </motion.div>
+  );
+};
 
 const Home = () => {
   const navigate = useNavigate();
@@ -722,10 +717,9 @@ const Home = () => {
         description="AI-powered phishing defense that trains your employees in real-time. Shame-free, instant feedback. Setup in 5 minutes."
       />
       {/* HERO */}
-      <section className="relative min-h-[95vh] flex items-center pt-20 overflow-hidden perspective-1000">
-        <ScrollMouse />
+      <section className="relative min-h-[95vh] flex flex-col items-center justify-center pt-20 overflow-hidden">
 
-        <div className="max-w-7xl mx-auto px-6 w-full flex flex-col items-center text-center pt-10 pb-20 relative z-10">
+        <div className="max-w-7xl mx-auto px-6 w-full flex flex-col items-center text-center pt-10 pb-8 relative z-10">
 
           {/* 1. TITLE SECTION */}
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="max-w-5xl mx-auto mb-12">
@@ -735,7 +729,7 @@ const Home = () => {
               </div>
             </Reveal>
             <h1 className="text-5xl sm:text-6xl md:text-8xl font-bold text-white mb-6 leading-[1.1] tracking-tight">
-              <TextReveal>One phishing email can</TextReveal> <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-500">destroy your business.</span>
+              <TextReveal>One phishing email can</TextReveal> <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-red-500">destroy your business.</span>
             </h1>
           </motion.div>
 
@@ -754,7 +748,7 @@ const Home = () => {
               initial={{ x: -50, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ delay: 0.8, duration: 0.8 }}
-              className="absolute top-[20%] left-[5%] md:left-[-5%] z-20 bg-black/80 backdrop-blur-md border border-white/10 p-4 rounded-2xl shadow-2xl flex items-center gap-4"
+              className="hidden sm:flex absolute top-[20%] left-[5%] md:left-[-5%] z-20 bg-black/80 backdrop-blur-md border border-white/10 p-3 sm:p-4 rounded-2xl shadow-2xl items-center gap-3 sm:gap-4"
             >
               <div className="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400">
                 <Activity className="w-5 h-5" />
@@ -772,9 +766,9 @@ const Home = () => {
               initial={{ x: 50, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ delay: 1, duration: 0.8 }}
-              className="absolute bottom-[20%] right-[5%] md:right-[-5%] z-20 bg-black/80 backdrop-blur-md border border-white/10 p-4 rounded-2xl shadow-2xl flex items-center gap-4"
+              className="hidden sm:flex absolute bottom-[20%] right-[5%] md:right-[-5%] z-20 bg-black/80 backdrop-blur-md border border-white/10 p-3 sm:p-4 rounded-2xl shadow-2xl items-center gap-3 sm:gap-4"
             >
-              <div className="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400">
+              <div className="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400">
                 <CheckCircle className="w-5 h-5" />
               </div>
               <div className="text-left">
@@ -786,17 +780,17 @@ const Home = () => {
 
           {/* 3. SUBTEXT & CTA */}
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.4 }} className="max-w-5xl mx-auto">
-            <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-10 leading-[1.1] tracking-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-10 leading-[1.1] tracking-tight">
               We train your team to <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-emerald-300">recognize threats</span><br className="hidden md:block" /> before they click.
             </h2>
             <div className="flex gap-4 justify-center flex-wrap mb-16">
               <Link to="/contact">
-                <Button size="lg" className="bg-green-600 hover:bg-green-500 shadow-[0_0_30px_rgba(34,197,94,0.3)] text-white h-16 px-12 text-lg">
+                <Button size="lg" className="bg-green-600 hover:bg-green-500 shadow-[0_0_30px_rgba(34,197,94,0.3)] text-white h-14 px-8 text-base md:h-16 md:px-12 md:text-lg">
                   Get Free Risk Assessment
                 </Button>
               </Link>
               <Link to="/services">
-                <Button size="lg" variant="outline" className="h-16 px-12 text-lg bg-black/50 backdrop-blur-md">
+                <Button size="lg" variant="outline" className="h-14 px-8 text-base md:h-16 md:px-12 md:text-lg bg-black/50 backdrop-blur-md">
                   See How It Works
                 </Button>
               </Link>
@@ -815,6 +809,7 @@ const Home = () => {
             </div>
           </motion.div>
 
+          <ScrollMouse />
         </div>
       </section>
 
@@ -887,17 +882,17 @@ const Home = () => {
 
           <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="grid md:grid-cols-3 gap-8 mb-12">
             {[
-              { val: "82%", label: "of breaches involve phishing", color: "text-red-500", border: "border-red-900/30", bg: "bg-red-950/20" },
-              { val: "$4.9M", label: "average cost of a data breach", color: "text-red-500", border: "border-red-900/30", bg: "bg-red-950/20" },
-              { val: "90%", label: "of employees forget training in 30 days", color: "text-red-500", border: "border-red-900/30", bg: "bg-red-950/20" }
+              { val: "82%", label: "of breaches involve phishing", color: "text-rose-400", border: "border-rose-900/20", bg: "bg-rose-950/10" },
+              { val: "$4.9M", label: "average cost of a data breach", color: "text-rose-400", border: "border-rose-900/20", bg: "bg-rose-950/10" },
+              { val: "90%", label: "of employees forget training in 30 days", color: "text-rose-400", border: "border-rose-900/20", bg: "bg-rose-950/10" }
             ].map((stat, i) => (
               <motion.div
                 key={i}
                 variants={fadeInUp}
-                whileHover={{ borderColor: "rgba(255,255,255,0.2)", backgroundColor: "rgba(255,255,255,0.02)" }}
+                whileHover={{ borderColor: "rgba(255,255,255,0.15)" }}
                 className={cn("p-8 rounded-2xl border transition-colors duration-300 relative group overflow-hidden", stat.bg, stat.border)}
               >
-                <div className="absolute inset-0 bg-red-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-rose-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className={cn("text-5xl font-bold mb-4", stat.color)}>{stat.val}</div>
                 <p className="text-gray-300 font-medium">{stat.label}</p>
               </motion.div>
@@ -969,7 +964,7 @@ const Home = () => {
               <Link to="/contact"><Button variant="outline" className="w-full">Get Started</Button></Link>
             </div>
             {/* PROFESSIONAL */}
-            <div className="p-6 rounded-2xl bg-primary/10 border-2 border-primary relative hover:border-primary transition-colors">
+            <div className="p-6 rounded-2xl bg-primary/10 border-2 border-primary relative hover:border-primary transition-colors text-left">
               <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-primary text-black text-xs font-bold rounded-full">MOST POPULAR</div>
               <div className="text-sm text-primary font-bold uppercase tracking-wider mb-2">Professional</div>
               <div className="text-3xl font-bold text-white mb-1">$799<span className="text-lg text-gray-500">/mo</span></div>
@@ -1009,10 +1004,9 @@ const Home = () => {
       </Section >
 
       {/* SOCIAL PROOF / VALUE PROP */}
-      {/* SOCIAL PROOF / VALUE PROP */}
       < Section className="bg-surface/50" >
         <div className="grid md:grid-cols-5 gap-12 items-center">
-          <div className="md:col-span-4">
+          <div className="md:col-span-3">
             <h2 className="text-4xl md:text-6xl font-bold text-white mb-8">Why This Approach <span className="text-primary">Works</span></h2>
             <ul className="space-y-6">
               <li className="flex gap-4 items-start">
@@ -1048,7 +1042,7 @@ const Home = () => {
           </div>
 
           {/* DYNAMIC QUOTE COMPONENT */}
-          <div className="md:col-span-1 relative group perspective-1000 h-full min-h-[250px] flex flex-col justify-center">
+          <div className="md:col-span-2 relative group perspective-1000 h-full min-h-[250px] flex flex-col justify-center">
             <div className="p-8 rounded-[2.5rem] bg-gradient-to-b from-surface/80 to-black border border-white/10 relative overflow-hidden backdrop-blur-xl">
               <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-[50px]" />
 
@@ -1148,7 +1142,7 @@ const PageHeader: React.FC<{ title: string, subtitle: string }> = ({ title, subt
   <section className="pt-40 pb-20 px-6 relative overflow-hidden">
     {/* ADD GRADIENT BACKGROUND */}
     <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/10 to-transparent opacity-30 pointer-events-none" />
-    <div className="absolute top-0 left-0 w-1/2 h-full bg-gradient-to-r from-blue-500/5 to-transparent opacity-20 pointer-events-none" />
+    <div className="absolute top-0 left-0 w-1/2 h-full bg-gradient-to-r from-emerald-500/5 to-transparent opacity-20 pointer-events-none" />
 
     <motion.div initial="hidden" animate="visible" variants={staggerContainer} className="max-w-7xl mx-auto relative z-10">
       <Reveal>
@@ -1187,14 +1181,13 @@ const Services = () => (
               "flex flex-col p-8 border bg-surface/40 backdrop-blur-sm rounded-3xl hover:bg-surface/60 transition-all duration-300 group relative overflow-hidden min-h-[280px]",
               s.span,
               ACCENT_COLORS[s.accent].border,
-              "hover:" + ACCENT_COLORS[s.accent].shadow
+              ACCENT_COLORS[s.accent].hoverShadow
             )}
           >
             <CardShimmer />
             <div className={cn(
-              "w-16 h-16 rounded-2xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-all duration-300 ease-out shadow-lg border border-white/5 relative z-10 mb-6",
-              ACCENT_COLORS[s.accent].bg,
-              "group-hover:shadow-[0_0_30px_rgba(34,197,94,0.3)]"
+              "w-16 h-16 rounded-2xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-all duration-300 ease-out border border-white/5 relative z-10 mb-6",
+              ACCENT_COLORS[s.accent].bg
             )}>
               <s.i className={cn("w-8 h-8 transition-colors", ACCENT_COLORS[s.accent].text)} />
             </div>
@@ -1237,8 +1230,10 @@ const Services = () => (
               ].map((row, i) => (
                 <tr key={i} className="group hover:bg-white/5 transition-colors">
                   <td className="p-4 text-white font-bold">{row.f}</td>
-                  <td className="p-4 text-primary font-bold bg-primary/5 border-x border-primary/10 flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4" /> {row.h}
+                  <td className="p-4 text-primary font-bold bg-primary/5 border-x border-primary/10">
+                    <div className="flex items-center gap-2">
+                      <CheckCircle className="w-4 h-4 shrink-0" /> <span>{row.h}</span>
+                    </div>
                   </td>
                   <td className="p-4 text-gray-500">{row.c1}</td>
                   <td className="p-4 text-gray-500">{row.c2}</td>
@@ -1367,7 +1362,7 @@ const Services = () => (
     {/* REUSED HOW WE WORK SECTION */}
     <HowWeWork />
 
-    <div className="mt-16 text-center bg-black/40 backdrop-blur-md p-16 rounded-[3rem] border border-white/10 relative overflow-hidden">
+    <div className="mt-16 text-center bg-black/40 backdrop-blur-md p-8 sm:p-12 md:p-16 rounded-[2rem] sm:rounded-[3rem] border border-white/10 relative overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
       <motion.div
         initial="hidden"
@@ -1546,8 +1541,6 @@ const Partnership = () => (
       </motion.div>
     </section>
     <Section className="relative !pt-8">
-      {/* Background Decor */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] pointer-events-none -z-10" />
 
       <div className="mb-24 flex flex-col md:flex-row items-center gap-16">
         {/* Mobile: Image First | Desktop: Image Left */}
@@ -1623,8 +1616,6 @@ const Partnership = () => (
       </motion.div>
 
       <Section className="bg-black relative overflow-hidden">
-        {/* Background Gradients */}
-        <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
 
         <div className="text-center mb-16 relative z-10">
           <h2 className="text-4xl font-bold text-white mb-6">
@@ -1654,7 +1645,7 @@ const Partnership = () => (
               className={cn(
                 "p-8 rounded-[2rem] bg-surface/30 backdrop-blur-sm border hover:bg-surface/50 transition-all duration-300 group relative overflow-hidden",
                 ACCENT_COLORS[benefit.accent].border,
-                "hover:" + ACCENT_COLORS[benefit.accent].shadow
+                ACCENT_COLORS[benefit.accent].hoverShadow
               )}
             >
               <div className={cn(
@@ -1910,7 +1901,7 @@ const Contact = () => {
                   className="w-full px-6 py-4 bg-surface border border-white/10 rounded-2xl text-white placeholder-gray-600 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all resize-none"
                   placeholder="We're looking for..."
                   value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setFormData({ ...formData, message: e.target.value })}
                 />
               </div>
 
@@ -2139,13 +2130,6 @@ function App() {
         </Routes>
       </AnimatePresence>
       <Footer />
-      {/* CSS Marquee Keyframes */}
-      <style>{`
-        @keyframes marquee {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-      `}</style>
     </div>
 
   );
