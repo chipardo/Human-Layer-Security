@@ -17,7 +17,6 @@
 
   html {
     scroll-behavior: smooth;
-    /* Prevent AI-looking hyphenated words */
     -webkit-hyphens: none;
     -moz-hyphens: none;
     -ms-hyphens: none;
@@ -27,10 +26,14 @@
   }
 
   body {
-    @apply bg-background text-text font-sans antialiased overflow-x-hidden selection:bg-primary selection:text-white;
+    @apply bg-background text-text font-sans antialiased overflow-x-hidden;
   }
 
-  /* Prevent word breaking/hyphenation everywhere */
+  ::selection {
+    background-color: #22C55E;
+    color: #FFFFFF;
+  }
+
   h1,
   h2,
   h3,
@@ -97,13 +100,11 @@
   }
 }
 
-/* Global smooth transitions for interactive elements */
 a,
 button {
   transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Marquee animation */
 @keyframes marquee {
   0% {
     transform: translateX(0);
@@ -113,7 +114,3 @@ button {
     transform: translateX(-50%);
   }
 }
-    transform: rotateY(2deg);
-  }
-}
-
