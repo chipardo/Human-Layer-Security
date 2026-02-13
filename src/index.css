@@ -27,6 +27,8 @@
 
   body {
     @apply bg-background text-text font-sans antialiased overflow-x-hidden;
+    letter-spacing: -0.01em;
+    text-rendering: optimizeLegibility;
   }
 
   ::selection {
@@ -63,10 +65,19 @@
   h5,
   h6 {
     @apply font-display;
+    letter-spacing: -0.025em;
+  }
+
+  h1 {
+    letter-spacing: -0.035em;
+  }
+
+  p {
+    line-height: 1.7;
   }
 
   ::-webkit-scrollbar {
-    width: 4px;
+    width: 5px;
   }
 
   ::-webkit-scrollbar-track {
@@ -74,21 +85,24 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-white/10 rounded-full;
+    background: linear-gradient(180deg, rgba(34, 197, 94, 0.3), rgba(34, 211, 238, 0.2));
+    border-radius: 10px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-primary/50;
+    background: linear-gradient(180deg, rgba(34, 197, 94, 0.6), rgba(34, 211, 238, 0.4));
   }
 }
 
 @layer utilities {
   .glass {
-    @apply bg-white/5 backdrop-blur-lg border border-white/10;
+    @apply backdrop-blur-xl border border-white/10;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
   }
 
   .glass-dark {
-    @apply bg-black/40 backdrop-blur-md border border-white/5;
+    @apply backdrop-blur-md border border-white/[0.06];
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3));
   }
 
   .perspective-1000 {
@@ -97,6 +111,60 @@
 
   .rotate-y-2 {
     transform: rotateY(2deg);
+  }
+
+  /* Premium card base style */
+  .premium-card {
+    @apply backdrop-blur-sm border border-white/[0.06] relative overflow-hidden;
+    background: linear-gradient(145deg, rgba(17, 17, 17, 0.8), rgba(0, 0, 0, 0.6));
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .premium-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent, rgba(255, 255, 255, 0.05));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .premium-card:hover::before {
+    opacity: 1;
+  }
+
+  .premium-card:hover {
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.5), 0 0 60px rgba(34, 197, 94, 0.04);
+  }
+
+  /* Text premium styles */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Subtle shimmer for premium text */
+  .shimmer-text {
+    background-size: 200% 100%;
+    animation: shimmer 3s ease-in-out infinite;
+  }
+
+  @keyframes shimmer {
+
+    0%,
+    100% {
+      background-position: 100% 0;
+    }
+
+    50% {
+      background-position: 0 0;
+    }
   }
 }
 
@@ -112,5 +180,26 @@ button {
 
   100% {
     transform: translateX(-50%);
+  }
+}
+
+/* GPU acceleration for animated elements */
+[style*="transform"],
+[style*="opacity"] {
+  will-change: transform, opacity;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
