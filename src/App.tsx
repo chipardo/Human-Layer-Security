@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate, useLocation, Link } from 'react-router-dom';
-import { Shield, Menu, X, CheckCircle, Users, Mail, Activity, ArrowRight, Globe, Terminal, FileText, Award, Twitter, Linkedin, Building, Stethoscope, Scale } from 'lucide-react';
+import { Shield, Menu, X, CheckCircle, Mail, Activity, ArrowRight, Globe, Terminal, FileText, Award, Twitter, Linkedin, Building, Stethoscope, Scale, Zap, Eye, BarChart3, Lock, Target, Fingerprint, Brain, Rocket, Sparkles, HeartHandshake, Headphones, Palette } from 'lucide-react';
 // Custom SEO component to replace react-helmet-async
 const PageMeta = ({ title, description }: { title: string, description?: string }) => {
   useEffect(() => {
@@ -52,15 +52,13 @@ const EASING = [0.22, 1, 0.36, 1]; // Custom cubic-bezier for "buttery" feel
 const fadeInUp = {
   hidden: {
     opacity: 0,
-    y: prefersReducedMotion ? 0 : 40,
-    scale: 0.95
+    y: prefersReducedMotion ? 0 : 30
   },
   visible: {
     opacity: 1,
     y: 0,
-    scale: 1,
     transition: {
-      duration: prefersReducedMotion ? 0.01 : 0.6,
+      duration: prefersReducedMotion ? 0.01 : 0.7,
       ease: [0.25, 0.1, 0.25, 1]
     }
   }
@@ -71,8 +69,8 @@ const staggerContainer = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.1,
+      staggerChildren: 0.12,
+      delayChildren: 0.15,
       when: "beforeChildren"
     }
   }
@@ -97,8 +95,8 @@ const Reveal: React.FC<{ children: React.ReactNode, width?: "fit-content" | "100
     <motion.div
       ref={ref}
       variants={{
-        hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 40 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.8, delay, ease: EASING } }
+        hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 30 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.7, delay, ease: EASING } }
       }}
       initial="hidden"
       animate={controls}
@@ -164,7 +162,7 @@ const TextReveal: React.FC<{ children: string, className?: string }> = ({ childr
 const CardShimmer = () => (
   <div className="absolute inset-0 overflow-hidden rounded-[inherit] pointer-events-none">
     <motion.div
-      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
+      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.07] to-transparent"
       initial={{ x: "-100%" }}
       animate={{ x: "200%" }}
       transition={{
@@ -199,7 +197,7 @@ const CardWithMagnet: React.FC<{ children: React.ReactNode, className?: string, 
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       animate={{ x: mousePosition.x, y: mousePosition.y }}
-      transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
+      transition={{ type: "spring", stiffness: 120, damping: 20, mass: 0.2 }}
       className={className}
       {...props}
     >
@@ -239,7 +237,7 @@ const ScrollProgress = () => {
 
   return (
     <motion.div
-      className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-primary to-emerald-400 origin-left z-50"
+      className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-primary via-cyan-400 to-violet-400 origin-left z-50"
       style={{ scaleX: scrollYProgress }}
     />
   );
@@ -250,9 +248,9 @@ const ScrollProgress = () => {
 const Button: React.FC<Omit<React.ComponentProps<typeof motion.button>, 'children'> & { variant?: 'primary' | 'outline' | 'ghost', size?: 'sm' | 'md' | 'lg', children: React.ReactNode }> = ({ className, variant = 'primary', size = 'md', children, ...props }) => {
   const base = "inline-flex items-center justify-center font-display font-semibold transition-all focus:outline-none disabled:opacity-50 rounded-full cursor-pointer relative overflow-hidden group transform-gpu";
   const vars = {
-    primary: "bg-primary text-black hover:bg-green-400 shadow-[0_0_30px_rgba(34,197,94,0.4),0_0_60px_rgba(34,197,94,0.2),0_0_90px_rgba(34,197,94,0.1)] hover:shadow-[0_0_40px_rgba(34,197,94,0.6),0_0_80px_rgba(34,197,94,0.3),0_0_120px_rgba(34,197,94,0.15)] border border-transparent",
-    outline: "border border-white/20 text-white hover:border-primary hover:text-primary bg-transparent hover:bg-white/5",
-    ghost: "text-white/70 hover:text-white hover:bg-white/5"
+    primary: "bg-primary text-black hover:bg-green-400 shadow-[0_0_30px_rgba(34,197,94,0.4),0_0_60px_rgba(34,197,94,0.2),0_0_90px_rgba(34,197,94,0.1)] hover:shadow-[0_0_40px_rgba(34,197,94,0.6),0_0_80px_rgba(34,197,94,0.3),0_0_120px_rgba(34,197,94,0.15)] border border-green-400/30 hover:border-green-300/50",
+    outline: "border border-white/15 text-white hover:border-primary/60 hover:text-primary bg-white/[0.02] hover:bg-primary/[0.05] backdrop-blur-sm",
+    ghost: "text-white/70 hover:text-white hover:bg-white/[0.06]"
   };
   const sizes = { sm: "h-9 px-4 text-xs", md: "h-12 px-8 text-sm", lg: "h-14 px-10 text-base" };
 
@@ -275,8 +273,8 @@ const Button: React.FC<Omit<React.ComponentProps<typeof motion.button>, 'childre
   return (
     <motion.button
       onClick={handleClick}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
+      whileHover={{ scale: 1.02 }}
+      whileTap={{ scale: 0.97 }}
       className={cn(base, vars[variant], sizes[size], className)}
       {...props}
     >
@@ -309,9 +307,9 @@ const ACCENT_COLORS: Record<string, { text: string; border: string; bg: string; 
 };
 
 const Section: React.FC<{ children: React.ReactNode, className?: string, id?: string }> = ({ children, className = "", id }) => (
-  <section id={id} className={cn("py-20 md:py-24 px-6 relative overflow-hidden bg-transparent", className)}>
+  <section id={id} className={cn("py-14 md:py-18 px-6 relative overflow-hidden bg-transparent", className)}>
     {/* Subtle grid overlay — global BackgroundLayers handles the heavy lifting */}
-    <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none -z-10" />
+    <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_70%_50%_at_50%_50%,#000_60%,transparent_100%)] pointer-events-none -z-10" />
 
     <motion.div
       initial="hidden"
@@ -330,13 +328,13 @@ const Section: React.FC<{ children: React.ReactNode, className?: string, id?: st
 const HowWeWork = () => (
   <Section className="bg-transparent relative overflow-hidden">
 
-    <div className="text-center mb-20 relative z-10">
+    <div className="text-center mb-12 relative z-10">
       <Reveal className="inline-block" width="100%">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold mb-6 uppercase tracking-widest">
           <Activity className="w-3 h-3" /> Process
         </div>
       </Reveal>
-      <Reveal delay={0.1} width="100%"><h2 className="text-4xl md:text-5xl font-bold text-white mb-6">How We <span className="text-primary">Work</span></h2></Reveal>
+      <Reveal delay={0.1} width="100%"><h2 className="text-4xl md:text-5xl font-bold text-white mb-4">How We <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">Work</span></h2></Reveal>
       <Reveal delay={0.2} width="100%"><p className="text-gray-400 max-w-2xl mx-auto text-lg">Four steps to turn your biggest vulnerability into your strongest defense.</p></Reveal>
     </div>
 
@@ -348,19 +346,20 @@ const HowWeWork = () => (
       className="grid md:grid-cols-4 gap-6 relative z-10"
     >
       {[
-        { t: "Test", d: "Realistic phishing emails. Custom templates. Real threats.", i: Mail, step: "01", c: "text-cyan-400", bg: "group-hover:bg-cyan-500/20", shadow: "group-hover:shadow-[0_0_25px_rgba(34,211,238,0.15)]" },
-        { t: "Catch", d: "Safe fail page. No shame. No reporting to manager.", i: FileText, step: "02", c: "text-rose-400", bg: "group-hover:bg-rose-500/20", shadow: "group-hover:shadow-[0_0_25px_rgba(244,63,94,0.15)]" },
-        { t: "Teach", d: "90-second instant lesson. Teach the 'why' and 'how'.", i: Activity, step: "03", c: "text-amber-400", bg: "group-hover:bg-amber-500/20", shadow: "group-hover:shadow-[0_0_25px_rgba(245,158,11,0.15)]" },
-        { t: "Improve", d: "Track metrics. Watch click rates drop. Export reports.", i: CheckCircle, step: "04", c: "text-emerald-400", bg: "group-hover:bg-emerald-500/20", shadow: "group-hover:shadow-[0_0_25px_rgba(16,185,129,0.15)]" }
+        { t: "Test", d: "Realistic phishing emails. Custom templates. Real threats.", i: Target, step: "01", c: "text-cyan-400", bg: "group-hover:bg-cyan-500/20", shadow: "group-hover:shadow-[0_0_25px_rgba(34,211,238,0.15)]" },
+        { t: "Catch", d: "Safe fail page. No shame. No reporting to manager.", i: Eye, step: "02", c: "text-rose-400", bg: "group-hover:bg-rose-500/20", shadow: "group-hover:shadow-[0_0_25px_rgba(244,63,94,0.15)]" },
+        { t: "Teach", d: "90-second instant lesson. Teach the 'why' and 'how'.", i: Brain, step: "03", c: "text-amber-400", bg: "group-hover:bg-amber-500/20", shadow: "group-hover:shadow-[0_0_25px_rgba(245,158,11,0.15)]" },
+        { t: "Improve", d: "Track metrics. Watch click rates drop. Export reports.", i: Rocket, step: "04", c: "text-emerald-400", bg: "group-hover:bg-emerald-500/20", shadow: "group-hover:shadow-[0_0_25px_rgba(16,185,129,0.15)]" }
       ].map((s, i) => (
-        <motion.div variants={fadeInUp} key={i} className="group relative p-8 bg-black/40 border border-white/5 rounded-[2rem] hover:bg-white/[0.03] hover:border-white/10 transition-all duration-300 will-change-transform overflow-hidden" whileHover={{ y: -5, transition: { duration: 0.3 } }}>
-          <div className="absolute top-0 right-0 w-32 h-32 bg-white/[0.03] rounded-full blur-[40px] pointer-events-none group-hover:bg-white/[0.06] transition-colors" />
+        <motion.div variants={fadeInUp} key={i} className="group relative p-8 bg-gradient-to-b from-surface/60 to-black/40 border border-white/[0.06] rounded-[2rem] hover:border-white/[0.12] transition-all duration-500 will-change-transform overflow-hidden hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)]" whileHover={{ y: -6, transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] } }}>
+          <div className="absolute top-0 right-0 w-40 h-40 bg-white/[0.02] rounded-full blur-[50px] pointer-events-none group-hover:bg-white/[0.06] transition-all duration-700" />
+          <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/[0.01] rounded-full blur-[30px] pointer-events-none group-hover:bg-white/[0.04] transition-all duration-700" />
 
           <div className="inline-block px-3 py-1 mb-6 border border-white/10 rounded-full text-xs font-mono font-bold group-hover:border-white/20 transition-colors text-gray-400 bg-surface">
             STEP {s.step}
           </div>
 
-          <div className={cn("mb-6 w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center transition-all duration-300 group-hover:scale-110", s.c, s.bg, s.shadow)}>
+          <div className={cn("mb-6 w-14 h-14 rounded-2xl bg-white/[0.04] flex items-center justify-center transition-all duration-500 group-hover:scale-110 ring-1 ring-white/[0.06] group-hover:ring-2", s.c, s.bg, s.shadow)}>
             <s.i className="w-7 h-7" />
           </div>
 
@@ -383,7 +382,7 @@ const WhyChoose = () => (
       </Reveal>
       <Reveal delay={0.1} width="100%">
         <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-          Why Companies Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-emerald-400">Human Layer</span>
+          Why Companies Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-emerald-400 to-cyan-400">Human Layer</span>
         </h2>
       </Reveal>
       <Reveal delay={0.2} width="100%">
@@ -395,25 +394,25 @@ const WhyChoose = () => (
 
     <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer} className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto relative z-10">
       {[
-        { t: "Zero Shame", d: "No public humiliation. Just private, immediate training.", i: Shield, c: "text-emerald-400", border: "group-hover:border-emerald-500/50", shadow: "group-hover:shadow-[0_0_50px_rgba(16,185,129,0.2)]", iconBg: "bg-emerald-500/10" },
+        { t: "Zero Shame", d: "No public humiliation. Just private, immediate training.", i: Lock, c: "text-emerald-400", border: "group-hover:border-emerald-500/50", shadow: "group-hover:shadow-[0_0_50px_rgba(16,185,129,0.2)]", iconBg: "bg-emerald-500/10" },
         { t: "Compliance Ready", d: "Automatic SOC 2, ISO 27001, & HIPAA documentation.", i: Award, c: "text-amber-400", border: "group-hover:border-amber-500/50", shadow: "group-hover:shadow-[0_0_50px_rgba(245,158,11,0.2)]", iconBg: "bg-amber-500/10" },
-        { t: "5 Minute Setup", d: "No IT department needed. Launch your first campaign today.", i: Activity, c: "text-cyan-400", border: "group-hover:border-cyan-400/50", shadow: "group-hover:shadow-[0_0_50px_rgba(34,211,238,0.2)]", iconBg: "bg-cyan-500/10" },
-        { t: "Real Templates", d: "Law firms get court notices. Finance gets wire transfers.", i: FileText, c: "text-rose-400", border: "group-hover:border-rose-500/50", shadow: "group-hover:shadow-[0_0_50px_rgba(244,63,94,0.2)]", iconBg: "bg-rose-500/10" },
-        { t: "Clear Analytics", d: "Track improvement. Export reports for insurance.", i: Terminal, c: "text-violet-400", border: "group-hover:border-violet-400/50", shadow: "group-hover:shadow-[0_0_50px_rgba(167,139,250,0.2)]", iconBg: "bg-violet-500/10" },
-        { t: "Instant Learning", d: "Training happens the second they click. Not next week.", i: Mail, c: "text-orange-400", border: "group-hover:border-orange-400/50", shadow: "group-hover:shadow-[0_0_50px_rgba(251,146,60,0.2)]", iconBg: "bg-orange-500/10" }
+        { t: "5 Minute Setup", d: "No IT department needed. Launch your first campaign today.", i: Zap, c: "text-cyan-400", border: "group-hover:border-cyan-400/50", shadow: "group-hover:shadow-[0_0_50px_rgba(34,211,238,0.2)]", iconBg: "bg-cyan-500/10" },
+        { t: "Real Templates", d: "Law firms get court notices. Finance gets wire transfers.", i: Fingerprint, c: "text-rose-400", border: "group-hover:border-rose-500/50", shadow: "group-hover:shadow-[0_0_50px_rgba(244,63,94,0.2)]", iconBg: "bg-rose-500/10" },
+        { t: "Clear Analytics", d: "Track improvement. Export reports for insurance.", i: BarChart3, c: "text-violet-400", border: "group-hover:border-violet-400/50", shadow: "group-hover:shadow-[0_0_50px_rgba(167,139,250,0.2)]", iconBg: "bg-violet-500/10" },
+        { t: "Instant Learning", d: "Training happens the second they click. Not next week.", i: Sparkles, c: "text-orange-400", border: "group-hover:border-orange-400/50", shadow: "group-hover:shadow-[0_0_50px_rgba(251,146,60,0.2)]", iconBg: "bg-orange-500/10" }
       ].map((f, i) => (
         <motion.div
           variants={fadeInUp}
           key={i}
           className={cn(
-            "flex flex-col items-start text-left group p-8 rounded-[2rem] border border-white/5 bg-surface/30 backdrop-blur-sm transition-all duration-500 hover:bg-surface/50 cursor-default relative overflow-hidden",
+            "flex flex-col items-start text-left group p-8 rounded-[2rem] border border-white/[0.06] bg-gradient-to-b from-surface/40 to-black/30 backdrop-blur-sm transition-all duration-500 hover:bg-surface/50 cursor-default relative overflow-hidden hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)]",
             f.border, f.shadow
           )}
           whileHover={{ y: -4 }}
         >
           <div className={cn("absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-white/5 to-transparent")} />
 
-          <div className={cn("w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-all duration-300 group-hover:scale-110 shadow-inner border border-white/5", f.iconBg)}>
+          <div className={cn("w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-all duration-500 group-hover:scale-110 ring-1 ring-white/[0.06] group-hover:ring-2 group-hover:ring-white/[0.12]", f.iconBg)}>
             <f.i className={cn("w-7 h-7 transition-colors duration-300", f.c)} />
           </div>
           <h3 className="text-xl font-bold text-white mb-3 relative z-10">{f.t}</h3>
@@ -443,8 +442,8 @@ const Navbar = () => {
   return (
     <nav className={cn("fixed w-full z-50 transition-all duration-300 px-4", scrolled ? "top-4" : "top-0")}>
       <div className={cn(
-        "max-w-7xl mx-auto px-6 h-20 flex justify-between items-center transition-all duration-300",
-        scrolled ? "glass rounded-full border border-white/10 shadow-lg shadow-black/50" : "bg-transparent border-transparent"
+        "max-w-7xl mx-auto px-6 h-20 flex justify-between items-center transition-all duration-500",
+        scrolled ? "glass rounded-full border border-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.4),0_0_0_1px_rgba(255,255,255,0.05)_inset] backdrop-blur-2xl" : "bg-transparent border-transparent"
       )}>
         <Link to="/" className="flex items-center gap-3 group relative z-10">
           <img src="/humanlayerlogo.png" alt="Human Layer Security" loading="lazy" decoding="async" className="h-10 sm:h-12 md:h-14 w-auto object-contain transition-all duration-300 group-hover:scale-105 filter drop-shadow-[0_0_8px_rgba(34,197,94,0.3)]" />
@@ -456,7 +455,7 @@ const Navbar = () => {
 
         <div className="hidden md:flex gap-1 bg-white/5 rounded-full p-1 border border-white/5 backdrop-blur-sm relative z-10">
           {['SERVICES', 'ABOUT', 'PARTNERSHIP'].map((item) => (
-            <Link key={item} to={`/${item.toLowerCase()}`} className="relative px-6 py-2 text-xs font-bold text-gray-300 hover:text-white rounded-full transition-colors tracking-wide group">
+            <Link key={item} to={`/${item.toLowerCase()}`} className="relative px-6 py-2 text-xs font-bold text-gray-300 hover:text-white rounded-full transition-all duration-300 tracking-wide group hover:bg-white/[0.04]">
               <span className="relative z-10">{item}</span>
               {location.pathname === `/${item.toLowerCase()}` && (
                 <motion.div layoutId="navbar-indicator" className="absolute inset-0 bg-white/10 rounded-full" transition={{ type: "spring", bounce: 0.2, duration: 0.6 }} />
@@ -498,10 +497,11 @@ const Navbar = () => {
 const Footer = () => (
   <footer className="bg-black border-t border-white/5 pt-0 relative overflow-hidden">
     {/* NEW CTA SECTION */}
-    <div className="border-b border-white/5 bg-surface/30 backdrop-blur-sm">
-      <div className="max-w-7xl mx-auto px-6 py-16 flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
+    <div className="border-b border-white/[0.06] bg-gradient-to-r from-surface/40 via-surface/20 to-surface/40 backdrop-blur-sm relative overflow-hidden">
+      <div className="absolute top-0 right-1/4 w-64 h-64 bg-primary/[0.04] rounded-full blur-[80px] pointer-events-none" />
+      <div className="max-w-7xl mx-auto px-6 py-12 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
         <div>
-          <h2 className="text-3xl font-bold text-white mb-2">Ready to Secure <span className="text-primary">Your Team?</span></h2>
+          <h2 className="text-3xl font-bold text-white mb-2">Ready to Secure <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-cyan-400">Your Team?</span></h2>
           <p className="text-gray-400 max-w-lg">Get a free risk assessment and see your baseline phishing risk in 24 hours.</p>
         </div>
         <div className="flex gap-4 shrink-0">
@@ -510,8 +510,8 @@ const Footer = () => (
       </div>
     </div>
 
-    <div className="max-w-7xl mx-auto px-6 py-20 relative z-10">
-      <div className="grid md:grid-cols-4 gap-12 mb-20">
+    <div className="max-w-7xl mx-auto px-6 py-14 relative z-10">
+      <div className="grid md:grid-cols-4 gap-8 mb-14">
         <div className="col-span-1 md:col-span-2">
           <Link to="/" className="flex items-center gap-4 mb-6 group">
             <img src="/humanlayerlogo.png" alt="Human Layer Security" loading="lazy" decoding="async" className="h-24 w-auto object-contain transition-transform group-hover:scale-102" />
@@ -553,19 +553,19 @@ const FAQ = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const faqs = [
-    { q: "Won't this upset our employees?", a: "No — and here's why: We don't report clicks to management. We don't publish 'walls of shame.' We don't make anyone feel stupid. When someone clicks, they see a private learning moment. Most employees actually appreciate the training because it helps them protect themselves." },
-    { q: "How is this different from KnowBe4 or Proofpoint?", a: "Three main differences: (1) We're faster to set up (minutes vs weeks), (2) Our scenarios are more realistic because we customize to your actual threats, (3) Our pricing is transparent and simple. Most importantly, we built this platform from scratch in 2024 with modern technology — not legacy systems from 2010." },
-    { q: "What if employees figure out it's a test?", a: "That's actually good! It means they're being vigilant. The goal isn't to trick people — it's to build instincts. If someone thinks 'this might be a phishing test,' they're already thinking more carefully about email security. That's exactly what we want." },
-    { q: "How long until we see results?", a: "Most companies see measurable improvement within 60–90 days. Click rates typically drop 50–80% within the first six months. But you'll notice behavioral changes sooner — employees start forwarding suspicious emails to IT instead of clicking them." },
+    { q: "Won't this upset our employees?", a: "No, and here's why: We don't report clicks to management. We don't publish 'walls of shame.' We don't make anyone feel stupid. When someone clicks, they see a private learning moment. Most employees actually appreciate the training because it helps them protect themselves." },
+    { q: "How is this different from KnowBe4 or Proofpoint?", a: "Three main differences: (1) We're faster to set up (minutes vs weeks), (2) Our scenarios are more realistic because we customize to your actual threats, (3) Our pricing is transparent and simple. Most importantly, we built this platform from scratch in 2024 with modern technology, not legacy systems from 2010." },
+    { q: "What if employees figure out it's a test?", a: "That's actually good! It means they're being vigilant. The goal isn't to trick people, it's to build instincts. If someone thinks 'this might be a phishing test,' they're already thinking more carefully about email security. That's exactly what we want." },
+    { q: "How long until we see results?", a: "Most companies see measurable improvement within 60 to 90 days. Click rates typically drop 50 to 80% within the first six months. You'll also notice behavioral changes sooner, like employees forwarding suspicious emails to IT instead of clicking them." },
     { q: "Do you handle the technical setup?", a: "Yes. Setup takes under 5 minutes. We handle email authentication, domain configuration, and platform setup. You just provide your employee list and select your first campaign. We take care of the technical details." },
-    { q: "Can we cancel anytime?", a: "Yes. Month-to-month contracts. Cancel with 30 days notice. No long-term commitments. No cancellation fees. We're confident you'll see value, so we don't lock you in." }
+    { q: "Can we cancel anytime?", a: "Yes. Month to month contracts. Cancel with 30 days notice. No long term commitments. No cancellation fees. We're confident you'll see value, so we don't lock you in." }
   ];
 
   return (
     <Section className="bg-black">
       <div className="max-w-4xl mx-auto">
         <h2 className="text-4xl md:text-5xl font-bold text-white mb-12 text-center">
-          Common <span className="text-primary">Questions</span>
+          Common <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-fuchsia-400">Questions</span>
         </h2>
 
         <div className="space-y-4">
@@ -641,21 +641,30 @@ const BackgroundLayers = () => (
     </div>
 
     {/* Global Gradient Grid */}
-    <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808006_1px,transparent_1px),linear-gradient(to_bottom,#80808006_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+    <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
 
     {/* Primary Glow — single, subtle */}
     <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,_rgba(34,197,94,0.06),transparent_60%)]" />
+    {/* Cyan accent glow — upper right */}
+    <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_10%,_rgba(34,211,238,0.04),transparent_50%)]" />
+    {/* Violet accent glow — lower left */}
+    <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_80%,_rgba(167,139,250,0.04),transparent_50%)]" />
 
-    {/* Single slow-moving orb for depth */}
+    {/* Slow-moving orbs for depth */}
     <motion.div
       className="absolute top-[-10%] left-[20%] w-[700px] h-[700px] bg-primary/[0.03] rounded-full blur-[150px]"
       animate={{ x: [0, 60, 0], y: [0, -40, 0] }}
       transition={{ duration: 30, ease: "easeInOut", repeat: Infinity }}
     />
     <motion.div
-      className="absolute bottom-[-15%] right-[10%] w-[500px] h-[500px] bg-emerald-500/[0.02] rounded-full blur-[150px]"
+      className="absolute bottom-[-15%] right-[10%] w-[500px] h-[500px] bg-cyan-500/[0.03] rounded-full blur-[150px]"
       animate={{ x: [0, -40, 0], y: [0, 30, 0] }}
       transition={{ duration: 35, ease: "easeInOut", repeat: Infinity }}
+    />
+    <motion.div
+      className="absolute top-[40%] right-[30%] w-[400px] h-[400px] bg-violet-500/[0.02] rounded-full blur-[150px]"
+      animate={{ x: [0, 30, 0], y: [0, -50, 0] }}
+      transition={{ duration: 40, ease: "easeInOut", repeat: Infinity }}
     />
   </div>
 );
@@ -717,19 +726,19 @@ const Home = () => {
         description="AI-powered phishing defense that trains your employees in real-time. Shame-free, instant feedback. Setup in 5 minutes."
       />
       {/* HERO */}
-      <section className="relative min-h-[95vh] flex flex-col items-center justify-center pt-20 overflow-hidden">
+      <section className="relative min-h-[90vh] flex flex-col items-center justify-center pt-20 overflow-hidden">
 
-        <div className="max-w-7xl mx-auto px-6 w-full flex flex-col items-center text-center pt-10 pb-8 relative z-10">
+        <div className="max-w-7xl mx-auto px-6 w-full flex flex-col items-center text-center pt-6 pb-4 relative z-10">
 
           {/* 1. TITLE SECTION */}
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="max-w-5xl mx-auto mb-12">
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="max-w-5xl mx-auto mb-8">
             <Reveal>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold mb-8 uppercase tracking-widest mx-auto">
                 <span className="w-2 h-2 rounded-full bg-primary animate-pulse" /> Phishing Defense Platform
               </div>
             </Reveal>
             <h1 className="text-5xl sm:text-6xl md:text-8xl font-bold text-white mb-6 leading-[1.1] tracking-tight">
-              <TextReveal>One phishing email can</TextReveal> <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-red-500">destroy your business.</span>
+              <TextReveal>One phishing email can</TextReveal> <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-400 via-orange-400 to-red-500">destroy your business.</span>
             </h1>
           </motion.div>
 
@@ -738,7 +747,7 @@ const Home = () => {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="relative w-full max-w-3xl mb-12 sm:mb-16 group px-4"
+            className="relative w-full max-w-3xl mb-8 sm:mb-10 group px-4"
           >
             <div className="absolute inset-0 bg-primary/20 blur-[100px] rounded-full opacity-20 pointer-events-none" />
             <ImageWithLoad src="/hero-network.png" alt="Human Defense Network" className="relative z-10 w-full h-auto object-contain drop-shadow-2xl max-h-[250px] sm:max-h-[300px] md:max-h-[400px] opacity-80 mix-blend-screen hover:opacity-100 hover:mix-blend-normal transition-all duration-700" />
@@ -780,10 +789,10 @@ const Home = () => {
 
           {/* 3. SUBTEXT & CTA */}
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.4 }} className="max-w-5xl mx-auto">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-10 leading-[1.1] tracking-tight">
-              We train your team to <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-emerald-300">recognize threats</span><br className="hidden md:block" /> before they click.
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-10 leading-[1.1] tracking-tight text-balance">
+              We train your team to <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-cyan-400 to-blue-400 shimmer-text">recognize threats</span><br className="hidden md:block" /> before they click.
             </h2>
-            <div className="flex gap-4 justify-center flex-wrap mb-16">
+            <div className="flex gap-4 justify-center flex-wrap mb-10">
               <Link to="/contact">
                 <Button size="lg" className="bg-green-600 hover:bg-green-500 shadow-[0_0_30px_rgba(34,197,94,0.3)] text-white h-14 px-8 text-base md:h-16 md:px-12 md:text-lg">
                   Get Free Risk Assessment
@@ -859,13 +868,13 @@ const Home = () => {
                 <Award className="w-4 h-4" /> Compliance Ready
               </span>
               <span className="text-primary/80 font-mono text-xs tracking-[0.2em] uppercase flex items-center gap-3 font-bold">
-                <Activity className="w-4 h-4" /> 5 Minute Setup
+                <Zap className="w-4 h-4" /> 5 Minute Setup
               </span>
               <span className="text-primary/80 font-mono text-xs tracking-[0.2em] uppercase flex items-center gap-3 font-bold">
-                <FileText className="w-4 h-4" /> Industry Specific
+                <Target className="w-4 h-4" /> Industry Specific
               </span>
               <span className="text-primary/80 font-mono text-xs tracking-[0.2em] uppercase flex items-center gap-3 font-bold">
-                <Terminal className="w-4 h-4" /> Monthly Analytics
+                <BarChart3 className="w-4 h-4" /> Monthly Analytics
               </span>
             </React.Fragment>
           ))}
@@ -878,19 +887,19 @@ const Home = () => {
       {/* THE PROBLEM SECTION */}
       < Section className="bg-black border-y border-white/5" >
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-8">Why Your Current Training <span className="text-primary">Isn't Working</span></h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Why Your Current Training <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-orange-400">Isn't Working</span></h2>
 
-          <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="grid md:grid-cols-3 gap-8 mb-12">
+          <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="grid md:grid-cols-3 gap-6 mb-8">
             {[
               { val: "82%", label: "of breaches involve phishing", color: "text-rose-400", border: "border-rose-900/20", bg: "bg-rose-950/10" },
-              { val: "$4.9M", label: "average cost of a data breach", color: "text-rose-400", border: "border-rose-900/20", bg: "bg-rose-950/10" },
-              { val: "90%", label: "of employees forget training in 30 days", color: "text-rose-400", border: "border-rose-900/20", bg: "bg-rose-950/10" }
+              { val: "$4.9M", label: "average cost of a data breach", color: "text-amber-400", border: "border-amber-900/20", bg: "bg-amber-950/10" },
+              { val: "90%", label: "of employees forget training in 30 days", color: "text-orange-400", border: "border-orange-900/20", bg: "bg-orange-950/10" }
             ].map((stat, i) => (
               <motion.div
                 key={i}
                 variants={fadeInUp}
-                whileHover={{ borderColor: "rgba(255,255,255,0.15)" }}
-                className={cn("p-8 rounded-2xl border transition-colors duration-300 relative group overflow-hidden", stat.bg, stat.border)}
+                whileHover={{ y: -5 }}
+                className={cn("p-8 rounded-3xl border transition-all duration-500 relative group overflow-hidden backdrop-blur-sm", stat.bg, stat.border)}
               >
                 <div className="absolute inset-0 bg-rose-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className={cn("text-5xl font-bold mb-4", stat.color)}>{stat.val}</div>
@@ -899,7 +908,7 @@ const Home = () => {
             ))}
           </motion.div>
 
-          <p className="text-xl text-gray-300 leading-relaxed mb-8">Annual compliance videos don't work. Generic "be careful" warnings don't work. Your employees need <span className="text-primary font-bold">practice with immediate feedback</span> — the same way you learned any other skill.</p>
+          <p className="text-xl text-gray-300 leading-relaxed mb-8">Annual compliance videos don't work. Generic "be careful" warnings don't work. Your employees need <span className="text-primary font-bold">practice with immediate feedback</span>, the same way you learned any other skill.</p>
 
           <Link to="/services"><Button variant="outline">See Our Approach</Button></Link>
         </div>
@@ -910,16 +919,16 @@ const Home = () => {
 
       {/* SERVICES PREVIEW */}
       < Section id="services-preview" >
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12">
-          <div className="mb-6 md:mb-0"><h2 className="text-4xl md:text-5xl font-bold text-white mb-6">What You <span className="text-primary">Get</span></h2><p className="text-gray-400 text-lg">Everything you need to build a security aware team. Nothing you don't.</p></div>
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8">
+          <div className="mb-4 md:mb-0"><h2 className="text-4xl md:text-5xl font-bold text-white mb-4">What You <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400">Get</span></h2><p className="text-gray-400 text-lg">Everything you need to build a security aware team. Nothing you don't.</p></div>
           <Button variant="outline" className="hidden md:flex" onClick={() => navigate('/services')}>View All Features</Button>
         </div>
-        <div className="grid grid-cols-1 gap-8 relative z-10">
+        <div className="grid grid-cols-1 gap-6 relative z-10">
           {[
-            { t: "Realistic Attack Simulations", d: "We send phishing emails that look and feel exactly like real attacks—because they're based on real attacks. Your employees see them in their actual inbox. They make decisions under real conditions.", i: Shield, c: "text-emerald-400", border: "border-emerald-500/20", gradient: "from-emerald-500/10 to-transparent" },
-            { t: "Training at the Point of Failure", d: "The second someone clicks a phishing link, they see what they missed and why it worked. Not next week in a training session. Not in an annual compliance video. Right now.", i: Users, c: "text-blue-400", border: "border-blue-500/20", gradient: "from-blue-500/10 to-transparent" },
-            { t: "Monthly Intelligence Reports", d: "See exactly where your vulnerabilities are. Who's clicking. What's working. Which departments need extra training. Export compliance reports for auditors.", i: FileText, c: "text-purple-400", border: "border-purple-500/20", gradient: "from-purple-500/10 to-transparent" },
-            { t: "Compliance Documentation", d: "Generate documentation automatically. SOC 2, ISO 27001, CMMC — formatted correctly and ready to submit. Your auditor gets what they need. You get back to work.", i: Award, c: "text-amber-400", border: "border-amber-500/20", gradient: "from-amber-500/10 to-transparent" }
+            { t: "Realistic Attack Simulations", d: "We send phishing emails that look and feel exactly like real attacks, because they're based on real attacks. Your employees see them in their actual inbox. They make decisions under real conditions.", i: Target, c: "text-emerald-400", border: "border-emerald-500/20", gradient: "from-emerald-500/10 to-transparent" },
+            { t: "Training at the Point of Failure", d: "The second someone clicks a phishing link, they see what they missed and why it worked. Not next week in a training session. Not in an annual compliance video. Right now.", i: Zap, c: "text-blue-400", border: "border-blue-500/20", gradient: "from-blue-500/10 to-transparent" },
+            { t: "Monthly Intelligence Reports", d: "See exactly where your vulnerabilities are. Who's clicking. What's working. Which departments need extra training. Export compliance reports for auditors.", i: BarChart3, c: "text-purple-400", border: "border-purple-500/20", gradient: "from-purple-500/10 to-transparent" },
+            { t: "Compliance Documentation", d: "Generate documentation automatically. SOC 2, ISO 27001, CMMC, all formatted correctly and ready to submit. Your auditor gets what they need. You get back to work.", i: Award, c: "text-amber-400", border: "border-amber-500/20", gradient: "from-amber-500/10 to-transparent" }
           ].map((s, i) => (
             <motion.div
               key={i}
@@ -927,11 +936,11 @@ const Home = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className={cn("flex flex-col md:flex-row gap-8 p-8 md:p-10 rounded-[2rem] bg-surface/30 backdrop-blur-md border hover:border-white/20 transition-all duration-300 group hover:shadow-2xl", s.border)}
+              className={cn("flex flex-col md:flex-row gap-6 p-6 md:p-8 rounded-2xl bg-gradient-to-r from-surface/40 to-black/30 backdrop-blur-md border hover:border-white/15 transition-all duration-500 group hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)]", s.border)}
             >
               <div className="shrink-0 relative">
                 <div className={cn("absolute inset-0 bg-gradient-to-br blur-2xl opacity-20 group-hover:opacity-40 transition-opacity", s.gradient)} />
-                <div className="w-20 h-20 rounded-full bg-black/50 border border-white/10 flex items-center justify-center relative z-10">
+                <div className="w-20 h-20 rounded-full bg-black/50 ring-1 ring-white/[0.06] group-hover:ring-2 group-hover:ring-white/[0.12] flex items-center justify-center relative z-10 transition-all duration-500 group-hover:scale-105">
                   <s.i className={cn("w-10 h-10", s.c)} />
                 </div>
               </div>
@@ -944,70 +953,71 @@ const Home = () => {
         </div>
 
         {/* PRICING PREVIEW */}
-        <div className="mt-16 p-10 rounded-3xl bg-surface/60 border border-white/10 text-center">
-          <h3 className="text-3xl font-bold text-white mb-4">Simple, <span className="text-primary">Transparent Pricing</span></h3>
-          <p className="text-gray-400 mb-8 max-w-2xl mx-auto">From startups to enterprises. Month to month contracts. Cancel anytime.</p>
+        <div className="mt-12 p-8 rounded-3xl bg-gradient-to-b from-surface/60 to-black/40 border border-white/[0.08] text-center relative overflow-hidden">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+          <h3 className="text-3xl font-bold text-white mb-3">Simple, <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-yellow-300">Transparent Pricing</span></h3>
+          <p className="text-gray-400 mb-6 max-w-2xl mx-auto">From startups to enterprises. Month to month contracts. Cancel anytime.</p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto mb-8">
             {/* STARTER */}
-            <div className="p-6 rounded-2xl bg-black/40 border border-white/10 text-left hover:border-primary/30 transition-colors">
-              <div className="text-sm text-primary font-bold uppercase tracking-wider mb-2">Starter</div>
-              <div className="text-3xl font-bold text-white mb-1">$299<span className="text-lg text-gray-500">/mo</span></div>
-              <div className="text-sm text-gray-500 mb-6">Up to 50 employees</div>
-              <ul className="space-y-3 text-sm text-gray-300 mb-6">
-                <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span><strong className="text-white">8 campaigns/month</strong></span></li>
-                <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span><strong className="text-white">50+ templates</strong> (industry-specific)</span></li>
-                <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span><strong className="text-white">No shame policy</strong></span></li>
-                <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span><strong className="text-white">Compliance certificates</strong></span></li>
-                <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span>Basic dashboard</span></li>
-                <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span><strong className="text-white">5 minute setup</strong></span></li>
+            <div className="p-8 rounded-3xl bg-surface/30 backdrop-blur-sm border border-white/[0.08] text-left hover:border-white/[0.15] transition-all duration-300 hover:bg-surface/40 group">
+              <div className="text-sm text-gray-400 font-bold uppercase tracking-wider mb-4">Starter</div>
+              <div className="text-4xl font-bold text-white mb-2">$299<span className="text-lg text-gray-500 font-normal">/mo</span></div>
+              <div className="text-sm text-gray-500 mb-8 font-medium">Up to 50 employees</div>
+              <ul className="space-y-4 text-sm text-gray-300 mb-8">
+                <li className="flex items-start gap-3"><CheckCircle className="w-5 h-5 text-gray-500 shrink-0" /> <span>8 campaigns/month</span></li>
+                <li className="flex items-start gap-3"><CheckCircle className="w-5 h-5 text-gray-500 shrink-0" /> <span>50+ templates</span></li>
+                <li className="flex items-start gap-3"><CheckCircle className="w-5 h-5 text-gray-500 shrink-0" /> <span>No shame policy</span></li>
+                <li className="flex items-start gap-3"><CheckCircle className="w-5 h-5 text-gray-500 shrink-0" /> <span>Compliance certificates</span></li>
+                <li className="flex items-start gap-3"><CheckCircle className="w-5 h-5 text-gray-500 shrink-0" /> <span>Basic dashboard</span></li>
+                <li className="flex items-start gap-3"><CheckCircle className="w-5 h-5 text-gray-500 shrink-0" /> <span>5 minute setup</span></li>
               </ul>
-              <Link to="/contact"><Button variant="outline" className="w-full">Get Started</Button></Link>
+              <Link to="/contact"><Button variant="outline" className="w-full border-white/10 hover:bg-white/5">Get Started</Button></Link>
             </div>
             {/* PROFESSIONAL */}
-            <div className="p-6 rounded-2xl bg-primary/10 border-2 border-primary relative hover:border-primary transition-colors text-left">
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-primary text-black text-xs font-bold rounded-full">MOST POPULAR</div>
-              <div className="text-sm text-primary font-bold uppercase tracking-wider mb-2">Professional</div>
-              <div className="text-3xl font-bold text-white mb-1">$799<span className="text-lg text-gray-500">/mo</span></div>
-              <div className="text-sm text-gray-500 mb-6">Up to 200 employees</div>
-              <ul className="space-y-3 text-sm text-gray-200 mb-6">
-                <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span><strong className="text-white">Unlimited campaigns</strong></span></li>
-                <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span><strong className="text-white">Custom template builder</strong></span></li>
-                <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span><strong className="text-white">No shame policy</strong></span></li>
-                <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span><strong className="text-white">Advanced compliance certificates</strong></span></li>
-                <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span><strong className="text-white">Real-time dashboard</strong></span></li>
-                <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span>API access</span></li>
+            <div className="p-8 rounded-3xl bg-gradient-to-b from-primary/[0.08] to-surface/20 border border-primary/40 relative hover:border-primary/60 transition-all duration-300 text-left shadow-[0_0_40px_-10px_rgba(34,197,94,0.15)] group scale-105 z-10">
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1.5 bg-gradient-to-r from-primary to-emerald-400 text-black text-xs font-bold rounded-full shadow-lg shadow-primary/20 tracking-wider">MOST POPULAR</div>
+              <div className="text-sm text-primary font-bold uppercase tracking-wider mb-4">Professional</div>
+              <div className="text-4xl font-bold text-white mb-2">$799<span className="text-lg text-gray-500 font-normal">/mo</span></div>
+              <div className="text-sm text-gray-400 mb-8 font-medium">Up to 200 employees</div>
+              <ul className="space-y-4 text-sm text-gray-200 mb-8">
+                <li className="flex items-start gap-3"><CheckCircle className="w-5 h-5 text-primary shrink-0" /> <span><strong className="text-white">Unlimited campaigns</strong></span></li>
+                <li className="flex items-start gap-3"><CheckCircle className="w-5 h-5 text-primary shrink-0" /> <span><strong className="text-white">Custom template builder</strong></span></li>
+                <li className="flex items-start gap-3"><CheckCircle className="w-5 h-5 text-primary shrink-0" /> <span><strong className="text-white">No shame policy</strong></span></li>
+                <li className="flex items-start gap-3"><CheckCircle className="w-5 h-5 text-primary shrink-0" /> <span><strong className="text-white">Advanced compliance certificates</strong></span></li>
+                <li className="flex items-start gap-3"><CheckCircle className="w-5 h-5 text-primary shrink-0" /> <span><strong className="text-white">Real-time dashboard</strong></span></li>
+                <li className="flex items-start gap-3"><CheckCircle className="w-5 h-5 text-primary shrink-0" /> <span>API access</span></li>
               </ul>
-              <Link to="/contact"><Button className="w-full">Get Started</Button></Link>
+              <Link to="/contact"><Button className="w-full shadow-lg shadow-primary/20">Get Started</Button></Link>
             </div>
             {/* ENTERPRISE */}
-            <div className="p-6 rounded-2xl bg-black/40 border border-white/10 text-left hover:border-primary/30 transition-colors">
-              <div className="text-sm text-primary font-bold uppercase tracking-wider mb-2">Enterprise</div>
-              <div className="text-3xl font-bold text-white mb-1">Custom</div>
-              <div className="text-sm text-gray-500 mb-6">Unlimited employees</div>
-              <ul className="space-y-3 text-sm text-gray-300 mb-6">
-                <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span>Everything in Pro</span></li>
-                <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span><strong className="text-white">Dedicated manager</strong></span></li>
-                <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span><strong className="text-white">White label option</strong></span></li>
-                <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span><strong className="text-white">Custom compliance</strong></span></li>
-                <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span>Threat intelligence</span></li>
-                <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span>99.9% SLA</span></li>
+            <div className="p-8 rounded-3xl bg-surface/30 backdrop-blur-sm border border-white/[0.08] text-left hover:border-white/[0.15] transition-all duration-300 hover:bg-surface/40 group">
+              <div className="text-sm text-indigo-400 font-bold uppercase tracking-wider mb-4">Enterprise</div>
+              <div className="text-4xl font-bold text-white mb-2">Custom</div>
+              <div className="text-sm text-gray-500 mb-8 font-medium">Unlimited employees</div>
+              <ul className="space-y-4 text-sm text-gray-300 mb-8">
+                <li className="flex items-start gap-3"><CheckCircle className="w-5 h-5 text-indigo-400 shrink-0" /> <span>Everything in Pro</span></li>
+                <li className="flex items-start gap-3"><CheckCircle className="w-5 h-5 text-indigo-400 shrink-0" /> <span><strong className="text-white">Dedicated manager</strong></span></li>
+                <li className="flex items-start gap-3"><CheckCircle className="w-5 h-5 text-indigo-400 shrink-0" /> <span><strong className="text-white">White label option</strong></span></li>
+                <li className="flex items-start gap-3"><CheckCircle className="w-5 h-5 text-indigo-400 shrink-0" /> <span><strong className="text-white">Custom compliance</strong></span></li>
+                <li className="flex items-start gap-3"><CheckCircle className="w-5 h-5 text-indigo-400 shrink-0" /> <span>Threat intelligence</span></li>
+                <li className="flex items-start gap-3"><CheckCircle className="w-5 h-5 text-indigo-400 shrink-0" /> <span>99.9% SLA</span></li>
               </ul>
-              <Link to="/contact"><Button variant="outline" className="w-full">Contact Sales</Button></Link>
+              <Link to="/contact"><Button variant="outline" className="w-full border-white/10 hover:bg-white/5">Contact Sales</Button></Link>
             </div>
           </div>
           <Link to="/contact"><Button>Get Custom Quote</Button></Link>
         </div>
 
-        <div className="flex justify-center mt-12">
+        <div className="flex justify-center mt-8">
           <Link to="/services"><Button size="lg">Explore All Features</Button></Link>
         </div>
       </Section >
 
       {/* SOCIAL PROOF / VALUE PROP */}
       < Section className="bg-surface/50" >
-        <div className="grid md:grid-cols-5 gap-12 items-center">
+        <div className="grid md:grid-cols-5 gap-8 items-center">
           <div className="md:col-span-3">
-            <h2 className="text-4xl md:text-6xl font-bold text-white mb-8">Why This Approach <span className="text-primary">Works</span></h2>
+            <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">Why This Approach <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-purple-400">Works</span></h2>
             <ul className="space-y-6">
               <li className="flex gap-4 items-start">
                 <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0 text-primary font-bold">1</div>
@@ -1020,7 +1030,7 @@ const Home = () => {
                 <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0 text-primary font-bold">2</div>
                 <div>
                   <h4 className="text-2xl md:text-3xl font-bold text-white mb-2">You'll See <span className="text-primary">the Difference</span></h4>
-                  <p className="text-gray-400 text-lg md:text-xl max-w-2xl leading-relaxed">Month by month, you'll watch click rates drop. You'll see employees start forwarding suspicious emails to IT. You'll notice the shift from "I hope this is safe" to "I know what to look for." The data proves what you'll feel—your team is getting sharper.</p>
+                  <p className="text-gray-400 text-lg md:text-xl max-w-2xl leading-relaxed">Month by month, you'll watch click rates drop. You'll see employees start forwarding suspicious emails to IT. You'll notice the shift from "I hope this is safe" to "I know what to look for." The data proves what you'll feel: your team is getting sharper.</p>
                 </div>
               </li>
             </ul>
@@ -1069,14 +1079,14 @@ const Home = () => {
       </Section >
       {/* PROOF SECTION */}
       < Section className="bg-black" >
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Results That <span className="text-primary">Actually Matter</span></h2>
+        <div className="text-center mb-10">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Results That <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-400">Actually Matter</span></h2>
           <p className="text-gray-400 max-w-2xl mx-auto text-lg">This isn't theory. These are real metrics from companies using our platform.</p>
         </div>
 
-        <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="grid md:grid-cols-2 gap-8 mb-16">
+        <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="grid md:grid-cols-2 gap-6 mb-10">
           {/* Case Study 1 */}
-          <CardWithMagnet className="p-8 rounded-3xl bg-surface/40 border border-white/10 transition-colors duration-300 group cursor-default">
+          <CardWithMagnet className="p-8 rounded-[2rem] bg-surface/30 backdrop-blur-md border border-white/[0.08] transition-all duration-500 group cursor-default hover:border-white/[0.15] hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)]">
             <CardShimmer />
             <div className="relative z-10">
               <div className="flex items-center gap-4 mb-6">
@@ -1100,7 +1110,7 @@ const Home = () => {
           </CardWithMagnet>
 
           {/* Case Study 2 */}
-          <CardWithMagnet className="p-8 rounded-3xl bg-surface/40 border border-white/10 transition-colors duration-300 group cursor-default">
+          <CardWithMagnet className="p-8 rounded-[2rem] bg-surface/30 backdrop-blur-md border border-white/[0.08] transition-all duration-500 group cursor-default hover:border-white/[0.15] hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)]">
             <CardShimmer />
             <div className="relative z-10">
               <div className="flex items-center gap-4 mb-6">
@@ -1124,10 +1134,11 @@ const Home = () => {
           </CardWithMagnet>
         </motion.div>
 
-        <div className="text-center p-10 rounded-3xl bg-primary/5 border border-primary/20">
-          <h3 className="text-2xl font-bold text-white mb-4">Want to see these results for your team?</h3>
-          <p className="text-gray-400 mb-6 max-w-2xl mx-auto">Let's run a baseline assessment. We'll show you where your vulnerabilities are, then demonstrate how the platform works with your actual team.</p>
-          <Link to="/contact"><Button size="lg">Schedule Free Assessment</Button></Link>
+        <div className="text-center p-10 rounded-3xl bg-gradient-to-br from-primary/10 via-cyan-500/5 to-violet-500/10 border border-primary/20 relative overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(34,211,238,0.08),transparent_60%)]" />
+          <h3 className="text-2xl font-bold text-white mb-4 relative z-10">Want to see these results for your team?</h3>
+          <p className="text-gray-400 mb-6 max-w-2xl mx-auto relative z-10">Let's run a baseline assessment. We'll show you where your vulnerabilities are, then demonstrate how the platform works with your actual team.</p>
+          <Link to="/contact"><Button size="lg" className="relative z-10">Schedule Free Assessment</Button></Link>
         </div>
       </Section >
 
@@ -1139,14 +1150,14 @@ const Home = () => {
 
 // --- INNER PAGES ---
 const PageHeader: React.FC<{ title: string, subtitle: string }> = ({ title, subtitle }) => (
-  <section className="pt-40 pb-20 px-6 relative overflow-hidden">
+  <section className="pt-32 pb-14 px-6 relative overflow-hidden">
     {/* ADD GRADIENT BACKGROUND */}
     <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/10 to-transparent opacity-30 pointer-events-none" />
     <div className="absolute top-0 left-0 w-1/2 h-full bg-gradient-to-r from-emerald-500/5 to-transparent opacity-20 pointer-events-none" />
 
     <motion.div initial="hidden" animate="visible" variants={staggerContainer} className="max-w-7xl mx-auto relative z-10">
       <Reveal>
-        <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight">
+        <h1 className="text-5xl md:text-7xl font-bold text-white mb-4 tracking-tight">
           {title.split(' ').slice(0, Math.ceil(title.split(' ').length / 2)).join(' ')} <span className="text-primary">{title.split(' ').slice(Math.ceil(title.split(' ').length / 2)).join(' ')}</span>
         </h1>
       </Reveal>
@@ -1158,7 +1169,7 @@ const PageHeader: React.FC<{ title: string, subtitle: string }> = ({ title, subt
 );
 
 const Services = () => (
-  <div className="min-h-screen bg-background text-white pb-20 relative">
+  <div className="min-h-screen bg-background text-white pb-12 relative">
     <BackgroundLayers />
     <PageMeta
       title="Services | HumanLayer Security"
@@ -1168,17 +1179,17 @@ const Services = () => (
     <Section className="!pt-0">
       <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="grid md:grid-cols-2 lg:grid-cols-6 gap-6">
         {[
-          { t: "Monthly Phishing Simulations", d: "Regular phishing emails designed to mimic real attacks.", i: Activity, span: "lg:col-span-3", accent: "emerald" },
+          { t: "Monthly Phishing Simulations", d: "Regular phishing emails designed to mimic real attacks.", i: Mail, span: "lg:col-span-3", accent: "emerald" },
           { t: "Instant, Targeted Training", d: "Brief, relevant learning moments right when failures occur.", i: Globe, span: "lg:col-span-3", accent: "cyan" },
           { t: "Clear Analytics Dashboard", d: "Track improvement, identify patterns, and export reports.", i: Terminal, span: "lg:col-span-2", accent: "violet" },
-          { t: "Direct Platform Support", d: "Direct access to the security team that built the platform.", i: Shield, span: "lg:col-span-2", accent: "amber" },
-          { t: "Role-Specific Scenarios", d: "Customized threats for Finance, HR, IT, and Executives.", i: Mail, span: "lg:col-span-2", accent: "rose" }
+          { t: "Direct Platform Support", d: "Direct access to the security team that built the platform.", i: Headphones, span: "lg:col-span-2", accent: "amber" },
+          { t: "Role-Specific Scenarios", d: "Customized threats for Finance, HR, IT, and Executives.", i: Fingerprint, span: "lg:col-span-2", accent: "rose" }
         ].map((s, i) => (
           <motion.div
             variants={fadeInUp}
             key={i}
             className={twMerge(
-              "flex flex-col p-8 border bg-surface/40 backdrop-blur-sm rounded-3xl hover:bg-surface/60 transition-all duration-300 group relative overflow-hidden min-h-[280px]",
+              "flex flex-col p-8 border bg-gradient-to-b from-surface/50 to-black/30 backdrop-blur-sm rounded-3xl hover:bg-surface/60 transition-all duration-500 group relative overflow-hidden min-h-[280px] hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)]",
               s.span,
               ACCENT_COLORS[s.accent].border,
               ACCENT_COLORS[s.accent].hoverShadow
@@ -1186,7 +1197,7 @@ const Services = () => (
           >
             <CardShimmer />
             <div className={cn(
-              "w-16 h-16 rounded-2xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-all duration-300 ease-out border border-white/5 relative z-10 mb-6",
+              "w-16 h-16 rounded-2xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-all duration-500 ease-out ring-1 ring-white/[0.06] group-hover:ring-2 group-hover:ring-white/[0.12] relative z-10 mb-6",
               ACCENT_COLORS[s.accent].bg
             )}>
               <s.i className={cn("w-8 h-8 transition-colors", ACCENT_COLORS[s.accent].text)} />
@@ -1296,10 +1307,11 @@ const Services = () => (
           {/* Animated Connecting Line */}
           <div className="absolute top-[2.5rem] left-[10%] right-[10%] h-0.5 bg-white/10 rounded-full overflow-hidden">
             <motion.div
-              initial={{ width: "0%" }}
-              whileInView={{ width: "100%" }}
-              transition={{ duration: 1.5, ease: "easeInOut" }}
-              className="h-full bg-gradient-to-r from-transparent via-primary to-transparent"
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
+              className="h-full bg-gradient-to-r from-transparent via-primary to-transparent origin-left"
             />
           </div>
 
@@ -1307,7 +1319,8 @@ const Services = () => (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
               className="flex flex-col items-center group cursor-default"
             >
               <div className="w-20 h-20 rounded-full bg-black border-4 border-primary flex items-center justify-center text-2xl font-bold text-white mb-6 shadow-[0_0_30px_rgba(34,197,94,0.4)] relative z-10 group-hover:scale-110 transition-transform duration-300">
@@ -1320,7 +1333,8 @@ const Services = () => (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
               className="flex flex-col items-center group cursor-default"
             >
               <div className="w-20 h-20 rounded-full bg-surface border-4 border-white/10 group-hover:border-primary/50 flex items-center justify-center text-2xl font-bold text-gray-500 group-hover:text-white mb-6 transition-all duration-300 relative z-10 bg-black">
@@ -1333,7 +1347,8 @@ const Services = () => (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.7, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
               className="flex flex-col items-center group cursor-default"
             >
               <div className="w-20 h-20 rounded-full bg-surface border-4 border-white/10 group-hover:border-primary/50 flex items-center justify-center text-2xl font-bold text-gray-500 group-hover:text-white mb-6 transition-all duration-300 relative z-10 bg-black">
@@ -1380,8 +1395,8 @@ const Services = () => (
         {/* STAT 1: CIRCULAR GRAPHIC */}
         <motion.div
           variants={{
-            hidden: { opacity: 0, scale: 0.8, y: 20 },
-            visible: { opacity: 1, scale: 1, y: 0, transition: { type: "spring", bounce: 0.4, duration: 0.8 } }
+            hidden: { opacity: 0, y: 25 },
+            visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.25, 0.1, 0.25, 1] } }
           }}
           className="flex flex-col items-center group"
         >
@@ -1393,7 +1408,8 @@ const Services = () => (
                 strokeDasharray="283"
                 initial={{ strokeDashoffset: 283 }}
                 whileInView={{ strokeDashoffset: 180 }}
-                transition={{ duration: 2, ease: "easeOut" }}
+                viewport={{ once: true }}
+                transition={{ duration: 1.5, ease: "easeOut" }}
                 strokeLinecap="round" className="drop-shadow-[0_0_10px_rgba(34,197,94,0.5)]"
               />
             </svg>
@@ -1405,8 +1421,8 @@ const Services = () => (
         {/* STAT 2: CENTRAL HERO GRAPHIC */}
         <motion.div
           variants={{
-            hidden: { opacity: 0, scale: 0.8, y: 20 },
-            visible: { opacity: 1, scale: 1, y: 0, transition: { type: "spring", bounce: 0.4, duration: 0.8 } }
+            hidden: { opacity: 0, y: 25 },
+            visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.25, 0.1, 0.25, 1], delay: 0.15 } }
           }}
           className="flex flex-col items-center group"
         >
@@ -1422,16 +1438,16 @@ const Services = () => (
         {/* STAT 3: BAR GRAPHIC */}
         <motion.div
           variants={{
-            hidden: { opacity: 0, scale: 0.8, y: 20 },
-            visible: { opacity: 1, scale: 1, y: 0, transition: { type: "spring", bounce: 0.4, duration: 0.8 } }
+            hidden: { opacity: 0, y: 25 },
+            visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.25, 0.1, 0.25, 1], delay: 0.3 } }
           }}
           className="flex flex-col items-center justify-center group h-full"
         >
           <div className="flex items-end gap-2 h-32 mb-6">
-            <motion.div initial={{ height: 0 }} whileInView={{ height: 40 }} transition={{ duration: 0.5 }} className="w-6 bg-white/10 rounded-t-lg"></motion.div>
-            <motion.div initial={{ height: 0 }} whileInView={{ height: 64 }} transition={{ duration: 0.5, delay: 0.1 }} className="w-6 bg-white/20 rounded-t-lg"></motion.div>
-            <motion.div initial={{ height: 0 }} whileInView={{ height: 80 }} transition={{ duration: 0.5, delay: 0.2 }} className="w-6 bg-white/30 rounded-t-lg"></motion.div>
-            <motion.div initial={{ height: 0 }} whileInView={{ height: 128 }} transition={{ duration: 0.5, delay: 0.3 }} className="w-6 bg-primary rounded-t-lg shadow-[0_0_15px_rgba(34,197,94,0.5)]"></motion.div>
+            <motion.div initial={{ height: 0 }} whileInView={{ height: 40 }} viewport={{ once: true }} transition={{ duration: 0.8, ease: "easeOut" }} className="w-6 bg-white/10 rounded-t-lg"></motion.div>
+            <motion.div initial={{ height: 0 }} whileInView={{ height: 64 }} viewport={{ once: true }} transition={{ duration: 0.8, ease: "easeOut", delay: 0.15 }} className="w-6 bg-white/20 rounded-t-lg"></motion.div>
+            <motion.div initial={{ height: 0 }} whileInView={{ height: 80 }} viewport={{ once: true }} transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }} className="w-6 bg-white/30 rounded-t-lg"></motion.div>
+            <motion.div initial={{ height: 0 }} whileInView={{ height: 128 }} viewport={{ once: true }} transition={{ duration: 0.8, ease: "easeOut", delay: 0.45 }} className="w-6 bg-primary rounded-t-lg shadow-[0_0_15px_rgba(34,197,94,0.5)]"></motion.div>
           </div>
           <div className="text-5xl font-bold text-white mb-2"><CountUp to={8} suffix="x" /></div>
           <div className="text-sm text-gray-400 uppercase tracking-widest font-bold">Improved Threat Response</div>
@@ -1444,7 +1460,7 @@ const Services = () => (
 );
 
 const About = () => (
-  <div className="min-h-screen bg-background text-white pb-20 relative">
+  <div className="min-h-screen bg-background text-white pb-12 relative">
     <BackgroundLayers />
     <PageMeta
       title="About Us | HumanLayer Security"
@@ -1464,7 +1480,7 @@ const About = () => (
               <p>We studied cybersecurity and electrical engineering. We learned how attacks work. How social engineering bypasses every technical defense. <span className="text-white font-semibold">How one convincing email can compromise an entire organization.</span></p>
               <p>Then we looked at how companies actually train their employees against these attacks. Annual compliance videos. Generic "be careful with emails" warnings. Boring slide decks that people click through while checking their phone.</p>
               <p>It doesn't work. And we knew why it doesn't work.</p>
-              <p>Real learning happens in the moment. You don't get better at recognizing phishing by watching videos—you get better by <span className="text-primary font-bold">practicing with realistic examples</span> and getting immediate feedback.</p>
+              <p>Real learning happens in the moment. You don't get better at recognizing phishing by watching videos. You get better by <span className="text-primary font-bold">practicing with realistic examples</span> and getting immediate feedback.</p>
               <p>So we built what we wished existed: a platform that tests people with realistic phishing attacks and teaches them instantly when they click. No shame. No punishment. Just practice and learning until recognizing phishing becomes instinct.</p>
               <p>That's HumanLayer Security.</p>
             </div>
@@ -1497,7 +1513,7 @@ const About = () => (
               {[
                 { name: CONTACT_INFO.founder, role: "FOUNDER & PRINCIPAL", desc: "Founder. FIU Cybersecurity. Built the phishing simulation engine and platform architecture.", init: "NS" },
                 { name: "Alejandro Marcone", role: "CO-FOUNDER & CYBER ANALYST", desc: "Co-Founder. ISIL Cybersecurity (Peru). Designed training methodology and threat analysis systems.", init: "AM" },
-                { name: "Branco Forti", role: "CO-FOUNDER & ELECTRICAL ENGINEER", desc: "Co-Founder. FIU Electrical Engineering. Built platform infrastructure and automation systems.", init: "BF" }
+
               ].map((member, i) => (
                 <div key={i} className="flex gap-6 items-start group cursor-default hover:bg-white/5 p-4 rounded-2xl transition-all border border-transparent hover:border-white/5">
                   <div className="relative shrink-0">
@@ -1527,7 +1543,7 @@ const About = () => (
 );
 
 const Partnership = () => (
-  <div className="min-h-screen bg-background text-white pb-20 relative">
+  <div className="min-h-screen bg-background text-white pb-12 relative">
     <BackgroundLayers />
     <PageMeta
       title="Partnership | HumanLayer Security"
@@ -1581,7 +1597,7 @@ const Partnership = () => (
         <div className="flex-1 space-y-8 z-10 order-2 md:order-1">
           <h2 className="text-5xl md:text-6xl font-bold text-white leading-[1.1] mb-8">Let's Grow <span className="text-primary">Together</span></h2>
           <div className="space-y-6 text-gray-400 text-lg leading-relaxed">
-            <p className="border-l-2 border-white/10 pl-6">If you work with businesses that need security training — MSPs, IT consultants, compliance advisors — you already know your clients need phishing protection.</p>
+            <p className="border-l-2 border-white/10 pl-6">If you work with businesses that need security training (MSPs, IT consultants, compliance advisors) you already know your clients need phishing protection.</p>
             <p>Building a phishing training platform would take you months and cost tens of thousands of dollars. <span className="text-white font-bold">We've already built it.</span> White label our platform and offer it to your clients under your brand.</p>
 
             <div className="bg-surface/40 border border-white/10 p-6 rounded-2xl">
@@ -1596,11 +1612,11 @@ const Partnership = () => (
 
       <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid md:grid-cols-3 gap-8 mb-24">
         {[
-          { t: "Your Brand, Our Platform", d: "We customize the platform with your logo, your colors, your domain. Your clients see your brand on every email, dashboard, and report. You own the relationship. We power the technology behind it.", i: FileText },
-          { t: "Recurring Revenue Share", d: "You bring the client. We deliver the platform. You earn a percentage of monthly subscription revenue as long as they're a customer. Build predictable, recurring income without building the technology.", i: Award },
-          { t: "We Handle the Technical Side", d: "Platform questions? We'll answer them. Customer support? We'll handle it. New features? We'll build them. Security updates? We'll deploy them. You focus on your clients. We focus on making the platform excellent.", i: Users }
+          { t: "Your Brand, Our Platform", d: "We customize the platform with your logo, your colors, your domain. Your clients see your brand on every email, dashboard, and report. You own the relationship. We power the technology behind it.", i: Palette },
+          { t: "Recurring Revenue Share", d: "You bring the client. We deliver the platform. You earn a percentage of monthly subscription revenue as long as they're a customer. Build predictable, recurring income without building the technology.", i: HeartHandshake },
+          { t: "We Handle the Technical Side", d: "Platform questions? We'll answer them. Customer support? We'll handle it. New features? We'll build them. Security updates? We'll deploy them. You focus on your clients. We focus on making the platform excellent.", i: Headphones }
         ].map((s, i) => (
-          <motion.div variants={fadeInUp} key={i} className="group relative p-10 rounded-[2.5rem] bg-surface/40 hover:bg-surface/60 border border-white/10 hover:border-primary/30 transition-all duration-300 overflow-hidden">
+          <motion.div variants={fadeInUp} key={i} className="group relative p-10 rounded-[2.5rem] bg-gradient-to-b from-surface/40 to-black/30 backdrop-blur-md border border-white/[0.08] hover:border-primary/40 transition-all duration-500 overflow-hidden hover:shadow-[0_20px_60px_-15px_rgba(34,197,94,0.15)]">
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
             <div className="w-16 h-16 mb-6 rounded-2xl bg-black/50 border border-white/10 flex items-center justify-center group-hover:scale-105 group-hover:border-primary/30 transition-all duration-300 relative z-10 shadow-inner">
@@ -1628,12 +1644,12 @@ const Partnership = () => (
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
           {[
-            { icon: Award, title: "30% Revenue Share", desc: "Earn recurring commission on every client", stat: "$1,800/mo", statLabel: "avg. per 10 clients", accent: "emerald" },
-            { icon: Shield, title: "White Label Platform", desc: "Your logo, your colors, your domain", stat: "100%", statLabel: "your branding", accent: "cyan" },
-            { icon: Users, title: "Dedicated Support", desc: "Partner success manager assigned", stat: "<2 hrs", statLabel: "response time", accent: "amber" },
-            { icon: Terminal, title: "API Access", desc: "Integrate with your existing tools", stat: "REST", statLabel: "API included", accent: "violet" },
+            { icon: HeartHandshake, title: "30% Revenue Share", desc: "Earn recurring commission on every client", stat: "$1,800/mo", statLabel: "avg. per 10 clients", accent: "emerald" },
+            { icon: Palette, title: "White Label Platform", desc: "Your logo, your colors, your domain", stat: "100%", statLabel: "your branding", accent: "cyan" },
+            { icon: Headphones, title: "Dedicated Support", desc: "Partner success manager assigned", stat: "<2 hrs", statLabel: "response time", accent: "amber" },
+            { icon: Globe, title: "API Access", desc: "Integrate with your existing tools", stat: "REST", statLabel: "API included", accent: "violet" },
             { icon: FileText, title: "Marketing Materials", desc: "Sales decks, case studies, templates", stat: "Ready", statLabel: "to use", accent: "rose" },
-            { icon: Activity, title: "Monthly Training", desc: "Partner webinars and product updates", stat: "Live", statLabel: "sessions", accent: "orange" }
+            { icon: Sparkles, title: "Monthly Training", desc: "Partner webinars and product updates", stat: "Live", statLabel: "sessions", accent: "orange" }
           ].map((benefit, i) => (
             <motion.div
               key={i}
@@ -1795,7 +1811,7 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background text-white pb-20 relative">
+    <div className="min-h-screen bg-background text-white pb-12 relative">
       <BackgroundLayers />
       <PageMeta
         title="Contact | HumanLayer Security"
@@ -1970,14 +1986,7 @@ const Contact = () => {
                 <div className="text-xs text-white font-mono">{CONTACT_INFO.email}</div>
               </a>
 
-              <a
-                href={`tel:${CONTACT_INFO.phone}`}
-                className="p-6 rounded-2xl bg-surface/50 border border-white/10 hover:border-primary/30 transition-all group text-center"
-              >
-                <Activity className="w-8 h-8 text-primary mx-auto mb-3 group-hover:scale-110 transition-transform" />
-                <div className="text-sm text-gray-400 mb-1">Call Us</div>
-                <div className="text-xs text-white font-mono">{CONTACT_INFO.phone}</div>
-              </a>
+
             </div>
 
             {/* Trust Indicators */}
@@ -2136,4 +2145,5 @@ function App() {
 }
 
 export default App;
+
 
